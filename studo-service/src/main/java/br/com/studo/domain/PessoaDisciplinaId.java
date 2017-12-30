@@ -15,9 +15,9 @@ import java.io.Serializable;
 @Embeddable
 public class PessoaDisciplinaId implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Pessoa pessoa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Disciplina disciplina;
 }
