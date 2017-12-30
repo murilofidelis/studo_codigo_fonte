@@ -1,6 +1,8 @@
 package br.com.studo.domain;
 
-import java.util.List;
+import br.com.studo.domain.enuns.Tipo;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,17 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import br.com.studo.domain.enuns.Tipo;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,41 +24,40 @@ import lombok.Setter;
 @Table(name = "tab_pessoa")
 public class Pessoa {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cod_pessoa;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long codPessoa;
 
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private Tipo tipo;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Tipo tipo;
 
-	@NotNull
-	@Size(max = 50)
-	private String nome;
+    @NotNull
+    @Size(max = 50)
+    private String nome;
 
-	@NotNull
-	@Size(max = 11)
-	private String cpf;
+    @NotNull
+    @Size(max = 11)
+    private String cpf;
 
-	@NotNull
-	private Boolean situacao;
+    @NotNull
+    private Boolean situacao;
 
-	@NotNull
-	private String sexo;
+    @NotNull
+    private String sexo;
 
-	@OneToMany
-	@JoinColumn(name = "cod_pessoa")
-	private List<Email> emais;
+    @OneToMany
+    @JoinColumn(name = "cod_pessoa")
+    private List<Email> emais;
 
-	@OneToOne
-	private Endereco endereco;
+    @OneToOne
+    private Endereco endereco;
 
-	@ManyToMany
-	@JoinTable(name = "pessoa_disciplina")
-	private List<Disciplina> disciplinas;
+    @OneToMany(mappedBy = "id.pessoa")
+    private List<PessoaDisciplina> pessoaDisciplinas;
 
-	@NotNull
-	@Size(max = 10)
-	private String senha;
+    @NotNull
+    @Size(max = 10)
+    private String senha;
 
 }

@@ -13,7 +13,7 @@ public class Teste {
 	public static void main(String[] args) {
 
 		
-
+/*
 
 
 		Email e = new Email();
@@ -37,7 +37,7 @@ public class Teste {
 		p.setSituacao(true);
 		p.setSexo("M");
 		p.setEmais(list);
-		
+		*/
 
 
 	}
