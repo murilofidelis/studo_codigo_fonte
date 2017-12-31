@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
-import { STUDO_API } from '../app.api';
+
 import 'rxjs/add/operator/toPromise';
+
+import { STUDO_API } from '../app.api';
+import { Disciplina } from '../model/disciplina.model';
 
 export class DisciplinaFiltro {
   descricao: string;
@@ -39,6 +42,14 @@ export class DisciplinaService {
         };
         return resultado;
       });
+  }
+
+  salvar(disciplina: Disciplina): Promise<any> {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(disciplina), { headers })
+      .toPromise()
+      .then(response => response.json());
   }
 
 }

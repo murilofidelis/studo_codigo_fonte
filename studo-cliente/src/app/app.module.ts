@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DisciplinaModule } from './view/disciplina/disciplina.module';
 import { DisciplinaService } from './service/disciplina.service';
@@ -13,7 +14,9 @@ import { DisciplinaService } from './service/disciplina.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
+
     DisciplinaModule
   ],
   providers: [DisciplinaService],

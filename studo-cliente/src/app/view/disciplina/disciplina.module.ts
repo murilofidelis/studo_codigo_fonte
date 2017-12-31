@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
+import { DialogModule } from 'primeng/primeng';
+import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 
 import { DisciplinaPesquisaComponent } from './disciplina-pesquisa/disciplina-pesquisa.component';
 
@@ -14,7 +16,9 @@ import { DisciplinaPesquisaComponent } from './disciplina-pesquisa/disciplina-pe
     FormsModule,
     InputTextModule,
     ButtonModule,
-    DataTableModule
+    DataTableModule,
+    DialogModule,
+    TooltipModule
   ],
   declarations: [
     DisciplinaPesquisaComponent

@@ -13,7 +13,7 @@
 
       <div class="ui-g-12">
         <button pButton type="submit" label="Pesquisar"></button>
-        <a pButton label="Novo"></a>
+        <a pButton label="Novo" (click)="novaDisciplina()"></a>
       </div>
 
     </form>
@@ -22,9 +22,17 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <p-dataTable [value]="disciplinas" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
-        emptyMessage="Nenhum lançamento encontrado" (onLazyLoad)="aoMudarPagina($event)" #tabela>
+        emptyMessage="Nenhum lançamento encontrado" (onLazyLoad)="mudarPagina($event)" #tabela>
 
         <p-column field="descricao" header="Descrição"></p-column>
+
+        <p-column field="ativa" header="Ativa">
+          <ng-template let-disc="rowData" pTemplate="body">
+            <a href="javascript:;" [pTooltip]="disc.ativa ? 'Desativar' : 'Ativar'" tooltipPosition="top">
+              {{ disc.ativa ? 'Ativa' : 'Inativa' }}
+            </a>
+          </ng-template>
+        </p-column>
 
         <p-column styleClass="col-acoes">
           <ng-template let-lanc="rowData" pTemplate="body">
@@ -37,3 +45,25 @@
     </div>
   </div>
 </div>
+
+<p-dialog header="Nova Disciplina" [(visible)]="display" [minWidth]="400" [width]="400" [responsive]="true" showEffect="fade"
+  [modal]="true">
+
+  <div class="ui-grid ui-grid-responsive ui-fluid">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-4">
+        <label for="email">Disciplina*</label>
+      </div>
+      <div class="ui-grid-col-8">
+        <input pInputText id="email" autocomplete="off" maxlength="50" [(ngModel)]="disciplina.descricao" />
+      </div>
+    </div>
+  </div>
+
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa-close" label="Cancelar" (click)="cancelaCadastro()"></button>
+      <button type="submit" pButton icon="fa-check" label="Salvar" (click)="salvar()"></button>
+    </div>
+  </p-footer>
+</p-dialog>
