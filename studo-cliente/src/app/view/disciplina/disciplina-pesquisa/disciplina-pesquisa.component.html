@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="ui-g">
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+      <div class="ui-g-12">
+        <h1>Disciplinas</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Descrição</label>
+        <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+        <a pButton label="Novo"></a>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-dataTable [value]="disciplinas" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
+        emptyMessage="Nenhum lançamento encontrado" (onLazyLoad)="aoMudarPagina($event)" #tabela>
+
+        <p-column field="descricao" header="Descrição"></p-column>
+
+        <p-column styleClass="col-acoes">
+          <ng-template let-lanc="rowData" pTemplate="body">
+            <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+            <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+          </ng-template>
+        </p-column>
+
+      </p-dataTable>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { HttpModule } from '@angular/http';
 
-import { DisciplinaModule } from './disciplina/disciplina.module';
+import { DisciplinaModule } from './view/disciplina/disciplina.module';
+import { DisciplinaService } from './service/disciplina.service';
 
 
 @NgModule({
@@ -11,9 +13,10 @@ import { DisciplinaModule } from './disciplina/disciplina.module';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     DisciplinaModule
   ],
-  providers: [],
+  providers: [DisciplinaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_disciplinas")
+@Table(name = "tab_disciplina")
 public class Disciplina {
 
     @Id

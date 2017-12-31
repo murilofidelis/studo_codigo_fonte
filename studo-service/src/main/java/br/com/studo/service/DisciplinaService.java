@@ -13,7 +13,7 @@ public class DisciplinaService {
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
-    public Page<Disciplina> buscaTodos(String descricao, Pageable pageable) {
+    public Page<Disciplina> filtraPesquisa(String descricao, Pageable pageable) {
         return disciplinaRepository.findByDescricaoContaining(descricao, pageable);
     }
 

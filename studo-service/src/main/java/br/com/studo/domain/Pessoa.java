@@ -4,16 +4,7 @@ import br.com.studo.domain.enuns.Tipo;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -56,8 +47,7 @@ public class Pessoa {
     @OneToMany(mappedBy = "id.pessoa")
     private List<PessoaDisciplina> pessoaDisciplinas;
 
-    @NotNull
-    @Size(max = 10)
-    private String senha;
+    @OneToOne
+    private Usuario usuario;
 
 }
