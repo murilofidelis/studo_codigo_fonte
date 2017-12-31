@@ -14,6 +14,8 @@ import java.io.Serializable;
 @Embeddable
 public class PessoaDisciplinaId implements Serializable {
 
+    private static final long serialVersionUID = -7342796447755202077L;
+
     @ManyToOne
     private Pessoa pessoa;
 

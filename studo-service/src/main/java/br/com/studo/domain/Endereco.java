@@ -18,20 +18,26 @@ import lombok.Setter;
 public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cod_endereco;
+	private Long codEndereco;
 
 	@NotNull
 	private String cep;
+
 	@NotNull
 	private String cidade;
+
 	@NotNull
 	private String estado;
+
 	@NotNull
 	private String logradouro;
+
 	@NotNull
 	private String numero;
+
 	@NotNull
 	private String bairro;
+
 	@Size(max = 100)
 	private String complemento;
 

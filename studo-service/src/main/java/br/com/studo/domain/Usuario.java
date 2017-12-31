@@ -20,7 +20,7 @@ public class Usuario {
     @NotNull
     @Size(max = 20)
     @Column(unique = true)
-    private String usuario;
+    private String login;
 
     @NotNull
     @Size(max = 10)

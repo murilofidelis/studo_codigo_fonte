@@ -22,7 +22,7 @@ public class Turma {
 
     @NotNull
     @Size(max = 1)
-    private String turma;
+    private String descricaoTurma;
 
     @NotNull
     @Size(max = 4)
