@@ -44,7 +44,7 @@ public class DisciplinaResource {
         return disciplina != null ? ResponseEntity.status(HttpStatus.OK).body(disciplina) : ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/{codigo}")
+    @PutMapping
     public ResponseEntity<Disciplina> alterar(@Valid @RequestBody Disciplina disciplina) {
         Disciplina disciplinaAtualizada = disciplinaService.atualizar(disciplina);
         return disciplinaAtualizada != null ? ResponseEntity.status(HttpStatus.OK).body(disciplinaAtualizada) : ResponseEntity.badRequest().build();

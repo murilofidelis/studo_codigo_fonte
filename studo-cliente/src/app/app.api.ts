@@ -1,1 +1,1 @@
-export const STUDO_API = 'http://localhost:8080'
+export const STUDO_API = 'http://localhost:8080';

@@ -52,4 +52,15 @@ export class DisciplinaService {
       .then(response => response.json());
   }
 
+  alterar(disciplina: Disciplina) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(disciplina), { headers })
+      .toPromise()
+      .then((response => {
+        const disciplinaAlterada = response.json() as Disciplina;
+        return disciplinaAlterada;
+      }));
+  }
+
 }

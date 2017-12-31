@@ -26,7 +26,7 @@
 
         <p-column field="descricao" header="Descrição"></p-column>
 
-        <p-column field="ativa" header="Ativa">
+        <p-column field="ativa" header="Status">
           <ng-template let-disc="rowData" pTemplate="body">
             <a href="javascript:;" [pTooltip]="disc.ativa ? 'Desativar' : 'Ativar'" tooltipPosition="top">
               {{ disc.ativa ? 'Ativa' : 'Inativa' }}
@@ -34,13 +34,11 @@
           </ng-template>
         </p-column>
 
-        <p-column styleClass="col-acoes">
-          <ng-template let-lanc="rowData" pTemplate="body">
-            <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
-            <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+        <p-column styleClass="col-acoes" header="Ações">
+          <ng-template let-disciplina="rowData" pTemplate="body">
+            <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" (click)="editar(disciplina)"></a>
           </ng-template>
         </p-column>
-
       </p-dataTable>
     </div>
   </div>

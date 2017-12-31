@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/components/common/api';
+import { ToastyService } from 'ng2-toasty';
+
 import { DisciplinaService, DisciplinaFiltro } from '../../../service/disciplina.service';
 import { Disciplina } from '../../../model/disciplina.model';
 
@@ -17,7 +19,9 @@ export class DisciplinaPesquisaComponent {
   @ViewChild('tabela') grid;
   display: boolean;
 
-  constructor(private disciplinaService: DisciplinaService) { }
+  constructor(
+    private disciplinaService: DisciplinaService,
+    private toasty: ToastyService) { }
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
@@ -40,11 +44,32 @@ export class DisciplinaPesquisaComponent {
     this.display = false;
   }
 
+  editar(disciplina: Disciplina) {
+    this.display = true;
+    this.disciplina = disciplina;
+  }
+
   salvar() {
+    if (this.disciplina.codigo) {
+      this.salvarAlteracao();
+    } else {
+      this.salvarCadastro();
+    }
+  }
+
+  salvarAlteracao() {
+    this.disciplinaService.alterar(this.disciplina).then(disciplina => {
+      this.disciplina = disciplina;
+      this.display = false;
+    });
+  }
+
+  salvarCadastro() {
     this.disciplina.ativa = true;
     this.disciplinaService.salvar(this.disciplina).then(() => {
       this.display = false;
       this.disciplina = new Disciplina();
+      this.toasty.success('Disciplina salva com sucesso!');
       this.pesquisar();
     });
   }
