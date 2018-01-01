@@ -49,7 +49,7 @@ export class DisciplinaService {
     headers.append('Content-Type', 'application/json');
     return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(disciplina), { headers })
       .toPromise()
-      .then(response => response.json());
+      .then(() => null);
   }
 
   alterar(disciplina: Disciplina) {

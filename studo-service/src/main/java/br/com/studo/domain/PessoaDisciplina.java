@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class PessoaDisciplina {
 
     @EmbeddedId
-    private PessoaDisciplinaId id;
+    private PessoaDisciplinaId codigo;
 
     @NotNull
     private Integer ano;

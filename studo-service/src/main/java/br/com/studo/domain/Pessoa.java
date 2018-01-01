@@ -26,7 +26,7 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codPessoa;
+    private Long codigo;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -47,13 +47,13 @@ public class Pessoa {
     private String sexo;
 
     @OneToMany
-    @JoinColumn(name = "cod_pessoa")
+    @JoinColumn(name = "codigo_pessoa")
     private List<Email> emais;
 
     @OneToOne
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "id.pessoa")
+    @OneToMany(mappedBy = "codigo.pessoa")
     private List<PessoaDisciplina> pessoaDisciplinas;
 
     @OneToOne

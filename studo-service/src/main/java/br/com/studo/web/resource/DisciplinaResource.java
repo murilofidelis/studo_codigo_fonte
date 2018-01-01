@@ -33,9 +33,15 @@ public class DisciplinaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Disciplina> salvar(@RequestBody Disciplina disciplina) {
+    public ResponseEntity<Disciplina> salvar(@Valid @RequestBody Disciplina disciplina) {
         Disciplina disciplinaSalva = disciplinaService.salvar(disciplina);
-        return disciplinaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).body(disciplinaSalva) : ResponseEntity.badRequest().build();
+        return disciplinaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Disciplina> alterar(@Valid @RequestBody Disciplina disciplina) {
+        Disciplina disciplinaAtualizada = disciplinaService.atualizar(disciplina);
+        return disciplinaAtualizada != null ? ResponseEntity.status(HttpStatus.OK).body(disciplinaAtualizada) : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{codigo}")
@@ -44,9 +50,4 @@ public class DisciplinaResource {
         return disciplina != null ? ResponseEntity.status(HttpStatus.OK).body(disciplina) : ResponseEntity.notFound().build();
     }
 
-    @PutMapping
-    public ResponseEntity<Disciplina> alterar(@Valid @RequestBody Disciplina disciplina) {
-        Disciplina disciplinaAtualizada = disciplinaService.atualizar(disciplina);
-        return disciplinaAtualizada != null ? ResponseEntity.status(HttpStatus.OK).body(disciplinaAtualizada) : ResponseEntity.badRequest().build();
-    }
 }

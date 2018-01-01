@@ -4,6 +4,8 @@ import { ToastyService } from 'ng2-toasty';
 
 import { DisciplinaService, DisciplinaFiltro } from '../../../service/disciplina.service';
 import { Disciplina } from '../../../model/disciplina.model';
+import { Mensagem } from '../../../model/mensagens';
+import { ErrorHandleService } from '../../../service/error-handle.service';
 
 @Component({
   selector: 'app-disciplina-pesquisa',
@@ -21,7 +23,8 @@ export class DisciplinaPesquisaComponent {
 
   constructor(
     private disciplinaService: DisciplinaService,
-    private toasty: ToastyService) { }
+    private toasty: ToastyService,
+    private errorHandle: ErrorHandleService) { }
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
@@ -29,7 +32,7 @@ export class DisciplinaPesquisaComponent {
       .then(resultado => {
         this.totalRegistros = resultado.total;
         this.disciplinas = resultado.disciplinas;
-      });
+      }).catch(erro => this.errorHandle.handle(erro));
   }
 
   mudarPagina(event: LazyLoadEvent) {
@@ -39,6 +42,7 @@ export class DisciplinaPesquisaComponent {
 
   novaDisciplina() {
     this.display = true;
+    this.disciplina = new Disciplina();
   }
   cancelaCadastro() {
     this.display = false;
@@ -61,7 +65,8 @@ export class DisciplinaPesquisaComponent {
     this.disciplinaService.alterar(this.disciplina).then(disciplina => {
       this.disciplina = disciplina;
       this.display = false;
-    });
+      this.toasty.success(Mensagem.MENSAGEM_ALTERADO_SUCESSO);
+    }).catch(erro => this.errorHandle.handle(erro));
   }
 
   salvarCadastro() {
@@ -69,8 +74,8 @@ export class DisciplinaPesquisaComponent {
     this.disciplinaService.salvar(this.disciplina).then(() => {
       this.display = false;
       this.disciplina = new Disciplina();
-      this.toasty.success('Disciplina salva com sucesso!');
+      this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
       this.pesquisar();
-    });
+    }).catch(erro => this.errorHandle.handle(erro));
   }
 }

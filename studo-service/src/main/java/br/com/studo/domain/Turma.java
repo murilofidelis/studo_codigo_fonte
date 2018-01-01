@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class Turma {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codTurma;
+    private Long codigo;
 
     @NotNull
     @Size(max = 30)

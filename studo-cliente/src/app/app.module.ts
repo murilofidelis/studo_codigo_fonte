@@ -3,25 +3,23 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastyModule } from 'ng2-toasty';
 
 import { DisciplinaModule } from './view/disciplina/disciplina.module';
-import { DisciplinaService } from './service/disciplina.service';
-
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    ToastyModule.forRoot(),
 
+    CoreModule,
     DisciplinaModule
   ],
-  providers: [DisciplinaService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

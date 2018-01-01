@@ -24,6 +24,7 @@
       <p-dataTable [value]="disciplinas" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
         emptyMessage="Nenhum lançamento encontrado" (onLazyLoad)="mudarPagina($event)" #tabela>
 
+        <p-column field="codigo" header="Cod."></p-column>
         <p-column field="descricao" header="Descrição"></p-column>
 
         <p-column field="ativa" header="Status">

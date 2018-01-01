@@ -18,7 +18,7 @@ public class Email {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codEmail;
+	private Long codigo;
 
 	@Size(max = 50)
 	private String dscEmail;

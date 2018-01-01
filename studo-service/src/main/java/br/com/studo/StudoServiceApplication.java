@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class StudoServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StudoServiceApplication.class, args);
-	}
-	
-	
+    public static void main(String[] args) {
+        SpringApplication.run(StudoServiceApplication.class, args);
+    }
+
+
 }

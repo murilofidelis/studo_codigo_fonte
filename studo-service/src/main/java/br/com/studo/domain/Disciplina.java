@@ -19,7 +19,7 @@ public class Disciplina {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codDisciplina;
+    private Long codigo;
 
     @NotNull
     @Size(max = 50)
