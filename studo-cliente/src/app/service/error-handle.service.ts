@@ -14,7 +14,7 @@ export class ErrorHandleService {
       let errors;
       try {
         errors = errorResponse.json();
-        msg = errors[0].mensagemErro;
+        msg = errors[0];
       } catch (e) { }
       console.error('Ocorreu um erro:', errorResponse);
     } else {

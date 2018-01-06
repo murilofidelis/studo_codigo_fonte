@@ -1,5 +1,5 @@
 projectKey=studo
 serverUrl=http://localhost:9000
 dashboardUrl=http://localhost:9000/dashboard/index/studo
-ceTaskId=AWCqnGCTJJ4lk0UcEbX-
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AWCqnGCTJJ4lk0UcEbX-
+ceTaskId=AWC0BFJAfDMcDuo6tZ38
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWC0BFJAfDMcDuo6tZ38

@@ -35,12 +35,11 @@ public class DisciplinaResource {
     @PostMapping
     public ResponseEntity<Disciplina> salvar(@Valid @RequestBody Disciplina disciplina) {
         Disciplina disciplinaSalva = disciplinaService.salvar(disciplina);
-        return disciplinaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
-    }
+        return disciplinaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();    }
 
     @PutMapping
     public ResponseEntity<Disciplina> alterar(@Valid @RequestBody Disciplina disciplina) {
-        Disciplina disciplinaAtualizada = disciplinaService.atualizar(disciplina);
+        Disciplina disciplinaAtualizada = disciplinaService.salvar(disciplina);
         return disciplinaAtualizada != null ? ResponseEntity.status(HttpStatus.OK).body(disciplinaAtualizada) : ResponseEntity.badRequest().build();
     }
 
@@ -49,5 +48,4 @@ public class DisciplinaResource {
         Disciplina disciplina = disciplinaService.buscarPorCodigo(codigo);
         return disciplina != null ? ResponseEntity.status(HttpStatus.OK).body(disciplina) : ResponseEntity.notFound().build();
     }
-
 }

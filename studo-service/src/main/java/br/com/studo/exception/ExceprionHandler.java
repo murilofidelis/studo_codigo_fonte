@@ -16,8 +16,8 @@ public class ExceprionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({StudoException.class})
     public ResponseEntity<Object> handleEmptyResultDataAccessException(StudoException ex, WebRequest request) {
-        String mensagem = ex.getMessage().toString();
-        List<Error> erros = Arrays.asList(new Error(mensagem));
+        String mensagem = ex.getMessage();
+        List<String> erros = Arrays.asList(mensagem);
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 }

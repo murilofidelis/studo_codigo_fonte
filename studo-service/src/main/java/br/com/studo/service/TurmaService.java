@@ -1,19 +1,19 @@
 package br.com.studo.service;
 
-import br.com.studo.domain.Pessoa;
-import br.com.studo.repository.PessoaRepositoty;
+import br.com.studo.domain.Turma;
+import br.com.studo.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class PessoaService {
+public class TurmaService {
 
     @Autowired
-    private PessoaRepositoty pessoaRepositoty;
+    private TurmaRepository turmaRepository;
 
-    public Pessoa salvar(Pessoa pessoa) {
-        return pessoaRepositoty.save(pessoa);
+    public Turma salvar(Turma turma) {
+        return turmaRepository.save(turma);
     }
 }

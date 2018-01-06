@@ -3,6 +3,7 @@ package br.com.studo.service;
 import br.com.studo.domain.Disciplina;
 import br.com.studo.exception.StudoException;
 import br.com.studo.repository.DisciplinaRepository;
+import br.com.studo.util.Mensagens;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,7 @@ public class DisciplinaService {
 
     public Disciplina salvar(Disciplina disciplina) {
         if (verificaDisciplinaExiste(disciplina.getDescricao())) {
-            throw new StudoException("Disciplina já cadastrada.");
+            throw new StudoException(Mensagens.MSG007.getValue());
         }
         return disciplinaRepository.save(disciplina);
     }
@@ -32,11 +33,6 @@ public class DisciplinaService {
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Disciplina buscarPorCodigo(Long codigo) {
         return disciplinaRepository.findOne(codigo);
-    }
-
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public Disciplina atualizar(Disciplina disciplina) {
-        return disciplinaRepository.save(disciplina);
     }
 
     private Boolean verificaDisciplinaExiste(String descricao) {
