@@ -4,6 +4,7 @@ import { ToastyModule } from 'ng2-toasty';
 
 import { DisciplinaService } from '../service/disciplina.service';
 import { ErrorHandleService } from '../service/error-handle.service';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   imports: [
@@ -12,10 +13,11 @@ import { ErrorHandleService } from '../service/error-handle.service';
   ],
   exports: [
     ToastyModule,
+    MessageComponent
   ],
   providers: [
     DisciplinaService,
     ErrorHandleService],
-  declarations: []
+  declarations: [MessageComponent]
 })
 export class CoreModule { }
