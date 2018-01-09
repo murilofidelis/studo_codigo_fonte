@@ -795,7 +795,7 @@
   <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  </compare-dm-settings>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="1.1892071150027208" viewportX="0" viewportY="62" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="1.1892071150027208" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB57" x="281" y="169" bgColor="0xbfd6ff" fgColor="0x5a6986" rounded="true" dashed="false"/>
   <table-pane table-ref="TAB68" x="762" y="548" bgColor="0xbfd6ff" fgColor="0x5a6986" rounded="true" dashed="false"/>
   <table-pane table-ref="TAB77" x="744" y="436" bgColor="0xbfd6ff" fgColor="0x5a6986" rounded="true" dashed="false"/>
@@ -805,7 +805,7 @@
   <table-pane table-ref="TAB110" x="313" y="683" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
   <table-pane table-ref="TAB124" x="518" y="463" bgColor="0xeeeeee" fgColor="0x000000" rounded="true" dashed="true"/>
   <table-pane table-ref="TAB135" x="532" y="751" bgColor="0xc7d0df" fgColor="0x000000" rounded="true" dashed="true"/>
-  <table-pane table-ref="TAB145" x="375" y="52" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
+  <table-pane table-ref="TAB145" x="378" y="52" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
   <table-pane table-ref="TAB150" x="723" y="276" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB154" x="524" y="625" bgColor="0xc7d0df" fgColor="0x000000" rounded="true" dashed="true"/>
   <table-pane table-ref="TAB162" x="20" y="182" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>

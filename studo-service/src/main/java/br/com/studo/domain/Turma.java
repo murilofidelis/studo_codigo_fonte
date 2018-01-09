@@ -6,12 +6,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "tab_turma")
-public class Turma {
+public class Turma implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;

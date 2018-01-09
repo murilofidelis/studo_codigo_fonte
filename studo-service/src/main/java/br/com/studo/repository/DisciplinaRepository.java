@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
 
-    public Page<Disciplina> findByDescricaoContaining(String descricao, Pageable pageable);
+    Page<Disciplina> findByDescricaoContaining(String descricao, Pageable pageable);
 
     @Query(value = "SELECT count(*) > 0 FROM Disciplina WHERE descricao = ?1")
-    public Boolean buscaDisciplinaPorNome(String descricao);
+    Boolean buscaDisciplinaPorNome(String descricao);
 }

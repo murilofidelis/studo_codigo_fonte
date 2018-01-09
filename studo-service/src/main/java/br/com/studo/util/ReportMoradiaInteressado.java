@@ -1,13 +1,9 @@
 package br.com.studo.util;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.base.expression.AbstractValueFormatter;
 import net.sf.dynamicreports.report.builder.DynamicReports;
-import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
-import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
@@ -24,24 +20,26 @@ public class ReportMoradiaInteressado {
 
     public void build() {
 
+        int x = 19;
+
         JasperReportBuilder report = DynamicReports.report();
 
-        report.setTemplate(Templates.reportTemplate);
+        report.setTemplate(Templates.reportTemplate)
 
-        report.title(Templates.createTitleComponent("Relatório Informativo  "));
+                .title(Templates.createTitleComponent("Relatório Informativo").setStyle(Templates.rootStyle))
 
-        report.title(cmp.text("Relatório informativo").setStyle(Templates.bold12CenteredStyle));
+                .title(cmp.text("Relatório informativo").setStyle(Templates.bold12CenteredStyle))
 
-        report.setPageFormat(PageType.A4, PageOrientation.PORTRAIT);
+                .setPageFormat(PageType.A4, PageOrientation.PORTRAIT)
 
-        report.columns(
-                // col.column("CPF", "cpf", type.stringType()).setStyle(Templates.vmiddle).setWidth(20),
-                col.column("CPF", "cpf", type.stringType()),
-                col.column("NIS", "nis", type.stringType()).setStyle(Templates.vmiddle).setWidth(20),
-                col.column("Tipo Morador", "tipo", type.stringType()).setStyle(Templates.vmiddle).setWidth(20),
-                col.column("Nome Completo", "nome", type.stringType()).setStyle(Templates.hleft).setWidth(40));
+                .columns(
+                        col.column("CPF", "cpf", type.stringType()).setStyle(Templates.vmiddle).setWidth(20),
+                        col.column("NIS", "nis", type.stringType()).setStyle(Templates.vmiddle).setWidth(20),
+                        col.column("Tipo Morador", "tipo", type.stringType()).setStyle(Templates.vmiddle).setWidth(20),
+                        col.column("Nome Completo", "nome", type.stringType()).setStyle(Templates.hleft).setWidth(40))
 
-        // report.pageFooter(Components.pageXofY());//show page number on the page footer
+                .pageFooter().summary(cmp.text("\n Total: " + x + " registros").setStyle(Templates.boldStyle)
+        );
 
         report.setDataSource(createDataSource());
 
@@ -67,7 +65,7 @@ public class ReportMoradiaInteressado {
         List<ReportDataRetornoCaixaDTO> l = new ArrayList<>();
         for (long i = 0; i <= 10; i++) {
             ReportDataRetornoCaixaDTO r = new ReportDataRetornoCaixaDTO();
-            r.setCpf("03520683105");
+            r.setCpf(formatarCpf("03520683105","###.###.###-##"));
             r.setNis("13213131312");
             r.setTipo("MORADOR");
             r.setNome("JOÃO DA SILVA PEREIRA CARDOSO");
@@ -76,24 +74,16 @@ public class ReportMoradiaInteressado {
         return new JRBeanCollectionDataSource(l);
     }
 
-    private class QuarterExpression extends AbstractSimpleExpression<String> {
 
-        private static final long serialVersionUID = 1L;
-
-        @Override
-
-        public String evaluate(ReportParameters reportParameters) {
-            return "Q";
-        }
+    public static String formatarCpf(String texto, String mascara) {
+        try {
+            MaskFormatter mf = new MaskFormatter(mascara);
+            mf.setValueContainsLiteralCharacters(false);
+            return mf.valueToString(texto);
+        }catch (Exception e){}
+    return  texto;
     }
 
-
-
-    public static String formatarCpf(String texto, String mascara) throws ParseException {
-        MaskFormatter mf = new MaskFormatter(mascara);
-        mf.setValueContainsLiteralCharacters(false);
-        return mf.valueToString(texto);
-    }
 
 }
 
