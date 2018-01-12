@@ -3,6 +3,7 @@ package br.com.studo.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 public class TurmaAluno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
     private Long codigo;
 
     @NotNull
@@ -34,8 +36,10 @@ public class TurmaAluno implements Serializable {
     private Turma turma;
 
     @NotNull
+    @Column(name = "dte_cadastro")
     private LocalDate dataCadastro;
 
     @NotNull
+    @Column(name = "bln_turma_atual")
     private Boolean turmaAtual;
 }

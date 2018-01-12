@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,16 +24,19 @@ public class Disciplina implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
     private Long codigo;
 
     @NotNull
     @Size(max = 50)
+    @Column(name = "descricao")
     private String descricao;
 
     @OneToMany(mappedBy = "disciplina", cascade = CascadeType.ALL)
     private List<PessoaDisciplina> pessoaDisciplinas;
 
     @NotNull
+    @Column(name = "bln_ativa")
     private Boolean ativa;
 
 }

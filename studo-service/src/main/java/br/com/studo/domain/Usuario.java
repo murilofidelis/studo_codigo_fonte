@@ -12,18 +12,20 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "tab_usuario")
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
     private Long codigo;
 
     @NotNull
     @Size(max = 20)
-    @Column(unique = true)
+    @Column(name = "login", unique = true)
     private String login;
 
     @NotNull
     @Size(max = 10)
+    @Column(name = "senha")
     private String senha;
 }

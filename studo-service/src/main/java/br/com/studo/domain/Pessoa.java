@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -28,24 +29,30 @@ public class Pessoa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
     private Long codigo;
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_pessoa")
     private Tipo tipo;
 
     @NotNull
     @Size(max = 50)
+    @Column(name = "nome")
     private String nome;
 
     @NotNull
     @Size(max = 11)
+    @Column(name = "cpf")
     private String cpf;
 
     @NotNull
+    @Column(name = "bln_situacao")
     private Boolean situacao;
 
     @NotNull
+    @Column(name = "sexo")
     private String sexo;
 
     @OneToMany

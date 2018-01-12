@@ -1,5 +1,6 @@
 package br.com.studo.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,30 +18,45 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "tab_endereco")
-public class Endereco implements Serializable{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+public class Endereco implements Serializable {
 
-	@NotNull
-	private String cep;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
+    private Long codigo;
 
-	@NotNull
-	private String cidade;
+    @NotNull
+    @Size(max = 8)
+    @Column(name = "cep")
+    private String cep;
 
-	@NotNull
-	private String estado;
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "cidade")
+    private String cidade;
 
-	@NotNull
-	private String logradouro;
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "estado")
+    private String estado;
 
-	@NotNull
-	private String numero;
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "logradoura")
+    private String logradoura;
 
-	@NotNull
-	private String bairro;
+    @NotNull
+    @Size(max = 6)
+    @Column(name = "numero")
+    private String numero;
 
-	@Size(max = 100)
-	private String complemento;
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "bairro")
+    private String bairro;
+
+    @Size(max = 100)
+    @Column(name = "complemento")
+    private String complemento;
 
 }

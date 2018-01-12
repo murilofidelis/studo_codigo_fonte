@@ -1,5 +1,6 @@
 package br.com.studo.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,13 +17,15 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "tab_email")
-public class Email implements Serializable{
+public class Email implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
+    private Long codigo;
 
-	@Size(max = 50)
-	private String dscEmail;
+    @Size(max = 50)
+    @Column(name = "dsc_email")
+    private String dscEmail;
 
 }
