@@ -3,36 +3,42 @@ package br.com.studo.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.util.List;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_disciplina")
-public class Disciplina implements Serializable {
+@Table(name = "tab_atividade")
+public class Atividade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
     @NotNull
-    @Size(max = 50)
-    private String descricao;
-
-    @OneToMany(mappedBy = "disciplina", cascade = CascadeType.ALL)
-    private List<PessoaDisciplina> pessoaDisciplinas;
+    private LocalDate dataCadastro;
 
     @NotNull
-    private Boolean ativa;
+    @Size(max = 250)
+    private String titulo;
 
+    @NotNull
+    @Size(max = 1024)
+    private String descricao;
+
+    private String classificacao;
+
+    @OneToOne
+    private Pessoa pessoa;
+
+    @OneToOne
+    private Disciplina disciplina;
 }
