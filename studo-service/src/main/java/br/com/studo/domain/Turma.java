@@ -42,7 +42,6 @@ public class Turma implements Serializable {
     private Periodo periodo;
 
     @NotNull
-    @Size(max = 4)
     @Column(name = "ano")
     private Integer ano;
 

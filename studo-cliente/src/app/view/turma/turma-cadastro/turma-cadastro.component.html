@@ -1,0 +1,45 @@
+<div class="container">
+  <form autocomplete="off" [formGroup]="turmaForm" novalidate>
+
+    <div class="ui-g">
+      <!-- {{turmaForm.valid | json}} -->
+      <div class="ui-g-12">
+        <h1>Cadastro Turma</h1>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Periodo*</label>
+        <p-dropdown [options]="periodos" [autoWidth]="false" formControlName="periodo"></p-dropdown>
+        <div class="invalid-mensage" *ngIf="turmaForm.controls['periodo'].invalid && turmaForm.controls['periodo'].touched">Campo obrigatório</div>
+      </div>
+
+      <div class="ui-g-12 ui-md-8 ui-fluid">
+        <label>Seríe*</label>
+        <p-dropdown [options]="series" [autoWidth]="false" formControlName="serie"></p-dropdown>
+        <div class="invalid-mensage" *ngIf="turmaForm.controls['serie'].invalid && turmaForm.controls['serie'].touched">Campo obrigatório</div>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Turma*</label>
+        <input pInputText type="text" formControlName="descricaoTurma">
+        <div class="invalid-mensage" *ngIf="turmaForm.controls['descricaoTurma'].invalid && turmaForm.controls['descricaoTurma'].touched">Campo obrigatório</div>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Ano*</label>
+        <input pInputText type="number" formControlName="ano" min="2018" max="2050">
+        <div class="invalid-mensage" *ngIf="turmaForm.controls['ano'].invalid && turmaForm.controls['ano'].touched">Campo obrigatório</div>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Sala*</label>
+        <input pInputText type="text" formControlName="sala" max="5">
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" (click)="salvar(turmaForm.value)" [disabled]="turmaForm.invalid"></button>
+      </div>
+
+    </div>
+  </form>
+</div>
