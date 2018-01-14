@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
-import { DisciplinaModule } from './view/disciplina/disciplina.module';
+import { ROUTES } from './app.routes';
+
 import { TurmaModule } from './view/turma/turma.module';
 import { CoreModule } from './core/core.module';
 
@@ -16,9 +18,10 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    RouterModule.forRoot(ROUTES),
 
+    /*Módulos que serão carregados na inicialização da aplicação*/
     CoreModule,
-    DisciplinaModule,
     TurmaModule,
   ],
   providers: [],

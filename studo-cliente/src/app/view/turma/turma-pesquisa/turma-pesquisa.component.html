@@ -2,44 +2,52 @@
 
   <div class="ui-g">
 
-    <div class="ui-g-12">
-      <h1>Turmas</h1>
-    </div>
+    <form autocomplete="off" #formulario="ngForm" (ngSubmit)="pesquisar()">
 
-    <div class="ui-g">
-      <form autocomplete="off" (ngSubmit)="pesquisar()">
+      <div class="ui-g-12">
+        <h1>Turmas</h1>
+      </div>
 
-        <div class="ui-g-4 ui-fluid">
-          <label>Ano*</label>
+      <!-- FORMULÁRIO DE PESQUISA -->
+      <div class="ui-g-10">
+
+        <div class="ui-g-5 ui-fluid">
+          <label>Ano</label>
           <input pInputText type="text" name="ano" [(ngModel)]="filtro.ano">
         </div>
 
-        <div class="ui-g-4 ui-fluid">
-          <label>Periodo*</label>
+        <div class="ui-g-5 ui-fluid">
+          <label>Periodo</label>
           <p-dropdown [options]="periodos" [autoWidth]="false" name="periodo" [(ngModel)]="filtro.periodo"></p-dropdown>
         </div>
 
-        <div class="ui-g-4 margin-button">
+        <div class="ui-g-5 ui-fluid margin-button">
           <button pButton type="submit" label="Pesquisar"></button>
-        </div>
-      </form>
 
-    </div>
+        </div>
+        <div class="ui-g-5 ui-fluid margin-button">
+          <button pButton type="button" label="Limpar" (click)="limpar(formulario)"></button>
+        </div>
+
+      </div>
+    </form>
   </div>
 
+  <br>
+  <!-- TABELA -->
   <div class="ui-g">
     <div class="ui-g-12">
       <p-dataTable [value]="turmas" [paginator]="true" [responsive]="true" [lazy]="true" [rows]="filtro.itensPorPagina" (onLazyLoad)="aoMudarPagina($event)"
         [totalRecords]="totalRegistros" emptyMessage="Nenhum lançamento encontrado" #tabela>
 
-        <p-column field="codigo" header="Cod. Turma"></p-column>
+        <p-column field="codigo" header="Código Turma" styleClass="col-codigo"></p-column>
         <p-column field="ano" header="Ano"></p-column>
         <p-column field="periodo" header="Periodo"></p-column>
         <p-column field="serie" header="Seríe"></p-column>
         <p-column field="descricaoTurma" header="Seríe"></p-column>
         <p-column field="sala" header="Sala"></p-column>
 
-        <p-column styleClass="col-acoes" header="Ações">
+        <p-column header="Ações" styleClass="col-acoes">
           <ng-template let-disciplina="rowData" pTemplate="body">
             <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
           </ng-template>

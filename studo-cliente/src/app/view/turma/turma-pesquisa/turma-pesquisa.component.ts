@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { SelectItem } from 'primeng/components/common/api';
 
 import { TurmaService, TurmaFiltro } from './../../../service/turma.service';
@@ -48,7 +49,11 @@ export class TurmaPesquisaComponent implements OnInit {
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
+  }
 
+  limpar(form: FormControl) {
+    form.reset();
+    this.pesquisar();
   }
 
 }

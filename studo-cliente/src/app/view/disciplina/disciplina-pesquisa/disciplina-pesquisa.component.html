@@ -6,13 +6,16 @@
         <h1>Disciplinas</h1>
       </div>
 
-      <div class="ui-g-12 ui-fluid">
+      <div class="ui-g-10 ui-fluid">
         <label>Descrição</label>
         <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
       </div>
 
-      <div class="ui-g-12">
+      <div class="ui-g-5 ui-fluid">
         <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+
+      <div class="ui-g-5 ui-fluid">
         <a pButton label="Novo" (click)="novaDisciplina()"></a>
       </div>
 
@@ -24,7 +27,7 @@
       <p-dataTable [value]="disciplinas" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
         emptyMessage="Nenhum lançamento encontrado" (onLazyLoad)="mudarPagina($event)" #tabela>
 
-        <p-column field="codigo" header="Cod."></p-column>
+        <p-column field="codigo" header="Código disciplina" styleClass="col-codigo"></p-column>
         <p-column field="descricao" header="Descrição"></p-column>
 
         <p-column field="ativa" header="Status">
@@ -35,7 +38,7 @@
           </ng-template>
         </p-column>
 
-        <p-column styleClass="col-acoes" header="Ações">
+        <p-column header="Ações" styleClass="col-acoes">
           <ng-template let-disciplina="rowData" pTemplate="body">
             <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" (click)="editar(disciplina)"></a>
           </ng-template>
