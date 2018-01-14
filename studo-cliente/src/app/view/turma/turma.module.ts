@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
 
 import { TurmaCadastroComponent } from './turma-cadastro/turma-cadastro.component';
+import { TurmaPesquisaComponent } from './turma-pesquisa/turma-pesquisa.component';
 
 @NgModule({
   imports: [
@@ -19,10 +20,12 @@ import { TurmaCadastroComponent } from './turma-cadastro/turma-cadastro.componen
     ButtonModule
   ],
   declarations: [
-    TurmaCadastroComponent
+    TurmaCadastroComponent,
+    TurmaPesquisaComponent
   ],
   exports: [
-    TurmaCadastroComponent
+    TurmaCadastroComponent,
+    TurmaPesquisaComponent
   ]
 })
 export class TurmaModule { }

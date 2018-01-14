@@ -1,10 +1,16 @@
 package br.com.studo.service;
 
 import br.com.studo.domain.Turma;
+import br.com.studo.domain.enuns.Periodo;
 import br.com.studo.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -12,6 +18,11 @@ public class TurmaService {
 
     @Autowired
     private TurmaRepository turmaRepository;
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public Page<Turma> filtarPesquisa(List<Periodo> periodos, Integer ano, Pageable pageable) {
+        return turmaRepository.findPeriodoAndAno(periodos, ano, pageable);
+    }
 
     public Turma salvar(Turma turma) {
         return turmaRepository.save(turma);

@@ -45,6 +45,4 @@ public class Turma implements Serializable {
     @Column(name = "ano")
     private Integer ano;
 
-    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
-    private List<TurmaAluno> turmaAlunos;
 }
