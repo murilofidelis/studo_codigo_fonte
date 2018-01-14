@@ -29,10 +29,10 @@ public class TurmaResource {
 
     @GetMapping
     public Page<Turma> filtarPesquisa(
-            @RequestParam(required = false, defaultValue = "MATUTINO, VESPERTINO, NOTURNO") List<Periodo> periodos,
+            @RequestParam(required = false, defaultValue = "MATUTINO, VESPERTINO, NOTURNO") List<Periodo> periodo,
             @RequestParam(required = false, defaultValue = "2018") Integer ano,
             Pageable pageable) {
-        return turmaService.filtarPesquisa(periodos, ano, pageable);
+        return turmaService.filtarPesquisa(periodo, ano, pageable);
     }
 
     @PostMapping
