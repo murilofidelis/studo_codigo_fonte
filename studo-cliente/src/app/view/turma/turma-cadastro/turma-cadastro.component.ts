@@ -1,5 +1,6 @@
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/components/common/api';
@@ -24,6 +25,8 @@ export class TurmaCadastroComponent implements OnInit {
   turma = new Turma();
 
   constructor(
+    private activatedRoute: ActivatedRoute,
+    private route: Router,
     private formBuilder: FormBuilder,
     private turmaService: TurmaService,
     private toasty: ToastyService,
@@ -31,13 +34,20 @@ export class TurmaCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const codigoTurma = this.activatedRoute.snapshot.params['codigo'];
+
     this.turmaForm = this.formBuilder.group({
+      codigo: this.formBuilder.control(''),
       periodo: this.formBuilder.control('', Validators.required),
       serie: this.formBuilder.control('', Validators.required),
       descricaoTurma: this.formBuilder.control('', [Validators.required, Validators.maxLength(1)]),
       sala: this.formBuilder.control('', Validators.maxLength(4)),
       ano: this.formBuilder.control('', [Validators.required, Validators.maxLength(4)]),
     });
+
+    if (codigoTurma) {
+      this.carregarTurma(codigoTurma);
+    }
     this.iniciaTurma();
     this.iniciaSerie();
   }
@@ -63,11 +73,16 @@ export class TurmaCadastroComponent implements OnInit {
     this.series.push({ label: '3º Ano', value: '3-ANO' });
   }
 
-  salvar(turma: Turma) {
-    if (this.turma.codigo) {
-    } else {
-      this.salvaCadastro(turma);
-    }
+  carregarTurma(codigo: number) {
+    this.turmaService.buscarPorCOdigo(codigo)
+      .then(turma => {
+        this.turma = turma;
+        this.atribuirValores(this.turma);
+      }).catch(erro => this.errorHandle.handle(erro));
+  }
+
+  atribuirValores(turma: Turma) {
+    this.turmaForm.setValue(turma);
   }
 
   salvaCadastro(turma: Turma) {
@@ -76,6 +91,9 @@ export class TurmaCadastroComponent implements OnInit {
         this.turma = new Turma();
         this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
         this.turmaForm.reset();
+        setTimeout(() => {
+          this.route.navigate(['/turmas']);
+        });
       }).catch(erro => this.errorHandle.handle(erro));
     }
   }

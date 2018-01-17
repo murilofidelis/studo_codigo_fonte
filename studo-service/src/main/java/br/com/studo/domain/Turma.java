@@ -31,7 +31,6 @@ public class Turma implements Serializable {
     @Column(name = "dsc_turma")
     private String descricaoTurma;
 
-    @NotNull
     @Size(max = 4)
     @Column(name = "sala")
     private String sala;

@@ -27,4 +27,9 @@ public class TurmaService {
     public Turma salvar(Turma turma) {
         return turmaRepository.save(turma);
     }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public Turma buscarPorCodigo(Long codigo) {
+        return turmaRepository.findOne(codigo);
+    }
 }

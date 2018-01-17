@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
@@ -16,6 +17,7 @@ import { TurmaPesquisaComponent } from './turma-pesquisa/turma-pesquisa.componen
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
 
     DropdownModule,
     InputTextModule,

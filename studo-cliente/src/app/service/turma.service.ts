@@ -21,7 +21,6 @@ export class TurmaService {
 
   constructor(private http: Http) { }
 
-
   pesquisar(filtro: TurmaFiltro) {
     const headers = new Headers();
     const params = new URLSearchParams();
@@ -47,8 +46,6 @@ export class TurmaService {
         };
         return resultado;
       });
-
-
   }
 
   salvar(turma: Turma): Promise<any> {
@@ -57,6 +54,15 @@ export class TurmaService {
     return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(turma), { headers })
       .toPromise()
       .then(() => null);
+  }
+
+  buscarPorCOdigo(codigo: number) {
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/${codigo}`)
+      .toPromise()
+      .then(response => {
+        const turma = response.json() as Turma;
+        return turma;
+      });
   }
 
 }
