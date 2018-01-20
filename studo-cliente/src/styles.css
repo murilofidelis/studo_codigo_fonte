@@ -28,3 +28,11 @@ body{
   }
 
 
+  .btn-align {
+    display: block;
+    margin-left: auto;
+    margin-right: 0px;
+  }
+
+
+

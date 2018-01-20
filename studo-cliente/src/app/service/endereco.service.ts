@@ -13,13 +13,10 @@ export class EnderecoService {
   constructor(private http: Http) { }
 
   buscarCep(cep: string): Promise<any> {
-    console.log('camando');
-    const headers = new Headers();
-    return this.http.get(`${this.VIA_CEP_END_POINT}/${cep}/json`, { headers })
+    return this.http.get(`${this.VIA_CEP_END_POINT}/${cep}/json`)
       .toPromise()
       .then(response => {
-        const endereco = response.json();
-        return endereco;
+        return response.json();
       });
   }
 

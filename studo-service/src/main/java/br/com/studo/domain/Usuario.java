@@ -1,5 +1,6 @@
 package br.com.studo.domain;
 
+import br.com.studo.domain.enuns.Tipo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +23,7 @@ public class Usuario implements Serializable {
     private Long codigo;
 
     @NotNull
-    @Size(max = 20)
+    @Size(max = 50)
     @Column(name = "login", unique = true)
     private String login;
 
@@ -30,6 +31,11 @@ public class Usuario implements Serializable {
     @Size(max = 10)
     @Column(name = "senha")
     private String senha;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_usuario")
+    private Tipo tipo;
 
     @Column(name = "bln_status")
     private Boolean status;

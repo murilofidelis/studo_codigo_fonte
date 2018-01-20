@@ -4,7 +4,7 @@ import { ToastyService } from 'ng2-toasty';
 
 import { DisciplinaService, DisciplinaFiltro } from '../../../service/disciplina.service';
 import { Disciplina } from '../../../model/disciplina.model';
-import { Mensagem } from '../../../model/mensagens';
+import { Mensagem } from '../../../model/mensagens.model';
 import { ErrorHandleService } from '../../../service/error-handle.service';
 
 @Component({

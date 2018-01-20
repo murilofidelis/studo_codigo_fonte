@@ -8,7 +8,7 @@ import { ToastyService } from 'ng2-toasty';
 import { TurmaService } from './../../../service/turma.service';
 import { Turma } from './../../../model/turma.model';
 import { ErrorHandleService } from '../../../service/error-handle.service';
-import { Mensagem } from './../../../model/mensagens';
+import { Mensagem } from './../../../model/mensagens.model';
 
 @Component({
   selector: 'app-turma-cadastro',

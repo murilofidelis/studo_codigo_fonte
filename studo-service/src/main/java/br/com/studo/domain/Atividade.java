@@ -47,7 +47,7 @@ public class Atividade implements Serializable {
 	private String classificacao;
 
 	@OneToOne
-	private Pessoa pessoa;
+	private Professor professor;
 
 	@OneToOne
 	private Disciplina disciplina;

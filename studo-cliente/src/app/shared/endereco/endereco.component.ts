@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { ToastyService } from 'ng2-toasty';
+
+import { Mensagem } from './../../model/mensagens.model';
 import { Endereco } from './../../model/endereco.model';
 import { EnderecoService } from './../../service/endereco.service';
 
@@ -17,6 +20,7 @@ export class EnderecoComponent implements OnInit {
   constructor(
     private enderecoService: EnderecoService,
     private formBuilder: FormBuilder,
+    private toasty: ToastyService,
   ) { }
 
   ngOnInit() {
@@ -35,10 +39,22 @@ export class EnderecoComponent implements OnInit {
   buscaCep(event) {
     const cep = event.replace(/[^a-zA-Z0-9]/g, '');
     this.enderecoService.buscarCep(cep).then(resulatdo => {
-      this.endereco = resulatdo;
-      console.log(this.endereco);
-      this.enderecoForm.get('uf').setValue(resulatdo.uf);
+      this.preencherEndereco(resulatdo);
     });
+  }
+
+  preencherEndereco(endereco: any) {
+    if (endereco.erro === true) {
+      this.toasty.info(Mensagem.CEP_NAO_ENCONTRADO);
+    } else {
+      this.enderecoForm.controls['uf'].setValue(endereco.uf);
+      this.enderecoForm.controls['localidade'].setValue(endereco.localidade);
+      this.enderecoForm.controls['logradouro'].setValue(endereco.logradouro);
+      this.enderecoForm.controls['bairro'].setValue(endereco.bairro);
+      this.enderecoForm.controls['complemento'].setValue(endereco.complemento);
+
+
+    }
   }
 
 }

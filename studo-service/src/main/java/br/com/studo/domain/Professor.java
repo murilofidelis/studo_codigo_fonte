@@ -1,13 +1,10 @@
 package br.com.studo.domain;
 
-import br.com.studo.domain.enuns.Tipo;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,13 +15,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_pessoa")
-public class Pessoa implements Serializable {
+@Table(name = "tab_professor")
+public class Professor implements Serializable {
 
     private static final long serialVersionUID = 1358987494816807819L;
 
@@ -32,11 +28,6 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
     private Long codigo;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_pessoa")
-    private Tipo tipo;
 
     @NotNull
     @Size(max = 50)
@@ -53,8 +44,8 @@ public class Pessoa implements Serializable {
     private String sexo;
 
     @OneToMany
-    @JoinColumn(name = "codigo_pessoa")
-    private List<Email> emais;
+    @JoinColumn(name = "codigo_professor")
+    private Email email;
 
     @OneToOne
     private Endereco endereco;

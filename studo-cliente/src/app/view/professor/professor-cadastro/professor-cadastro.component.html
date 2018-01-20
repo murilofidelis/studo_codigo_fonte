@@ -1,6 +1,7 @@
 <div class="container">
+  {{professorForm.valid|json }}
 
-  <form>
+  <form autocomplete="off" [formGroup]="professorForm">
     <div class="ui-g">
 
       <div class="ui-g-12">
@@ -9,22 +10,26 @@
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Nome*</label>
-        <input pInputText type="text">
+        <input pInputText type="text" formControlName="nome">
+        <div class="invalid-mensage" *ngIf="professorForm.controls['nome'].invalid && professorForm.controls['nome'].touched">Campo obrigatório</div>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>CPF*</label>
-        <p-inputMask mask="999.999.999-99"></p-inputMask>
+        <p-inputMask mask="999.999.999-99" formControlName="cpf"></p-inputMask>
+        <div class="invalid-mensage" *ngIf="professorForm.controls['cpf'].invalid && professorForm.controls['cpf'].touched">Campo obrigatório</div>
       </div>
 
       <div class="ui-g-12 ui-md-5 ui-fluid">
         <label>Sexo*</label>
-        <p-dropdown [options]="sexo" [autoWidth]="false"></p-dropdown>
+        <p-dropdown [options]="sexo" [autoWidth]="false" formControlName="sexo"></p-dropdown>
+        <div class="invalid-mensage" *ngIf="professorForm.controls['sexo'].invalid && professorForm.controls['sexo'].touched">Campo obrigatório</div>
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>E-mail*</label>
-        <input pInputText type="text">
+        <input pInputText type="text" formControlName="email">
+        <div class="invalid-mensage" *ngIf="professorForm.controls['email'].invalid && professorForm.controls['email'].touched">Campo obrigatório</div>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
@@ -34,6 +39,15 @@
 
       <div>
         <app-endereco></app-endereco>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid btn-align">
+        <div class="ui-g-12 ui-md-6 ui-fluid">
+          <button pButton type="submit" label="Salvar" (click)="salvar(professorForm.value)" [disabled]="false"></button>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-fluid">
+          <button pButton type="submit" label="Voltar" routerLink="/turmas"></button>
+        </div>
       </div>
 
     </div>

@@ -1,41 +1,49 @@
 <div class="container">
+  {{enderecoForm.valid | json}}
+  <form autocomplete="off" [formGroup]="enderecoForm" novalidate>
+    <div class="ui-g">
 
-  <div class="ui-g">
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>CEP*</label>
+        <p-inputMask mask="99999-999" (change)="buscaCep($event.target.value)" formControlName="cep"></p-inputMask>
+        <div class="invalid-mensage" *ngIf="enderecoForm.controls['cep'].invalid && enderecoForm.controls['cep'].touched">Campo obrigatório</div>
+      </div>
 
-    <div class="ui-g-12 ui-md-2 ui-fluid">
-      <label>CEP*</label>
-      <p-inputMask mask="99999-999" (change)="buscaCep($event.target.value)" formControlName="cep"></p-inputMask>
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Estado*</label>
+        <input pInputText type="text" formControlName="uf">
+        <div class="invalid-mensage" *ngIf="enderecoForm.controls['uf'].invalid && enderecoForm.controls['uf'].touched">Campo obrigatório</div>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Cidade*</label>
+        <input pInputText type="text" formControlName="localidade">
+        <div class="invalid-mensage" *ngIf="enderecoForm.controls['localidade'].invalid && enderecoForm.controls['localidade'].touched">Campo obrigatório</div>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Logradouro*</label>
+        <input pInputText type="text" formControlName="logradouro">
+        <div class="invalid-mensage" *ngIf="enderecoForm.controls['logradouro'].invalid && enderecoForm.controls['logradouro'].touched">Campo obrigatório</div>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Bairro*</label>
+        <input pInputText type="text" formControlName="bairro">
+        <div class="invalid-mensage" *ngIf="enderecoForm.controls['bairro'].invalid && enderecoForm.controls['bairro'].touched">Campo obrigatório</div>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Numero*</label>
+        <input pInputText type="text" formControlName="numero">
+        <div class="invalid-mensage" *ngIf="enderecoForm.controls['numero'].invalid && enderecoForm.controls['numero'].touched">Campo obrigatório</div>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Complemento</label>
+        <input pInputText type="text" formControlName="complemento">
+      </div>
+
     </div>
-
-    <div class="ui-g-12 ui-md-2 ui-fluid">
-      <label>Estado*</label>
-      <input pInputText type="text" formControlName="uf">
-    </div>
-
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label>Cidade*</label>
-      <input pInputText type="text">
-    </div>
-
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label>Logradouro*</label>
-      <input pInputText type="text">
-    </div>
-
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label>Bairro*</label>
-      <input pInputText type="text">
-    </div>
-
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label>Numero*</label>
-      <input pInputText type="text">
-    </div>
-
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label>Complemento</label>
-      <input pInputText type="text">
-    </div>
-
-  </div>
+  </form>
 </div>
