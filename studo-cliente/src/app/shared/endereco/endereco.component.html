@@ -4,12 +4,12 @@
 
     <div class="ui-g-12 ui-md-2 ui-fluid">
       <label>CEP*</label>
-      <p-inputMask mask="99999-999" (change)="buscaCep($event.target.value)"></p-inputMask>
+      <p-inputMask mask="99999-999" (change)="buscaCep($event.target.value)" formControlName="cep"></p-inputMask>
     </div>
 
     <div class="ui-g-12 ui-md-2 ui-fluid">
       <label>Estado*</label>
-      <input pInputText type="text">
+      <input pInputText type="text" formControlName="uf">
     </div>
 
     <div class="ui-g-12 ui-md-4 ui-fluid">

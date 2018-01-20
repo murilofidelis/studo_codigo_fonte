@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Endereco } from './../../model/endereco.model';
 import { EnderecoService } from './../../service/endereco.service';
@@ -11,24 +12,32 @@ import { EnderecoService } from './../../service/endereco.service';
 export class EnderecoComponent implements OnInit {
 
   endereco: Endereco;
+  enderecoForm: FormGroup;
 
   constructor(
-    private enderecoService: EnderecoService
+    private enderecoService: EnderecoService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
+    this.enderecoForm = this.formBuilder.group({
+      codigo: this.formBuilder.control(null),
+      cep: this.formBuilder.control(null, Validators.required),
+      uf: this.formBuilder.control(null, Validators.required),
+      localidade: this.formBuilder.control(null, Validators.required),
+      logradouro: this.formBuilder.control(null, Validators.required),
+      bairro: this.formBuilder.control(null, Validators.required),
+      numero: this.formBuilder.control(null, Validators.required),
+      complemento: this.formBuilder.control(''),
+    });
   }
 
-  buscaCep(event: any) {
-    console.log(event);
-    let cep: String = '';
-    cep = event.target.value.replace(/[^a-zA-Z0-9]/g, '');
-
-    console.log(cep);
-    this.enderecoService.buscarCep(event.target.value).then(resulatdo => {
-
+  buscaCep(event) {
+    const cep = event.replace(/[^a-zA-Z0-9]/g, '');
+    this.enderecoService.buscarCep(cep).then(resulatdo => {
       this.endereco = resulatdo;
       console.log(this.endereco);
+      this.enderecoForm.get('uf').setValue(resulatdo.uf);
     });
   }
 
