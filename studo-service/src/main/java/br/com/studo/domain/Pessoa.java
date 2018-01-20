@@ -4,7 +4,6 @@ import br.com.studo.domain.enuns.Tipo;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -27,6 +26,8 @@ import java.util.List;
 @Table(name = "tab_pessoa")
 public class Pessoa implements Serializable {
 
+    private static final long serialVersionUID = 1358987494816807819L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
@@ -48,10 +49,6 @@ public class Pessoa implements Serializable {
     private String cpf;
 
     @NotNull
-    @Column(name = "bln_situacao")
-    private Boolean situacao;
-
-    @NotNull
     @Column(name = "sexo")
     private String sexo;
 
@@ -61,9 +58,6 @@ public class Pessoa implements Serializable {
 
     @OneToOne
     private Endereco endereco;
-
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
-    private List<PessoaDisciplina> pessoaDisciplinas;
 
     @OneToOne
     private Usuario usuario;

@@ -19,13 +19,15 @@ import java.io.Serializable;
 @Table(name = "tab_email")
 public class Email implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo")
-    private Long codigo;
+	private static final long serialVersionUID = -2001171565703568324L;
 
-    @Size(max = 50)
-    @Column(name = "dsc_email")
-    private String dscEmail;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigo")
+	private Long codigo;
+
+	@Size(max = 50)
+	@Column(name = "dsc_email")
+	private String dscEmail;
 
 }

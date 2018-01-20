@@ -20,26 +20,29 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tab_turma_aluno")
 public class TurmaAluno implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo")
-    private Long codigo;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+	private static final long serialVersionUID = -927136295454282048L;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "turma_id")
-    private Turma turma;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigo")
+	private Long codigo;
 
-    @NotNull
-    @Column(name = "dte_cadastro")
-    private LocalDate dataCadastro;
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "aluno_id")
+	private Aluno aluno;
 
-    @NotNull
-    @Column(name = "bln_turma_atual")
-    private Boolean turmaAtual;
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "turma_id")
+	private Turma turma;
+
+	@NotNull
+	@Column(name = "dte_cadastro")
+	private LocalDate dataCadastro;
+
+	@NotNull
+	@Column(name = "bln_turma_atual")
+	private Boolean turmaAtual;
 }

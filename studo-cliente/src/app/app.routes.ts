@@ -1,3 +1,4 @@
+import { ProfessorCadastroComponent } from './view/professor/professor-cadastro/professor-cadastro.component';
 import { Routes } from '@angular/router';
 
 import { DisciplinaPesquisaComponent } from './view/disciplina/disciplina-pesquisa/disciplina-pesquisa.component';
@@ -9,6 +10,7 @@ export const ROUTES: Routes = [
   { path: 'turmas', component: TurmaPesquisaComponent },
   { path: 'turmas/nova', component: TurmaCadastroComponent },
   { path: 'turmas/:codigo', component: TurmaCadastroComponent },
-  { path: 'diciplinas', loadChildren: './view/disciplina/disciplina.module#DisciplinaModule' }
+  { path: 'diciplinas', loadChildren: './view/disciplina/disciplina.module#DisciplinaModule' },
+  { path: 'professor/novo', component: ProfessorCadastroComponent }
 ];
 

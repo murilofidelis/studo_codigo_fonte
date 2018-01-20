@@ -9,10 +9,14 @@ import { ROUTES } from './app.routes';
 
 import { TurmaModule } from './view/turma/turma.module';
 import { CoreModule } from './core/core.module';
+import { ProfessorModule } from './view/professor/professor.module';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
+
   ],
   imports: [
     BrowserModule,
@@ -23,6 +27,7 @@ import { CoreModule } from './core/core.module';
     /*Módulos que serão carregados na inicialização da aplicação*/
     CoreModule,
     TurmaModule,
+    ProfessorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

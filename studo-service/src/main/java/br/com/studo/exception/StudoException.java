@@ -7,7 +7,9 @@ import lombok.Setter;
 @Setter
 public class StudoException extends RuntimeException {
 
-    public StudoException(String var) {
+	private static final long serialVersionUID = 3661546451490206892L;
+
+	public StudoException(String var) {
         super(var);
     }
 

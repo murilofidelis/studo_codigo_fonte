@@ -16,32 +16,31 @@ import java.util.List;
 @Table(name = "tab_aluno")
 public class Aluno implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo")
-    private Long codigo;
+	private static final long serialVersionUID = 5752740166747344166L;
 
-    @Column(name = "nome")
-    @Size(max = 50)
-    private String nome;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigo")
+	private Long codigo;
 
-    @Column(name = "email")
-    @Size(max = 50)
-    private String email;
+	@Column(name = "nome")
+	@Size(max = 50)
+	private String nome;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sexo")
-    private Sexo sexo;
+	@Column(name = "email")
+	@Size(max = 50)
+	private String email;
 
-    @Column(name = "bln_status")
-    private Boolean status;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "sexo")
+	private Sexo sexo;
 
-    @Column(name = "dte_nascimento")
-    private LocalDate dataNascimento;
+	@Column(name = "dte_nascimento")
+	private LocalDate dataNascimento;
 
-    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
-    private List<TurmaAluno> turmaAlunos;
+	@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+	private List<TurmaAluno> turmaAlunos;
 
-    @OneToOne
-    private Usuario usuario;
+	@OneToOne
+	private Usuario usuario;
 }

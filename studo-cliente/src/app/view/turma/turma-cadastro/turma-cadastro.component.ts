@@ -37,12 +37,12 @@ export class TurmaCadastroComponent implements OnInit {
     const codigoTurma = this.activatedRoute.snapshot.params['codigo'];
 
     this.turmaForm = this.formBuilder.group({
-      codigo: this.formBuilder.control(''),
-      periodo: this.formBuilder.control('', Validators.required),
-      serie: this.formBuilder.control('', Validators.required),
-      descricaoTurma: this.formBuilder.control('', [Validators.required, Validators.maxLength(1)]),
-      sala: this.formBuilder.control('', Validators.maxLength(4)),
-      ano: this.formBuilder.control('', [Validators.required, Validators.maxLength(4)]),
+      codigo: this.formBuilder.control(null),
+      periodo: this.formBuilder.control(null, Validators.required),
+      serie: this.formBuilder.control(null, Validators.required),
+      descricaoTurma: this.formBuilder.control(null, [Validators.required, Validators.maxLength(1)]),
+      sala: this.formBuilder.control(null, Validators.maxLength(4)),
+      ano: this.formBuilder.control(null, [Validators.required, Validators.maxLength(4)]),
     });
 
     if (codigoTurma) {

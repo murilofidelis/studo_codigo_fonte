@@ -14,6 +14,8 @@ import java.io.Serializable;
 @Table(name = "tab_usuario")
 public class Usuario implements Serializable {
 
+    private static final long serialVersionUID = 8024177994467350678L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
@@ -28,4 +30,7 @@ public class Usuario implements Serializable {
     @Size(max = 10)
     @Column(name = "senha")
     private String senha;
+
+    @Column(name = "bln_status")
+    private Boolean status;
 }

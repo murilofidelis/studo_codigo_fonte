@@ -15,7 +15,7 @@ public enum Mensagens {
         try {
             properties.load(Mensagens.class.getResourceAsStream("/messages.properties"));
         } catch (IOException e) {
-            throw new StudoException("Oocorreu um erro ao ler aquivo de mensagens");
+            throw new StudoException("Ocorreu um erro ao ler aquivo de mensagens");
         }
     }
 
