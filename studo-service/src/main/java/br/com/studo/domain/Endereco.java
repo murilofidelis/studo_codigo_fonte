@@ -20,45 +20,45 @@ import java.io.Serializable;
 @Table(name = "tab_endereco")
 public class Endereco implements Serializable {
 
-	private static final long serialVersionUID = 1454354308295534370L;
+    private static final long serialVersionUID = 1454354308295534370L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo")
-	private Long codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
+    private Long codigo;
 
-	@NotNull
-	@Size(max = 8)
-	@Column(name = "cep")
-	private String cep;
+    @NotNull
+    @Size(max = 8)
+    @Column(name = "cep")
+    private String cep;
 
-	@NotNull
-	@Size(max = 50)
-	@Column(name = "cidade")
-	private String cidade;
+    @NotNull
+    @Size(max = 5)
+    @Column(name = "estado")
+    private String uf;
 
-	@NotNull
-	@Size(max = 50)
-	@Column(name = "estado")
-	private String estado;
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "localidade")
+    private String localidade;
 
-	@NotNull
-	@Size(max = 50)
-	@Column(name = "logradoura")
-	private String logradoura;
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "logradouro")
+    private String logradouro;
 
-	@NotNull
-	@Size(max = 6)
-	@Column(name = "numero")
-	private String numero;
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "bairro")
+    private String bairro;
 
-	@NotNull
-	@Size(max = 50)
-	@Column(name = "bairro")
-	private String bairro;
+    @NotNull
+    @Size(max = 6)
+    @Column(name = "numero")
+    private String numero;
 
-	@Size(max = 100)
-	@Column(name = "complemento")
-	private String complemento;
+    @Size(max = 100)
+    @Column(name = "complemento")
+    private String complemento;
 
 }

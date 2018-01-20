@@ -1,3 +1,41 @@
-<p>
-  endereco works!
-</p>
+<div class="container">
+
+  <div class="ui-g">
+
+    <div class="ui-g-12 ui-md-2 ui-fluid">
+      <label>CEP*</label>
+      <p-inputMask mask="99999-999" (change)="buscaCep($event.target.value)"></p-inputMask>
+    </div>
+
+    <div class="ui-g-12 ui-md-2 ui-fluid">
+      <label>Estado*</label>
+      <input pInputText type="text">
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+      <label>Cidade*</label>
+      <input pInputText type="text">
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+      <label>Logradouro*</label>
+      <input pInputText type="text">
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+      <label>Bairro*</label>
+      <input pInputText type="text">
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+      <label>Numero*</label>
+      <input pInputText type="text">
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+      <label>Complemento</label>
+      <input pInputText type="text">
+    </div>
+
+  </div>
+</div>

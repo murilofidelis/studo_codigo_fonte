@@ -8,6 +8,8 @@ import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton
 import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 
 import { ProfessorCadastroComponent } from './professor-cadastro/professor-cadastro.component';
+import { SharedModule } from '../../shared/shared.module';
+
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { ProfessorCadastroComponent } from './professor-cadastro/professor-cadas
     DropdownModule,
     ButtonModule,
     SelectButtonModule,
-    InputMaskModule
+    InputMaskModule,
+
+    SharedModule,
   ],
   declarations: [ProfessorCadastroComponent]
 })

@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -7,11 +8,9 @@ import { RouterModule } from '@angular/router';
 
 import { ROUTES } from './app.routes';
 
-import { TurmaModule } from './view/turma/turma.module';
 import { CoreModule } from './core/core.module';
 import { ProfessorModule } from './view/professor/professor.module';
-
-
+import { TurmaModule } from './view/turma/turma.module';
 
 @NgModule({
   declarations: [

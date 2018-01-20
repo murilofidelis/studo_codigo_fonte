@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { DialogModule } from 'primeng/primeng';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { FieldsetModule } from 'primeng/components/fieldset/fieldset';
 
 import { DisciplinaPesquisaComponent } from './disciplina-pesquisa/disciplina-pesquisa.component';
 
@@ -24,6 +25,7 @@ const ROUTES: Routes = [
     DataTableModule,
     DialogModule,
     TooltipModule,
+    FieldsetModule,
 
     RouterModule.forChild(ROUTES),
   ],

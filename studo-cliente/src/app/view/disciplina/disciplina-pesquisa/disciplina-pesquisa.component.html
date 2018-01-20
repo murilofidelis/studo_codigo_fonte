@@ -1,26 +1,31 @@
 <div class="container">
   <div class="ui-g">
-    <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-      <div class="ui-g-12">
-        <h1>Disciplinas</h1>
-      </div>
+    <div class="ui-g-12">
+      <h1>Disciplinas</h1>
+    </div>
 
-      <div class="ui-g-10 ui-fluid">
-        <label>Descrição</label>
-        <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
-      </div>
+    <p-fieldset legend="Pesquisa" class="ui-g-12">
+      <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-      <div class="ui-g-5 ui-fluid">
-        <button pButton type="submit" label="Pesquisar"></button>
-      </div>
+        <div class="ui-g-6 ui-fluid">
+          <label>Descrição</label>
+          <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
+        </div>
 
-      <div class="ui-g-5 ui-fluid">
-        <a pButton label="Novo" (click)="novaDisciplina()"></a>
-      </div>
+        <div class="ui-g-3 ui-fluid align-button">
+          <button pButton type="submit" label="Pesquisar"></button>
+        </div>
 
-    </form>
+        <div class="ui-g-3 ui-fluid align-button">
+          <a pButton label="Novo" (click)="novaDisciplina()"></a>
+        </div>
+
+      </form>
+    </p-fieldset>
   </div>
+
+  <br>
 
   <div class="ui-g">
     <div class="ui-g-12">

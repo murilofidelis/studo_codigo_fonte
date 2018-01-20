@@ -7,6 +7,7 @@ import { DisciplinaService } from '../service/disciplina.service';
 import { TurmaService } from './../service/turma.service';
 import { ErrorHandleService } from '../service/error-handle.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { EnderecoService } from '../service/endereco.service';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { NavbarComponent } from './navbar/navbar.component';
   providers: [
     DisciplinaService,
     TurmaService,
-    ErrorHandleService],
+    ErrorHandleService,
+    EnderecoService,
+  ],
   declarations: [NavbarComponent]
 })
 export class CoreModule { }

@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { FieldsetModule } from 'primeng/components/fieldset/fieldset';
 
 import { TurmaCadastroComponent } from './turma-cadastro/turma-cadastro.component';
 import { TurmaPesquisaComponent } from './turma-pesquisa/turma-pesquisa.component';
@@ -23,7 +24,8 @@ import { TurmaPesquisaComponent } from './turma-pesquisa/turma-pesquisa.componen
     InputTextModule,
     ButtonModule,
     DataTableModule,
-    TooltipModule
+    TooltipModule,
+    FieldsetModule
   ],
   declarations: [
     TurmaCadastroComponent,
