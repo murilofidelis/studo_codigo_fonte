@@ -14,7 +14,7 @@ import { TurmaModule } from './view/turma/turma.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
 
   ],
   imports: [
@@ -26,7 +26,7 @@ import { TurmaModule } from './view/turma/turma.module';
     /*Módulos que serão carregados na inicialização da aplicação*/
     CoreModule,
     TurmaModule,
-    ProfessorModule
+    ProfessorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

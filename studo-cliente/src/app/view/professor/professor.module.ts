@@ -11,7 +11,6 @@ import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { ProfessorCadastroComponent } from './professor-cadastro/professor-cadastro.component';
 import { SharedModule } from '../../shared/shared.module';
 
-
 @NgModule({
   imports: [
     CommonModule,

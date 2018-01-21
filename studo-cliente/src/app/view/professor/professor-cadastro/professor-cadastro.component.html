@@ -1,5 +1,4 @@
 <div class="container">
-  {{professorForm.valid|json }}
 
   <form autocomplete="off" [formGroup]="professorForm">
     <div class="ui-g">
@@ -28,7 +27,7 @@
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>E-mail*</label>
-        <input pInputText type="text" formControlName="email">
+        <input pInputText type="text" formControlName="email" email>
         <div class="invalid-mensage" *ngIf="professorForm.controls['email'].invalid && professorForm.controls['email'].touched">Campo obrigatório</div>
       </div>
 
@@ -52,4 +51,7 @@
 
     </div>
   </form>
+
+  <app-form-debug [form]="professorForm"></app-form-debug>
+
 </div>
