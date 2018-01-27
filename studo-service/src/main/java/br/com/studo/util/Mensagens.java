@@ -20,6 +20,6 @@ public enum Mensagens {
     }
 
     public String getValue() {
-        return properties.getProperty(this.toString());
+        return properties.getProperty(this.name());
     }
 }

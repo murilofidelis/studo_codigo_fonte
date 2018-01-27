@@ -10,4 +10,9 @@ export class Professor {
   email: Email;
   endereco: Endereco;
   usuario: Usuario;
+
+  constructor() {
+    this.email = new Email();
+    this.endereco = new Endereco();
+  }
 }

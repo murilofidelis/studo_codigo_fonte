@@ -33,7 +33,7 @@ public class Professor implements Serializable {
     private String nome;
 
     @NotNull
-    @Size(max = 11)
+    @Size(max = 110)
     @Column(name = "cpf")
     private String cpf;
 
@@ -41,15 +41,14 @@ public class Professor implements Serializable {
     @Column(name = "sexo")
     private String sexo;
 
-    @NotNull
     @OneToOne
     private Email email;
 
-    @NotNull
+
     @OneToOne
     private Endereco endereco;
 
-    @NotNull
+
     @OneToOne
     private Usuario usuario;
 

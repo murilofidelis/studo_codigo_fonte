@@ -1,7 +1,7 @@
 package br.com.studo.web.resource;
 
 import br.com.studo.domain.Professor;
-import br.com.studo.service.PessoaService;
+import br.com.studo.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +15,15 @@ import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
-@RequestMapping("pessoas")
-public class PessoaResource {
+@RequestMapping("professor")
+public class ProfessorResource {
 
     @Autowired
-    private PessoaService pessoaService;
+    private ProfessorService pessoaService;
 
     @PostMapping
-    public ResponseEntity<Professor> salvar(@RequestBody @Valid Professor pessoa) {
-        Professor pessoaSalva = pessoaService.salvar(pessoa);
+    public ResponseEntity<Professor> salvar(@RequestBody  Professor professor) {
+        Professor pessoaSalva = pessoaService.salvar(professor);
         return pessoaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 

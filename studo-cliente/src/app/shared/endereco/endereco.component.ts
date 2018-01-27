@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ToastyService } from 'ng2-toasty';
@@ -32,28 +32,30 @@ export class EnderecoComponent implements OnInit {
       logradouro: this.formBuilder.control(null, Validators.required),
       bairro: this.formBuilder.control(null, Validators.required),
       numero: this.formBuilder.control(null, Validators.required),
-      complemento: this.formBuilder.control(''),
+      complemento: this.formBuilder.control(null),
     });
   }
 
   buscaCep(event) {
     const cep = event.replace(/[^a-zA-Z0-9]/g, '');
     this.enderecoService.buscarCep(cep).then(resulatdo => {
-      this.preencherEndereco(resulatdo);
+      this.preencheEndereco(resulatdo);
     });
+
   }
 
-  preencherEndereco(endereco: any) {
+  preencheEndereco(endereco: any) {
     if (endereco.erro === true) {
       this.toasty.info(Mensagem.CEP_NAO_ENCONTRADO);
     } else {
-      this.enderecoForm.controls['uf'].setValue(endereco.uf);
-      this.enderecoForm.controls['localidade'].setValue(endereco.localidade);
-      this.enderecoForm.controls['logradouro'].setValue(endereco.logradouro);
-      this.enderecoForm.controls['bairro'].setValue(endereco.bairro);
-      this.enderecoForm.controls['complemento'].setValue(endereco.complemento);
+      this.enderecoForm.get('uf').setValue(endereco.uf);
+      this.enderecoForm.get('localidade').setValue(endereco.localidade);
+      this.enderecoForm.get('logradouro').setValue(endereco.logradouro);
+      this.enderecoForm.get('bairro').setValue(endereco.bairro);
+      this.enderecoForm.get('complemento').setValue(endereco.complemento);
 
-
+      this.endereco = this.enderecoForm.value;
+      console.log(this.endereco);
     }
   }
 

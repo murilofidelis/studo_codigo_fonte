@@ -1,3 +1,4 @@
+import { ProfessorService } from './../service/professor.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -23,6 +24,7 @@ import { EnderecoService } from '../service/endereco.service';
   providers: [
     DisciplinaService,
     TurmaService,
+    ProfessorService,
     ErrorHandleService,
     EnderecoService,
   ],

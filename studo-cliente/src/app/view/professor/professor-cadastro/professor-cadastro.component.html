@@ -1,8 +1,9 @@
 <div class="container">
 
   <form autocomplete="off" [formGroup]="professorForm">
-    <div class="ui-g">
 
+    <div class="ui-g">
+      <!-- DADOS PESSOAIS-->
       <div class="ui-g-12">
         <h1>Cadastro de Professor</h1>
       </div>
@@ -10,36 +11,83 @@
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Nome*</label>
         <input pInputText type="text" formControlName="nome">
-        <div class="invalid-mensage" *ngIf="professorForm.controls['nome'].invalid && professorForm.controls['nome'].touched">Campo obrigatório</div>
+        <app-control-erro [exibiErro]="verificaCampoContenErro('nome')" mensagemErro="Nome é obrigatório."></app-control-erro>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>CPF*</label>
         <p-inputMask mask="999.999.999-99" formControlName="cpf"></p-inputMask>
-        <div class="invalid-mensage" *ngIf="professorForm.controls['cpf'].invalid && professorForm.controls['cpf'].touched">Campo obrigatório</div>
+        <app-control-erro [exibiErro]="verificaCpfValido()" mensagemErro="CPF inválido."></app-control-erro>
+        <app-control-erro [exibiErro]="verificaCampoContenErro('cpf')" mensagemErro="CPF é obrigatório."></app-control-erro>
       </div>
 
       <div class="ui-g-12 ui-md-5 ui-fluid">
         <label>Sexo*</label>
         <p-dropdown [options]="sexo" [autoWidth]="false" formControlName="sexo"></p-dropdown>
-        <div class="invalid-mensage" *ngIf="professorForm.controls['sexo'].invalid && professorForm.controls['sexo'].touched">Campo obrigatório</div>
+        <app-control-erro [exibiErro]="verificaCampoContenErro('sexo')" mensagemErro="Sexo é obrigatório."></app-control-erro>
       </div>
 
+
       <div class="ui-g-12 ui-md-4 ui-fluid">
-        <label>E-mail*</label>
-        <input pInputText type="text" formControlName="email" email>
-        <div class="invalid-mensage" *ngIf="professorForm.controls['email'].invalid && professorForm.controls['email'].touched">Campo obrigatório</div>
+        <div formGroupName="email">
+          <label>E-mail*</label>
+          <input pInputText type="text" formControlName="dscEmail" email>
+          <app-control-erro [exibiErro]="verificaCampoContenErro('email.dscEmail')" mensagemErro="E-mail é obrigatório."></app-control-erro>
+          <app-control-erro [exibiErro]="verificaEmailValido()" mensagemErro="E-mail inválido."></app-control-erro>
+        </div>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Situação*</label>
         <p-selectButton [options]="status"></p-selectButton>
       </div>
+      <!-- ENDEREÇO-->
+      <div formGroupName="endereco">
+        <div class="ui-g">
+          <div class="ui-g-12 ui-md-2 ui-fluid">
+            <label>CEP*</label>
+            <p-inputMask mask="99999-999" formControlName="cep" (change)="buscaCep($event.target.value)"></p-inputMask>
+            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.cep')" mensagemErro="CEP é obrigatório."></app-control-erro>
+          </div>
 
-      <div>
-        <app-endereco></app-endereco>
+          <div class="ui-g-12 ui-md-2 ui-fluid">
+            <label>Estado*</label>
+            <input pInputText type="text" formControlName="uf">
+            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.uf')" mensagemErro="UF é obrigatório."></app-control-erro>
+          </div>
+
+          <div class="ui-g-12 ui-md-4 ui-fluid">
+            <label>Cidade*</label>
+            <input pInputText type="text" formControlName="localidade">
+            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.localidade')" mensagemErro="UF é obrigatório."></app-control-erro>
+          </div>
+
+          <div class="ui-g-12 ui-md-4 ui-fluid">
+            <label>Logradouro*</label>
+            <input pInputText type="text" formControlName="logradouro">
+            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.logradouro')" mensagemErro="Logradouro é obrigatório."></app-control-erro>
+          </div>
+
+          <div class="ui-g-12 ui-md-4 ui-fluid">
+            <label>Bairro*</label>
+            <input pInputText type="text" formControlName="bairro">
+            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.bairro')" mensagemErro="Bairro é obrigatório."></app-control-erro>
+          </div>
+
+          <div class="ui-g-12 ui-md-4 ui-fluid">
+            <label>Numero*</label>
+            <input pInputText type="text" formControlName="numero">
+            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.numero')" mensagemErro="Bairro é obrigatório."></app-control-erro>
+          </div>
+
+          <div class="ui-g-12 ui-md-4 ui-fluid">
+            <label>Complemento</label>
+            <input pInputText type="text" formControlName="complemento">
+          </div>
+
+        </div>
       </div>
-
+      <!-- OPÇÕES-->
       <div class="ui-g-12 ui-md-4 ui-fluid btn-align">
         <div class="ui-g-12 ui-md-6 ui-fluid">
           <button pButton type="submit" label="Salvar" (click)="salvar(professorForm.value)" [disabled]="false"></button>

@@ -8,6 +8,7 @@ import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 
 import { MessageComponent } from './message/message.component';
 import { FormDebugComponent } from '../util/form-debug/form-debug.component';
+import { ControlErroComponent } from './control-erro/control-erro.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,18 @@ import { FormDebugComponent } from '../util/form-debug/form-debug.component';
     InputMaskModule
 
   ],
-  exports: [MessageComponent, EnderecoComponent, FormDebugComponent],
-  declarations: [MessageComponent, EnderecoComponent, FormDebugComponent]
+  declarations: [
+    MessageComponent,
+    EnderecoComponent,
+    FormDebugComponent,
+    ControlErroComponent,
+  ],
+  exports: [
+    MessageComponent,
+    EnderecoComponent,
+    FormDebugComponent,
+    ControlErroComponent,
+  ],
+
 })
 export class SharedModule { }
