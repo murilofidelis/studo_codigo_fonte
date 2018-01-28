@@ -46,4 +46,9 @@ public class ProfessorService {
         return professorRepositoty.findByCpfCadastrado(cpf);
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public Professor buscaPorCodigo(Long codigo) {
+        return professorRepositoty.findOne(codigo);
+    }
+
 }

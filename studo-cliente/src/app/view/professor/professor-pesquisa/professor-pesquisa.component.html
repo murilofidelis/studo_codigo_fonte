@@ -1,3 +1,62 @@
-<p>
-  professor-pesquisa works!
-</p>
+<div class="container">
+  <div class="ui-g">
+
+    <div class="ui-g-12">
+      <h1>Professor</h1>
+    </div>
+
+    <p-fieldset legend="Pesquisa" class="ui-g-12">
+      <form autocomplete="off" #formulario="ngForm" (ngSubmit)="pesquisar()">
+        <div class="ui-g">
+
+          <div class="ui-g-6 ui-fluid">
+            <label>Nome</label>
+            <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+          </div>
+
+          <div class="ui-g-3 ui-fluid margin-button">
+            <button pButton type="submit" label="Pesquisar"></button>
+          </div>
+
+          <div class="ui-g-3 ui-fluid margin-button">
+            <button pButton type="button" label="Limpar" (click)="limpa(formulario)"></button>
+          </div>
+
+        </div>
+      </form>
+    </p-fieldset>
+
+    <br>
+    <!-- TABELA -->
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <p-dataTable [value]="professores" [paginator]="true" [responsive]="true" [lazy]="true" [rows]="filtro.itensPorPagina" (onLazyLoad)="mudarPagina($event)"
+          [totalRecords]="totalRegistros" emptyMessage="Nenhum lançamento encontrado" #tabela>
+
+          <p-column field="nome" header="Nome"></p-column>
+          <p-column field="cpf" header="CPF"></p-column>
+          <p-column field="email.dscEmail" header="E-mail"></p-column>
+          <p-column header="Situação">
+            <ng-template let-prof="rowData" pTemplate="body">
+              <a href="javascript:;" [pTooltip]="prof.usuario.status ? 'Desativar' : 'Ativar'" tooltipPosition="top">
+                {{ prof.usuario.status ? 'Ativa' : 'Inativa' }}
+              </a>
+            </ng-template>
+          </p-column>
+
+          <p-column header="Ações" styleClass="col-acoes">
+            <ng-template let-prof="rowData" pTemplate="body">
+              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/professor', prof.codigo]"></a>
+            </ng-template>
+          </p-column>
+
+        </p-dataTable>
+      </div>
+    </div>
+
+    <div class="ui-md-2 ui-fluid">
+      <a pButton label="Novo" icon="fa-plus" routerLink="/professor/novo"></a>
+    </div>
+
+  </div>
+</div>

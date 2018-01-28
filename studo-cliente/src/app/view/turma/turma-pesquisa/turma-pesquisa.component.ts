@@ -46,12 +46,13 @@ export class TurmaPesquisaComponent implements OnInit {
         this.turmas = resultado.turmas;
       }).catch(erro => this.errorHandle.handle(erro));
   }
+
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
   }
 
-  limpar(form: FormControl) {
+  limpa(form: FormControl) {
     form.reset();
     this.pesquisar();
   }

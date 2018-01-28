@@ -30,12 +30,17 @@ export class ProfessorCadastroComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private toasty: ToastyService,
+    private activatedRoute: ActivatedRoute,
     private route: Router,
     private professorService: ProfessorService,
     private enderecoService: EnderecoService,
     private errorHandle: ErrorHandleService) { }
 
   ngOnInit() {
+    const codigoProfessor = this.activatedRoute.snapshot.params['codigo'];
+
+    console.log(codigoProfessor);
+
     this.professorForm = this.formBuilder.group({
       'codigo': [null],
       'nome': [null, Validators.required],

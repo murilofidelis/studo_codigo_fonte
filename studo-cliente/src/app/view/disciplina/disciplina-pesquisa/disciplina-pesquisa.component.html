@@ -35,7 +35,7 @@
         <p-column field="codigo" header="Código disciplina" styleClass="col-codigo"></p-column>
         <p-column field="descricao" header="Descrição"></p-column>
 
-        <p-column field="ativa" header="Status">
+        <p-column field="ativa" header="Situação">
           <ng-template let-disc="rowData" pTemplate="body">
             <a href="javascript:;" [pTooltip]="disc.ativa ? 'Desativar' : 'Ativar'" tooltipPosition="top">
               {{ disc.ativa ? 'Ativa' : 'Inativa' }}

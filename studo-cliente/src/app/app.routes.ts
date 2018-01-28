@@ -13,6 +13,7 @@ export const ROUTES: Routes = [
   { path: 'turmas/:codigo', component: TurmaCadastroComponent },
   { path: 'diciplinas', loadChildren: './view/disciplina/disciplina.module#DisciplinaModule' },
   { path: 'professor', component: ProfessorPesquisaComponent },
-  { path: 'professor/novo', component: ProfessorCadastroComponent }
+  { path: 'professor/novo', component: ProfessorCadastroComponent },
+  { path: 'professor/:codigo', component: ProfessorCadastroComponent }
 ];
 

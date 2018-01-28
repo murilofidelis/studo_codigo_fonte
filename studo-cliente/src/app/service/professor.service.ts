@@ -10,6 +10,11 @@ import { Observable } from 'rxjs/Observable';
 
 import { Professor } from './../model/professor.model';
 
+export class ProfessorFiltro {
+  nome: string;
+  pagina = 0;
+  itensPorPagina = 5;
+}
 
 @Injectable()
 export class ProfessorService {
@@ -18,8 +23,33 @@ export class ProfessorService {
 
   constructor(private http: Http) { }
 
+  pesuisar(filtro: ProfessorFiltro) {
+    const headers = new Headers();
+    const params = new URLSearchParams();
+
+    if (filtro.nome) {
+      params.set('nome', filtro.nome);
+    }
+
+    params.set('page', filtro.pagina.toString());
+    params.set('size', filtro.itensPorPagina.toString());
+
+    return this.http.get(`${STUDO_API}/${this.END_POINT}`, { headers, search: params })
+      .toPromise()
+      .then(response => {
+        const responseJson = response.json();
+        const professores = responseJson.content;
+
+        const resultado = {
+          professores,
+          total: responseJson.totalElements
+        };
+        return resultado;
+      });
+  }
+
   verificaCpfCadastrado(cpf: string): Observable<boolean> {
-    return this.http.get(`${STUDO_API}/${this.END_POINT}/${cpf}`)
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/verifica/${cpf}`)
       .map(response => response)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

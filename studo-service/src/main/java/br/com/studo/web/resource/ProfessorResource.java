@@ -37,9 +37,15 @@ public class ProfessorResource {
         return pessoaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/{cpf}")
+    @GetMapping("/verifica/{cpf}")
     public Boolean verificaCpfCadastrado(@PathVariable String cpf) {
         return professorService.verificaCpfCadastrado(cpf);
+    }
+
+    @GetMapping("/{codigo}")
+    public ResponseEntity<Professor> buscaPorCodigo(@PathVariable Long codigo) {
+        Professor professor = professorService.buscaPorCodigo(codigo);
+        return professor != null ? ResponseEntity.ok().body(professor) : ResponseEntity.notFound().build();
     }
 
 }
