@@ -3,6 +3,8 @@ package br.com.studo.web.resource;
 import br.com.studo.domain.Professor;
 import br.com.studo.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -21,17 +24,22 @@ import javax.validation.Valid;
 public class ProfessorResource {
 
     @Autowired
-    private ProfessorService pessoaService;
+    private ProfessorService professorService;
+
+    @GetMapping
+    public Page<Professor> filtarPesquisa(@RequestParam(required = false, defaultValue = "%") String nome, Pageable pageable) {
+        return professorService.filtarPesquisar(nome, pageable);
+    }
 
     @PostMapping
     public ResponseEntity<Professor> salvar(@RequestBody @Valid Professor professor) {
-        Professor pessoaSalva = pessoaService.salvar(professor);
+        Professor pessoaSalva = professorService.salvar(professor);
         return pessoaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{cpf}")
-    public ResponseEntity<Boolean> verificaCpfCadastrado(@PathVariable String cpf) {
-        return ResponseEntity.ok().body(pessoaService.verificaCpfCadastrado(cpf));
+    public Boolean verificaCpfCadastrado(@PathVariable String cpf) {
+        return professorService.verificaCpfCadastrado(cpf);
     }
 
 }

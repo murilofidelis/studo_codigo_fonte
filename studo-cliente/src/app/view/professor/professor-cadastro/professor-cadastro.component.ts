@@ -25,6 +25,8 @@ export class ProfessorCadastroComponent implements OnInit {
   professorForm: FormGroup;
   professor = new Professor();
 
+  cpfCadastrado: boolean;
+
   constructor(
     private formBuilder: FormBuilder,
     private toasty: ToastyService,
@@ -73,7 +75,7 @@ export class ProfessorCadastroComponent implements OnInit {
   }
 
   buscaCep(event) {
-    const cep = event.replace(/[^a-zA-Z0-9]/g, '');
+    const cep = this.removeMascara(event.target.value);
     this.enderecoService.buscarCep(cep).then(resulatdo => {
       this.preencheEndereco(resulatdo);
     });
@@ -82,17 +84,16 @@ export class ProfessorCadastroComponent implements OnInit {
   preencheEndereco(endereco: any) {
     if (endereco.erro === true) {
       this.toasty.info(Mensagem.CEP_NAO_ENCONTRADO);
-    } else {
-      this.professorForm.patchValue({
-        endereco: {
-          uf: endereco.uf,
-          localidade: endereco.localidade,
-          logradouro: endereco.logradouro,
-          bairro: endereco.bairro,
-          complemento: endereco.complemento,
-        }
-      });
     }
+    this.professorForm.patchValue({
+      endereco: {
+        uf: endereco.uf,
+        localidade: endereco.localidade,
+        logradouro: endereco.logradouro,
+        bairro: endereco.bairro,
+        complemento: endereco.complemento,
+      }
+    });
   }
 
   verificaCampoContenErro(campo: string): boolean {
@@ -112,8 +113,17 @@ export class ProfessorCadastroComponent implements OnInit {
     }
   }
 
-  verificaCpfCadastrado(event){
-    
+  // FIX ME
+  verificaCpfCadastrado(event) {
+    const cpf = this.removeMascara(event.target.value);
+    this.professorService.verificaCpfCadastrado(cpf).subscribe(result => {
+      console.log(result);
+      this.cpfCadastrado = result['_body'];
+      console.log('CPF ' + this.cpfCadastrado);
+      if (this.cpfCadastrado) {
+        console.log('CPF dadasdasdasdasdada');
+      }
+    });
   }
 
   salvar() {
@@ -126,6 +136,11 @@ export class ProfessorCadastroComponent implements OnInit {
           // this.route.navigate(['/turmas']);
         });
       }).catch(erro => this.errorHandle.handle(erro));
+  }
+
+  removeMascara(valor: string): string {
+    const valorSemFormatacao = valor.replace(/[^a-zA-Z0-9]/g, '');
+    return valorSemFormatacao;
   }
 
 }

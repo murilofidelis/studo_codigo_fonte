@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton';
 import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 
+import { ProfessorPesquisaComponent } from './professor-pesquisa/professor-pesquisa.component';
 import { ProfessorCadastroComponent } from './professor-cadastro/professor-cadastro.component';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -25,6 +26,6 @@ import { SharedModule } from '../../shared/shared.module';
 
     SharedModule,
   ],
-  declarations: [ProfessorCadastroComponent]
+  declarations: [ProfessorCadastroComponent, ProfessorPesquisaComponent]
 })
 export class ProfessorModule { }
