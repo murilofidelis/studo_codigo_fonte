@@ -14,5 +14,6 @@ export class Professor {
   constructor() {
     this.email = new Email();
     this.endereco = new Endereco();
+    this.usuario = new Usuario();
   }
 }

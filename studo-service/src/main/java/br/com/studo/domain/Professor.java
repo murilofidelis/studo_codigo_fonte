@@ -3,6 +3,7 @@ package br.com.studo.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Professor implements Serializable {
     private String nome;
 
     @NotNull
-    @Size(max = 110)
+    @Size(max = 11)
     @Column(name = "cpf")
     private String cpf;
 
@@ -41,15 +42,15 @@ public class Professor implements Serializable {
     @Column(name = "sexo")
     private String sexo;
 
-    @OneToOne
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
     private Email email;
 
-
-    @OneToOne
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
 }

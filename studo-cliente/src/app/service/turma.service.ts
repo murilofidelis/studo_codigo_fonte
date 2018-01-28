@@ -56,7 +56,7 @@ export class TurmaService {
       .then(() => null);
   }
 
-  buscarPorCOdigo(codigo: number) {
+  buscarPorCodigo(codigo: number) {
     return this.http.get(`${STUDO_API}/${this.END_POINT}/${codigo}`)
       .toPromise()
       .then(response => {

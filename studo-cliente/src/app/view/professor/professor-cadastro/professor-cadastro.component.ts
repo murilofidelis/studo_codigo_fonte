@@ -31,14 +31,13 @@ export class ProfessorCadastroComponent implements OnInit {
     private route: Router,
     private professorService: ProfessorService,
     private enderecoService: EnderecoService,
-    private errorHandle: ErrorHandleService
-  ) { }
+    private errorHandle: ErrorHandleService) { }
 
   ngOnInit() {
     this.professorForm = this.formBuilder.group({
       'codigo': [null],
       'nome': [null, Validators.required],
-      'cpf': [null, [Validators.required, Validators.minLength(11), ValidadorCPF.validate]],
+      'cpf': [null, [Validators.required, Validators.minLength(11)]],
       'sexo': [null, Validators.required],
 
       'email': this.formBuilder.group({
@@ -84,11 +83,15 @@ export class ProfessorCadastroComponent implements OnInit {
     if (endereco.erro === true) {
       this.toasty.info(Mensagem.CEP_NAO_ENCONTRADO);
     } else {
-      this.professorForm.get('endereco.uf').setValue(endereco.uf);
-      this.professorForm.get('endereco.localidade').setValue(endereco.localidade);
-      this.professorForm.get('endereco.logradouro').setValue(endereco.logradouro);
-      this.professorForm.get('endereco.bairro').setValue(endereco.bairro);
-      this.professorForm.get('endereco.complemento').setValue(endereco.complemento);
+      this.professorForm.patchValue({
+        endereco: {
+          uf: endereco.uf,
+          localidade: endereco.localidade,
+          logradouro: endereco.logradouro,
+          bairro: endereco.bairro,
+          complemento: endereco.complemento,
+        }
+      });
     }
   }
 
@@ -109,16 +112,20 @@ export class ProfessorCadastroComponent implements OnInit {
     }
   }
 
-  salvar(professor: Professor) {
-    console.log(professor);
-    this.professorService.salvar(professor).then(() => {
-      this.professor = new Professor();
-      this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
-      this.professorForm.reset();
-      setTimeout(() => {
-        // this.route.navigate(['/turmas']);
-      });
-    }).catch(erro => this.errorHandle.handle(erro));
+  verificaCpfCadastrado(event){
+    
+  }
+
+  salvar() {
+    this.professorService.salvar(this.professorForm.value)
+      .then(() => {
+        this.professor = new Professor();
+        this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
+        this.professorForm.reset();
+        setTimeout(() => {
+          // this.route.navigate(['/turmas']);
+        });
+      }).catch(erro => this.errorHandle.handle(erro));
   }
 
 }

@@ -13,7 +13,12 @@ export class ProfessorService {
 
   constructor(private http: Http) { }
 
-  salvar(professor: Professor) {
+  verificaCpfCadastrado(cpf: string): Promise<any> {
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/${cpf}`)
+      .toPromise();
+  }
+
+  salvar(professor: Professor): Promise<any> {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(professor), { headers })

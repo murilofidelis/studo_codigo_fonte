@@ -73,7 +73,7 @@ export class TurmaCadastroComponent implements OnInit {
   }
 
   carregarTurma(codigo: number) {
-    this.turmaService.buscarPorCOdigo(codigo)
+    this.turmaService.buscarPorCodigo(codigo)
       .then(turma => {
         this.turma = turma;
         this.atribuirValores(this.turma);
@@ -84,17 +84,15 @@ export class TurmaCadastroComponent implements OnInit {
     this.turmaForm.setValue(turma);
   }
 
-  salvaCadastro(turma: Turma) {
-    if (this.turmaForm.valid) {
-      this.turmaService.salvar(turma).then(() => {
-        this.turma = new Turma();
-        this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
-        this.turmaForm.reset();
-        setTimeout(() => {
-          this.route.navigate(['/turmas']);
-        });
-      }).catch(erro => this.errorHandle.handle(erro));
-    }
+  salvar() {
+    this.turmaService.salvar(this.turmaForm.value).then(() => {
+      this.turma = new Turma();
+      this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
+      this.turmaForm.reset();
+      setTimeout(() => {
+        this.route.navigate(['/turmas']);
+      });
+    }).catch(erro => this.errorHandle.handle(erro));
   }
 
 }

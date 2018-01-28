@@ -1,8 +1,9 @@
 <div class="container">
 
-  <form autocomplete="off" [formGroup]="professorForm">
+  <form autocomplete="off" [formGroup]="professorForm" (ngSubmit)="salvar()">
 
     <div class="ui-g">
+
       <!-- DADOS PESSOAIS-->
       <div class="ui-g-12">
         <h1>Cadastro de Professor</h1>
@@ -16,7 +17,7 @@
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>CPF*</label>
-        <p-inputMask mask="999.999.999-99" formControlName="cpf"></p-inputMask>
+        <p-inputMask mask="999.999.999-99" unmask="true" formControlName="cpf" (change)="verificaCpfCadastrado($event)"></p-inputMask>
         <app-control-erro [exibiErro]="verificaCpfValido()" mensagemErro="CPF inválido."></app-control-erro>
         <app-control-erro [exibiErro]="verificaCampoContenErro('cpf')" mensagemErro="CPF é obrigatório."></app-control-erro>
       </div>
@@ -41,12 +42,13 @@
         <label>Situação*</label>
         <p-selectButton [options]="status"></p-selectButton>
       </div>
+
       <!-- ENDEREÇO-->
       <div formGroupName="endereco">
         <div class="ui-g">
           <div class="ui-g-12 ui-md-2 ui-fluid">
             <label>CEP*</label>
-            <p-inputMask mask="99999-999" formControlName="cep" (change)="buscaCep($event.target.value)"></p-inputMask>
+            <p-inputMask mask="99999-999" unmask="true" formControlName="cep" (change)="buscaCep($event.target.value)"></p-inputMask>
             <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.cep')" mensagemErro="CEP é obrigatório."></app-control-erro>
           </div>
 
@@ -87,10 +89,11 @@
 
         </div>
       </div>
+
       <!-- OPÇÕES-->
       <div class="ui-g-12 ui-md-4 ui-fluid btn-align">
         <div class="ui-g-12 ui-md-6 ui-fluid">
-          <button pButton type="submit" label="Salvar" (click)="salvar(professorForm.value)" [disabled]="false"></button>
+          <button pButton type="submit" label="Salvar" [disabled]="professorForm.invalid"></button>
         </div>
         <div class="ui-g-12 ui-md-6 ui-fluid">
           <button pButton type="submit" label="Voltar" routerLink="/turmas"></button>
@@ -99,7 +102,7 @@
 
     </div>
   </form>
-
+  <!--
   <app-form-debug [form]="professorForm"></app-form-debug>
-
+-->
 </div>

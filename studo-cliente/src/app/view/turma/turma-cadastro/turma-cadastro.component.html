@@ -1,5 +1,5 @@
 <div class="container">
-  <form autocomplete="off" [formGroup]="turmaForm" novalidate>
+  <form autocomplete="off" [formGroup]="turmaForm" (ngSubmit)="salvar()" novalidate>
 
     <div class="ui-g">
       <!-- {{turmaForm.valid | json}} -->
@@ -38,7 +38,7 @@
 
       <div class="ui-g-12 ui-md-4 ui-fluid btn-align">
         <div class="ui-g-12 ui-md-6 ui-fluid">
-          <button pButton type="submit" label="Salvar" (click)="salvaCadastro(turmaForm.value)" [disabled]="turmaForm.invalid"></button>
+          <button pButton type="submit" label="Salvar" [disabled]="turmaForm.invalid"></button>
         </div>
         <div class="ui-g-12 ui-md-6 ui-fluid">
           <button pButton type="submit" label="Voltar" routerLink="/turmas"></button>
