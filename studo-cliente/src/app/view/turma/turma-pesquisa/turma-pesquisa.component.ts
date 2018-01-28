@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SelectItem } from 'primeng/components/common/api';
 
@@ -19,6 +19,7 @@ export class TurmaPesquisaComponent implements OnInit {
   periodos: SelectItem[];
   filtro = new TurmaFiltro();
   turmas = [];
+  @ViewChild('tabela') grid;
 
   constructor(
     private turmasService: TurmaService,
@@ -54,6 +55,7 @@ export class TurmaPesquisaComponent implements OnInit {
 
   limpa(form: FormControl) {
     form.reset();
+    this.grid.reset();
     this.pesquisar();
   }
 

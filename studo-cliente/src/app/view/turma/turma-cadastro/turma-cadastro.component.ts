@@ -44,11 +44,12 @@ export class TurmaCadastroComponent implements OnInit {
       ano: this.formBuilder.control(null, [Validators.required, Validators.maxLength(4)]),
     });
 
+    this.iniciaTurma();
+    this.iniciaSerie();
+
     if (codigoTurma) {
       this.carregarTurma(codigoTurma);
     }
-    this.iniciaTurma();
-    this.iniciaSerie();
   }
 
   iniciaTurma() {

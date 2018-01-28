@@ -13,7 +13,7 @@ import { Professor } from './../model/professor.model';
 export class ProfessorFiltro {
   nome: string;
   pagina = 0;
-  itensPorPagina = 5;
+  itensPorPagina = 10;
 }
 
 @Injectable()
@@ -52,6 +52,15 @@ export class ProfessorService {
     return this.http.get(`${STUDO_API}/${this.END_POINT}/verifica/${cpf}`)
       .map(response => response)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  buscaPorCodigo(codigo: number) {
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/${codigo}`)
+      .toPromise()
+      .then(response => {
+        const professor = response.json() as Professor;
+        return professor;
+      });
   }
 
   salvar(professor: Professor): Promise<any> {

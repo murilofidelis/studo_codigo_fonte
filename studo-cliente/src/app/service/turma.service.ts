@@ -11,7 +11,7 @@ export class TurmaFiltro {
   ano: number;
   periodo: string;
   pagina = 0;
-  itensPorPagina = 5;
+  itensPorPagina = 10;
 }
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { ToastyService } from 'ng2-toasty';
@@ -17,6 +17,7 @@ export class ProfessorPesquisaComponent implements OnInit {
   totalRegistros = 0;
   filtro = new ProfessorFiltro();
   professores = [];
+  @ViewChild('tabela') grid;
 
   constructor(
     private professorService: ProfessorService,
@@ -43,6 +44,7 @@ export class ProfessorPesquisaComponent implements OnInit {
 
   limpa(form: FormControl) {
     form.reset();
+    this.grid.reset();
     this.pesquisar();
   }
 

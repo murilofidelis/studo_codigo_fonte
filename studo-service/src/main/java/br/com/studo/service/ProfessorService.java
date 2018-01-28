@@ -26,7 +26,7 @@ public class ProfessorService {
 
     public Professor salvar(Professor professor) {
 
-        if (professor.getUsuario() == null) {
+        if (professor.getUsuario().getCodigo() == null) {
             professor.setUsuario(criaUsuario(professor));
         }
         return professorRepositoty.save(professor);
@@ -36,7 +36,7 @@ public class ProfessorService {
         Usuario usuario = new Usuario();
         usuario.setLogin(professor.getCpf());
         usuario.setSenha(GeraSenhaProvisoriaUtil.geraSenha());
-        usuario.setStatus(true);
+        usuario.setStatus(professor.getUsuario().getStatus());
         usuario.setTipo(Tipo.PROFESSOR);
         return usuario;
     }

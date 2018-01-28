@@ -39,8 +39,6 @@ export class ProfessorCadastroComponent implements OnInit {
   ngOnInit() {
     const codigoProfessor = this.activatedRoute.snapshot.params['codigo'];
 
-    console.log(codigoProfessor);
-
     this.professorForm = this.formBuilder.group({
       'codigo': [null],
       'nome': [null, Validators.required],
@@ -61,10 +59,22 @@ export class ProfessorCadastroComponent implements OnInit {
         'bairro': [null, Validators.required],
         'numero': [null, Validators.required],
         'complemento': [null],
+      }),
+
+      usuario: this.formBuilder.group({
+        'codigo': [null],
+        'login': [null],
+        'senha': [null],
+        'status': [true],
+        'tipo': [null],
       })
     });
     this.iniciarSexo();
     this.iniciaStatus();
+
+    if (codigoProfessor) {
+      this.carregaProfessor(codigoProfessor);
+    }
   }
 
   iniciarSexo() {
@@ -126,9 +136,19 @@ export class ProfessorCadastroComponent implements OnInit {
       this.cpfCadastrado = result['_body'];
       console.log('CPF ' + this.cpfCadastrado);
       if (this.cpfCadastrado) {
-        console.log('CPF dadasdasdasdasdada');
+        console.log('CPF TESTE');
       }
     });
+  }
+
+  carregaProfessor(codigo: number) {
+    this.professorService.buscaPorCodigo(codigo)
+      .then(professor => {
+        this.professor = professor;
+        this.professorForm.setValue(this.professor);
+      }).catch(erro => this.errorHandle.handle(erro));
+
+
   }
 
   salvar() {
@@ -138,7 +158,7 @@ export class ProfessorCadastroComponent implements OnInit {
         this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
         this.professorForm.reset();
         setTimeout(() => {
-          // this.route.navigate(['/turmas']);
+          this.route.navigate(['/professor']);
         });
       }).catch(erro => this.errorHandle.handle(erro));
   }

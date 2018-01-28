@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { LazyLoadEvent } from 'primeng/components/common/api';
 import { ToastyService } from 'ng2-toasty';
 
@@ -6,6 +7,7 @@ import { DisciplinaService, DisciplinaFiltro } from '../../../service/disciplina
 import { Disciplina } from '../../../model/disciplina.model';
 import { Mensagem } from '../../../model/mensagens.model';
 import { ErrorHandleService } from '../../../service/error-handle.service';
+
 
 @Component({
   selector: 'app-disciplina-pesquisa',
@@ -77,5 +79,11 @@ export class DisciplinaPesquisaComponent {
       this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
       this.pesquisar();
     }).catch(erro => this.errorHandle.handle(erro));
+  }
+
+  limpa(form: FormControl) {
+    form.reset();
+    this.grid.reset();
+    this.pesquisar();
   }
 }

@@ -6,7 +6,7 @@
     </div>
 
     <p-fieldset legend="Pesquisa" class="ui-g-12">
-      <form autocomplete="off" (ngSubmit)="pesquisar()">
+      <form autocomplete="off" #formulario="ngForm" (ngSubmit)="pesquisar()">
 
         <div class="ui-g-6 ui-fluid">
           <label>Descrição</label>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="ui-g-3 ui-fluid align-button">
-          <a pButton label="Novo" (click)="novaDisciplina()"></a>
+          <button pButton type="button" label="Limpar" (click)="limpa(formulario)"></button>
         </div>
 
       </form>
@@ -51,6 +51,11 @@
       </p-dataTable>
     </div>
   </div>
+
+  <div class="ui-g-3 ui-fluid">
+    <a pButton label="Novo" (click)="novaDisciplina()"></a>
+  </div>
+
 </div>
 
 <p-dialog header="Nova Disciplina" [(visible)]="display" [minWidth]="400" [width]="400" [responsive]="true" showEffect="fade"
