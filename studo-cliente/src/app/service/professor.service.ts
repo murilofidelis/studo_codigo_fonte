@@ -50,7 +50,7 @@ export class ProfessorService {
 
   verificaCpfCadastrado(cpf: string): Observable<boolean> {
     return this.http.get(`${STUDO_API}/${this.END_POINT}/verifica/${cpf}`)
-      .map(response => response)
+      .map(response => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 

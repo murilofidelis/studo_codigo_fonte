@@ -42,7 +42,7 @@ export class ProfessorCadastroComponent implements OnInit {
     this.professorForm = this.formBuilder.group({
       'codigo': [null],
       'nome': [null, Validators.required],
-      'cpf': [null, [Validators.required, Validators.minLength(11)]],
+      'cpf': [null, [Validators.required, Validators.minLength(11), ValidadorCPF.validate]],
       'sexo': [null, Validators.required],
 
       'email': this.formBuilder.group({
@@ -128,17 +128,13 @@ export class ProfessorCadastroComponent implements OnInit {
     }
   }
 
-  // FIX ME
   verificaCpfCadastrado(event) {
     const cpf = this.removeMascara(event.target.value);
-    this.professorService.verificaCpfCadastrado(cpf).subscribe(result => {
-      console.log(result);
-      this.cpfCadastrado = result['_body'];
-      console.log('CPF ' + this.cpfCadastrado);
-      if (this.cpfCadastrado) {
-        console.log('CPF TESTE');
-      }
-    });
+    if (cpf) {
+      this.professorService.verificaCpfCadastrado(cpf).subscribe(result => {
+        this.cpfCadastrado = result;
+      });
+    }
   }
 
   carregaProfessor(codigo: number) {
@@ -146,9 +142,12 @@ export class ProfessorCadastroComponent implements OnInit {
       .then(professor => {
         this.professor = professor;
         this.professorForm.setValue(this.professor);
+       // this.professorForm.controls['cpf'].disable();
       }).catch(erro => this.errorHandle.handle(erro));
+  }
 
-
+  bloquearCadastro(): boolean {
+    return (this.professorForm.invalid || (this.cpfCadastrado && !this.professor.codigo));
   }
 
   salvar() {

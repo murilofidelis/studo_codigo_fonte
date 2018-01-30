@@ -38,8 +38,8 @@ public class ProfessorResource {
     }
 
     @GetMapping("/verifica/{cpf}")
-    public Boolean verificaCpfCadastrado(@PathVariable String cpf) {
-        return professorService.verificaCpfCadastrado(cpf);
+    public ResponseEntity<Boolean> verificaCpfCadastrado(@PathVariable String cpf) {
+        return ResponseEntity.ok().body(professorService.verificaCpfCadastrado(cpf));
     }
 
     @GetMapping("/{codigo}")
