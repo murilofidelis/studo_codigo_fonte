@@ -42,6 +42,9 @@ public class Professor implements Serializable {
     @Column(name = "sexo")
     private String sexo;
 
+    @Column(name = "bln_status")
+    private Boolean status;
+
     @NotNull
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Email email;
@@ -49,8 +52,4 @@ public class Professor implements Serializable {
     @NotNull
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Endereco endereco;
-
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Usuario usuario;
-
 }

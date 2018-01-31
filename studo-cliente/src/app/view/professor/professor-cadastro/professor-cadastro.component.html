@@ -17,7 +17,7 @@
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>CPF*</label>
-        <p-inputMask mask="999.999.999-99" unmask="true" formControlName="cpf" (change)="verificaCpfCadastrado($event)"></p-inputMask>
+        <p-inputMask mask="999.999.999-99" unmask="true" formControlName="cpf" (change)="verificaCpfCadastrado($event)" [disabled]="disableCpf"></p-inputMask>
         <app-control-erro [exibiErro]="verificaCampoContenErro('cpf')" mensagemErro="CPF é obrigatório."></app-control-erro>
         <app-control-erro [exibiErro]="verificaCpfValido()" mensagemErro="CPF inválido."></app-control-erro>
         <app-control-erro [exibiErro]="cpfCadastrado" mensagemErro="CPF já cadastrado."></app-control-erro>
@@ -41,10 +41,8 @@
 
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
-        <div formGroupName="usuario">
           <label>Situação*</label>
           <p-selectButton [options]="status" formControlName="status"></p-selectButton>
-        </div>
       </div>
 
       <!-- ENDEREÇO-->

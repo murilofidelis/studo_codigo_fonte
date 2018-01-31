@@ -38,8 +38,8 @@
           <p-column field="email.dscEmail" header="E-mail"></p-column>
           <p-column header="Situação">
             <ng-template let-prof="rowData" pTemplate="body">
-              <a href="javascript:;" [pTooltip]="prof.usuario.status ? 'Desativar' : 'Ativar'" tooltipPosition="top">
-                {{ prof.usuario.status ? 'Ativa' : 'Inativa' }}
+              <a href="javascript:;" [pTooltip]="prof.status ? 'Desativar' : 'Ativar'" tooltipPosition="top">
+                {{ prof.status ? 'Ativo' : 'Inativo' }}
               </a>
             </ng-template>
           </p-column>

@@ -1,10 +1,7 @@
 package br.com.studo.service;
 
 import br.com.studo.domain.Professor;
-import br.com.studo.domain.Usuario;
-import br.com.studo.domain.enuns.Tipo;
 import br.com.studo.repository.ProfessorRepositoty;
-import br.com.studo.util.GeraSenhaProvisoriaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,26 +16,21 @@ public class ProfessorService {
     @Autowired
     private ProfessorRepositoty professorRepositoty;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Professor> filtarPesquisar(String nome, Pageable pageable) {
         return professorRepositoty.findByNomeStartingWithIgnoreCase(nome, pageable);
     }
 
     public Professor salvar(Professor professor) {
-
-        if (professor.getUsuario().getCodigo() == null) {
-            professor.setUsuario(criaUsuario(professor));
+        if (professor.getCodigo() == null) {
+            usuarioService.criaUsuarioProfessor(professor);
+        } else {
+            usuarioService.atualizaUsuarioProfessor(professor);
         }
         return professorRepositoty.save(professor);
-    }
-
-    private Usuario criaUsuario(Professor professor) {
-        Usuario usuario = new Usuario();
-        usuario.setLogin(professor.getCpf());
-        usuario.setSenha(GeraSenhaProvisoriaUtil.geraSenha());
-        usuario.setStatus(professor.getUsuario().getStatus());
-        usuario.setTipo(Tipo.PROFESSOR);
-        return usuario;
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)

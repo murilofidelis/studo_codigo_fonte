@@ -26,6 +26,7 @@ export class ProfessorCadastroComponent implements OnInit {
   professor = new Professor();
 
   cpfCadastrado: boolean;
+  disableCpf: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,6 +45,7 @@ export class ProfessorCadastroComponent implements OnInit {
       'nome': [null, Validators.required],
       'cpf': [null, [Validators.required, Validators.minLength(11), ValidadorCPF.validate]],
       'sexo': [null, Validators.required],
+      'status': [true],
 
       'email': this.formBuilder.group({
         'codigo': [null],
@@ -61,15 +63,8 @@ export class ProfessorCadastroComponent implements OnInit {
         'complemento': [null],
       }),
 
-      usuario: this.formBuilder.group({
-        'codigo': [null],
-        'login': [null],
-        'senha': [null],
-        'status': [true],
-        'tipo': [null],
-      })
     });
-    this.iniciarSexo();
+    this.iniciaSexo();
     this.iniciaStatus();
 
     if (codigoProfessor) {
@@ -77,7 +72,7 @@ export class ProfessorCadastroComponent implements OnInit {
     }
   }
 
-  iniciarSexo() {
+  iniciaSexo() {
     this.sexo = [];
     this.sexo.push({ label: 'Selecione...', value: null });
     this.sexo.push({ label: 'Masculino', value: 'MASCULINO' });
@@ -142,7 +137,7 @@ export class ProfessorCadastroComponent implements OnInit {
       .then(professor => {
         this.professor = professor;
         this.professorForm.setValue(this.professor);
-       // this.professorForm.controls['cpf'].disable();
+        this.disableCpf = true;
       }).catch(erro => this.errorHandle.handle(erro));
   }
 

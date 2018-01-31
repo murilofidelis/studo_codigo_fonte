@@ -7,13 +7,12 @@ export class Professor {
   nome: string;
   cpf: string;
   sexo: string;
+  status: boolean;
   email: Email;
   endereco: Endereco;
-  usuario: Usuario;
 
   constructor() {
     this.email = new Email();
     this.endereco = new Endereco();
-    this.usuario = new Usuario();
   }
 }
