@@ -37,4 +37,9 @@ public class TurmaService {
     private String gerarNumeroTurma(Turma turma) {
         return new StringBuilder().append(turma.getAno()).append("/").append(turma.getSerie().substring(0, 1)).append("/").append(turma.getDescricaoTurma()).toString();
     }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public Turma buscaTurmaPorNumero(String numTurma) {
+        return turmaRepository.findByNumeroTurma(numTurma);
+    }
 }

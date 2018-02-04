@@ -46,4 +46,10 @@ public class TurmaResource {
         Turma turma = turmaService.buscarPorCodigo(codigo);
         return turma != null ? ResponseEntity.ok().body(turma) : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/buscaPorNumero")
+    public ResponseEntity<Turma> buscarPorNumero(@RequestParam String numTurma) {
+        Turma turma = turmaService.buscaTurmaPorNumero(numTurma);
+        return turma != null ? ResponseEntity.ok().body(turma) : ResponseEntity.notFound().build();
+    }
 }
