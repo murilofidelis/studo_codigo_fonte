@@ -1,4 +1,4 @@
-package br.com.studo;
+package br.com.studo.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

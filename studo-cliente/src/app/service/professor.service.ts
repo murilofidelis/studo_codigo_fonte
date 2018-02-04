@@ -1,13 +1,12 @@
-import { STUDO_API } from './../app.api';
 import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
-
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
 
+import { STUDO_API } from './../app.api';
 import { Professor } from './../model/professor.model';
 
 export class ProfessorFiltro {
