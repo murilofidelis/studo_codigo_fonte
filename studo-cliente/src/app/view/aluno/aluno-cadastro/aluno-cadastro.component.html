@@ -1,0 +1,44 @@
+<div class="container">
+
+  <form>
+    <div class="ui-g">
+
+      <div class="ui-g-12">
+        <h1>Cadastro de Aluno</h1>
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Matrícula*</label>
+        <input pInputText type="text">
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Nome*</label>
+        <input pInputText type="text">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Data Nascimento*</label>
+        <input pInputText type="text">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Sexo*</label>
+        <p-dropdown [options]="sexo" [autoWidth]="false"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>E-mail*</label>
+        <input pInputText type="text" email>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Número da Turma*</label>
+        <input pInputText type="text" email>
+      </div>
+
+      <app-turma-info></app-turma-info>
+
+    </div>
+  </form>
+</div>

@@ -11,6 +11,7 @@ import { ROUTES } from './app.routes';
 import { CoreModule } from './core/core.module';
 import { ProfessorModule } from './view/professor/professor.module';
 import { TurmaModule } from './view/turma/turma.module';
+import { AlunoModule } from './view/aluno/aluno.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TurmaModule } from './view/turma/turma.module';
     CoreModule,
     TurmaModule,
     ProfessorModule,
+    AlunoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

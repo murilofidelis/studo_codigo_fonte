@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin
@@ -37,7 +36,7 @@ public class TurmaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Turma> salvar(@RequestBody @Valid Turma turma) {
+    public ResponseEntity<Turma> salvar(@RequestBody Turma turma) {
         Turma turmaSalva = turmaService.salvar(turma);
         return turmaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }

@@ -9,6 +9,7 @@ import { TurmaService } from './../service/turma.service';
 import { ErrorHandleService } from '../service/error-handle.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { EnderecoService } from '../service/endereco.service';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 
 @NgModule({
@@ -28,6 +29,6 @@ import { EnderecoService } from '../service/endereco.service';
     ErrorHandleService,
     EnderecoService,
   ],
-  declarations: [NavbarComponent]
+  declarations: [NavbarComponent, PaginaNaoEncontradaComponent]
 })
 export class CoreModule { }

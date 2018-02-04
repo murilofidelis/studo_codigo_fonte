@@ -40,11 +40,11 @@
       <p-dataTable [value]="turmas" [paginator]="true" [responsive]="true" [lazy]="true" [rows]="filtro.itensPorPagina" (onLazyLoad)="aoMudarPagina($event)"
         [totalRecords]="totalRegistros" emptyMessage="Nenhum lançamento encontrado" #tabela>
 
-        <p-column field="codigo" header="Código Turma" styleClass="col-codigo"></p-column>
+        <p-column field="numeroTurma" header="Número" styleClass="col-codigo"></p-column>
         <p-column field="ano" header="Ano"></p-column>
         <p-column field="periodo" header="Periodo"></p-column>
         <p-column field="serie" header="Seríe"></p-column>
-        <p-column field="descricaoTurma" header="Seríe"></p-column>
+        <p-column field="descricaoTurma" header="Turma"></p-column>
         <p-column field="sala" header="Sala"></p-column>
 
         <p-column header="Ações" styleClass="col-acoes">
