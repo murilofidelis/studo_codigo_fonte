@@ -65,4 +65,17 @@ export class TurmaService {
       });
   }
 
+  buscarPorNumero(numTurma: string) {
+
+    const params = new URLSearchParams();
+    params.set('numTurma', numTurma);
+
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/buscaPorNumero`, { search: params })
+      .toPromise()
+      .then(response => {
+        const turma = response.json() as Turma;
+        return turma;
+      });
+  }
+
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,7 +34,7 @@ public class TurmaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Turma> salvar(@RequestBody @Valid Turma turma) {
+    public ResponseEntity<Turma> salvar(@RequestBody Turma turma) {
         Turma turmaSalva = turmaService.salvar(turma);
         return turmaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
@@ -43,6 +42,12 @@ public class TurmaResource {
     @GetMapping("/{codigo}")
     public ResponseEntity<Turma> buscarPorCodigo(@PathVariable Long codigo) {
         Turma turma = turmaService.buscarPorCodigo(codigo);
+        return turma != null ? ResponseEntity.ok().body(turma) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/buscaPorNumero")
+    public ResponseEntity<Turma> buscarPorNumero(@RequestParam String numTurma) {
+        Turma turma = turmaService.buscaTurmaPorNumero(numTurma);
         return turma != null ? ResponseEntity.ok().body(turma) : ResponseEntity.notFound().build();
     }
 }

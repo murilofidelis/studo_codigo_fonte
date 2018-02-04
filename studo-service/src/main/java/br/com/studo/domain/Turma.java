@@ -15,34 +15,38 @@ import java.io.Serializable;
 @Table(name = "tab_turma")
 public class Turma implements Serializable {
 
-	private static final long serialVersionUID = 6109374665565097280L;
+    private static final long serialVersionUID = 6109374665565097280L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo")
-	private Long codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
+    private Long codigo;
 
-	@NotNull
-	@Size(max = 30)
-	@Column(name = "serie")
-	private String serie;
+    @NotNull
+    @Column(name = "numero_turma")
+    private String numeroTurma;
 
-	@NotNull
-	@Size(max = 1)
-	@Column(name = "dsc_turma")
-	private String descricaoTurma;
+    @NotNull
+    @Size(max = 30)
+    @Column(name = "serie")
+    private String serie;
 
-	@Size(max = 4)
-	@Column(name = "sala")
-	private String sala;
+    @NotNull
+    @Size(max = 1)
+    @Column(name = "dsc_turma")
+    private String descricaoTurma;
 
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "periodo")
-	private Periodo periodo;
+    @Size(max = 4)
+    @Column(name = "sala")
+    private String sala;
 
-	@NotNull
-	@Column(name = "ano")
-	private Integer ano;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "periodo")
+    private Periodo periodo;
+
+    @NotNull
+    @Column(name = "ano")
+    private Integer ano;
 
 }
