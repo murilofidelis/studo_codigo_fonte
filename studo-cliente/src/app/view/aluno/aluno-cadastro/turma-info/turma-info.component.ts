@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { TurmaService } from './../../../../service/turma.service';
 import { Turma } from '../../../../model/turma.model';
@@ -13,6 +13,8 @@ export class TurmaInfoComponent implements OnInit {
 
   turma: Turma = new Turma();
 
+  @Output() turmaAtualizada = new EventEmitter();
+
   constructor(
     private turmaService: TurmaService,
     private errorHandle: ErrorHandleService) { }
@@ -21,10 +23,9 @@ export class TurmaInfoComponent implements OnInit {
   }
 
   buscarPorNumero(event) {
-    console.log(event.target.value);
     this.turmaService.buscarPorNumero(event.target.value).then(resultado => {
       this.turma = resultado;
-      console.log(this.turma);
+      this.turmaAtualizada.emit(this.turma);
     }).catch(erro => this.errorHandle.handle(erro));
 
   }

@@ -18,8 +18,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_turma_aluno")
-public class TurmaAluno implements Serializable {
+@Table(name = "tab_matricula")
+public class Matricula implements Serializable {
 
 	private static final long serialVersionUID = -927136295454282048L;
 

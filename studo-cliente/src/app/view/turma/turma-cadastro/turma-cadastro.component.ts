@@ -93,7 +93,7 @@ export class TurmaCadastroComponent implements OnInit {
       this.turmaForm.reset();
       setTimeout(() => {
         this.route.navigate(['/turmas']);
-      });
+      }, 1000);
     }).catch(erro => this.errorHandle.handle(erro));
   }
 

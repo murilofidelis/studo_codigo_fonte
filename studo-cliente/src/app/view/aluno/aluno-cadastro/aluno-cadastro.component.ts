@@ -1,6 +1,14 @@
+import { Matricula } from './../../../model/matricula.model';
+import { Aluno } from './../../../model/aluno.model';
+import { ValidadorCPF } from './../../../util/validator/cpf-validador';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { SelectItem } from 'primeng/components/common/api';
+import { ToastyService } from 'ng2-toasty';
+
+import { ErrorHandleService } from './../../../service/error-handle.service';
 
 @Component({
   selector: 'app-aluno-cadastro',
@@ -10,9 +18,31 @@ import { SelectItem } from 'primeng/components/common/api';
 export class AlunoCadastroComponent implements OnInit {
 
   sexo: SelectItem[];
-  constructor() { }
+  alunoForm: FormGroup;
+  aluno: Aluno = new Aluno();
+  matricula: Matricula = new Matricula();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private toasty: ToastyService,
+    private activatedRoute: ActivatedRoute,
+    private route: Router,
+    private errorHandle: ErrorHandleService
+  ) { }
 
   ngOnInit() {
+    this.alunoForm = this.formBuilder.group({
+      'codigo': [null],
+      'nome': [null, [Validators.required, Validators.maxLength(50)]],
+      'cpf': [null, [Validators.required, ValidadorCPF.validate]],
+      'sexo': [null, Validators.required],
+
+      'email': this.formBuilder.group({
+        'codigo': [null],
+        'dscEmail': [null, [Validators.required, Validators.email]],
+      }),
+
+    });
     this.iniciaSexo();
   }
 
@@ -21,5 +51,23 @@ export class AlunoCadastroComponent implements OnInit {
     this.sexo.push({ label: 'Selecione...', value: null });
     this.sexo.push({ label: 'Masculino', value: 'MASCULINO' });
     this.sexo.push({ label: 'Feminino', value: 'FEMININO' });
+  }
+
+  salvar() {
+    console.log(this.alunoForm.value);
+  }
+
+  alterouTurma(event) {
+
+
+    this.aluno.nome = 'Murilo';
+    this.aluno.sexo = 'MASCULINO';
+    this.matricula.turma = event;
+    this.matricula.aluno = this.aluno;
+
+    this.aluno.matriculas.push(this.matricula);
+
+
+    console.log(this.aluno);
   }
 }

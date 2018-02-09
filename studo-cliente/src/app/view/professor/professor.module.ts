@@ -12,7 +12,6 @@ import { FieldsetModule } from 'primeng/components/fieldset/fieldset';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 
-
 import { ProfessorPesquisaComponent } from './professor-pesquisa/professor-pesquisa.component';
 import { ProfessorCadastroComponent } from './professor-cadastro/professor-cadastro.component';
 import { SharedModule } from '../../shared/shared.module';

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { ButtonModule } from 'primeng/components/button/button';
-
 
 import { AlunoCadastroComponent } from './aluno-cadastro/aluno-cadastro.component';
 import { TurmaInfoComponent } from './aluno-cadastro/turma-info/turma-info.component';
@@ -12,6 +13,9 @@ import { TurmaInfoComponent } from './aluno-cadastro/turma-info/turma-info.compo
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+
     InputTextModule,
     DropdownModule,
     ButtonModule

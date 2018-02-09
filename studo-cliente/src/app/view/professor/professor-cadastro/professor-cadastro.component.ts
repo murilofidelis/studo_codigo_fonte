@@ -153,7 +153,7 @@ export class ProfessorCadastroComponent implements OnInit {
         this.professorForm.reset();
         setTimeout(() => {
           this.route.navigate(['/professor']);
-        });
+        }, 1000);
       }).catch(erro => this.errorHandle.handle(erro));
   }
 

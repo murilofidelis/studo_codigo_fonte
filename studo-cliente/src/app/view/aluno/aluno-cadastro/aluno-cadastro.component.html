@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form>
+  <form autocomplete="off" [formGroup]="alunoForm" (ngSubmit)="salvar()">
     <div class="ui-g">
 
       <div class="ui-g-12">
@@ -33,7 +33,17 @@
       </div>
 
       <div class="ui-g-12 marge">
-        <app-turma-info></app-turma-info>
+        <app-turma-info (turmaAtualizada)="alterouTurma($event)"></app-turma-info>
+      </div>
+
+      <!-- OPÇÕES-->
+      <div class="ui-g-12 ui-md-4 ui-fluid btn-align">
+        <div class="ui-g-12 ui-md-6 ui-fluid">
+          <button pButton type="submit" label="Salvar"></button>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-fluid">
+          <button pButton type="submit" label="Voltar" routerLink="/aluno"></button>
+        </div>
       </div>
 
     </div>

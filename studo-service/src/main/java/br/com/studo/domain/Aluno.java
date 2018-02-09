@@ -12,8 +12,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -36,10 +39,6 @@ public class Aluno implements Serializable {
     @Size(max = 50)
     private String nome;
 
-    @Column(name = "email")
-    @Size(max = 50)
-    private String email;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "sexo")
     private Sexo sexo;
@@ -47,6 +46,11 @@ public class Aluno implements Serializable {
     @Column(name = "dte_nascimento")
     private LocalDate dataNascimento;
 
+    @NotNull
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "codigo_email")
+    private Email email;
+
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
-    private List<TurmaAluno> turmaAlunos;
+    private List<Matricula> matriculas;
 }
