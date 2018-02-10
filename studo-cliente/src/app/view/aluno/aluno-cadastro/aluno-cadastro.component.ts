@@ -33,8 +33,9 @@ export class AlunoCadastroComponent implements OnInit {
   ngOnInit() {
     this.alunoForm = this.formBuilder.group({
       'codigo': [null],
+      'matricula': [null, Validators.required],
       'nome': [null, [Validators.required, Validators.maxLength(50)]],
-      'cpf': [null, [Validators.required, ValidadorCPF.validate]],
+      'dataNascimento': [null, [Validators.required, ValidadorCPF.validate]],
       'sexo': [null, Validators.required],
 
       'email': this.formBuilder.group({
@@ -54,20 +55,13 @@ export class AlunoCadastroComponent implements OnInit {
   }
 
   salvar() {
-    console.log(this.alunoForm.value);
+    this.aluno = this.alunoForm.value;
+    this.aluno.matriculas.push(this.matricula);
+    console.log(this.aluno);
   }
 
   alterouTurma(event) {
-
-
-    this.aluno.nome = 'Murilo';
-    this.aluno.sexo = 'MASCULINO';
     this.matricula.turma = event;
-    this.matricula.aluno = this.aluno;
-
-    this.aluno.matriculas.push(this.matricula);
-
-
     console.log(this.aluno);
   }
 }

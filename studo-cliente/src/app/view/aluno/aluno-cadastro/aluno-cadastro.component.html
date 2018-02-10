@@ -9,27 +9,29 @@
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Matrícula*</label>
-        <input pInputText type="text">
+        <input pInputText type="text" formControlName="matricula">
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Nome*</label>
-        <input pInputText type="text">
+        <input pInputText type="text" formControlName="nome">
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Data Nascimento*</label>
-        <input pInputText type="text">
+        <input pInputText type="text" formControlName="dataNascimento">
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Sexo*</label>
-        <p-dropdown [options]="sexo" [autoWidth]="false"></p-dropdown>
+        <p-dropdown [options]="sexo" [autoWidth]="false" formControlName="sexo"></p-dropdown>
       </div>
 
-      <div class="ui-g-12 ui-md-6 ui-fluid">
-        <label>E-mail*</label>
-        <input pInputText type="text" email>
+      <div formGroupName="email">
+        <div class="ui-g-12 ui-md-6 ui-fluid">
+          <label>E-mail*</label>
+          <input pInputText type="text" formControlName="dscEmail" email>
+        </div>
       </div>
 
       <div class="ui-g-12 marge">
