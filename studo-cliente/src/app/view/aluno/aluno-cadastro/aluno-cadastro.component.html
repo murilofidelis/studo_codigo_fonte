@@ -27,11 +27,9 @@
         <p-dropdown [options]="sexo" [autoWidth]="false" formControlName="sexo"></p-dropdown>
       </div>
 
-      <div formGroupName="email">
-        <div class="ui-g-12 ui-md-6 ui-fluid">
-          <label>E-mail*</label>
-          <input pInputText type="text" formControlName="dscEmail" email>
-        </div>
+      <div class="ui-g-12 ui-md-6 ui-fluid" formGroupName="email">
+        <label>E-mail*</label>
+        <input pInputText type="text" formControlName="dscEmail" email>
       </div>
 
       <div class="ui-g-12 marge">

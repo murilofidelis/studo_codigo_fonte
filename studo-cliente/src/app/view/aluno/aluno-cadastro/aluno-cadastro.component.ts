@@ -1,6 +1,3 @@
-import { Matricula } from './../../../model/matricula.model';
-import { Aluno } from './../../../model/aluno.model';
-import { ValidadorCPF } from './../../../util/validator/cpf-validador';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -8,7 +5,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/components/common/api';
 import { ToastyService } from 'ng2-toasty';
 
+import { Mensagem } from './../../../model/mensagens.model';
+import { Turma } from './../../../model/turma.model';
+import { Matricula } from './../../../model/matricula.model';
+import { Aluno } from './../../../model/aluno.model';
+import { ValidadorCPF } from './../../../util/validator/cpf-validador';
+
 import { ErrorHandleService } from './../../../service/error-handle.service';
+import { AlunoService } from '../../../service/aluno.service';
 
 @Component({
   selector: 'app-aluno-cadastro',
@@ -21,8 +25,11 @@ export class AlunoCadastroComponent implements OnInit {
   alunoForm: FormGroup;
   aluno: Aluno = new Aluno();
   matricula: Matricula = new Matricula();
+  matriculas: Matricula[];
+  turma: Turma = new Turma();
 
   constructor(
+    private alunoService: AlunoService,
     private formBuilder: FormBuilder,
     private toasty: ToastyService,
     private activatedRoute: ActivatedRoute,
@@ -35,7 +42,7 @@ export class AlunoCadastroComponent implements OnInit {
       'codigo': [null],
       'matricula': [null, Validators.required],
       'nome': [null, [Validators.required, Validators.maxLength(50)]],
-      'dataNascimento': [null, [Validators.required, ValidadorCPF.validate]],
+      'dataNascimento': [null, Validators.required],
       'sexo': [null, Validators.required],
 
       'email': this.formBuilder.group({
@@ -45,6 +52,7 @@ export class AlunoCadastroComponent implements OnInit {
 
     });
     this.iniciaSexo();
+    this.matriculas = [];
   }
 
   iniciaSexo() {
@@ -56,12 +64,17 @@ export class AlunoCadastroComponent implements OnInit {
 
   salvar() {
     this.aluno = this.alunoForm.value;
-    this.aluno.matriculas.push(this.matricula);
+    this.aluno.matriculas = this.matriculas;
     console.log(this.aluno);
+    this.alunoService.salvar(this.aluno).then(() => {
+      this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
+    }).catch(erro => this.errorHandle.handle(erro));
+
   }
 
   alterouTurma(event) {
+    this.turma = event;
     this.matricula.turma = event;
-    console.log(this.aluno);
+    this.matriculas.push(this.matricula);
   }
 }

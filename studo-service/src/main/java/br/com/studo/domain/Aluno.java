@@ -1,5 +1,6 @@
 package br.com.studo.domain;
 
+import br.com.studo.converter.DateConverter;
 import br.com.studo.domain.enuns.Sexo;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Convert;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -28,29 +30,33 @@ import java.util.List;
 @Table(name = "tab_aluno")
 public class Aluno implements Serializable {
 
-    private static final long serialVersionUID = 5752740166747344166L;
+	private static final long serialVersionUID = 5752740166747344166L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo")
-    private Long codigo;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigo")
+	private Long codigo;
 
-    @Column(name = "nome")
-    @Size(max = 50)
-    private String nome;
+	@Column(name = "matricula", unique = true)
+	@Size(max = 10)
+	private Long matricula;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sexo")
-    private Sexo sexo;
+	@Column(name = "nome")
+	@Size(max = 50)
+	private String nome;
 
-    @Column(name = "dte_nascimento")
-    private LocalDate dataNascimento;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "sexo")
+	private Sexo sexo;
 
-    @NotNull
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "codigo_email")
-    private Email email;
+	@Column(name = "dte_nascimento", columnDefinition = "DATE")
+	private LocalDate dataNascimento;
 
-    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
-    private List<Matricula> matriculas;
+	@NotNull
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "codigo_email")
+	private Email email;
+
+	@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+	private List<Matricula> matriculas;
 }

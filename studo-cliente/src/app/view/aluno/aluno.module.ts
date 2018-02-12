@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { ButtonModule } from 'primeng/components/button/button';
+import { CalendarModule } from 'primeng/components/calendar/calendar';
 
 import { AlunoCadastroComponent } from './aluno-cadastro/aluno-cadastro.component';
 import { TurmaInfoComponent } from './aluno-cadastro/turma-info/turma-info.component';
@@ -18,7 +19,8 @@ import { TurmaInfoComponent } from './aluno-cadastro/turma-info/turma-info.compo
 
     InputTextModule,
     DropdownModule,
-    ButtonModule
+    ButtonModule,
+    CalendarModule
   ],
   declarations: [AlunoCadastroComponent, TurmaInfoComponent]
 })

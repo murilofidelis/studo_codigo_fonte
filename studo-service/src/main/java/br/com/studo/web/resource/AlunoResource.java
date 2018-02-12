@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("aluno")
+@RequestMapping("alunos")
 public class AlunoResource {
 
     @Autowired
@@ -19,8 +19,11 @@ public class AlunoResource {
 
     @PostMapping
     public ResponseEntity<Aluno> salvarAluno(@RequestBody Aluno aluno) {
-        Aluno alunoSalvo = alunoService.salvarAluno(aluno);
-        return alunoSalvo != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
+    	
+ 
+      //  Aluno alunoSalvo = alunoService.salvarAluno(aluno);
+       // return alunoSalvo != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
+    	return ResponseEntity.ok().body(alunoService.salvarAluno(aluno));
     }
 
 
