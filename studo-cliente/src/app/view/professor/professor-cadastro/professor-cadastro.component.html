@@ -41,8 +41,8 @@
 
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
-          <label>Situação*</label>
-          <p-selectButton [options]="status" formControlName="status"></p-selectButton>
+        <label>Situação*</label>
+        <p-selectButton [options]="status" formControlName="status"></p-selectButton>
       </div>
 
       <!-- ENDEREÇO-->
@@ -95,10 +95,10 @@
       <!-- OPÇÕES-->
       <div class="ui-g-12 ui-md-4 ui-fluid btn-align">
         <div class="ui-g-12 ui-md-6 ui-fluid">
-          <button pButton type="submit" label="Salvar" [disabled]="bloquearCadastro()"></button>
+          <button pButton type="submit" icon="fa-check" label="Salvar" [disabled]="bloquearCadastro()"></button>
         </div>
         <div class="ui-g-12 ui-md-6 ui-fluid">
-          <button pButton type="submit" label="Voltar" routerLink="/professor"></button>
+          <button pButton type="submit" icon="fa-reply" label="Voltar" routerLink="/professor"></button>
         </div>
       </div>
 

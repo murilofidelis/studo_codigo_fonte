@@ -37,6 +37,8 @@ export class AlunoCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const codigoAluno = this.activatedRoute.snapshot.params['codigo'];
+
     this.alunoForm = this.formBuilder.group({
       'codigo': [null],
       'nome': [null, [Validators.required, Validators.maxLength(50)]],
@@ -53,6 +55,10 @@ export class AlunoCadastroComponent implements OnInit {
     this.iniciaSexo();
     this.iniciaStatus();
     this.traduzirCalendar();
+
+    if (codigoAluno) {
+      this.carregaAluno(codigoAluno);
+    }
   }
 
   iniciaSexo() {
@@ -72,9 +78,21 @@ export class AlunoCadastroComponent implements OnInit {
     this.alunoService.salvar(this.aluno).then(() => {
       this.alunoForm.reset();
       this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
+      setTimeout(() => {
+        this.route.navigate(['/aluno']);
+      }, 1000);
     }).catch(erro => this.errorHandle.handle(erro));
 
   }
+
+  carregaAluno(codigo: number) {
+    this.alunoService.buscaPorCodigo(codigo)
+      .then(aluno => {
+        this.aluno = aluno;
+        this.alunoForm.setValue(this.aluno);
+      }).catch(erro => this.errorHandle.handle(erro));
+  }
+
 
   traduzirCalendar() {
     this.pt = {

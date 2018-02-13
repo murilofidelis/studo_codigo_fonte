@@ -2,7 +2,7 @@
   <div class="ui-g">
 
     <div class="ui-g-12">
-      <h1>Professor</h1>
+      <h1>Alunos</h1>
     </div>
 
     <p-fieldset legend="Pesquisa" class="ui-g-12">
@@ -30,11 +30,10 @@
     <!-- TABELA -->
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-dataTable [value]="professores" [paginator]="true" [responsive]="true" [lazy]="true" [rows]="filtro.itensPorPagina" (onLazyLoad)="mudarPagina($event)"
+        <p-dataTable [value]="alunos" [paginator]="true" [responsive]="true" [rows]="filtro.itensPorPagina" [lazy]="true" (onLazyLoad)="mudarPagina($event)"
           [totalRecords]="totalRegistros" emptyMessage="Nenhum lançamento encontrado" #tabela>
 
           <p-column field="nome" header="Nome"></p-column>
-          <p-column field="cpf" header="CPF"></p-column>
           <p-column field="email.dscEmail" header="E-mail"></p-column>
           <p-column header="Situação">
             <ng-template let-prof="rowData" pTemplate="body">
@@ -46,7 +45,7 @@
 
           <p-column header="Ações" styleClass="col-acoes">
             <ng-template let-prof="rowData" pTemplate="body">
-              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/professor', prof.codigo]"></a>
+              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/aluno', prof.codigo]"></a>
             </ng-template>
           </p-column>
 
@@ -55,7 +54,7 @@
     </div>
 
     <div class="ui-md-3 ui-fluid">
-      <a pButton label="Novo" icon="fa-plus" routerLink="/professor/novo"></a>
+      <a pButton label="Novo" icon="fa-plus" routerLink="/aluno/novo"></a>
     </div>
 
   </div>

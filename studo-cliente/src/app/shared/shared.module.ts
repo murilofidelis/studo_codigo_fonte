@@ -18,7 +18,6 @@ import { ControlErroComponent } from './control-erro/control-erro.component';
 
     InputTextModule,
     InputMaskModule
-
   ],
   declarations: [
     MessageComponent,

@@ -8,11 +8,14 @@ import { ProfessorPesquisaComponent } from './view/professor/professor-pesquisa/
 import { ProfessorCadastroComponent } from './view/professor/professor-cadastro/professor-cadastro.component';
 import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AlunoCadastroComponent } from './view/aluno/aluno-cadastro/aluno-cadastro.component';
+import { AlunoPesquisaComponent } from './view/aluno/aluno-pesquisa/aluno-pesquisa.component';
 
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'turmas', pathMatch: 'full' },
 
+  { path: 'aluno', component: AlunoPesquisaComponent },
   { path: 'aluno/novo', component: AlunoCadastroComponent },
+  { path: 'aluno/:codigo', component: AlunoCadastroComponent },
 
   { path: 'matricula/novo', component: MatriculaCadastroComponent },
 
