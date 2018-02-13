@@ -4,7 +4,6 @@ import { Matricula } from './matricula.model';
 
 export class Aluno {
   codigo: number;
-  matricula: number;
   nome: string;
   sexo: string;
   dataNascimento: Date;

@@ -22,11 +22,10 @@ import { AlunoService } from '../../../service/aluno.service';
 export class AlunoCadastroComponent implements OnInit {
 
   sexo: SelectItem[];
+  status = [];
   alunoForm: FormGroup;
   aluno: Aluno = new Aluno();
-
-  matriculas: Matricula[];
-  turma: Turma = new Turma();
+  pt: any;
 
   constructor(
     private alunoService: AlunoService,
@@ -40,10 +39,10 @@ export class AlunoCadastroComponent implements OnInit {
   ngOnInit() {
     this.alunoForm = this.formBuilder.group({
       'codigo': [null],
-      'matricula': [null, Validators.required],
       'nome': [null, [Validators.required, Validators.maxLength(50)]],
       'dataNascimento': [null, Validators.required],
       'sexo': [null, Validators.required],
+      'status': [true],
 
       'email': this.formBuilder.group({
         'codigo': [null],
@@ -52,7 +51,8 @@ export class AlunoCadastroComponent implements OnInit {
 
     });
     this.iniciaSexo();
-    this.matriculas = [];
+    this.iniciaStatus();
+    this.traduzirCalendar();
   }
 
   iniciaSexo() {
@@ -62,18 +62,42 @@ export class AlunoCadastroComponent implements OnInit {
     this.sexo.push({ label: 'Feminino', value: 'FEMININO' });
   }
 
+  iniciaStatus() {
+    this.status.push({ label: 'Ativo', value: true });
+    this.status.push({ label: 'Inativo', value: false });
+  }
+
   salvar() {
     this.aluno = this.alunoForm.value;
-    this.aluno.dataNascimento = new Date();
-    console.log(JSON.stringify(this.aluno));
-
     this.alunoService.salvar(this.aluno).then(() => {
+      this.alunoForm.reset();
       this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
     }).catch(erro => this.errorHandle.handle(erro));
 
   }
 
-  alterouTurma(event) {
-    this.turma = event;
+  traduzirCalendar() {
+    this.pt = {
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['dom', 'sen', 'ter', 'quar', 'quin', 'sex', 'sáb'],
+      dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+        'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['jan ', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+      dateFormat: 'dd/mm/yy'
+    };
   }
+
+  verificaCampoContenErro(campo: string): boolean {
+    return (!this.alunoForm.get(campo).value) &&
+      (this.alunoForm.get(campo).touched || this.alunoForm.get(campo).dirty);
+  }
+
+  verificaEmailValido() {
+    const email = this.alunoForm.get('email.dscEmail');
+    if (email.errors) {
+      return email.errors['email'] && email.touched;
+    }
+  }
+
 }

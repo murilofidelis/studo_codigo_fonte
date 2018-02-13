@@ -19,12 +19,9 @@ public class AlunoResource {
 
     @PostMapping
     public ResponseEntity<Aluno> salvarAluno(@RequestBody Aluno aluno) {
-    	
- 
-      //  Aluno alunoSalvo = alunoService.salvarAluno(aluno);
-       // return alunoSalvo != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
-    	return ResponseEntity.ok().body(alunoService.salvarAluno(aluno));
-    }
 
+        Aluno alunoSalvo = alunoService.salvarAluno(aluno);
+        return alunoSalvo != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
+    }
 
 }

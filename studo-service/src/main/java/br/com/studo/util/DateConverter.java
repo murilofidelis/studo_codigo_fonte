@@ -1,4 +1,4 @@
-package br.com.studo.converter;
+package br.com.studo.util;
 
 import java.sql.Date;
 import java.time.LocalDate;

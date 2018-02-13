@@ -43,6 +43,7 @@ public class Professor implements Serializable {
     @Column(name = "sexo")
     private String sexo;
 
+    @NotNull
     @Column(name = "bln_status")
     private Boolean status;
 

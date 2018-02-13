@@ -1,28 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { ButtonModule } from 'primeng/components/button/button';
 import { CalendarModule } from 'primeng/components/calendar/calendar';
+import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton';
 
 import { AlunoCadastroComponent } from './aluno-cadastro/aluno-cadastro.component';
-import { TurmaInfoComponent } from './aluno-cadastro/turma-info/turma-info.component';
+
+import { SharedModule } from './../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule,
 
     InputTextModule,
     DropdownModule,
     ButtonModule,
-    CalendarModule
+    CalendarModule,
+    SelectButtonModule,
+
+    SharedModule
   ],
-  declarations: [AlunoCadastroComponent, TurmaInfoComponent]
+  declarations: [AlunoCadastroComponent]
 })
 export class AlunoModule { }

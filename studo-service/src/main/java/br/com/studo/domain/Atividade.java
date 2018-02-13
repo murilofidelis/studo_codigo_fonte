@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -30,7 +31,7 @@ public class Atividade implements Serializable {
 
 	@NotNull
 	@Column(name = "dte_cadastro")
-	LocalDate dataCadastro;
+	LocalDateTime dataCadastro;
 
 	@NotNull
 	@Size(max = 250)
