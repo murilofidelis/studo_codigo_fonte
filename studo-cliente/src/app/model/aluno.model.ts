@@ -9,10 +9,8 @@ export class Aluno {
   sexo: string;
   dataNascimento: Date;
   email: Email;
-  matriculas: Matricula[];
 
   constructor() {
     this.email = new Email();
-    this.matriculas = [];
   }
 }

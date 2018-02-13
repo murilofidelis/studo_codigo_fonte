@@ -24,7 +24,7 @@ export class AlunoCadastroComponent implements OnInit {
   sexo: SelectItem[];
   alunoForm: FormGroup;
   aluno: Aluno = new Aluno();
-  matricula: Matricula = new Matricula();
+
   matriculas: Matricula[];
   turma: Turma = new Turma();
 
@@ -64,8 +64,9 @@ export class AlunoCadastroComponent implements OnInit {
 
   salvar() {
     this.aluno = this.alunoForm.value;
-    this.aluno.matriculas = this.matriculas;
-    console.log(this.aluno);
+    this.aluno.dataNascimento = new Date();
+    console.log(JSON.stringify(this.aluno));
+
     this.alunoService.salvar(this.aluno).then(() => {
       this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
     }).catch(erro => this.errorHandle.handle(erro));
@@ -74,7 +75,5 @@ export class AlunoCadastroComponent implements OnInit {
 
   alterouTurma(event) {
     this.turma = event;
-    this.matricula.turma = event;
-    this.matriculas.push(this.matricula);
   }
 }

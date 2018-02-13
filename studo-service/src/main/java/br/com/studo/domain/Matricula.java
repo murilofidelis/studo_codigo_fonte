@@ -28,21 +28,20 @@ public class Matricula implements Serializable {
 	@Column(name = "codigo")
 	private Long codigo;
 
-	@NotNull
+
 	@ManyToOne
 	@JoinColumn(name = "aluno_id")
 	private Aluno aluno;
 
-	@NotNull
+
 	@ManyToOne
 	@JoinColumn(name = "turma_id")
 	private Turma turma;
 
-	@NotNull
 	@Column(name = "dte_cadastro")
 	private LocalDate dataCadastro;
 
-	@NotNull
+
 	@Column(name = "bln_turma_atual")
 	private Boolean turmaAtual;
 }

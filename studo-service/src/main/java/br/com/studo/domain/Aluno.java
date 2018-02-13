@@ -7,22 +7,20 @@ import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Convert;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -30,33 +28,32 @@ import java.util.List;
 @Table(name = "tab_aluno")
 public class Aluno implements Serializable {
 
-	private static final long serialVersionUID = 5752740166747344166L;
+ //   private static final long serialVersionUID = 5752740166747344166L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo")
-	private Long codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
+    private Long codigo;
 
-	@Column(name = "matricula", unique = true)
-	@Size(max = 10)
-	private Long matricula;
+    @Column(name = "matricula", unique = true)
+    private Long matricula;
 
-	@Column(name = "nome")
-	@Size(max = 50)
-	private String nome;
+    @Column(name = "nome")
+    @Size(max = 50)
+    private String nome;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "sexo")
-	private Sexo sexo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sexo")
+    private Sexo sexo;
 
-	@Column(name = "dte_nascimento", columnDefinition = "DATE")
-	private LocalDate dataNascimento;
+    //  @Column(name = "dte_nascimento", columnDefinition = "DATE")
+    // @Convert(converter = DateConverter.class)
+    @Column(name = "dte_nascimento")
+    private LocalDate dataNascimento;
 
-	@NotNull
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "codigo_email")
-	private Email email;
+    @NotNull
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "codigo_email")
+    private Email email;
 
-	@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
-	private List<Matricula> matriculas;
 }

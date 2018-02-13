@@ -16,6 +16,7 @@ import { TurmaInfoComponent } from './aluno-cadastro/turma-info/turma-info.compo
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
+    FormsModule,
 
     InputTextModule,
     DropdownModule,

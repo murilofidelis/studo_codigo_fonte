@@ -1,6 +1,7 @@
 package br.com.studo.service;
 
 import br.com.studo.domain.Aluno;
+import br.com.studo.domain.Matricula;
 import br.com.studo.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
