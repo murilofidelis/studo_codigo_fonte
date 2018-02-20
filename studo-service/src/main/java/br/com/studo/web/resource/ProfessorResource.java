@@ -30,7 +30,7 @@ public class ProfessorResource {
     }
 
     @PostMapping
-    public ResponseEntity<Professor> salvar(@RequestBody @Valid Professor professor) {
+    public ResponseEntity salvar(@RequestBody @Valid Professor professor) {
         Professor pessoaSalva = professorService.salvar(professor);
         return pessoaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }

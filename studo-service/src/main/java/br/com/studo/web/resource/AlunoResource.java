@@ -1,6 +1,7 @@
 package br.com.studo.web.resource;
 
 import br.com.studo.domain.Aluno;
+import br.com.studo.domain.Matricula;
 import br.com.studo.service.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,7 +29,7 @@ public class AlunoResource {
     }
 
     @PostMapping
-    public ResponseEntity<Aluno> salvarAluno(@RequestBody Aluno aluno) {
+    public ResponseEntity salvarAluno(@RequestBody Aluno aluno) {
         Aluno alunoSalvo = alunoService.salvarAluno(aluno);
         return alunoSalvo != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
@@ -39,4 +40,14 @@ public class AlunoResource {
         return aluno != null ? ResponseEntity.ok().body(aluno) : ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/matricula")
+    public ResponseEntity salvaMatricula(@RequestBody Matricula matricula) {
+        Matricula matriculaSalva = alunoService.salvaMatricula(matricula);
+        return matriculaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/matriculas/{codigo}")
+    public ResponseEntity buscaMatriculasPorAluno(@PathVariable Long codigo) {
+        return ResponseEntity.ok().body(alunoService.buscaMatriculasPorAluno(codigo));
+    }
 }

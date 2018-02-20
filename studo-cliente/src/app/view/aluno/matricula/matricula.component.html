@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="ui-g">
+
+    <div class="ui-g-12">
+      <h1>Matriculas</h1>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Nome:</label>
+        {{aluno.nome}}
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Data Nascimento:</label>
+        {{aluno.dataNascimento | date: 'dd/MM/yyyy'}}
+      </div>
+
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>E-mail:</label>
+        {{aluno.email.dscEmail }}
+      </div>
+
+    </div>
+
+    <div class="ui-g-12 ui-md-8">
+      <app-turma-info (turmaAtualizada)="atualizaTurma($event)"></app-turma-info>
+    </div>
+
+    <!-- OPÇÕES-->
+    <div class="ui-g-4 ui-md-4 ui-fluid btn-align">
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <button pButton icon="fa-check" label="Salvar" (click)="salvarMatricula()" [disabled]="false"></button>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <button pButton type="submit" icon="fa-reply" label="Voltar" routerLink="/aluno"></button>
+      </div>
+    </div>
+
+
+    <div class="ui-g-12">
+      <p-panel header="Matriculas">
+
+        <p-dataTable [paginator]="true" [responsive]="true" emptyMessage="Nenhum registro encontrado" #tabela>
+
+          <p-column field="nome" header="Nome"></p-column>
+          <p-column field="email.dscEmail" header="Turma"></p-column>
+          <p-column header="Data da matrícula"></p-column>
+
+          <p-column header="Ações" styleClass="col-acoes">
+            <ng-template let-aluno="rowData" pTemplate="body">
+              <a pButton icon="fa-address-book" pTooltip="Matricula" tooltipPosition="top"></a>
+            </ng-template>
+          </p-column>
+
+        </p-dataTable>
+
+      </p-panel>
+    </div>
+
+  </div>
+</div>

@@ -38,7 +38,7 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <p-dataTable [value]="turmas" [paginator]="true" [responsive]="true" [lazy]="true" [rows]="filtro.itensPorPagina" (onLazyLoad)="aoMudarPagina($event)"
-        [totalRecords]="totalRegistros" emptyMessage="Nenhum lançamento encontrado" #tabela>
+        [totalRecords]="totalRegistros" emptyMessage="Nenhum registro encontrado" #tabela>
 
         <p-column field="numeroTurma" header="Número" styleClass="col-codigo"></p-column>
         <p-column field="ano" header="Ano"></p-column>

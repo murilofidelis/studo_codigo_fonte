@@ -1,6 +1,7 @@
 package br.com.studo.service;
 
 import br.com.studo.domain.Aluno;
+import br.com.studo.domain.Matricula;
 import br.com.studo.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 @Transactional
@@ -16,6 +19,9 @@ public class AlunoService {
 
     @Autowired
     private AlunoRepository alunoRepository;
+
+    @Autowired
+    MatriculaService matriculaService;
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Aluno> filtarPesquisar(String nome, Pageable pageable) {
@@ -30,4 +36,14 @@ public class AlunoService {
     public Aluno buscaPorCodigo(Long codigo) {
         return alunoRepository.findOne(codigo);
     }
+
+    public Matricula salvaMatricula(Matricula matricula) {
+        return matriculaService.salvaMatricula(matricula);
+    }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public List<Matricula> buscaMatriculasPorAluno(Long codigo) {
+        return matriculaService.buscaMatriculasPorAluno(codigo);
+    }
+
 }

@@ -31,21 +31,22 @@
     <div class="ui-g">
       <div class="ui-g-12">
         <p-dataTable [value]="alunos" [paginator]="true" [responsive]="true" [rows]="filtro.itensPorPagina" [lazy]="true" (onLazyLoad)="mudarPagina($event)"
-          [totalRecords]="totalRegistros" emptyMessage="Nenhum lançamento encontrado" #tabela>
+          [totalRecords]="totalRegistros" emptyMessage="Nenhum registro encontrado" #tabela>
 
           <p-column field="nome" header="Nome"></p-column>
           <p-column field="email.dscEmail" header="E-mail"></p-column>
           <p-column header="Situação">
-            <ng-template let-prof="rowData" pTemplate="body">
-              <a href="javascript:;" [pTooltip]="prof.status ? 'Desativar' : 'Ativar'" tooltipPosition="top">
-                {{ prof.status ? 'Ativo' : 'Inativo' }}
+            <ng-template let-aluno="rowData" pTemplate="body">
+              <a href="javascript:;" [pTooltip]="aluno.status ? 'Desativar' : 'Ativar'" tooltipPosition="top">
+                {{ aluno.status ? 'Ativo' : 'Inativo' }}
               </a>
             </ng-template>
           </p-column>
 
           <p-column header="Ações" styleClass="col-acoes">
-            <ng-template let-prof="rowData" pTemplate="body">
-              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/aluno', prof.codigo]"></a>
+            <ng-template let-aluno="rowData" pTemplate="body">
+              <a pButton icon="fa-address-book" pTooltip="Matricula" tooltipPosition="top" [routerLink]="['/matricula', aluno.codigo]"></a>
+              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/aluno', aluno.codigo]"></a>
             </ng-template>
           </p-column>
 

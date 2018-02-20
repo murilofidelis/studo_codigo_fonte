@@ -67,8 +67,8 @@ export class TurmaCadastroComponent implements OnInit {
     this.series.push({ label: '5º Seríe', value: '5-SERIE' });
     this.series.push({ label: '6º Seríe', value: '6-SERIE' });
     this.series.push({ label: '7º Seríe', value: '7-SERIE' });
-    this.series.push({ label: '8º Seríe', value: '5-SERIE' });
-    this.series.push({ label: '9º Seríe', value: '5-SERIE' });
+    this.series.push({ label: '8º Seríe', value: '8-SERIE' });
+    this.series.push({ label: '9º Seríe', value: '9-SERIE' });
     this.series.push({ label: '1º Ano', value: '1-ANO' });
     this.series.push({ label: '2º Ano', value: '2-ANO' });
     this.series.push({ label: '3º Ano', value: '3-ANO' });

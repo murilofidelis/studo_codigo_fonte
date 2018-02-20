@@ -1,3 +1,4 @@
+import { Matricula } from './../model/matricula.model';
 import { Aluno } from './../model/aluno.model';
 import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
@@ -57,6 +58,14 @@ export class AlunoService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(aluno), { headers })
+      .toPromise()
+      .then(() => null);
+  }
+
+  salvarMatricula(matricula: Matricula) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`${STUDO_API}/${this.END_POINT}/matricula`, JSON.stringify(matricula), { headers })
       .toPromise()
       .then(() => null);
   }

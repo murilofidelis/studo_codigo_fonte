@@ -31,7 +31,7 @@ public class DisciplinaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Disciplina> salvar(@Valid @RequestBody Disciplina disciplina) {
+    public ResponseEntity salvar(@Valid @RequestBody Disciplina disciplina) {
         Disciplina disciplinaSalva = disciplinaService.salvar(disciplina);
         return disciplinaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }

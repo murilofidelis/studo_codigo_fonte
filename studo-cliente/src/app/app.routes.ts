@@ -1,4 +1,3 @@
-import { MatriculaCadastroComponent } from './view/matricula/matricula-cadastro/matricula-cadastro.component';
 import { Routes } from '@angular/router';
 
 import { DisciplinaPesquisaComponent } from './view/disciplina/disciplina-pesquisa/disciplina-pesquisa.component';
@@ -9,6 +8,7 @@ import { ProfessorCadastroComponent } from './view/professor/professor-cadastro/
 import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AlunoCadastroComponent } from './view/aluno/aluno-cadastro/aluno-cadastro.component';
 import { AlunoPesquisaComponent } from './view/aluno/aluno-pesquisa/aluno-pesquisa.component';
+import { MatriculaComponent } from './view/aluno/matricula/matricula.component';
 
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'turmas', pathMatch: 'full' },
@@ -17,7 +17,7 @@ export const ROUTES: Routes = [
   { path: 'aluno/novo', component: AlunoCadastroComponent },
   { path: 'aluno/:codigo', component: AlunoCadastroComponent },
 
-  { path: 'matricula/novo', component: MatriculaCadastroComponent },
+  { path: 'matricula/:codigo', component: MatriculaComponent },
 
   { path: 'turmas', component: TurmaPesquisaComponent },
   { path: 'turmas/nova', component: TurmaCadastroComponent },

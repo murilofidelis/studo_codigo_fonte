@@ -11,11 +11,15 @@ import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton
 import { FieldsetModule } from 'primeng/components/fieldset/fieldset';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
+import { PanelModule } from 'primeng/components/panel/panel';
 
 import { AlunoCadastroComponent } from './aluno-cadastro/aluno-cadastro.component';
 
 import { SharedModule } from './../../shared/shared.module';
 import { AlunoPesquisaComponent } from './aluno-pesquisa/aluno-pesquisa.component';
+import { TurmaInfoComponent } from './matricula/turma-info/turma-info.component';
+import { MatriculaComponent } from './matricula/matricula.component';
 
 @NgModule({
   imports: [
@@ -32,9 +36,11 @@ import { AlunoPesquisaComponent } from './aluno-pesquisa/aluno-pesquisa.componen
     FieldsetModule,
     DataTableModule,
     TooltipModule,
+    InputMaskModule,
+    PanelModule,
 
     SharedModule
   ],
-  declarations: [AlunoCadastroComponent, AlunoPesquisaComponent]
+  declarations: [AlunoCadastroComponent, AlunoPesquisaComponent, TurmaInfoComponent, MatriculaComponent]
 })
 export class AlunoModule { }

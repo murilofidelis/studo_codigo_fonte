@@ -32,7 +32,7 @@ public class Matricula implements Serializable {
 
     @NotNull
     @Column(name = "matricula", unique = true)
-    private Long matricula;
+    private String matricula;
 
     @NotNull
     @ManyToOne

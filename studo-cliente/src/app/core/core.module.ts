@@ -13,7 +13,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { EnderecoService } from '../service/endereco.service';
 import { AlunoService } from '../service/aluno.service';
 
-
 @NgModule({
   imports: [
     CommonModule,
