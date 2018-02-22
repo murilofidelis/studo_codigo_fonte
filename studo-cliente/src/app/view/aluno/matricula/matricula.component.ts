@@ -18,6 +18,7 @@ export class MatriculaComponent implements OnInit {
 
   aluno: Aluno;
   matricula: Matricula;
+  matriculas: Matricula[];
 
   constructor(
     private alunoService: AlunoService,
@@ -33,6 +34,7 @@ export class MatriculaComponent implements OnInit {
 
     if (codigoAluno) {
       this.carregarAluno(codigoAluno);
+      this.buscaMatriculasPorAluno(codigoAluno);
     }
   }
 
@@ -41,6 +43,13 @@ export class MatriculaComponent implements OnInit {
       .then(aluno => {
         this.aluno = aluno;
       }).catch(erro => this.errorHandle.handle(erro));
+  }
+
+  buscaMatriculasPorAluno(codigo: number) {
+    this.alunoService.buscaMatriculasPorAluno(codigo).then(matriculas => {
+      this.matriculas = matriculas;
+      console.log(this.matriculas);
+    }).catch(erro => this.errorHandle.handle(erro));
   }
 
   atualizaTurma(event) {

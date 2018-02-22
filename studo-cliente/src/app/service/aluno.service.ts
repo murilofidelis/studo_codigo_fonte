@@ -74,4 +74,10 @@ export class AlunoService {
     aluno.dataNascimento = moment(aluno.dataNascimento, 'YYYY-MM-DD').toDate();
   }
 
+  buscaMatriculasPorAluno(codigoAluno: number) {
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/matriculas/${codigoAluno}`)
+      .toPromise()
+      .then(response => response.json());
+  }
+
 }

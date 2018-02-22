@@ -7,7 +7,8 @@ import java.util.Properties;
 
 public enum Mensagens {
 
-    MSG007;
+    MSG007,
+    MSG041;
 
     Properties properties = new Properties();
 
