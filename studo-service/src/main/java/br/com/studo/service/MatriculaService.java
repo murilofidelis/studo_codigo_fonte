@@ -21,7 +21,7 @@ public class MatriculaService {
 
     public Matricula salvaMatricula(Matricula matricula) {
         verificaMatricula(matricula);
-        matricula.setDataCadastro(LocalDate.now());
+        matricula.setDataMatricula(LocalDate.now());
         matricula.setTurmaAtual(true);
         matricula.setMatricula(geraMatricula(matricula));
         return matriculaRepository.save(matricula);
@@ -32,10 +32,8 @@ public class MatriculaService {
         int ano = calendar.get(Calendar.YEAR);
         return new StringBuilder()
                 .append(ano)
-                .append("/")
                 .append(matricula.getTurma().getSerie().substring(0, 1))
-                .append("/")
-                .append(matricula.getTurma().getDescricaoTurma()).append("/")
+                .append(matricula.getTurma().getDescricaoTurma())
                 .append(matricula.getAluno().getCodigo())
                 .toString();
     }
@@ -48,5 +46,9 @@ public class MatriculaService {
         if (matriculaRepository.findByAlunoMatriculado(matricula.getAluno().getCodigo(), matricula.getTurma().getCodigo())) {
             throw new StudoException(Mensagens.MSG041.getValue());
         }
+    }
+
+    public void deletaMatriculaAluno(Long codMatricula) {
+        matriculaRepository.delete(codMatricula);
     }
 }

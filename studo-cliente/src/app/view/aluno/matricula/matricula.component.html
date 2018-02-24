@@ -48,14 +48,14 @@
           <p-column field="turma.serie" header="Série"></p-column>
           <p-column field="turma.descricaoTurma" header="Turma"></p-column>
           <p-column header="Data da matrícula">
-            <ng-template let-dt="rowData" pTemplate="body">
-              {{ dt }}
+            <ng-template let-matricula="rowData" pTemplate="body">
+              {{ matricula.dataMatricula | date: 'dd/MM/yyyy'}}
             </ng-template>
           </p-column>
 
           <p-column header="Ações" styleClass="col-acoes">
             <ng-template let-aluno="rowData" pTemplate="body">
-              <a pButton icon="fa-address-book" pTooltip="Matricula" tooltipPosition="top"></a>
+              <a pButton icon="fa-times" pTooltip="Excluir matrícula" tooltipPosition="top"></a>
             </ng-template>
           </p-column>
 

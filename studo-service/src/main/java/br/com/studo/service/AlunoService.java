@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
 @Service
 @Transactional
 public class AlunoService {
@@ -44,6 +43,10 @@ public class AlunoService {
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<Matricula> buscaMatriculasPorAluno(Long codigo) {
         return matriculaService.buscaMatriculasPorAluno(codigo);
+    }
+
+    public void deletaMatriculaAluno(Long codMatricula) {
+        matriculaService.deletaMatriculaAluno(codMatricula);
     }
 
 }

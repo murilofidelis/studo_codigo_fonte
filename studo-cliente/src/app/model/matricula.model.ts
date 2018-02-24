@@ -5,7 +5,7 @@ export class Matricula {
   codigo: number;
   aluno: Aluno;
   turma: Turma;
-  dataCadastro: Date;
+  dataMatricula: Date;
   turmaAtual: boolean;
 
   constructor() {

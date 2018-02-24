@@ -62,6 +62,7 @@ export class MatriculaComponent implements OnInit {
       this.alunoService.salvarMatricula(this.matricula)
         .then(() => {
           this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
+          this.buscaMatriculasPorAluno(this.aluno.codigo);
         }).catch(erro => this.errorHandle.handle(erro));
     }
   }

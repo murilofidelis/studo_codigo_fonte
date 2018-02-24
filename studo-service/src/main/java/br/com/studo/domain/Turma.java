@@ -23,7 +23,7 @@ public class Turma implements Serializable {
     private Long codigo;
 
     @NotNull
-    @Column(name = "numero_turma")
+    @Column(name = "numero_turma", unique = true)
     private String numeroTurma;
 
     @NotNull

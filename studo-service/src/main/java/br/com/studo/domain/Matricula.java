@@ -46,8 +46,8 @@ public class Matricula implements Serializable {
 
     @NotNull
     @Convert(converter = DateConverter.class)
-    @Column(name = "dte_cadastro")
-    private LocalDate dataCadastro;
+    @Column(name = "dte_matricula")
+    private LocalDate dataMatricula;
 
     @NotNull
     @Column(name = "bln_turma_atual")

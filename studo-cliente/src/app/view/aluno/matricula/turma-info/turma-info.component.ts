@@ -20,10 +20,13 @@ export class TurmaInfoComponent {
     private errorHandle: ErrorHandleService) { }
 
   buscarPorNumero(event) {
-    this.turmaService.buscarPorNumero(event.target.value).then(resultado => {
-      this.turma = resultado;
-      this.turmaAtualizada.emit(this.turma);
-    }).catch(erro => this.errorHandle.handle(erro));
+    const numeroTumrma = event.target.value;
+    if (numeroTumrma) {
+      const valorSemFormatacao = numeroTumrma.replace(/[^a-zA-Z0-9]/g, '');
+      this.turmaService.buscarPorNumero(valorSemFormatacao).then(resultado => {
+        this.turma = resultado;
+        this.turmaAtualizada.emit(this.turma);
+      }).catch(erro => this.errorHandle.handle(erro));
+    }
   }
-
 }
