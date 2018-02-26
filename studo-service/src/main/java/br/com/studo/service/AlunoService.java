@@ -22,12 +22,20 @@ public class AlunoService {
     @Autowired
     MatriculaService matriculaService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Aluno> filtarPesquisar(String nome, Pageable pageable) {
         return alunoRepository.findByNomeStartingWithIgnoreCase(nome, pageable);
     }
 
     public Aluno salvarAluno(Aluno aluno) {
+        if (aluno.getCodigo() == null) {
+            usuarioService.criaUsuarioAluno(aluno);
+        } else {
+            usuarioService.atualizaUsuarioAluno(aluno);
+        }
         return alunoRepository.save(aluno);
     }
 
@@ -47,6 +55,11 @@ public class AlunoService {
 
     public void deletaMatriculaAluno(Long codMatricula) {
         matriculaService.deletaMatriculaAluno(codMatricula);
+    }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public boolean verificaCpfCadastrado(String cpf) {
+        return alunoRepository.findByCpfCadastrado(cpf);
     }
 
 }

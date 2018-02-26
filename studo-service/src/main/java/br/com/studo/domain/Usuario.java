@@ -1,6 +1,6 @@
 package br.com.studo.domain;
 
-import br.com.studo.domain.enuns.Tipo;
+import br.com.studo.domain.enums.Tipo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_usuario")
+@Table(name = "tab_usuario", schema = "usuarios")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 8024177994467350678L;
@@ -31,6 +31,16 @@ public class Usuario implements Serializable {
     @Size(max = 10)
     @Column(name = "senha")
     private String senha;
+
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "nome")
+    private String nome;
+
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "email")
+    private String email;
 
     @NotNull
     @Enumerated(EnumType.STRING)

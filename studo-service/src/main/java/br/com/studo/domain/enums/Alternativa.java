@@ -1,4 +1,4 @@
-package br.com.studo.domain.enuns;
+package br.com.studo.domain.enums;
 
 public enum Alternativa {
 

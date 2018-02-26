@@ -7,10 +7,18 @@
         <h1>Cadastro de Aluno</h1>
       </div>
 
-      <div class="ui-g-12 ui-md-9 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Nome*</label>
         <input pInputText type="text" formControlName="nome" maxlength="50">
         <app-control-erro [exibiErro]="verificaCampoContenErro('nome')" mensagemErro="Nome é obrigatório."></app-control-erro>
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>CPF*</label>
+        <p-inputMask mask="999.999.999-99" unmask="true" formControlName="cpf" (change)="verificaCpfCadastrado($event)" [disabled]="disableCpf"></p-inputMask>
+        <app-control-erro [exibiErro]="verificaCampoContenErro('cpf')" mensagemErro="CPF é obrigatório."></app-control-erro>
+        <app-control-erro [exibiErro]="verificaCpfValido()" mensagemErro="CPF inválido."></app-control-erro>
+        <app-control-erro [exibiErro]="cpfCadastrado" mensagemErro="CPF já cadastrado."></app-control-erro>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">

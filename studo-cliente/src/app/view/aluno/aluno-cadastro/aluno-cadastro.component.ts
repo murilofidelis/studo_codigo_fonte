@@ -27,6 +27,9 @@ export class AlunoCadastroComponent implements OnInit {
   aluno: Aluno = new Aluno();
   pt: any;
 
+  cpfCadastrado: boolean;
+  disableCpf: boolean;
+
   constructor(
     private alunoService: AlunoService,
     private formBuilder: FormBuilder,
@@ -42,6 +45,7 @@ export class AlunoCadastroComponent implements OnInit {
     this.alunoForm = this.formBuilder.group({
       'codigo': [null],
       'nome': [null, [Validators.required, Validators.maxLength(50)]],
+      'cpf': [null, [Validators.required, Validators.minLength(11), ValidadorCPF.validate]],
       'dataNascimento': [null, Validators.required],
       'sexo': [null, Validators.required],
       'status': [true],
@@ -116,6 +120,26 @@ export class AlunoCadastroComponent implements OnInit {
     if (email.errors) {
       return email.errors['email'] && email.touched;
     }
+  }
+
+  verificaCpfValido(): boolean {
+    const cpf = this.alunoForm.get('cpf');
+    return (cpf.invalid && cpf.dirty);
+  }
+
+
+  verificaCpfCadastrado(event) {
+    const cpf = this.removeMascara(event.target.value);
+    if (cpf) {
+      this.alunoService.verificaCpfCadastrado(cpf).subscribe(result => {
+        this.cpfCadastrado = result;
+      });
+    }
+  }
+
+  removeMascara(valor: string): string {
+    const valorSemFormatacao = valor.replace(/[^a-zA-Z0-9]/g, '');
+    return valorSemFormatacao;
   }
 
 }

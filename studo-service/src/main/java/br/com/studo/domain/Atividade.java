@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_atividade")
+@Table(name = "tab_atividade", schema = "studo")
 public class Atividade implements Serializable {
 
 	private static final long serialVersionUID = -1847561676474026120L;

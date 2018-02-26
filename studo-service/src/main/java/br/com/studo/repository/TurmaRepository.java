@@ -1,7 +1,7 @@
 package br.com.studo.repository;
 
 import br.com.studo.domain.Turma;
-import br.com.studo.domain.enuns.Periodo;
+import br.com.studo.domain.enums.Periodo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

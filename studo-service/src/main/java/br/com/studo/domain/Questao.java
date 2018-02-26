@@ -1,7 +1,7 @@
 package br.com.studo.domain;
 
-import br.com.studo.domain.enuns.Alternativa;
-import br.com.studo.domain.enuns.TipoQuestao;
+import br.com.studo.domain.enums.Alternativa;
+import br.com.studo.domain.enums.TipoQuestao;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +21,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_questoes")
+@Table(name = "tab_questoes",  schema = "studo")
 public class Questao implements Serializable {
 
 	private static final long serialVersionUID = -8070767110863889654L;

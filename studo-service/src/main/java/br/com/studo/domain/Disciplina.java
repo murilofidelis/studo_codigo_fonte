@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_disciplina")
+@Table(name = "tab_disciplina",  schema = "studo")
 public class Disciplina implements Serializable {
 
 	private static final long serialVersionUID = 124926647057211327L;

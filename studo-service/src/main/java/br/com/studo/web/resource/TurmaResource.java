@@ -1,7 +1,7 @@
 package br.com.studo.web.resource;
 
 import br.com.studo.domain.Turma;
-import br.com.studo.domain.enuns.Periodo;
+import br.com.studo.domain.enums.Periodo;
 import br.com.studo.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

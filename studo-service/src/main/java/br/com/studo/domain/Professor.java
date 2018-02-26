@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_professor")
+@Table(name = "tab_professor",  schema = "studo")
 public class Professor implements Serializable {
 
     private static final long serialVersionUID = 1358987494816807819L;

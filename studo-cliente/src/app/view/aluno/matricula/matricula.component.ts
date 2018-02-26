@@ -48,7 +48,6 @@ export class MatriculaComponent implements OnInit {
   buscaMatriculasPorAluno(codigo: number) {
     this.alunoService.buscaMatriculasPorAluno(codigo).then(matriculas => {
       this.matriculas = matriculas;
-      console.log(this.matriculas);
     }).catch(erro => this.errorHandle.handle(erro));
   }
 
@@ -65,6 +64,14 @@ export class MatriculaComponent implements OnInit {
           this.buscaMatriculasPorAluno(this.aluno.codigo);
         }).catch(erro => this.errorHandle.handle(erro));
     }
+  }
+
+  excluirMatricula(matricula: Matricula) {
+    this.alunoService.excluirMatricula(matricula.codigo)
+      .then(() => {
+        this.toasty.success(Mensagem.MENSAGEM_EXCLUIDO_SUCESSO);
+        this.buscaMatriculasPorAluno(this.aluno.codigo);
+      }).catch(erro => this.errorHandle.handle(erro));
   }
 
 }

@@ -36,6 +36,11 @@ public class AlunoResource {
         return alunoSalvo != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
+    @GetMapping("/verifica/{cpf}")
+    public ResponseEntity<Boolean> verificaCpfCadastrado(@PathVariable String cpf) {
+        return ResponseEntity.ok().body(alunoService.verificaCpfCadastrado(cpf));
+    }
+
     @GetMapping("/{codigo}")
     public ResponseEntity<Aluno> buscaPorCodigo(@PathVariable Long codigo) {
         Aluno aluno = alunoService.buscaPorCodigo(codigo);
@@ -53,7 +58,7 @@ public class AlunoResource {
         return ResponseEntity.ok().body(alunoService.buscaMatriculasPorAluno(codigo));
     }
 
-    @DeleteMapping()
+    @DeleteMapping("/{codMatricula}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletaMatriculaAluno(@PathVariable Long codMatricula) {
         alunoService.deletaMatriculaAluno(codMatricula);

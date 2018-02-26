@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 
 import * as moment from 'moment';
+import { Observable } from 'rxjs/Observable';
 
 import { STUDO_API } from './../app.api';
 
@@ -78,6 +79,18 @@ export class AlunoService {
     return this.http.get(`${STUDO_API}/${this.END_POINT}/matriculas/${codigoAluno}`)
       .toPromise()
       .then(response => response.json());
+  }
+
+  verificaCpfCadastrado(cpf: string): Observable<boolean> {
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/verifica/${cpf}`)
+      .map(response => response.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  excluirMatricula(codigoMatricula: number) {
+    return this.http.delete(`${STUDO_API}/${this.END_POINT}/${codigoMatricula}`)
+      .toPromise()
+      .then(() => null);
   }
 
 }

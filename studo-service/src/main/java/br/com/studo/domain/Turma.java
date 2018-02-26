@@ -1,6 +1,6 @@
 package br.com.studo.domain;
 
-import br.com.studo.domain.enuns.Periodo;
+import br.com.studo.domain.enums.Periodo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_turma")
+@Table(name = "tab_turma",  schema = "studo")
 public class Turma implements Serializable {
 
     private static final long serialVersionUID = 6109374665565097280L;

@@ -6,20 +6,24 @@
     </div>
 
     <div class="ui-g-12">
-      <div class="ui-g-12 ui-md-3 ui-fluid">
+      <div class="ui-g-12 ui-md-3">
         <label>Nome:</label>
-        {{aluno.nome}}
+        {{ aluno.nome }}
       </div>
 
-      <div class="ui-g-12 ui-md-3 ui-fluid">
+      <div class="ui-g-12 ui-md-3">
+        <label>CPF:</label>
+        {{ aluno.cpf }}
+      </div>
+
+      <div class="ui-g-12 ui-md-3">
         <label>Data Nascimento:</label>
-        {{aluno.dataNascimento | date: 'dd/MM/yyyy'}}
+        {{ aluno.dataNascimento | date: 'dd/MM/yyyy' }}
       </div>
 
-
-      <div class="ui-g-12 ui-md-3 ui-fluid">
+      <div class="ui-g-12 ui-md-3">
         <label>E-mail:</label>
-        {{aluno.email.dscEmail }}
+        {{ aluno.email.dscEmail }}
       </div>
 
     </div>
@@ -54,8 +58,8 @@
           </p-column>
 
           <p-column header="Ações" styleClass="col-acoes">
-            <ng-template let-aluno="rowData" pTemplate="body">
-              <a pButton icon="fa-times" pTooltip="Excluir matrícula" tooltipPosition="top"></a>
+            <ng-template let-matricula="rowData" pTemplate="body">
+              <a pButton icon="fa-times" pTooltip="Excluir matrícula" tooltipPosition="top" (click)="excluirMatricula(matricula)"></a>
             </ng-template>
           </p-column>
 

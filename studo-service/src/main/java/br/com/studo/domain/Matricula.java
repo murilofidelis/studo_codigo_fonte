@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_matricula")
+@Table(name = "tab_matricula",  schema = "studo")
 public class Matricula implements Serializable {
 
     private static final long serialVersionUID = -927136295454282048L;

@@ -1,7 +1,7 @@
 package br.com.studo.domain;
 
 import br.com.studo.util.DateConverter;
-import br.com.studo.domain.enuns.Sexo;
+import br.com.studo.domain.enums.Sexo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +25,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "tab_aluno")
+@Table(name = "tab_aluno", schema = "studo")
 public class Aluno implements Serializable {
 
     private static final long serialVersionUID = 5752740166747344166L;
@@ -39,6 +39,11 @@ public class Aluno implements Serializable {
     @Column(name = "nome")
     @Size(max = 50)
     private String nome;
+
+    @NotNull
+    @Size(max = 11)
+    @Column(name = "cpf")
+    private String cpf;
 
     @NotNull
     @Enumerated(EnumType.STRING)
