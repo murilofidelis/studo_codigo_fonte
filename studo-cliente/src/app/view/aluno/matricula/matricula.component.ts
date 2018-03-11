@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ToastyService } from 'ng2-toasty';
 
+import { ConfirmationService } from 'primeng/components/common/api';
+
 import { Aluno } from './../../../model/aluno.model';
 import { AlunoService } from './../../../service/aluno.service';
 import { ErrorHandleService } from '../../../service/error-handle.service';
@@ -12,7 +14,8 @@ import { Mensagem } from '../../../model/mensagens.model';
 @Component({
   selector: 'app-matricula',
   templateUrl: './matricula.component.html',
-  styleUrls: ['./matricula.component.css']
+  styleUrls: ['./matricula.component.css'],
+  providers: [ConfirmationService]
 })
 export class MatriculaComponent implements OnInit {
 
@@ -24,7 +27,8 @@ export class MatriculaComponent implements OnInit {
     private alunoService: AlunoService,
     private activatedRoute: ActivatedRoute,
     private toasty: ToastyService,
-    private errorHandle: ErrorHandleService
+    private errorHandle: ErrorHandleService,
+    private confirmartion: ConfirmationService
   ) { }
 
   ngOnInit() {
@@ -72,6 +76,18 @@ export class MatriculaComponent implements OnInit {
         this.toasty.success(Mensagem.MENSAGEM_EXCLUIDO_SUCESSO);
         this.buscaMatriculasPorAluno(this.aluno.codigo);
       }).catch(erro => this.errorHandle.handle(erro));
+  }
+
+  confirmarExclusaoMatricula(matricula: Matricula) {
+    this.confirmartion.confirm({
+      message: `Deseja excluir esta matrícula do aluno: ${matricula.aluno.nome} ?`,
+      header: 'Excluir matrícula',
+      icon: 'fa fa-question-circle',
+      accept: () => {
+        this.excluirMatricula(matricula);
+      },
+      reject: () => { }
+    });
   }
 
 }

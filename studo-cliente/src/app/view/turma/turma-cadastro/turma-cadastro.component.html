@@ -9,25 +9,25 @@
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>Periodo*</label>
-        <p-dropdown [options]="periodos" [autoWidth]="false" formControlName="periodo"></p-dropdown>
+        <p-dropdown [options]="periodos" [autoWidth]="false" formControlName="periodo" [disabled]="desabilitaCampos"></p-dropdown>
         <div class="invalid-mensage" *ngIf="turmaForm.controls['periodo'].invalid && turmaForm.controls['periodo'].touched">Campo obrigatório</div>
       </div>
 
       <div class="ui-g-12 ui-md-8 ui-fluid">
         <label>Seríe*</label>
-        <p-dropdown [options]="series" [autoWidth]="false" formControlName="serie"></p-dropdown>
+        <p-dropdown [options]="series" [autoWidth]="false" formControlName="serie" [disabled]="desabilitaCampos"></p-dropdown>
         <div class="invalid-mensage" *ngIf="turmaForm.controls['serie'].invalid && turmaForm.controls['serie'].touched">Campo obrigatório</div>
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>Turma*</label>
-        <input pInputText type="text" formControlName="descricaoTurma">
+        <input pInputText type="text" formControlName="descricaoTurma" [disabled]="desabilitaCampos">
         <div class="invalid-mensage" *ngIf="turmaForm.controls['descricaoTurma'].invalid && turmaForm.controls['descricaoTurma'].touched">Campo obrigatório</div>
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>Ano*</label>
-        <input pInputText type="number" formControlName="ano" min="2018" max="2050">
+        <input pInputText type="number" formControlName="ano" min="2018" max="2050" [disabled]="desabilitaCampos">
         <div class="invalid-mensage" *ngIf="turmaForm.controls['ano'].invalid && turmaForm.controls['ano'].touched">Campo obrigatório</div>
       </div>
 

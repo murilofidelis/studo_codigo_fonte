@@ -59,7 +59,7 @@
 
           <p-column header="Ações" styleClass="col-acoes">
             <ng-template let-matricula="rowData" pTemplate="body">
-              <a pButton icon="fa-times" pTooltip="Excluir matrícula" tooltipPosition="top" (click)="excluirMatricula(matricula)"></a>
+              <a pButton icon="fa-times" pTooltip="Excluir matrícula" tooltipPosition="top" (click)="confirmarExclusaoMatricula(matricula)"></a>
             </ng-template>
           </p-column>
 
@@ -67,6 +67,13 @@
 
       </p-panel>
     </div>
+
+    <p-confirmDialog #confirmacao>
+      <p-footer>
+        <button type="button" pButton icon="fa-check" label="Sim" (click)="confirmacao.accept()"></button>
+        <button type="button" pButton icon="fa-times" label="Não" (click)="confirmacao.reject()"></button>
+      </p-footer>
+    </p-confirmDialog>
 
   </div>
 </div>

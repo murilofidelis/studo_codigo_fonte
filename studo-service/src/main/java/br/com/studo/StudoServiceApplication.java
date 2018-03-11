@@ -21,7 +21,7 @@ public class StudoServiceApplication {
         log.info("\n----------------------------------------------------------\n\t" +
                         "Aplicação '{}' esta rodando! Acesso URLs:\n\t" +
                         "Local: \t\thttp://localhost:{}\n\t" +
-                        "External: \thttp://{}:{}\n----------------------------------------------------------",
+                        "Externo: \thttp://{}:{}\n----------------------------------------------------------",
                 env.getProperty("spring.application.name"),
                 env.getProperty("server.port"),
                 InetAddress.getLocalHost().getHostAddress(),

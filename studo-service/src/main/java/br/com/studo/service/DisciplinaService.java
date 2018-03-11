@@ -21,7 +21,7 @@ public class DisciplinaService {
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Disciplina> filtraPesquisa(String descricao, Pageable pageable) {
-        return disciplinaRepository.findByDescricaoContaining(descricao, pageable);
+        return disciplinaRepository.findByDescricaoContainingIgnoreCase(descricao, pageable);
     }
 
     public Disciplina salvar(Disciplina disciplina) {

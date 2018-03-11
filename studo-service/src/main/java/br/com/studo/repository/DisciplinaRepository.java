@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DisciplinaRepository extends CrudRepository<Disciplina, Long> {
 
-    Page<Disciplina> findByDescricaoContaining(String descricao, Pageable pageable);
-
+    Page<Disciplina> findByDescricaoContainingIgnoreCase(String descricao, Pageable pageable);
+    
     @Query(value = "SELECT count(*) > 0 FROM Disciplina WHERE descricao = ?1")
     Boolean buscaDisciplinaPorNome(String descricao);
 }

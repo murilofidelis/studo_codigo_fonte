@@ -2,6 +2,7 @@ package br.com.studo.service;
 
 import br.com.studo.domain.Turma;
 import br.com.studo.domain.enums.Periodo;
+import br.com.studo.exception.StudoException;
 import br.com.studo.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,9 @@ public class TurmaService {
 
     public Turma salvar(Turma turma) {
         turma.setNumeroTurma(gerarNumeroTurma(turma));
+        if (turma.getCodigo() == null) {
+            verificaTurmaCadastrada(turma.getNumeroTurma());
+        }
         return turmaRepository.save(turma);
     }
 
@@ -46,6 +50,12 @@ public class TurmaService {
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Turma buscaTurmaPorNumero(String numTurma) {
         return turmaRepository.findByNumeroTurma(numTurma);
+    }
+
+    private void verificaTurmaCadastrada(String numTruma) {
+        if (turmaRepository.findTurmaCadastrada(numTruma)) {
+            throw new StudoException("Turma já cadastrada!");
+        }
     }
 
 }

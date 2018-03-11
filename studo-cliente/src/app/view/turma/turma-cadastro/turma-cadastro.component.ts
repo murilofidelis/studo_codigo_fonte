@@ -20,6 +20,7 @@ export class TurmaCadastroComponent implements OnInit {
   periodos: SelectItem[];
   series: SelectItem[];
   turmaForm: FormGroup;
+  desabilitaCampos: boolean;
 
   turma = new Turma();
 
@@ -50,6 +51,7 @@ export class TurmaCadastroComponent implements OnInit {
 
     if (codigoTurma) {
       this.carregarTurma(codigoTurma);
+      this.desabilitaCampos = true;
     }
   }
 

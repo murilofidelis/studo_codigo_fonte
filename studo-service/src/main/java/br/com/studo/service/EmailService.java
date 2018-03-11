@@ -20,7 +20,5 @@ public class EmailService {
 		mail.setText(mensagem);
 
 		javaMailSender.send(mail);
-
 	}
-
 }

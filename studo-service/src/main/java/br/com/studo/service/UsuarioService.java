@@ -5,7 +5,7 @@ import br.com.studo.domain.Professor;
 import br.com.studo.domain.Usuario;
 import br.com.studo.domain.enums.Tipo;
 import br.com.studo.repository.UsuarioRepositoty;
-import br.com.studo.util.GeraSenhaProvisoriaUtil;
+import br.com.studo.util.PasswordUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,8 @@ public class UsuarioService {
 	public Usuario criaUsuarioProfessor(Professor professor) {
 		Usuario usuario = new Usuario();
 		usuario.setLogin(professor.getCpf());
-		String senhaProvisoria = GeraSenhaProvisoriaUtil.geraSenha();
-		usuario.setSenha(senhaProvisoria);
+		String senhaProvisoria = PasswordUtil.geraSenha();
+		usuario.setSenha(PasswordUtil.encoderPassword(senhaProvisoria));
 		usuario.setNome(professor.getNome());
 		usuario.setEmail(professor.getEmail().getDscEmail());
 		usuario.setStatus(professor.getStatus());
@@ -53,8 +53,8 @@ public class UsuarioService {
 		Usuario usuario = new Usuario();
 		usuario.setNome(aluno.getNome());
 		usuario.setLogin(aluno.getCpf());
-		String senhaProvisoria = GeraSenhaProvisoriaUtil.geraSenha();
-		usuario.setSenha(senhaProvisoria);
+		String senhaProvisoria = PasswordUtil.geraSenha();
+		usuario.setSenha(PasswordUtil.encoderPassword(senhaProvisoria));
 		usuario.setEmail(aluno.getEmail().getDscEmail());
 		usuario.setStatus(aluno.getStatus());
 		usuario.setTipo(Tipo.ALUNO);

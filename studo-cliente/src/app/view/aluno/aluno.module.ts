@@ -13,6 +13,7 @@ import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { PanelModule } from 'primeng/components/panel/panel';
+import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
 
 import { AlunoCadastroComponent } from './aluno-cadastro/aluno-cadastro.component';
 
@@ -20,6 +21,7 @@ import { SharedModule } from './../../shared/shared.module';
 import { AlunoPesquisaComponent } from './aluno-pesquisa/aluno-pesquisa.component';
 import { TurmaInfoComponent } from './matricula/turma-info/turma-info.component';
 import { MatriculaComponent } from './matricula/matricula.component';
+
 
 @NgModule({
   imports: [
@@ -38,6 +40,7 @@ import { MatriculaComponent } from './matricula/matricula.component';
     TooltipModule,
     InputMaskModule,
     PanelModule,
+    ConfirmDialogModule,
 
     SharedModule
   ],

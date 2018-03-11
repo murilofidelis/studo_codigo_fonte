@@ -13,9 +13,12 @@ import java.util.List;
 @Repository
 public interface TurmaRepository extends CrudRepository<Turma, Long> {
 
-    @Query(value = "SELECT turma FROM Turma turma WHERE turma.periodo IN ?1 AND turma.ano = ?2 ")
-    Page<Turma> findPeriodoAndAno(List<Periodo> periodos, Integer ano, Pageable pageable);
+	@Query(value = "SELECT turma FROM Turma turma WHERE turma.periodo IN ?1 AND turma.ano = ?2 ")
+	Page<Turma> findPeriodoAndAno(List<Periodo> periodos, Integer ano, Pageable pageable);
 
-    Turma findByNumeroTurma(String numTurma);
+	Turma findByNumeroTurma(String numTurma);
+
+	@Query("SELECT count(*) > 0 FROM Turma WHERE numeroTurma = ?1")
+	Boolean findTurmaCadastrada(String numTruma);
 
 }

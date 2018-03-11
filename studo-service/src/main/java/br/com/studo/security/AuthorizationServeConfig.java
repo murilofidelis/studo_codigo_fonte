@@ -1,4 +1,4 @@
-package br.com.studo.config;
+package br.com.studo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,10 +23,18 @@ public class AuthorizationServeConfig extends AuthorizationServerConfigurerAdapt
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("studo_cliente")
-                .secret("@ngul@r0")
+                .secret("stud0_cli3nt3_s3cret")
                 .scopes("read", "write")
-                .authorizedGrantTypes("password")
-                .accessTokenValiditySeconds(43200); // 12 Horas
+                .authorizedGrantTypes("password", "refresh_token")
+                .accessTokenValiditySeconds(60)
+                .refreshTokenValiditySeconds(3600 * 24)
+                .and()
+                .withClient("studo_mobile")
+                .secret("stud0_mobile_secret")
+                .scopes("read", "write")
+                .authorizedGrantTypes("password", "refresh_token")
+                .accessTokenValiditySeconds(60)
+                .refreshTokenValiditySeconds(3600 * 24);
     }
 
     @Override
@@ -34,6 +42,7 @@ public class AuthorizationServeConfig extends AuthorizationServerConfigurerAdapt
         endpoints
                 .tokenStore(tokenStore())
                 .accessTokenConverter(accessTokenConverter())
+                .reuseRefreshTokens(false)
                 .authenticationManager(authenticationManager);
     }
 

@@ -34,7 +34,7 @@ public class TurmaResource {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody Turma turma) {
+    public ResponseEntity<Turma> salvar(@RequestBody Turma turma) {
         Turma turmaSalva = turmaService.salvar(turma);
         return turmaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }

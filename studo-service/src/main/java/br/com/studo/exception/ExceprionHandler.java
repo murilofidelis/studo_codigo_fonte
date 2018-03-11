@@ -14,10 +14,10 @@ import java.util.List;
 @ControllerAdvice
 public class ExceprionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({StudoException.class})
-    public ResponseEntity<Object> handleEmptyResultDataAccessException(StudoException ex, WebRequest request) {
-        String mensagem = ex.getMessage();
-        List<String> erros = Arrays.asList(mensagem);
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-    }
+	@ExceptionHandler({ StudoException.class })
+	public ResponseEntity<Object> exceprionHandler(StudoException ex, WebRequest request) {
+		String mensagem = ex.getMessage();
+		List<String> erros = Arrays.asList(mensagem);
+		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
 }
