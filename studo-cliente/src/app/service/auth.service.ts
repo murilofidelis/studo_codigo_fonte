@@ -28,9 +28,10 @@ export class AuthService {
     return this.http.post(`${STUDO_API}/${this.END_POINT}`, body, { headers })
       .toPromise()
       .then(response => {
-        console.log(response);
         this.armazenarToken(response.json().access_token);
-      }).catch(erro => { console.log(erro); });
+      }).catch(response => {
+        return Promise.reject(response.json());
+      });
   }
 
   private armazenarToken(token: string) {
