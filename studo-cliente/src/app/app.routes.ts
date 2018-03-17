@@ -11,7 +11,7 @@ import { AlunoPesquisaComponent } from './view/aluno/aluno-pesquisa/aluno-pesqui
 import { MatriculaComponent } from './view/aluno/matricula/matricula.component';
 
 export const ROUTES: Routes = [
-  { path: '', redirectTo: 'turmas', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
   { path: 'aluno', component: AlunoPesquisaComponent },
   { path: 'aluno/novo', component: AlunoCadastroComponent },
