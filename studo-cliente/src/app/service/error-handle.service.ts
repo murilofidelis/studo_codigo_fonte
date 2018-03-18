@@ -1,10 +1,15 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
+import { NotAuthenticatedError } from '../seguranca/studo-http';
 
 @Injectable()
 export class ErrorHandleService {
 
-  constructor(private toasty: ToastyService) { }
+  constructor(
+    private router: Router,
+    private toasty: ToastyService
+  ) { }
 
   handle(errorResponse: any) {
 
@@ -15,12 +20,22 @@ export class ErrorHandleService {
       try {
         errors = errorResponse.json();
         msg = errors[0];
+
+        if (errorResponse.status === 403) {
+          msg = 'Você não possui permissão para realizar esta ação';
+        }
       } catch (e) { }
       console.error('Ocorreu um erro:', errorResponse);
+    } else if (errorResponse instanceof NotAuthenticatedError) {
+
+      this.router.navigate(['/login']);
+
     } else {
       msg = 'Ocorreu um erro inesperado.';
       console.error('Ocorreu um erro:', errorResponse);
     }
-    this.toasty.error(msg);
+    if (msg) {
+      this.toasty.error(msg);
+    }
   }
 }

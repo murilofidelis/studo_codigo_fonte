@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
+import { Headers, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -17,7 +18,7 @@ export class DisciplinaService {
 
   END_POINT = 'disciplinas';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   pesquisar(filtro: DisciplinaFiltro): Promise<any> {
     const params = new URLSearchParams();

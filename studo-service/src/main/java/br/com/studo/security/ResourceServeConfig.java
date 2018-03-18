@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
 @Configuration
 @EnableWebSecurity
 @EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = false)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServeConfig extends ResourceServerConfigurerAdapter {
 
     @Autowired

@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController()
-@RequestMapping("login")
-public class LoginResource {
+@RequestMapping("/logout")
+public class LogoutResource {
 
-    @DeleteMapping("/logout")
+    @DeleteMapping("/revoke")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
+
         Cookie cookie = new Cookie("refresh_token", null);
         cookie.setHttpOnly(true);
         cookie.setSecure(false);
@@ -22,6 +23,7 @@ public class LoginResource {
         cookie.setMaxAge(0);
         response.addCookie(cookie);
         response.setStatus(HttpStatus.NO_CONTENT.value());
+
     }
 
 }

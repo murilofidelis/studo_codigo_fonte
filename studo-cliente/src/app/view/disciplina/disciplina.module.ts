@@ -9,7 +9,7 @@ import { DialogModule } from 'primeng/primeng';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { FieldsetModule } from 'primeng/components/fieldset/fieldset';
 
-import { DisciplinaPesquisaComponent } from './disciplina-pesquisa/disciplina-pesquisa.component';
+import { DisciplinaPesquisaComponent } from './disciplinas/disciplina-pesquisa.component';
 
 /**LAZY LOAD - só é carregado quando solicitado */
 const ROUTES: Routes = [

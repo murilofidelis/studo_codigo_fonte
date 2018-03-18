@@ -14,6 +14,7 @@ import { ErrorHandleService } from '../service/error-handle.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { EnderecoService } from '../service/endereco.service';
 import { AlunoService } from '../service/aluno.service';
+import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,6 @@ import { AlunoService } from '../service/aluno.service';
     ErrorHandleService,
     EnderecoService,
   ],
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent]
+  declarations: [NavbarComponent, PaginaNaoEncontradaComponent, AcessoNegadoComponent]
 })
 export class CoreModule { }

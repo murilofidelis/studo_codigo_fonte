@@ -30,7 +30,7 @@ public class AppUserDetailService implements UserDetailsService {
         if (Objects.isNull(usuario)) {
             throw new UsernameNotFoundException("Usuário ou senha inválidos");
         }
-        return new User(cpf, usuario.getSenha(), getPermissoes(usuario));
+        return new UsuarioSistema(usuario, getPermissoes(usuario));
     }
 
     private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
