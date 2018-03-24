@@ -15,19 +15,19 @@
         <br> {{ auth.jwtPayload?.nome }} </div>
     </li>
 
-    <li class="navbar-menuitem" routerLinkActive="ativo">
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_ALUNO')">
       <a routerLink="/aluno">Aluno</a>
     </li>
 
-    <li class="navbar-menuitem" routerLinkActive="ativo">
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_TURMA')">
       <a routerLink="/turmas">Turmas</a>
     </li>
 
-    <li class="navbar-menuitem" routerLinkActive="ativo">
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_PROFESSOR')">
       <a routerLink="/professor">Professor</a>
     </li>
 
-    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_DISCIPLINAS')">
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_DISCIPLINA')">
       <a routerLink="/diciplinas">Disciplinas </a>
     </li>
 

@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
+import { Headers, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -19,7 +20,7 @@ export class TurmaService {
 
   END_POINT = 'turmas';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   pesquisar(filtro: TurmaFiltro) {
     const headers = new Headers();

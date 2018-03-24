@@ -1,6 +1,7 @@
 package br.com.studo.service;
 
 import br.com.studo.domain.Aluno;
+import br.com.studo.domain.Perfil;
 import br.com.studo.domain.Professor;
 import br.com.studo.domain.Usuario;
 import br.com.studo.domain.enums.Tipo;
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Slf4j
 @Service
 @Transactional
@@ -18,6 +22,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepositoty usuarioRepositoty;
+
+    @Autowired
+    private PerfilService perfilService;
 
     @Autowired
     private EmailService emailService;
@@ -30,19 +37,20 @@ public class UsuarioService {
         usuario.setNome(professor.getNome());
         usuario.setEmail(professor.getEmail().getDscEmail());
         usuario.setStatus(professor.getStatus());
-        usuario.setTipo(Tipo.PROFESSOR);
+        usuario.setPerfils(addPerfil(Tipo.PROFESSOR));
         salvaUsuario(usuario);
 
-        log.info("SALVANDO USUÁRIO: {}", professor.getNome());
+        log.info("SALVANDO USUÁRIO: {}", professor.getNome() + " CPF: " + professor.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
 
-/*		emailService.enviaEmail(professor.getEmail().getDscEmail(), "Studo - Criação de usuário",
-				criarMensagemEmail(professor.getCpf(), professor.getNome(), senhaProvisoria));*/
-
+       /* emailService.enviaEmail(professor.getEmail().getDscEmail(), "Studo - Criação de usuário",
+                criarMensagemEmail(professor.getCpf(), professor.getNome(), senhaProvisoria)); */
         return usuario;
     }
 
     public Usuario atualizaUsuarioProfessor(Professor professor) {
         Usuario usuario = buscaPorCpf(professor.getCpf());
+        usuario.setNome(professor.getNome());
+        usuario.setEmail(professor.getEmail().getDscEmail());
         usuario.setStatus(professor.getStatus());
         log.info("ATUALIZANDO USUÁRIO: {}", professor.getNome());
         return usuario;
@@ -56,10 +64,10 @@ public class UsuarioService {
         usuario.setSenha(PasswordUtil.encoderPassword(senhaProvisoria));
         usuario.setEmail(aluno.getEmail().getDscEmail());
         usuario.setStatus(aluno.getStatus());
-        usuario.setTipo(Tipo.ALUNO);
+        usuario.setPerfils(addPerfil(Tipo.ALUNO));
         salvaUsuario(usuario);
 
-        log.info("SALVANDO USUÁRIO: {}", aluno.getNome());
+        log.info("SALVANDO USUÁRIO: {}", aluno.getNome() + " CPF: " + aluno.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
 
 /*		emailService.enviaEmail(aluno.getEmail().getDscEmail(), "Studo - Criação de usuário",
 				criarMensagemEmail(aluno.getCpf(), aluno.getNome(), senhaProvisoria));*/
@@ -69,6 +77,8 @@ public class UsuarioService {
 
     public Usuario atualizaUsuarioAluno(Aluno aluno) {
         Usuario usuario = buscaPorCpf(aluno.getCpf());
+        usuario.setNome(aluno.getNome());
+        usuario.setEmail(aluno.getEmail().getDscEmail());
         usuario.setStatus(aluno.getStatus());
         log.info("ATUALIZANDO USUÁRIO: {}", aluno.getNome());
         return usuario;
@@ -76,6 +86,13 @@ public class UsuarioService {
 
     private void salvaUsuario(Usuario usuario) {
         usuarioRepositoty.save(usuario);
+    }
+
+    private Set<Perfil> addPerfil(Tipo tipo) {
+        Set<Perfil> perfils = new HashSet<>();
+        Perfil perfil = perfilService.getPerfil(tipo.getCodigo());
+        perfils.add(perfil);
+        return perfils;
     }
 
     private Usuario buscaPorCpf(String cpf) {

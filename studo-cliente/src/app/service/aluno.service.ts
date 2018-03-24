@@ -1,12 +1,14 @@
-import { Matricula } from './../model/matricula.model';
-import { Aluno } from './../model/aluno.model';
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
+import { Headers, URLSearchParams } from '@angular/http';
 
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 
 import { STUDO_API } from './../app.api';
+
+import { Matricula } from './../model/matricula.model';
+import { Aluno } from './../model/aluno.model';
 
 export class AlunoFiltro {
   nome: string;
@@ -19,7 +21,7 @@ export class AlunoService {
 
   END_POINT = 'alunos';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   pesquisar(filtro: AlunoFiltro) {
     const headers = new Headers();

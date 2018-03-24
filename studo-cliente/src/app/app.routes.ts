@@ -16,24 +16,50 @@ import { AcessoNegadoComponent } from './core/acesso-negado/acesso-negado.compon
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-  { path: 'aluno', component: AlunoPesquisaComponent },
-  { path: 'aluno/novo', component: AlunoCadastroComponent, canActivate: [AuthGuard] },
-  { path: 'aluno/:codigo', component: AlunoCadastroComponent },
-
-  { path: 'matricula/:codigo', component: MatriculaComponent },
-
-  { path: 'turmas', component: TurmaPesquisaComponent },
-  { path: 'turmas/nova', component: TurmaCadastroComponent },
-  { path: 'turmas/:codigo', component: TurmaCadastroComponent },
-
+  {
+    path: 'aluno', component: AlunoPesquisaComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_LISTAR_ALUNO'] }
+  },
+  {
+    path: 'aluno/novo', component: AlunoCadastroComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_CADASTRAR_ALUNO'] }
+  },
+  {
+    path: 'aluno/:codigo', component: AlunoCadastroComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ALTERAR_ALUNO'] }
+  },
+  {
+    path: 'matricula/:codigo', component: MatriculaComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ALTERAR_ALUNO'] }
+  },
+  {
+    path: 'turmas', component: TurmaPesquisaComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_LISTAR_TURMA'] }
+  },
+  {
+    path: 'turmas/nova', component: TurmaCadastroComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_CADASTRAR_TURMA'] }
+  },
+  {
+    path: 'turmas/:codigo', component: TurmaCadastroComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ALTERAR_TURMA'] }
+  },
   {
     path: 'diciplinas', loadChildren: './view/disciplina/disciplina.module#DisciplinaModule', canActivate: [AuthGuard],
-    data: { roles: ['ROLE_LISTAR_DISCIPLINAS'] }
+    data: { roles: ['ROLE_LISTAR_DISCIPLINA'] }
   },
-
-  { path: 'professor', component: ProfessorPesquisaComponent },
-  { path: 'professor/novo', component: ProfessorCadastroComponent },
-  { path: 'professor/:codigo', component: ProfessorCadastroComponent },
+  {
+    path: 'professor', component: ProfessorPesquisaComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_LISTAR_PROFESSOR'] }
+  },
+  {
+    path: 'professor/novo', component: ProfessorCadastroComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_CADASTRAR_PROFESSOR'] }
+  },
+  {
+    path: 'professor/:codigo', component: ProfessorCadastroComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ALTERAR_PROFESSOR'] }
+  },
 
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
+import { Headers, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -20,7 +21,7 @@ export class ProfessorService {
 
   END_POINT = 'professor';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   pesuisar(filtro: ProfessorFiltro) {
     const headers = new Headers();

@@ -27,27 +27,27 @@ public class DisciplinaResource {
     private DisciplinaService disciplinaService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_LISTAR_DISCIPLINAS')")
+    @PreAuthorize("hasAuthority('ROLE_LISTAR_DISCIPLINA')")
     public Page<Disciplina> filtrarPesquisa(@RequestParam(required = false, defaultValue = "%") String descricao, Pageable pageable) {
         return disciplinaService.filtraPesquisa(descricao, pageable);
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_DISCIPLINAS')")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_DISCIPLINA')")
     public ResponseEntity<Disciplina> salvar(@Valid @RequestBody Disciplina disciplina) {
         Disciplina disciplinaSalva = disciplinaService.salvar(disciplina);
         return disciplinaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_DISCIPLINAS')")
+    @PreAuthorize("hasAuthority('ROLE_ALTERAR_DISCIPLINA')")
     public ResponseEntity<Disciplina> alterar(@Valid @RequestBody Disciplina disciplina) {
         Disciplina disciplinaAtualizada = disciplinaService.salvar(disciplina);
         return disciplinaAtualizada != null ? ResponseEntity.status(HttpStatus.OK).body(disciplinaAtualizada) : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{codigo}")
-    @PreAuthorize("hasAuthority('ROLE_LISTAR_DISCIPLINAS')")
+    @PreAuthorize("hasAuthority('ROLE_LISTAR_DISCIPLINA')")
     public ResponseEntity<Disciplina> buscarPorCodigo(@PathVariable Long codigo) {
         Disciplina disciplina = disciplinaService.buscarPorCodigo(codigo);
         return disciplina != null ? ResponseEntity.status(HttpStatus.OK).body(disciplina) : ResponseEntity.notFound().build();

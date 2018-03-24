@@ -1,13 +1,11 @@
 package br.com.studo.domain;
 
-import br.com.studo.domain.enums.Tipo;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -54,18 +52,13 @@ public class Usuario implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_usuario")
-    private Tipo tipo;
-
     @Column(name = "bln_status")
     private Boolean status;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tab_usuario_permissao", schema = "usuarios",
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "tab_usuario_perfil", schema = "usuarios",
             joinColumns = @JoinColumn(name = "codigo_usuario", referencedColumnName = "codigo"),
-            inverseJoinColumns = @JoinColumn(name = "codigo_permissao", referencedColumnName = "codigo"))
-    private Set<Permissao> permissoes;
+            inverseJoinColumns = @JoinColumn(name = "codigo_perfil", referencedColumnName = "codigo"))
+    private Set<Perfil> perfils;
 
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="0001" author="murilo">
+        <sql>
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(1, 'ROLE_CADASTRAR_PROFESSOR');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(2, 'ROLE_LISTAR_PROFESSOR');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(3, 'ROLE_ALTERAR_PROFESSOR');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(4, 'ROLE_EXCLUIR_PROFESSOR');
+
+
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(5, 'ROLE_CADASTRAR_DISCIPLINA');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(6, 'ROLE_LISTAR_DISCIPLINA');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(7, 'ROLE_ALTERAR_DISCIPLINA');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(8, 'ROLE_EXCLUIR_DISCIPLINA');
+
+
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(9, 'ROLE_CADASTRAR_TURMA');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(10, 'ROLE_LISTAR_TURMA');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(11, 'ROLE_ALTERAR_TURMA');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(12, 'ROLE_EXCLUIR_TURMA');
+
+
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(13, 'ROLE_CADASTRAR_ALUNO');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(14, 'ROLE_LISTAR_ALUNO');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(15, 'ROLE_ALTERAR_ALUNO');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(16, 'ROLE_EXCLUIR_ALUNO');
+        </sql>
+    </changeSet>
+
+    <changeSet id="0002" author="murilo">
+        <sql>
+            INSERT INTO usuarios.tab_perfil(codigo, dsc_perfil) VALUES(1,'SECRETARIO');
+            INSERT INTO usuarios.tab_perfil(codigo, dsc_perfil) VALUES(2,'PROFESSOR');
+            INSERT INTO usuarios.tab_perfil(codigo, dsc_perfil) VALUES(3,'ALUNO');
+        </sql>
+    </changeSet>
+
+    <changeSet id="0003" author="murilo">
+        <sql>
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,1);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,2);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,3);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,4);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,5);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,6);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,7);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,8);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,9);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,10);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,11);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,12);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,13);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,14);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,15);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,16);
+        </sql>
+    </changeSet>
+
+    <changeSet id="0004" author="murilo">
+        <sql>
+            INSERT INTO usuarios.tab_usuario (codigo, email, login, nome, senha, bln_status)
+            VALUES(1, 'secretario@teste.com', '10336857047', 'Secretário', '$2a$10$zx/WsZjE5PbXMF6K.i6j/O9CFiwt5GqM5nBbYuB4h61QS2Q8hbkuu', true);
+
+            INSERT INTO usuarios.tab_usuario_perfil(codigo_usuario,codigo_perfil) VALUES(1,1);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

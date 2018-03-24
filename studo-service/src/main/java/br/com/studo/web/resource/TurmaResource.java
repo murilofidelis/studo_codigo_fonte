@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ public class TurmaResource {
     private TurmaService turmaService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_LISTAR_TURMA')")
     public Page<Turma> filtarPesquisa(
             @RequestParam(required = false, defaultValue = "MATUTINO, VESPERTINO, NOTURNO") List<Periodo> periodo,
             @RequestParam(required = false, defaultValue = "2018") Integer ano,
@@ -34,18 +36,21 @@ public class TurmaResource {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_TURMA')")
     public ResponseEntity<Turma> salvar(@RequestBody Turma turma) {
         Turma turmaSalva = turmaService.salvar(turma);
         return turmaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{codigo}")
+    @PreAuthorize("hasAuthority('ROLE_LISTAR_TURMA')")
     public ResponseEntity<Turma> buscarPorCodigo(@PathVariable Long codigo) {
         Turma turma = turmaService.buscarPorCodigo(codigo);
         return turma != null ? ResponseEntity.ok().body(turma) : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/buscaPorNumero")
+    @PreAuthorize("hasAuthority('ROLE_LISTAR_TURMA')")
     public ResponseEntity<Turma> buscarPorNumero(@RequestParam String numTurma) {
         Turma turma = turmaService.buscaTurmaPorNumero(numTurma);
         return turma != null ? ResponseEntity.ok().body(turma) : ResponseEntity.notFound().build();
