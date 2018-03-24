@@ -7,7 +7,7 @@ import { STUDO_API } from '../app.api';
 @Injectable()
 export class LogoutService {
 
-  END_POINT = 'logout';
+  END_POINT = 'tokens';
 
   constructor(
     private http: AuthHttp,

@@ -22,7 +22,7 @@ export class LoginComponent {
   login(cpf: string, senha: string) {
     this.auth.login(cpf, senha)
       .then(() => {
-        this.route.navigate(['/aluno']);
+        this.route.navigate(['/diciplinas']);
       })
       .catch(erro => {
         if (erro.error === 'invalid_grant') {
