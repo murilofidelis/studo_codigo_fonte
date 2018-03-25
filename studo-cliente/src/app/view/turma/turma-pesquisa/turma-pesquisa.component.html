@@ -49,7 +49,7 @@
 
         <p-column header="Ações" styleClass="col-acoes">
           <ng-template let-disciplina="rowData" pTemplate="body">
-            <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/turmas', disciplina.codigo]"></a>
+            <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/turma', disciplina.codigo]"></a>
           </ng-template>
         </p-column>
 
@@ -58,7 +58,7 @@
   </div>
 
   <div class="ui-md-3 ui-fluid">
-    <a pButton label="Novo" icon="fa-plus" routerLink="/turmas/nova"></a>
+    <a pButton label="Novo" icon="fa-plus" routerLink="/turma/nova"></a>
   </div>
 
 </div>

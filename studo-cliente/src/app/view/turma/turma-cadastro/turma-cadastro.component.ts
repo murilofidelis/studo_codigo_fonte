@@ -94,7 +94,7 @@ export class TurmaCadastroComponent implements OnInit {
       this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
       this.turmaForm.reset();
       setTimeout(() => {
-        this.route.navigate(['/turmas']);
+        this.route.navigate(['/turma']);
       }, 1000);
     }).catch(erro => this.errorHandle.handle(erro));
   }

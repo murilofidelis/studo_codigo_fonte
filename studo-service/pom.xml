@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>studo-service</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Sistema de cadastro de atividades</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -91,6 +91,13 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
+        </dependency>
+
+        <!-- Spring profile-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>

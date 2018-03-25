@@ -1,5 +1,6 @@
 package br.com.studo.service;
 
+import br.com.studo.config.StudoProperty;
 import br.com.studo.domain.Aluno;
 import br.com.studo.domain.Perfil;
 import br.com.studo.domain.Professor;
@@ -29,6 +30,9 @@ public class UsuarioService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private StudoProperty property;
+
     public Usuario criaUsuarioProfessor(Professor professor) {
         Usuario usuario = new Usuario();
         usuario.setLogin(professor.getCpf());
@@ -42,8 +46,10 @@ public class UsuarioService {
 
         log.info("SALVANDO USUÁRIO: {}", professor.getNome() + " CPF: " + professor.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
 
-       /* emailService.enviaEmail(professor.getEmail().getDscEmail(), "Studo - Criação de usuário",
-                criarMensagemEmail(professor.getCpf(), professor.getNome(), senhaProvisoria)); */
+        if (property.isEnviarEmail()) {
+            emailService.enviaEmail(professor.getEmail().getDscEmail(), "Studo - Criação de usuário",
+                    criarMensagemEmail(professor.getCpf(), professor.getNome(), senhaProvisoria));
+        }
         return usuario;
     }
 
@@ -69,8 +75,10 @@ public class UsuarioService {
 
         log.info("SALVANDO USUÁRIO: {}", aluno.getNome() + " CPF: " + aluno.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
 
-/*		emailService.enviaEmail(aluno.getEmail().getDscEmail(), "Studo - Criação de usuário",
-				criarMensagemEmail(aluno.getCpf(), aluno.getNome(), senhaProvisoria));*/
+        if (property.isEnviarEmail()) {
+            emailService.enviaEmail(aluno.getEmail().getDscEmail(), "Studo - Criação de usuário",
+                    criarMensagemEmail(aluno.getCpf(), aluno.getNome(), senhaProvisoria));
+        }
 
         return usuario;
     }
@@ -104,7 +112,7 @@ public class UsuarioService {
 
         return new StringBuilder().append("PREZADO(a), " + nome)
                 .append("\n")
-                .append("Sua consta de usuário foi criada com sucesso!")
+                .append("Sua conta de usuário foi criada com sucesso!")
                 .append("\n\n")
                 .append("Segue sua senha provisoria: ")
                 .append("\n\n")

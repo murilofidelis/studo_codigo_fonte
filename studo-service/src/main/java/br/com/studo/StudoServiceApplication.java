@@ -1,8 +1,10 @@
 package br.com.studo;
 
+import br.com.studo.config.StudoProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.env.Environment;
 
 import java.net.InetAddress;
@@ -10,6 +12,7 @@ import java.net.UnknownHostException;
 
 @Slf4j
 @SpringBootApplication
+@EnableConfigurationProperties(StudoProperty.class)
 public class StudoServiceApplication {
 
     public static void main(String[] args) throws UnknownHostException {

@@ -33,19 +33,19 @@ export const ROUTES: Routes = [
     data: { roles: ['ROLE_ALTERAR_ALUNO'] }
   },
   {
-    path: 'turmas', component: TurmaPesquisaComponent, canActivate: [AuthGuard],
+    path: 'turma', component: TurmaPesquisaComponent, canActivate: [AuthGuard],
     data: { roles: ['ROLE_LISTAR_TURMA'] }
   },
   {
-    path: 'turmas/nova', component: TurmaCadastroComponent, canActivate: [AuthGuard],
+    path: 'turma/nova', component: TurmaCadastroComponent, canActivate: [AuthGuard],
     data: { roles: ['ROLE_CADASTRAR_TURMA'] }
   },
   {
-    path: 'turmas/:codigo', component: TurmaCadastroComponent, canActivate: [AuthGuard],
+    path: 'turma/:codigo', component: TurmaCadastroComponent, canActivate: [AuthGuard],
     data: { roles: ['ROLE_ALTERAR_TURMA'] }
   },
   {
-    path: 'diciplinas', loadChildren: './view/disciplina/disciplina.module#DisciplinaModule', canActivate: [AuthGuard],
+    path: 'diciplina', loadChildren: './view/disciplina/disciplina.module#DisciplinaModule', canActivate: [AuthGuard],
     data: { roles: ['ROLE_LISTAR_DISCIPLINA'] }
   },
   {
