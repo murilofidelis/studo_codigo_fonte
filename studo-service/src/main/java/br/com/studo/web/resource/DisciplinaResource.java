@@ -1,6 +1,7 @@
 package br.com.studo.web.resource;
 
 import br.com.studo.domain.Disciplina;
+import br.com.studo.domain.dto.DisciplinaDTO;
 import br.com.studo.service.DisciplinaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,22 +35,22 @@ public class DisciplinaResource {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_DISCIPLINA')")
-    public ResponseEntity<Disciplina> salvar(@Valid @RequestBody Disciplina disciplina) {
-        Disciplina disciplinaSalva = disciplinaService.salvar(disciplina);
+    public ResponseEntity<DisciplinaDTO> salvar(@Valid @RequestBody DisciplinaDTO disciplinaDTO) {
+        DisciplinaDTO disciplinaSalva = disciplinaService.salvar(disciplinaDTO);
         return disciplinaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
     @PutMapping
     @PreAuthorize("hasAuthority('ROLE_ALTERAR_DISCIPLINA')")
-    public ResponseEntity<Disciplina> alterar(@Valid @RequestBody Disciplina disciplina) {
-        Disciplina disciplinaAtualizada = disciplinaService.salvar(disciplina);
+    public ResponseEntity<DisciplinaDTO> alterar(@Valid @RequestBody DisciplinaDTO disciplinaDTO) {
+        DisciplinaDTO disciplinaAtualizada = disciplinaService.salvar(disciplinaDTO);
         return disciplinaAtualizada != null ? ResponseEntity.status(HttpStatus.OK).body(disciplinaAtualizada) : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{codigo}")
     @PreAuthorize("hasAuthority('ROLE_LISTAR_DISCIPLINA')")
-    public ResponseEntity<Disciplina> buscarPorCodigo(@PathVariable Long codigo) {
-        Disciplina disciplina = disciplinaService.buscarPorCodigo(codigo);
+    public ResponseEntity<DisciplinaDTO> buscarPorCodigo(@PathVariable Long codigo) {
+        DisciplinaDTO disciplina = disciplinaService.buscarPorCodigo(codigo);
         return disciplina != null ? ResponseEntity.status(HttpStatus.OK).body(disciplina) : ResponseEntity.notFound().build();
     }
 }

@@ -1,6 +1,8 @@
 package br.com.studo.service;
 
 import br.com.studo.domain.Professor;
+import br.com.studo.domain.dto.ProfessorDTO;
+import br.com.studo.domain.mapper.ProfessorMapper;
 import br.com.studo.repository.ProfessorRepositoty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,9 @@ public class ProfessorService {
     private ProfessorRepositoty professorRepositoty;
 
     @Autowired
+    private ProfessorMapper professorMapper;
+
+    @Autowired
     private UsuarioService usuarioService;
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
@@ -24,13 +29,14 @@ public class ProfessorService {
         return professorRepositoty.findByNomeStartingWithIgnoreCase(nome, pageable);
     }
 
-    public Professor salvar(Professor professor) {
+    public ProfessorDTO salvar(ProfessorDTO professorDTO) {
+        Professor professor = professorMapper.toEntity(professorDTO);
         if (professor.getCodigo() == null) {
             usuarioService.criaUsuarioProfessor(professor);
         } else {
             usuarioService.atualizaUsuarioProfessor(professor);
         }
-        return professorRepositoty.save(professor);
+        return professorMapper.toDTO(professorRepositoty.save(professor));
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
@@ -39,8 +45,8 @@ public class ProfessorService {
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public Professor buscaPorCodigo(Long codigo) {
-        return professorRepositoty.findOne(codigo);
+    public ProfessorDTO buscaPorCodigo(Long codigo) {
+        return professorMapper.toDTO(professorRepositoty.findOne(codigo));
     }
 
 }

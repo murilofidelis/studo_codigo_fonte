@@ -1,4 +1,4 @@
-package br.com.studo.domain;
+package br.com.studo.domain.usuario;
 
 import lombok.Getter;
 import lombok.Setter;

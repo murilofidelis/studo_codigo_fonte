@@ -2,6 +2,10 @@ package br.com.studo.service;
 
 import br.com.studo.domain.Aluno;
 import br.com.studo.domain.Matricula;
+import br.com.studo.domain.dto.AlunoDTO;
+import br.com.studo.domain.dto.MatriculaDTO;
+import br.com.studo.domain.mapper.AlunoMapper;
+import br.com.studo.domain.mapper.MatriculaMapper;
 import br.com.studo.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,37 +24,45 @@ public class AlunoService {
     private AlunoRepository alunoRepository;
 
     @Autowired
+    private AlunoMapper alunoMapper;
+
+    @Autowired
+    private MatriculaMapper matriculaMapper;
+
+    @Autowired
     MatriculaService matriculaService;
 
     @Autowired
     private UsuarioService usuarioService;
+
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Aluno> filtarPesquisar(String nome, Pageable pageable) {
         return alunoRepository.findByNomeStartingWithIgnoreCase(nome, pageable);
     }
 
-    public Aluno salvarAluno(Aluno aluno) {
+    public AlunoDTO salvarAluno(AlunoDTO alunoDTO) {
+        Aluno aluno = alunoMapper.toEntity(alunoDTO);
         if (aluno.getCodigo() == null) {
             usuarioService.criaUsuarioAluno(aluno);
         } else {
             usuarioService.atualizaUsuarioAluno(aluno);
         }
-        return alunoRepository.save(aluno);
+        return alunoMapper.toDTO(alunoRepository.save(aluno));
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public Aluno buscaPorCodigo(Long codigo) {
-        return alunoRepository.findOne(codigo);
+    public AlunoDTO buscaPorCodigo(Long codigo) {
+        return alunoMapper.toDTO(alunoRepository.findOne(codigo));
     }
 
-    public Matricula salvaMatricula(Matricula matricula) {
-        return matriculaService.salvaMatricula(matricula);
+    public MatriculaDTO salvaMatricula(MatriculaDTO matriculaDTO) {
+        return matriculaMapper.toDTO(matriculaService.salvaMatricula(matriculaMapper.toEntity(matriculaDTO)));
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public List<Matricula> buscaMatriculasPorAluno(Long codigo) {
-        return matriculaService.buscaMatriculasPorAluno(codigo);
+    public List<MatriculaDTO> buscaMatriculasPorAluno(Long codigo) {
+        return matriculaMapper.listDTO(matriculaService.buscaMatriculasPorAluno(codigo));
     }
 
     public void deletaMatriculaAluno(Long codMatricula) {
