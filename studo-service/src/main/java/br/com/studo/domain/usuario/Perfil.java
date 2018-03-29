@@ -1,6 +1,6 @@
 package br.com.studo.domain;
 
-import br.com.studo.domain.enums.Tipo;
+import br.com.studo.domain.enums.TipoPerfil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,7 +33,7 @@ public class Perfil {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "dsc_perfil")
-    private Tipo tipoUsuario;
+    private TipoPerfil tipoPerfilUsuario;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tab_perfil_permissao", schema = "usuarios",
