@@ -2,6 +2,8 @@ package br.com.studo.web.resource;
 
 import br.com.studo.domain.Aluno;
 import br.com.studo.domain.Matricula;
+import br.com.studo.domain.dto.AlunoDTO;
+import br.com.studo.domain.dto.MatriculaDTO;
 import br.com.studo.service.AlunoService;
 
 import java.util.List;
@@ -37,8 +39,8 @@ public class AlunoResource {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_ALUNO')")
-    public ResponseEntity<Aluno> salvarAluno(@RequestBody Aluno aluno) {
-        Aluno alunoSalvo = alunoService.salvarAluno(aluno);
+    public ResponseEntity<Aluno> salvarAluno(@RequestBody AlunoDTO alunoDTO) {
+        AlunoDTO alunoSalvo = alunoService.salvarAluno(alunoDTO);
         return alunoSalvo != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
@@ -50,21 +52,21 @@ public class AlunoResource {
 
     @GetMapping("/{codigo}")
     @PreAuthorize("hasAuthority('ROLE_LISTAR_ALUNO')")
-    public ResponseEntity<Aluno> buscaPorCodigo(@PathVariable Long codigo) {
-        Aluno aluno = alunoService.buscaPorCodigo(codigo);
-        return aluno != null ? ResponseEntity.ok().body(aluno) : ResponseEntity.notFound().build();
+    public ResponseEntity<AlunoDTO> buscaPorCodigo(@PathVariable Long codigo) {
+        AlunoDTO alunoDTO = alunoService.buscaPorCodigo(codigo);
+        return alunoDTO != null ? ResponseEntity.ok().body(alunoDTO) : ResponseEntity.notFound().build();
     }
 
     @PostMapping("/matricula")
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_ALUNO')")
-    public ResponseEntity<Aluno> salvaMatricula(@RequestBody Matricula matricula) {
-        Matricula matriculaSalva = alunoService.salvaMatricula(matricula);
+    public ResponseEntity<HttpStatus> salvaMatricula(@RequestBody MatriculaDTO matriculaDTO) {
+        MatriculaDTO matriculaSalva = alunoService.salvaMatricula(matriculaDTO);
         return matriculaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/matriculas/{codigo}")
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_ALUNO')")
-    public ResponseEntity<List<Matricula>> buscaMatriculasPorAluno(@PathVariable Long codigo) {
+    public ResponseEntity<List<MatriculaDTO>> buscaMatriculasPorAluno(@PathVariable Long codigo) {
         return ResponseEntity.ok().body(alunoService.buscaMatriculasPorAluno(codigo));
     }
 

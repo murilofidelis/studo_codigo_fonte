@@ -1,6 +1,6 @@
 package br.com.studo.security;
 
-import br.com.studo.domain.Usuario;
+import br.com.studo.domain.usuario.Usuario;
 import br.com.studo.repository.UsuarioRepositoty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

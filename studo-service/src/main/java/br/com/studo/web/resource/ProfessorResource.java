@@ -1,6 +1,7 @@
 package br.com.studo.web.resource;
 
 import br.com.studo.domain.Professor;
+import br.com.studo.domain.dto.ProfessorDTO;
 import br.com.studo.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,8 +34,8 @@ public class ProfessorResource {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_PROFESSOR')")
-    public ResponseEntity<Professor> salvar(@RequestBody @Valid Professor professor) {
-        Professor pessoaSalva = professorService.salvar(professor);
+    public ResponseEntity<ProfessorDTO> salvar(@RequestBody @Valid ProfessorDTO professorDTO) {
+        ProfessorDTO pessoaSalva = professorService.salvar(professorDTO);
         return pessoaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
@@ -46,8 +47,8 @@ public class ProfessorResource {
 
     @GetMapping("/{codigo}")
     @PreAuthorize("hasAuthority('ROLE_LISTAR_PROFESSOR')")
-    public ResponseEntity<Professor> buscaPorCodigo(@PathVariable Long codigo) {
-        Professor professor = professorService.buscaPorCodigo(codigo);
+    public ResponseEntity<ProfessorDTO> buscaPorCodigo(@PathVariable Long codigo) {
+        ProfessorDTO professor = professorService.buscaPorCodigo(codigo);
         return professor != null ? ResponseEntity.ok().body(professor) : ResponseEntity.notFound().build();
     }
 

@@ -5,11 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DisciplinaDTO {
+public class EmailDTO  {
 
     private Long codigo;
 
-    private String descricao;
-
-    private Boolean ativa;
+    private String dscEmail;
 }

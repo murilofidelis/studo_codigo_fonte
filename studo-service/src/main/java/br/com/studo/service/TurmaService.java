@@ -1,7 +1,9 @@
 package br.com.studo.service;
 
 import br.com.studo.domain.Turma;
+import br.com.studo.domain.dto.TurmaDTO;
 import br.com.studo.domain.enums.Periodo;
+import br.com.studo.domain.mapper.TurmaMapper;
 import br.com.studo.exception.StudoException;
 import br.com.studo.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +22,20 @@ public class TurmaService {
     @Autowired
     private TurmaRepository turmaRepository;
 
+    @Autowired
+    private TurmaMapper turmaMapper;
+
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Turma> filtarPesquisa(List<Periodo> periodos, Integer ano, Pageable pageable) {
         return turmaRepository.findPeriodoAndAno(periodos, ano, pageable);
     }
 
-    public Turma salvar(Turma turma) {
-        turma.setNumeroTurma(gerarNumeroTurma(turma));
-        if (turma.getCodigo() == null) {
-            verificaTurmaCadastrada(turma.getNumeroTurma());
+    public TurmaDTO salvar(TurmaDTO turmaDTO) {
+        turmaDTO.setNumeroTurma(gerarNumeroTurma(turmaDTO));
+        if (turmaDTO.getCodigo() == null) {
+            verificaTurmaCadastrada(turmaDTO.getNumeroTurma());
         }
-        return turmaRepository.save(turma);
+        return turmaMapper.toDTO(turmaRepository.save(turmaMapper.toEntity(turmaDTO)));
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
@@ -38,18 +43,18 @@ public class TurmaService {
         return turmaRepository.findOne(codigo);
     }
 
-    private String gerarNumeroTurma(Turma turma) {
+    private String gerarNumeroTurma(TurmaDTO turmaDTO) {
         return new StringBuilder()
-                .append(turma.getPeriodo().name().substring(0, 1))
-                .append(turma.getAno())
-                .append(turma.getSerie().substring(0, 1))
-                .append(turma.getDescricaoTurma())
+                .append(turmaDTO.getPeriodo().name().substring(0, 1))
+                .append(turmaDTO.getAno())
+                .append(turmaDTO.getSerie().substring(0, 1))
+                .append(turmaDTO.getDescricaoTurma())
                 .toString();
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public Turma buscaTurmaPorNumero(String numTurma) {
-        return turmaRepository.findByNumeroTurma(numTurma);
+    public TurmaDTO buscaTurmaPorNumero(String numTurma) {
+        return turmaMapper.toDTO(turmaRepository.findByNumeroTurma(numTurma));
     }
 
     private void verificaTurmaCadastrada(String numTruma) {

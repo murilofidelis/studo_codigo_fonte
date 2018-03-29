@@ -3,7 +3,8 @@ package br.com.studo.service;
 import br.com.studo.domain.Matricula;
 import br.com.studo.exception.StudoException;
 import br.com.studo.repository.MatriculaRepository;
-import br.com.studo.util.Mensagens;
+import br.com.studo.util.Mensagem;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,9 @@ public class MatriculaService {
 
     @Autowired
     private MatriculaRepository matriculaRepository;
+    
+    @Autowired
+    private Mensagem mensagem;
 
     public Matricula salvaMatricula(Matricula matricula) {
         verificaMatricula(matricula);
@@ -44,7 +48,7 @@ public class MatriculaService {
 
     private void verificaMatricula(Matricula matricula) {
         if (matriculaRepository.findByAlunoMatriculado(matricula.getAluno().getCodigo(), matricula.getTurma().getCodigo())) {
-            throw new StudoException(Mensagens.MSG041.getValue());
+            throw new StudoException(mensagem.get("MSG041"));
         }
     }
 

@@ -2,10 +2,10 @@ package br.com.studo.service;
 
 import br.com.studo.config.StudoProperty;
 import br.com.studo.domain.Aluno;
-import br.com.studo.domain.Perfil;
+import br.com.studo.domain.usuario.Perfil;
 import br.com.studo.domain.Professor;
-import br.com.studo.domain.Usuario;
-import br.com.studo.domain.enums.Tipo;
+import br.com.studo.domain.usuario.Usuario;
+import br.com.studo.domain.enums.TipoPerfil;
 import br.com.studo.repository.UsuarioRepositoty;
 import br.com.studo.util.PasswordUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,7 @@ public class UsuarioService {
         usuario.setNome(professor.getNome());
         usuario.setEmail(professor.getEmail().getDscEmail());
         usuario.setStatus(professor.getStatus());
-        usuario.setPerfils(addPerfil(Tipo.PROFESSOR));
+        usuario.setPerfils(addPerfil(TipoPerfil.PROFESSOR));
         salvaUsuario(usuario);
 
         log.info("SALVANDO USUÁRIO: {}", professor.getNome() + " CPF: " + professor.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
@@ -70,7 +70,7 @@ public class UsuarioService {
         usuario.setSenha(PasswordUtil.encoderPassword(senhaProvisoria));
         usuario.setEmail(aluno.getEmail().getDscEmail());
         usuario.setStatus(aluno.getStatus());
-        usuario.setPerfils(addPerfil(Tipo.ALUNO));
+        usuario.setPerfils(addPerfil(TipoPerfil.ALUNO));
         salvaUsuario(usuario);
 
         log.info("SALVANDO USUÁRIO: {}", aluno.getNome() + " CPF: " + aluno.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
@@ -96,9 +96,9 @@ public class UsuarioService {
         usuarioRepositoty.save(usuario);
     }
 
-    private Set<Perfil> addPerfil(Tipo tipo) {
+    private Set<Perfil> addPerfil(TipoPerfil tipoPerfil) {
         Set<Perfil> perfils = new HashSet<>();
-        Perfil perfil = perfilService.getPerfil(tipo.getCodigo());
+        Perfil perfil = perfilService.getPerfil(tipoPerfil.getCodigo());
         perfils.add(perfil);
         return perfils;
     }

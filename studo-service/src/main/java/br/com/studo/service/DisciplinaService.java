@@ -2,9 +2,11 @@ package br.com.studo.service;
 
 import br.com.studo.domain.Disciplina;
 
+import br.com.studo.domain.dto.DisciplinaDTO;
+import br.com.studo.domain.mapper.DisciplinaMapper;
 import br.com.studo.exception.StudoException;
 import br.com.studo.repository.DisciplinaRepository;
-import br.com.studo.util.Mensagens;
+import br.com.studo.util.Mensagem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,21 +21,27 @@ public class DisciplinaService {
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
+    @Autowired
+    private DisciplinaMapper disciplinaMapper;
+
+    @Autowired
+    private Mensagem mensagem;
+
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Disciplina> filtraPesquisa(String descricao, Pageable pageable) {
         return disciplinaRepository.findByDescricaoContainingIgnoreCase(descricao, pageable);
     }
 
-    public Disciplina salvar(Disciplina disciplina) {
-        if (verificaDisciplinaExiste(disciplina.getDescricao())) {
-            throw new StudoException(Mensagens.MSG007.getValue());
+    public DisciplinaDTO salvar(DisciplinaDTO disciplinaDTO) {
+        if (verificaDisciplinaExiste(disciplinaDTO.getDescricao())) {
+            throw new StudoException(mensagem.get("MSG007"));
         }
-        return disciplinaRepository.save(disciplina);
+        return disciplinaMapper.toDTO(disciplinaRepository.save(disciplinaMapper.toEntity(disciplinaDTO)));
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public Disciplina buscarPorCodigo(Long codigo) {
-        return disciplinaRepository.findOne(codigo);
+    public DisciplinaDTO buscarPorCodigo(Long codigo) {
+        return disciplinaMapper.toDTO(disciplinaRepository.findOne(codigo));
     }
 
     private Boolean verificaDisciplinaExiste(String descricao) {

@@ -1,6 +1,7 @@
 package br.com.studo.web.resource;
 
 import br.com.studo.domain.Turma;
+import br.com.studo.domain.dto.TurmaDTO;
 import br.com.studo.domain.enums.Periodo;
 import br.com.studo.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class TurmaResource {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_TURMA')")
-    public ResponseEntity<Turma> salvar(@RequestBody Turma turma) {
-        Turma turmaSalva = turmaService.salvar(turma);
+    public ResponseEntity<TurmaDTO> salvar(@RequestBody TurmaDTO turmaDTO) {
+        TurmaDTO turmaSalva = turmaService.salvar(turmaDTO);
         return turmaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
@@ -51,8 +52,8 @@ public class TurmaResource {
 
     @GetMapping("/buscaPorNumero")
     @PreAuthorize("hasAuthority('ROLE_LISTAR_TURMA')")
-    public ResponseEntity<Turma> buscarPorNumero(@RequestParam String numTurma) {
-        Turma turma = turmaService.buscaTurmaPorNumero(numTurma);
-        return turma != null ? ResponseEntity.ok().body(turma) : ResponseEntity.notFound().build();
+    public ResponseEntity<TurmaDTO> buscarPorNumero(@RequestParam String numTurma) {
+        TurmaDTO turmaDTO = turmaService.buscaTurmaPorNumero(numTurma);
+        return turmaDTO != null ? ResponseEntity.ok().body(turmaDTO) : ResponseEntity.notFound().build();
     }
 }

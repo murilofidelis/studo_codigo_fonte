@@ -21,34 +21,34 @@ import java.time.LocalDateTime;
 @Table(name = "tab_atividade", schema = "studo")
 public class Atividade implements Serializable {
 
-	private static final long serialVersionUID = -1847561676474026120L;
+    private static final long serialVersionUID = -1847561676474026120L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo")
-	private Long codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
+    private Long codigo;
 
-	@NotNull
-	@Column(name = "dte_cadastro")
-	LocalDateTime dataCadastro;
+    @NotNull
+    @Column(name = "dte_cadastro")
+    private LocalDateTime dataCadastro;
 
-	@NotNull
-	@Size(max = 250)
-	@Column(name = "titulo")
-	String titulo;
+    @NotNull
+    @Size(max = 250)
+    @Column(name = "titulo")
+    private String titulo;
 
-	@NotNull
-	@Size(max = 1024)
-	@Column(name = "descricao")
-	String descricao;
+    @NotNull
+    @Size(max = 1024)
+    @Column(name = "descricao")
+    private String descricao;
 
-	@Column(name = "dsc_classificacao")
-	@Size(max = 30)
-	private String classificacao;
+    @Column(name = "dsc_classificacao")
+    @Size(max = 30)
+    private String classificacao;
 
-	@OneToOne
-	private Professor professor;
+    @OneToOne
+    private Professor professor;
 
-	@OneToOne
-	private Disciplina disciplina;
+    @OneToOne
+    private Disciplina disciplina;
 }

@@ -1,6 +1,6 @@
 package br.com.studo.domain.enums;
 
-public enum Tipo {
+public enum TipoPerfil {
 
     SECRETARIO("Secretário", 1L),
     PROFESSOR("Professor", 2L),
@@ -9,7 +9,7 @@ public enum Tipo {
     private String descricao;
     private Long codigo;
 
-    Tipo(String descricao, long codigo) {
+    TipoPerfil(String descricao, long codigo) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
