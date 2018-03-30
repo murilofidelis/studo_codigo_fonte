@@ -1,7 +1,9 @@
+
 import { Routes } from '@angular/router';
 
 import { AuthGuard } from './seguranca/auth.guard';
 
+import { DashbordComponent } from './view/dashbord/dashbord/dashbord.component';
 import { DisciplinaPesquisaComponent } from './view/disciplina/disciplinas/disciplina-pesquisa.component';
 import { TurmaPesquisaComponent } from './view/turma/turma-pesquisa/turma-pesquisa.component';
 import { TurmaCadastroComponent } from './view/turma/turma-cadastro/turma-cadastro.component';
@@ -16,6 +18,10 @@ import { AcessoNegadoComponent } from './core/acesso-negado/acesso-negado.compon
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
+  {
+    path: 'home', component: DashbordComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_VISUALIZAR_DASHBORD'] }
+  },
   {
     path: 'aluno', component: AlunoPesquisaComponent, canActivate: [AuthGuard],
     data: { roles: ['ROLE_LISTAR_ALUNO'] }

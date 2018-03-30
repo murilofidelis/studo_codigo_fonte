@@ -13,9 +13,9 @@ public class MatriculaDTO {
 
     private String matricula;
 
-    private AlunoDTO alunoDTO;
+    private AlunoDTO aluno;
 
-    private TurmaDTO turmaDTO;
+    private TurmaDTO turma;
 
     private LocalDate dataMatricula;
 

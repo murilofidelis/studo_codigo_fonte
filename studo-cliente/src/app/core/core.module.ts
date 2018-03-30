@@ -5,6 +5,7 @@ import { ToastyModule } from 'ng2-toasty';
 import { JwtHelper } from 'angular2-jwt';
 
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
+import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 
 import { AuthService } from '../service/auth.service';
 import { DisciplinaService } from '../service/disciplina.service';
@@ -14,7 +15,7 @@ import { ErrorHandleService } from '../service/error-handle.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { EnderecoService } from '../service/endereco.service';
 import { AlunoService } from '../service/aluno.service';
-import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
+import { DashbordService } from './../service/dashbord.service';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
     AlunoService,
     ErrorHandleService,
     EnderecoService,
+    DashbordService,
   ],
   declarations: [NavbarComponent, PaginaNaoEncontradaComponent, AcessoNegadoComponent]
 })

@@ -19,7 +19,7 @@ public class AtividadeDTO {
 
     private String classificacao;
 
-    private ProfessorDTO professorDTO;
+    private ProfessorDTO professor;
 
-    private DisciplinaDTO disciplinaDTO;
+    private DisciplinaDTO disciplina;
 }

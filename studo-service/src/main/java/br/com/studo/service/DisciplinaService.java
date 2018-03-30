@@ -34,7 +34,7 @@ public class DisciplinaService {
 
     public DisciplinaDTO salvar(DisciplinaDTO disciplinaDTO) {
         if (verificaDisciplinaExiste(disciplinaDTO.getDescricao())) {
-            throw new StudoException(mensagem.get("MSG007"));
+            throw new StudoException(mensagem.get("MSG001"));
         }
         return disciplinaMapper.toDTO(disciplinaRepository.save(disciplinaMapper.toEntity(disciplinaDTO)));
     }
@@ -46,5 +46,9 @@ public class DisciplinaService {
 
     private Boolean verificaDisciplinaExiste(String descricao) {
         return disciplinaRepository.buscaDisciplinaPorNome(descricao);
+    }
+
+    public Integer count(){
+        return disciplinaRepository.quantidade();
     }
 }

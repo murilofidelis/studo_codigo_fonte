@@ -13,6 +13,8 @@ import { ProfessorModule } from './view/professor/professor.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
 import { TurmaModule } from './view/turma/turma.module';
 import { AlunoModule } from './view/aluno/aluno.module';
+import { DashbordModule } from './view/dashbord/dashbord.module';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { AlunoModule } from './view/aluno/aluno.module';
 
     /*Módulos que serão carregados na inicialização da aplicação*/
     CoreModule,
+    DashbordModule,
     SegurancaModule,
     AlunoModule,
     TurmaModule,

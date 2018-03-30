@@ -22,5 +22,5 @@ public class AlunoDTO {
 
     private LocalDate dataNascimento;
 
-    private EmailDTO emailDTO;
+    private EmailDTO email;
 }

@@ -15,4 +15,7 @@ public interface AlunoRepository extends CrudRepository<Aluno, Long> {
     @Query("SELECT count(*) > 0 FROM Aluno WHERE cpf = ?1")
     Boolean findByCpfCadastrado(String cpf);
 
+    @Query("SELECT count(*) FROM Aluno")
+    Integer quantidade();
+
 }

@@ -15,4 +15,7 @@ public interface ProfessorRepositoty extends CrudRepository<Professor, Long> {
     @Query("SELECT count(*) > 0 FROM Professor WHERE cpf = ?1")
     Boolean findByCpfCadastrado(String cpf);
 
+    @Query("SELECT count(*) FROM Professor")
+    Integer quantidade();
+
 }

@@ -1,7 +1,6 @@
 package br.com.studo.service;
 
 import br.com.studo.domain.Aluno;
-import br.com.studo.domain.Matricula;
 import br.com.studo.domain.dto.AlunoDTO;
 import br.com.studo.domain.dto.MatriculaDTO;
 import br.com.studo.domain.mapper.AlunoMapper;
@@ -34,7 +33,6 @@ public class AlunoService {
 
     @Autowired
     private UsuarioService usuarioService;
-
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Aluno> filtarPesquisar(String nome, Pageable pageable) {
@@ -74,4 +72,7 @@ public class AlunoService {
         return alunoRepository.findByCpfCadastrado(cpf);
     }
 
+    public Integer cout() {
+        return alunoRepository.quantidade();
+    }
 }

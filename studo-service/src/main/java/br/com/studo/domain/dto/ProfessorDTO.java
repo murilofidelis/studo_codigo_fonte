@@ -19,7 +19,7 @@ public class ProfessorDTO {
 
     private Boolean status;
 
-    private EmailDTO emailDTO;
+    private EmailDTO email;
 
-    private EnderecoDTO enderecoDTO;
+    private EnderecoDTO endereco;
 }

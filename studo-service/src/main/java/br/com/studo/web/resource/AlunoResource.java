@@ -1,13 +1,9 @@
 package br.com.studo.web.resource;
 
 import br.com.studo.domain.Aluno;
-import br.com.studo.domain.Matricula;
 import br.com.studo.domain.dto.AlunoDTO;
 import br.com.studo.domain.dto.MatriculaDTO;
 import br.com.studo.service.AlunoService;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("alunos")

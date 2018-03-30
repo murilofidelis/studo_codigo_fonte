@@ -44,7 +44,7 @@ public class UsuarioService {
         usuario.setPerfils(addPerfil(TipoPerfil.PROFESSOR));
         salvaUsuario(usuario);
 
-        log.info("SALVANDO USUÁRIO: {}", professor.getNome() + " CPF: " + professor.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
+        log.debug("SALVANDO USUÁRIO: {}", professor.getNome() + " CPF: " + professor.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
 
         if (property.isEnviarEmail()) {
             emailService.enviaEmail(professor.getEmail().getDscEmail(), "Studo - Criação de usuário",
@@ -58,7 +58,7 @@ public class UsuarioService {
         usuario.setNome(professor.getNome());
         usuario.setEmail(professor.getEmail().getDscEmail());
         usuario.setStatus(professor.getStatus());
-        log.info("ATUALIZANDO USUÁRIO: {}", professor.getNome());
+        log.debug("ATUALIZANDO USUÁRIO: {}", professor.getNome());
         return usuario;
     }
 
@@ -73,7 +73,7 @@ public class UsuarioService {
         usuario.setPerfils(addPerfil(TipoPerfil.ALUNO));
         salvaUsuario(usuario);
 
-        log.info("SALVANDO USUÁRIO: {}", aluno.getNome() + " CPF: " + aluno.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
+        log.debug("SALVANDO USUÁRIO: {}", aluno.getNome() + " CPF: " + aluno.getCpf() + " SENHA PROVISORIA: " + senhaProvisoria);
 
         if (property.isEnviarEmail()) {
             emailService.enviaEmail(aluno.getEmail().getDscEmail(), "Studo - Criação de usuário",
@@ -88,7 +88,7 @@ public class UsuarioService {
         usuario.setNome(aluno.getNome());
         usuario.setEmail(aluno.getEmail().getDscEmail());
         usuario.setStatus(aluno.getStatus());
-        log.info("ATUALIZANDO USUÁRIO: {}", aluno.getNome());
+        log.debug("ATUALIZANDO USUÁRIO: {}", aluno.getNome());
         return usuario;
     }
 
@@ -104,7 +104,7 @@ public class UsuarioService {
     }
 
     private Usuario buscaPorCpf(String cpf) {
-        log.info("BUSCANDO USUÁRIO CPF:  {}", cpf);
+        log.debug("BUSCANDO USUÁRIO CPF:  {}", cpf);
         return usuarioRepositoty.findByLogin(cpf);
     }
 
