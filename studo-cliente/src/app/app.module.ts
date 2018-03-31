@@ -14,6 +14,7 @@ import { SegurancaModule } from './seguranca/seguranca.module';
 import { TurmaModule } from './view/turma/turma.module';
 import { AlunoModule } from './view/aluno/aluno.module';
 import { DashbordModule } from './view/dashbord/dashbord.module';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { DashbordModule } from './view/dashbord/dashbord.module';
     ProfessorModule,
 
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
