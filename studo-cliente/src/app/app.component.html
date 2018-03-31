@@ -1,6 +1,17 @@
-<app-navbar *ngIf="exibindoNavbar()"></app-navbar>
+<!DOCTYPE html>
+<html>
 
-<!-- -->
-<router-outlet></router-outlet>
+<head></head>
 
-<ng2-toasty></ng2-toasty>
+<body>
+    <!--NAV BAR -->
+    <app-navbar *ngIf="exibindoNavbar()"></app-navbar>
+
+    <!--COMPONENTE PRINCIPAL -->
+    <router-outlet></router-outlet>
+
+    <!-- COMPONENTE DE MENSAGEM-->
+    <ng2-toasty></ng2-toasty>
+
+</body>
+</html>

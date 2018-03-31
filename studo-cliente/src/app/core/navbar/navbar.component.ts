@@ -12,12 +12,18 @@ import { LogoutService } from '../../service/logout.service';
 })
 export class NavbarComponent {
 
+  exibir: boolean;
+
   constructor(
     private router: Router,
     private auth: AuthService,
     private logoutService: LogoutService,
     private errorHandle: ErrorHandleService,
   ) { }
+
+  exibirMenu() {
+    this.exibir = !this.exibir;
+  }
 
   logout() {
     this.logoutService.logout()

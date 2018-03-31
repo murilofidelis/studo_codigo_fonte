@@ -2,14 +2,14 @@
   <div class="container">
     <div class="ui-g">
       <div class="ui-g-12">
-        <a href="javascript:;" class="navbar-toggle" (click)="exibirMenu = !exibirMenu">
+        <a href="javascript:;" class="navbar-toggle" (click)="exibirMenu()">
           <i class="fa fa-bars"></i>
         </a>
       </div>
     </div>
   </div>
 
-  <ul class="navbar-menu" [hidden]="!exibirMenu">
+  <ul class="navbar-menu" *ngIf="!exibir">
     <li class="navbar-usuario">
       <div>Bem vindo,
         <br> {{ auth.jwtPayload?.nome }} </div>
