@@ -49,7 +49,7 @@ public class ProfessorService {
         return professorMapper.toDTO(professorRepositoty.findOne(codigo));
     }
 
-    public Integer cout() {
+    public Integer count() {
         return professorRepositoty.quantidade();
     }
 

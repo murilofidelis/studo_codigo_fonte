@@ -72,7 +72,7 @@ public class AlunoService {
         return alunoRepository.findByCpfCadastrado(cpf);
     }
 
-    public Integer cout() {
+    public Integer count() {
         return alunoRepository.quantidade();
     }
 }
