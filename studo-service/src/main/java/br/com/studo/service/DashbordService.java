@@ -24,8 +24,8 @@ public class DashbordService {
 
     public DashbordDTO montarDashBord() {
         DashbordDTO dashbord = new DashbordDTO();
-        dashbord.setNumAlunos(alunoService.cout());
-        dashbord.setNumProfessores(professorService.cout());
+        dashbord.setNumAlunos(alunoService.count());
+        dashbord.setNumProfessores(professorService.count());
         dashbord.setNumDisciplinas(disciplinaService.count());
         dashbord.setNumTurmas(turmaService.count());
         return dashbord;
