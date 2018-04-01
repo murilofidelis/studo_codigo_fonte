@@ -22,7 +22,7 @@ public class AppUserDetailService implements UserDetailsService {
     private UsuarioRepositoty usuarioRepositoty;
 
     @Override
-    public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String cpf) {
 
         Usuario usuario = usuarioRepositoty.findByLoginAndStatus(cpf, true);
 

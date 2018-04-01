@@ -9,16 +9,29 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "studo")
 public class StudoProperty {
 
-    private String originPermitida;
-
     private boolean enviarEmail;
 
     private final Seguranca seguranca = new Seguranca();
 
+    @Setter
+    @Getter
     public static class Seguranca {
 
-        @Setter
-        @Getter
+        private String originPermitida;
+
         private boolean enableHttps;
+
+        private String studoCliente;
+
+        private String secret;
+
+        private String[] scopes;
+
+        private int accessTokenValiditySeconds;
+
+        private int refreshTokenValiditySeconds;
+
+        private String[] authorizedGrantTypes;
+
     }
 }

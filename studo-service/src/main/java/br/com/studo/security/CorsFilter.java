@@ -22,40 +22,40 @@ import br.com.studo.config.StudoProperty;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
-	@Autowired
-	private StudoProperty property;
+    @Autowired
+    private StudoProperty property;
 
-	@Override
-	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
-			throws IOException, ServletException {
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
+            throws IOException, ServletException {
 
-		HttpServletRequest request = (HttpServletRequest) req;
-		HttpServletResponse response = (HttpServletResponse) resp;
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) resp;
 
-		response.setHeader("Access-Control-Allow-Origin", property.getOriginPermitida());
-		response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Origin", property.getSeguranca().getOriginPermitida());
+        response.setHeader("Access-Control-Allow-Credentials", "true");
 
-		if ("OPTIONS".equals(request.getMethod())
-				&& property.getOriginPermitida().equals(request.getHeader("Origin"))) {
-			response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
-			response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
-			response.setHeader("Access-Control-Max-Age", "3600");
+        if ("OPTIONS".equals(request.getMethod())
+                && property.getSeguranca().getOriginPermitida().equals(request.getHeader("Origin"))) {
+            response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
+            response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
+            response.setHeader("Access-Control-Max-Age", "3600");
 
-			response.setStatus(HttpServletResponse.SC_OK);
-		} else {
-			chain.doFilter(req, resp);
-		}
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            chain.doFilter(req, resp);
+        }
 
-	}
+    }
 
-	@Override
-	public void init(FilterConfig arg0) throws ServletException {
+    @Override
+    public void init(FilterConfig arg0) throws ServletException {
+        //Não precisa implementar
+    }
 
-	}
-
-	@Override
-	public void destroy() {
-
-	}
+    @Override
+    public void destroy() {
+        //Não precisa implementar
+    }
 
 }

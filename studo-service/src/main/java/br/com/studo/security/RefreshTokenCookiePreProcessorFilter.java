@@ -42,10 +42,12 @@ public class RefreshTokenCookiePreProcessorFilter implements Filter {
 
     @Override
     public void destroy() {
+        //Não precisa implementar
     }
 
     @Override
     public void init(FilterConfig arg0) throws ServletException {
+        //Não precisa implementar
     }
 
     static class MyServletRequestWrapper extends HttpServletRequestWrapper {

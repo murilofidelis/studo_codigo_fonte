@@ -1,5 +1,6 @@
 package br.com.studo.security;
 
+import br.com.studo.config.StudoProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,20 +24,23 @@ public class AuthorizationServeConfig extends AuthorizationServerConfigurerAdapt
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private StudoProperty property;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("studo_cliente")
-                .secret("stud0_cli3nt3_s3cret")
-                .scopes("read", "write")
-                .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(600)
-                .refreshTokenValiditySeconds(3600 * 24)
+                .withClient(property.getSeguranca().getStudoCliente())
+                .secret(property.getSeguranca().getSecret())
+                .scopes(property.getSeguranca().getScopes())
+                .authorizedGrantTypes(property.getSeguranca().getAuthorizedGrantTypes())
+                .accessTokenValiditySeconds(property.getSeguranca().getAccessTokenValiditySeconds())
+                .refreshTokenValiditySeconds(property.getSeguranca().getRefreshTokenValiditySeconds())
                 .and()
                 .withClient("studo_mobile")
                 .secret("stud0_mobile_secret")
                 .scopes("read", "write")
-                .authorizedGrantTypes("password", "refresh_token")
+                .authorizedGrantTypes(property.getSeguranca().getAuthorizedGrantTypes())
                 .accessTokenValiditySeconds(600)
                 .refreshTokenValiditySeconds(3600 * 24);
     }

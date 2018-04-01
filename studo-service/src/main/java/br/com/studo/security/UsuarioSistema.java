@@ -1,6 +1,7 @@
 package br.com.studo.security;
 
 import br.com.studo.domain.usuario.Usuario;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
 @Getter
+@EqualsAndHashCode
 public class UsuarioSistema extends User {
 
     private Usuario usuario;
