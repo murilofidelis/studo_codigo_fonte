@@ -14,6 +14,8 @@ import { AlunoCadastroComponent } from './view/aluno/aluno-cadastro/aluno-cadast
 import { AlunoPesquisaComponent } from './view/aluno/aluno-pesquisa/aluno-pesquisa.component';
 import { MatriculaComponent } from './view/aluno/matricula/matricula.component';
 import { AcessoNegadoComponent } from './core/acesso-negado/acesso-negado.component';
+import { AtividadePesquisaComponent } from './view/atividade/atividade-pesquisa/atividade-pesquisa.component';
+import { AtividadeCadastroComponent } from './view/atividade/atividade-cadastro/atividade-cadastro.component';
 
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -65,6 +67,14 @@ export const ROUTES: Routes = [
   {
     path: 'professor/:codigo', component: ProfessorCadastroComponent, canActivate: [AuthGuard],
     data: { roles: ['ROLE_ALTERAR_PROFESSOR'] }
+  },
+  {
+    path: 'atividade', component: AtividadePesquisaComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_LISTAR_ATIVIDADE'] }
+  },
+  {
+    path: 'atividade/nova', component: AtividadeCadastroComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_CADASTRAR_ATIVIDADE'] }
   },
 
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },

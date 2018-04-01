@@ -1,3 +1,4 @@
+import { CalendarioUtil } from './../../../util/calendario.util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -99,15 +100,7 @@ export class AlunoCadastroComponent implements OnInit {
 
 
   traduzirCalendar() {
-    this.pt = {
-      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-      dayNamesShort: ['dom', 'sen', 'ter', 'quar', 'quin', 'sex', 'sáb'],
-      dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-        'Outubro', 'Novembro', 'Dezembro'],
-      monthNamesShort: ['jan ', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
-      dateFormat: 'dd/mm/yy'
-    };
+    this.pt = CalendarioUtil.pt;
   }
 
   verificaCampoContenErro(campo: string): boolean {

@@ -4,14 +4,26 @@
 <head></head>
 
 <body>
-    <!--NAV BAR -->
-    <app-navbar *ngIf="exibindoNavbar()"></app-navbar>
+  <!--NAV BAR -->
+  <app-navbar *ngIf="exibindoNavbar()"></app-navbar>
 
-    <!--COMPONENTE PRINCIPAL -->
-    <router-outlet></router-outlet>
+  <!--COMPONENTE PRINCIPAL -->
+  <router-outlet></router-outlet>
 
-    <!-- COMPONENTE DE MENSAGEM-->
-    <ng2-toasty></ng2-toasty>
+  <!-- COMPONENTE DE MENSAGEM-->
+  <ng2-toasty></ng2-toasty>
+
+
+  <!--RODAPÉ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        <b>Versão</b> 0.0.1
+      </div>
+      <strong>Studo</strong>
+    </div>
+  </footer>
 
 </body>
+
 </html>

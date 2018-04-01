@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { ROUTES } from './app.routes';
 
@@ -14,8 +15,7 @@ import { SegurancaModule } from './seguranca/seguranca.module';
 import { TurmaModule } from './view/turma/turma.module';
 import { AlunoModule } from './view/aluno/aluno.module';
 import { DashbordModule } from './view/dashbord/dashbord.module';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
+import { AtividadeModule } from './view/atividade/atividade.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     AlunoModule,
     TurmaModule,
     ProfessorModule,
-
+    AtividadeModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

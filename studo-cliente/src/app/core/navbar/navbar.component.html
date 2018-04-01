@@ -32,7 +32,11 @@
     </li>
 
     <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_DISCIPLINA')">
-      <a routerLink="/diciplina">Disciplinas </a>
+      <a routerLink="/diciplina">Disciplinas</a>
+    </li>
+
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_ATIVIDADE')">
+      <a routerLink="/atividade">Atividades</a>
     </li>
 
     <li class="navbar-menuitem">

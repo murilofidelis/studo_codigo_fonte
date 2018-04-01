@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Atividades</h1>
+    </div>
+
+    <p-fieldset legend="Pesquisa" class="ui-g-12">
+      <form autocomplete="off" #formulario="ngForm">
+
+        <div class="ui-g-3 ui-fluid">
+          <label>De</label>
+          <p-calendar [locale]="pt" dateFormat="dd/mm/yy" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2030"></p-calendar>
+        </div>
+
+        <div class="ui-g-3 ui-fluid">
+          <label>Até</label>
+          <p-calendar [locale]="pt" dateFormat="dd/mm/yy" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2030"></p-calendar>
+        </div>
+
+        <div class="ui-g-3 ui-fluid align-button">
+          <button pButton type="submit" icon="fa-search" label="Pesquisar"></button>
+        </div>
+
+        <div class="ui-g-3 ui-fluid align-button">
+          <button pButton type="button" icon="fa-times" label="Limpar" (click)="limpa(formulario)"></button>
+        </div>
+
+      </form>
+    </p-fieldset>
+
+    <br>
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <p-dataTable [responsive]="true" [paginator]="true" emptyMessage="Nenhum registro encontrado" #tabela>
+
+          <p-column field="" header="Título"></p-column>
+          <p-column field="descricao" header="Disciplina"></p-column>
+
+          <p-column header="Ações" styleClass="col-acoes">
+            <ng-template let-disciplina="rowData" pTemplate="body">
+              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" (click)="editar(disciplina)"></a>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+
+    <div class="ui-g-3 ui-fluid">
+      <a pButton label="Nova" icon="fa-plus" routerLink="/atividade/nova"></a>
+    </div>
+
+  </div>
+</div>
