@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AtividadeCadastroComponent implements OnInit {
 
+  disciplinas = [];
+
   constructor() { }
 
   ngOnInit() {
+    this.carregarDisicplinas();
   }
 
+  carregarDisicplinas() {
+    this.disciplinas.push({ label: 'Selecione...', value: null });
+  }
 }

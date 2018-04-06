@@ -1,12 +1,15 @@
-package br.com.studo.service;
+package br.com.studo.service.impl;
 
 import br.com.studo.config.StudoProperty;
 import br.com.studo.domain.Aluno;
-import br.com.studo.domain.usuario.Perfil;
 import br.com.studo.domain.Professor;
-import br.com.studo.domain.usuario.Usuario;
 import br.com.studo.domain.enums.TipoPerfil;
+import br.com.studo.domain.usuario.Perfil;
+import br.com.studo.domain.usuario.Usuario;
 import br.com.studo.repository.UsuarioRepositoty;
+import br.com.studo.service.EmailService;
+import br.com.studo.service.PerfilService;
+import br.com.studo.service.UsuarioService;
 import br.com.studo.util.PasswordUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

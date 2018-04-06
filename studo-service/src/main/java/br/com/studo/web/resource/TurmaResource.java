@@ -45,8 +45,8 @@ public class TurmaResource {
 
     @GetMapping("/{codigo}")
     @PreAuthorize("hasAuthority('ROLE_LISTAR_TURMA')")
-    public ResponseEntity<Turma> buscarPorCodigo(@PathVariable Long codigo) {
-        Turma turma = turmaService.buscarPorCodigo(codigo);
+    public ResponseEntity<TurmaDTO> buscarPorCodigo(@PathVariable Long codigo) {
+        TurmaDTO turma = turmaService.buscarPorCodigo(codigo);
         return turma != null ? ResponseEntity.ok().body(turma) : ResponseEntity.notFound().build();
     }
 

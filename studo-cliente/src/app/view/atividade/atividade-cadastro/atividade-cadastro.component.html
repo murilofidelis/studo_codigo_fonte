@@ -1,3 +1,36 @@
-<p>
-  atividade-cadastro works!
-</p>
+<div class="container">
+  <form>
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Nova atividade</h1>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Disciplina</label>
+        <p-dropdown [options]="disciplinas" [autoWidth]="false"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Titulo</label>
+        <input pInputText type="text">
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Descrição</label>
+        <textarea pInputTextarea [rows]="10"></textarea>
+      </div>
+
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid btn-align">
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <button pButton type="submit" icon="fa-check" label="Salvar"></button>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <button pButton type="submit" icon="fa-reply" label="Voltar"></button>
+      </div>
+
+    </div>
+  </form>
+</div>

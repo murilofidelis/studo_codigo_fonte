@@ -10,6 +10,8 @@ import { DialogModule } from 'primeng/primeng';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { FieldsetModule } from 'primeng/components/fieldset/fieldset';
 import { CalendarModule } from 'primeng/components/calendar/calendar';
+import { DropdownModule } from 'primeng/components/dropdown/dropdown';
+import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
 
 import { AtividadePesquisaComponent } from './atividade-pesquisa/atividade-pesquisa.component';
 import { AtividadeCadastroComponent } from './atividade-cadastro/atividade-cadastro.component';
@@ -27,6 +29,8 @@ import { AtividadeCadastroComponent } from './atividade-cadastro/atividade-cadas
     TooltipModule,
     FieldsetModule,
     CalendarModule,
+    DropdownModule,
+    InputTextareaModule,
   ],
   declarations: [AtividadePesquisaComponent, AtividadeCadastroComponent]
 })
