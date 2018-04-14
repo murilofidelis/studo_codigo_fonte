@@ -8,9 +8,5 @@ export class Aluno {
   cpf: string;
   sexo: string;
   dataNascimento: Date;
-  email: Email;
-
-  constructor() {
-    this.email = new Email();
-  }
+  email: Email = new Email();
 }

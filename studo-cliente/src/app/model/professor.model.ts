@@ -8,11 +8,6 @@ export class Professor {
   cpf: string;
   sexo: string;
   status: boolean;
-  email: Email;
-  endereco: Endereco;
-
-  constructor() {
-    this.email = new Email();
-    this.endereco = new Endereco();
-  }
+  email: Email = new Email();
+  endereco: Endereco = new Endereco();
 }

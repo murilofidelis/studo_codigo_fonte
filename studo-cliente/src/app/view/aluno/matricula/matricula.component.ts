@@ -5,11 +5,12 @@ import { ToastyService } from 'ng2-toasty';
 
 import { ConfirmationService } from 'primeng/components/common/api';
 
+import { Mensagem } from '../../../util/mensagens.util';
+
 import { Aluno } from './../../../model/aluno.model';
 import { AlunoService } from './../../../service/aluno.service';
 import { ErrorHandleService } from '../../../service/error-handle.service';
 import { Matricula } from '../../../model/matricula.model';
-import { Mensagem } from '../../../model/mensagens.model';
 
 @Component({
   selector: 'app-matricula',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
-import { Headers, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -24,7 +24,7 @@ export class ProfessorService {
   constructor(private http: AuthHttp) { }
 
   pesuisar(filtro: ProfessorFiltro) {
-    const headers = new Headers();
+
     const params = new URLSearchParams();
 
     if (filtro.nome) {
@@ -34,7 +34,7 @@ export class ProfessorService {
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
 
-    return this.http.get(`${STUDO_API}/${this.END_POINT}`, { headers, search: params })
+    return this.http.get(`${STUDO_API}/${this.END_POINT}`, { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -64,9 +64,7 @@ export class ProfessorService {
   }
 
   salvar(professor: Professor): Promise<any> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(professor), { headers })
+    return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(professor))
       .toPromise()
       .then(() => null);
   }

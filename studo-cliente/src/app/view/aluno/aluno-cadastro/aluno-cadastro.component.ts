@@ -6,7 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/components/common/api';
 import { ToastyService } from 'ng2-toasty';
 
-import { Mensagem } from './../../../model/mensagens.model';
+import { Mensagem } from '../../../util/mensagens.util';
+
 import { Turma } from './../../../model/turma.model';
 import { Matricula } from './../../../model/matricula.model';
 import { Aluno } from './../../../model/aluno.model';

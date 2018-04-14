@@ -6,11 +6,12 @@ import { ToastyService } from 'ng2-toasty';
 
 import { SelectItem } from 'primeng/components/common/api';
 
+import { Mensagem } from '../../../util/mensagens.util';
+import { ValidadorCPF } from './../../../util/validator/cpf-validador';
+
 import { Professor } from './../../../model/professor.model';
 import { EnderecoService } from '../../../service/endereco.service';
 import { ProfessorService } from './../../../service/professor.service';
-import { Mensagem } from '../../../model/mensagens.model';
-import { ValidadorCPF } from './../../../util/validator/cpf-validador';
 import { ErrorHandleService } from '../../../service/error-handle.service';
 
 @Component({

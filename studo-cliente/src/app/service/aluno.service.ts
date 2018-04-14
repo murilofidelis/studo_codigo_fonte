@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
-import { Headers, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
@@ -24,7 +24,7 @@ export class AlunoService {
   constructor(private http: AuthHttp) { }
 
   pesquisar(filtro: AlunoFiltro) {
-    const headers = new Headers();
+
     const params = new URLSearchParams();
 
     if (filtro.nome) {
@@ -33,7 +33,7 @@ export class AlunoService {
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
 
-    return this.http.get(`${STUDO_API}/${this.END_POINT}`, { headers, search: params })
+    return this.http.get(`${STUDO_API}/${this.END_POINT}`, { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -60,7 +60,7 @@ export class AlunoService {
   salvar(aluno: Aluno) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(aluno), { headers })
+    return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(aluno))
       .toPromise()
       .then(() => null);
   }
@@ -68,7 +68,7 @@ export class AlunoService {
   salvarMatricula(matricula: Matricula) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(`${STUDO_API}/${this.END_POINT}/matricula`, JSON.stringify(matricula), { headers })
+    return this.http.post(`${STUDO_API}/${this.END_POINT}/matricula`, JSON.stringify(matricula))
       .toPromise()
       .then(() => null);
   }

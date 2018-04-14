@@ -13,24 +13,20 @@
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(3, 'ROLE_ALTERAR_PROFESSOR');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(4, 'ROLE_EXCLUIR_PROFESSOR');
 
-
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(5, 'ROLE_CADASTRAR_DISCIPLINA');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(6, 'ROLE_LISTAR_DISCIPLINA');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(7, 'ROLE_ALTERAR_DISCIPLINA');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(8, 'ROLE_EXCLUIR_DISCIPLINA');
-
 
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(9, 'ROLE_CADASTRAR_TURMA');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(10, 'ROLE_LISTAR_TURMA');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(11, 'ROLE_ALTERAR_TURMA');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(12, 'ROLE_EXCLUIR_TURMA');
 
-
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(13, 'ROLE_CADASTRAR_ALUNO');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(14, 'ROLE_LISTAR_ALUNO');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(15, 'ROLE_ALTERAR_ALUNO');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(16, 'ROLE_EXCLUIR_ALUNO');
-
 
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(17, 'ROLE_CADASTRAR_ATIVIDADE');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(18, 'ROLE_LISTAR_ATIVIDADE');
@@ -49,6 +45,13 @@
 
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(29, 'ROLE_VISUALIZAR_RELATORIO');
             INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(30, 'ROLE_VISUALIZAR_DASHBORD');
+
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(31, 'ROLE_ACESSAR_DISCIPLINA');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(32, 'ROLE_ACESSAR_PROFESSOR');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(33, 'ROLE_ACESSAR_TURMA');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(34, 'ROLE_ACESSAR_ALUNO');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(35, 'ROLE_ACESSAR_ATIVIDADE');
+            INSERT INTO usuarios.tab_permissoes(codigo, descricao) VALUES(36, 'ROLE_ACESSAR_QUESTOES');
         </sql>
     </changeSet>
 
@@ -79,7 +82,12 @@
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,15);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,16);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,30);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,31);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,32);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,33);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,34);
 
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(6,30);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,17);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,18);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,19);
@@ -94,6 +102,8 @@
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,28);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,29);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,30);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,35);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,36);
         </sql>
     </changeSet>
 

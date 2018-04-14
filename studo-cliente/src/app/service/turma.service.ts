@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
-import { Headers, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -23,7 +23,6 @@ export class TurmaService {
   constructor(private http: AuthHttp) { }
 
   pesquisar(filtro: TurmaFiltro) {
-    const headers = new Headers();
     const params = new URLSearchParams();
 
     if (filtro.ano) {
@@ -35,7 +34,7 @@ export class TurmaService {
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
 
-    return this.http.get(`${STUDO_API}/${this.END_POINT}`, { headers, search: params })
+    return this.http.get(`${STUDO_API}/${this.END_POINT}`, { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -50,9 +49,7 @@ export class TurmaService {
   }
 
   salvar(turma: Turma): Promise<any> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(turma), { headers })
+    return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(turma))
       .toPromise()
       .then(() => null);
   }

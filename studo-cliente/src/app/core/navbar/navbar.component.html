@@ -19,23 +19,23 @@
       <a routerLink="/home">Home</a>
     </li>
 
-    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_ALUNO')">
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_ACESSAR_ALUNO')">
       <a routerLink="/aluno">Aluno</a>
     </li>
 
-    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_TURMA')">
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_ACESSAR_TURMA')">
       <a routerLink="/turma">Turmas</a>
     </li>
 
-    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_PROFESSOR')">
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_ACESSAR_PROFESSOR')">
       <a routerLink="/professor">Professor</a>
     </li>
 
-    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_DISCIPLINA')">
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_ACESSAR_DISCIPLINA')">
       <a routerLink="/diciplina">Disciplinas</a>
     </li>
 
-    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_LISTAR_ATIVIDADE')">
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.possuiPermissao('ROLE_ACESSAR_ATIVIDADE')">
       <a routerLink="/atividade">Atividades</a>
     </li>
 

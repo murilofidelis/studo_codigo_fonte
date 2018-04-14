@@ -8,6 +8,7 @@ import br.com.studo.repository.DisciplinaRepository;
 import br.com.studo.service.DisciplinaService;
 import br.com.studo.util.Mensagem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,11 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 
     public Integer count() {
         return disciplinaRepository.quantidade();
+    }
+
+    @Override
+    @Cacheable("disciplinas")
+    public Iterable<DisciplinaDTO> listar() {
+        return disciplinaMapper.iterable(disciplinaRepository.findAll());
     }
 }

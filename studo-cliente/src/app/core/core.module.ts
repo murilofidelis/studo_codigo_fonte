@@ -16,6 +16,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { EnderecoService } from '../service/endereco.service';
 import { AlunoService } from '../service/aluno.service';
 import { DashbordService } from './../service/dashbord.service';
+import { AtividadeService } from '../service/atividade.service';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { DashbordService } from './../service/dashbord.service';
     ErrorHandleService,
     EnderecoService,
     DashbordService,
+    AtividadeService,
   ],
   declarations: [NavbarComponent, PaginaNaoEncontradaComponent, AcessoNegadoComponent]
 })

@@ -53,4 +53,10 @@ public class DisciplinaResource {
         DisciplinaDTO disciplina = disciplinaService.buscarPorCodigo(codigo);
         return disciplina != null ? ResponseEntity.status(HttpStatus.OK).body(disciplina) : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/listaTodas")
+    @PreAuthorize("hasAuthority('ROLE_LISTAR_DISCIPLINA')")
+    public ResponseEntity<Iterable<DisciplinaDTO>> listarTodas(){
+        return ResponseEntity.ok().body(disciplinaService.listar());
+    }
 }

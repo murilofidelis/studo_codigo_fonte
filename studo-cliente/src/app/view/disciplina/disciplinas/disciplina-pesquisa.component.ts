@@ -3,11 +3,11 @@ import { FormControl } from '@angular/forms';
 import { LazyLoadEvent } from 'primeng/components/common/api';
 import { ToastyService } from 'ng2-toasty';
 
+import { Mensagem } from '../../../util/mensagens.util';
+
 import { DisciplinaService, DisciplinaFiltro } from '../../../service/disciplina.service';
 import { Disciplina } from '../../../model/disciplina.model';
-import { Mensagem } from '../../../model/mensagens.model';
 import { ErrorHandleService } from '../../../service/error-handle.service';
-
 
 @Component({
   selector: 'app-disciplina-pesquisa',

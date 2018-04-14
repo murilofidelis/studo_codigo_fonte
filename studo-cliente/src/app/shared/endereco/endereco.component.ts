@@ -3,7 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ToastyService } from 'ng2-toasty';
 
-import { Mensagem } from './../../model/mensagens.model';
+import { Mensagem } from '../../util/mensagens.util';
+
 import { Endereco } from './../../model/endereco.model';
 import { EnderecoService } from './../../service/endereco.service';
 

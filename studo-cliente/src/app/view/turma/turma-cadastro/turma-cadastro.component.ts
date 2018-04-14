@@ -5,10 +5,11 @@ import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/components/common/api';
 import { ToastyService } from 'ng2-toasty';
 
+import { Mensagem } from '../../../util/mensagens.util';
+
 import { TurmaService } from './../../../service/turma.service';
 import { Turma } from './../../../model/turma.model';
 import { ErrorHandleService } from '../../../service/error-handle.service';
-import { Mensagem } from './../../../model/mensagens.model';
 
 @Component({
   selector: 'app-turma-cadastro',
