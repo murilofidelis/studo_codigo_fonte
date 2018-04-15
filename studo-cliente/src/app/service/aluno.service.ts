@@ -1,3 +1,4 @@
+import { ErrorHandleService } from './error-handle.service';
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
 import { URLSearchParams } from '@angular/http';
@@ -21,7 +22,10 @@ export class AlunoService {
 
   END_POINT = 'alunos';
 
-  constructor(private http: AuthHttp) { }
+  constructor(
+    private http: AuthHttp,
+    private erroHandle: ErrorHandleService
+  ) { }
 
   pesquisar(filtro: AlunoFiltro) {
 
@@ -58,19 +62,17 @@ export class AlunoService {
   }
 
   salvar(aluno: Aluno) {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
     return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(aluno))
       .toPromise()
-      .then(() => null);
+      .then(res => res.json())
+      .catch(erro => this.erroHandle.handle(erro));
   }
 
   salvarMatricula(matricula: Matricula) {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
     return this.http.post(`${STUDO_API}/${this.END_POINT}/matricula`, JSON.stringify(matricula))
       .toPromise()
-      .then(() => null);
+      .then(res => res.json())
+      .catch(erro => this.erroHandle.handle(erro));
   }
 
   private converteStringParaData(aluno: Aluno) {
@@ -92,7 +94,8 @@ export class AlunoService {
   excluirMatricula(codigoMatricula: number) {
     return this.http.delete(`${STUDO_API}/${this.END_POINT}/${codigoMatricula}`)
       .toPromise()
-      .then(() => null);
+      .then(res => res.json())
+      .catch(erro => this.erroHandle.handle(erro));
   }
 
 }

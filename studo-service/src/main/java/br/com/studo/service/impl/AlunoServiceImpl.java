@@ -72,7 +72,7 @@ public class AlunoServiceImpl implements AlunoService{
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public boolean verificaCpfCadastrado(String cpf) {
-        return alunoRepository.findByCpfCadastrado(cpf);
+        return usuarioService.cpfExiste(cpf);
     }
 
     public Integer count() {

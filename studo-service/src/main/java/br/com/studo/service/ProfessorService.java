@@ -16,4 +16,6 @@ public interface ProfessorService {
     ProfessorDTO buscaPorCodigo(Long codigo);
 
     Integer count();
+
+   ProfessorDTO buscarProfessorLogado();
 }

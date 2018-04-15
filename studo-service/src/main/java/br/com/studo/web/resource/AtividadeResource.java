@@ -5,6 +5,7 @@ import br.com.studo.service.AtividadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +17,9 @@ public class AtividadeResource {
     private AtividadeService atividadeService;
 
     @PostMapping
-    public ResponseEntity salvar(AtividadeDTO atividadeDTO) {
+    public ResponseEntity salvar(@RequestBody AtividadeDTO atividadeDTO) {
         AtividadeDTO atividade = atividadeService.salvar(atividadeDTO);
         return atividade != null ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+
     }
 }

@@ -13,4 +13,6 @@ public interface UsuarioService {
     Usuario criaUsuarioAluno(Aluno aluno);
 
     Usuario atualizaUsuarioAluno(Aluno aluno);
+
+    Boolean cpfExiste(String cpf);
 }

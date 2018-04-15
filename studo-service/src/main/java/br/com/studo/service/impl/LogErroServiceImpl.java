@@ -22,7 +22,7 @@ public class LogErroServiceImpl implements LogErroService {
 
         LogErro logErro = new LogErro();
         logErro.setData(LocalDateTime.now());
-        logErro.setUsuarioLogado(SecurityUtil.getCurrentUserLogin());
+        logErro.setUsuarioLogado(SecurityUtil.getUsuarioLogado());
         logErro.setStackTrace(log);
         logErroRepository.save(logErro);
     }

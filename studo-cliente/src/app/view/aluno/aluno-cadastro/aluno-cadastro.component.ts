@@ -13,7 +13,6 @@ import { Matricula } from './../../../model/matricula.model';
 import { Aluno } from './../../../model/aluno.model';
 import { ValidadorCPF } from './../../../util/validator/cpf-validador';
 
-import { ErrorHandleService } from './../../../service/error-handle.service';
 import { AlunoService } from '../../../service/aluno.service';
 
 @Component({
@@ -37,8 +36,7 @@ export class AlunoCadastroComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toasty: ToastyService,
     private activatedRoute: ActivatedRoute,
-    private route: Router,
-    private errorHandle: ErrorHandleService
+    private route: Router
   ) { }
 
   ngOnInit() {
@@ -81,14 +79,15 @@ export class AlunoCadastroComponent implements OnInit {
 
   salvar() {
     this.aluno = this.alunoForm.value;
-    this.alunoService.salvar(this.aluno).then(() => {
-      this.alunoForm.reset();
-      this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
-      setTimeout(() => {
-        this.route.navigate(['/aluno']);
-      }, 1000);
-    }).catch(erro => this.errorHandle.handle(erro));
-
+    this.alunoService.salvar(this.aluno).then(res => {
+      if (res) {
+        this.alunoForm.reset();
+        this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
+        setTimeout(() => {
+          this.route.navigate(['/aluno']);
+        }, 1000);
+      }
+    });
   }
 
   carregaAluno(codigo: number) {
@@ -96,9 +95,8 @@ export class AlunoCadastroComponent implements OnInit {
       .then(aluno => {
         this.aluno = aluno;
         this.alunoForm.setValue(this.aluno);
-      }).catch(erro => this.errorHandle.handle(erro));
+      });
   }
-
 
   traduzirCalendar() {
     this.pt = CalendarioUtil.pt;
@@ -120,7 +118,6 @@ export class AlunoCadastroComponent implements OnInit {
     const cpf = this.alunoForm.get('cpf');
     return (cpf.invalid && cpf.dirty);
   }
-
 
   verificaCpfCadastrado(event) {
     const cpf = this.removeMascara(event.target.value);

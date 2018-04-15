@@ -36,6 +36,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private StudoProperty property;
 
+    @Override
     public Usuario criaUsuarioProfessor(Professor professor) {
         Usuario usuario = new Usuario();
         usuario.setLogin(professor.getCpf());
@@ -56,6 +57,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
+    @Override
     public Usuario atualizaUsuarioProfessor(Professor professor) {
         Usuario usuario = buscaPorCpf(professor.getCpf());
         usuario.setNome(professor.getNome());
@@ -65,6 +67,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
+    @Override
     public Usuario criaUsuarioAluno(Aluno aluno) {
         Usuario usuario = new Usuario();
         usuario.setNome(aluno.getNome());
@@ -85,6 +88,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
+    @Override
     public Usuario atualizaUsuarioAluno(Aluno aluno) {
         Usuario usuario = buscaPorCpf(aluno.getCpf());
         usuario.setNome(aluno.getNome());
@@ -92,6 +96,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setStatus(aluno.getStatus());
         log.debug("ATUALIZANDO USUÁRIO: {}", aluno.getNome());
         return usuario;
+    }
+
+    @Override
+    public Boolean cpfExiste(String cpf) {
+        return usuarioRepositoty.veificaCpf(cpf);
     }
 
     private void salvaUsuario(Usuario usuario) {
@@ -111,7 +120,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     private String criarMensagemEmail(String cpf, String nome, String senhaProvisoria) {
-
         return new StringBuilder().append("PREZADO(a), " + nome)
                 .append("\n")
                 .append("Sua conta de usuário foi criada com sucesso!")

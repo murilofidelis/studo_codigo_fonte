@@ -12,9 +12,6 @@ public interface AlunoRepository extends CrudRepository<Aluno, Long> {
 
     Page<Aluno> findByNomeStartingWithIgnoreCase(String nome, Pageable pageable);
 
-    @Query("SELECT count(*) > 0 FROM Aluno WHERE cpf = ?1")
-    Boolean findByCpfCadastrado(String cpf);
-
     @Query("SELECT count(*) FROM Aluno")
     Integer quantidade();
 

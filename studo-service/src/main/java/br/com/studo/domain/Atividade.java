@@ -1,9 +1,11 @@
 package br.com.studo.domain;
 
+import br.com.studo.util.DateTimeConverter;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,6 +32,7 @@ public class Atividade implements Serializable {
 
     @NotNull
     @Column(name = "dte_cadastro")
+    @Convert(converter = DateTimeConverter.class)
     private LocalDateTime dataCadastro;
 
     @NotNull

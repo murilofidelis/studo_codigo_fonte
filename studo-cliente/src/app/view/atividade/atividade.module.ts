@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
@@ -21,8 +21,9 @@ import { AtividadeCadastroComponent } from './atividade-cadastro/atividade-cadas
   imports: [
     CommonModule,
     RouterModule,
-
+    ReactiveFormsModule,
     FormsModule,
+
     InputTextModule,
     ButtonModule,
     DataTableModule,

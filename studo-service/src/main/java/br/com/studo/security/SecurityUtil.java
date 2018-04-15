@@ -13,7 +13,7 @@ public final class SecurityUtil {
 
     /* Métdo responsável por retornar o login do usuário logado */
 
-    public static String getCurrentUserLogin() {
+    public static String getUsuarioLogado() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         String login = null;

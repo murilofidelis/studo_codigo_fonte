@@ -31,11 +31,13 @@ public class TurmaServiceImpl implements TurmaService {
     @Autowired
     private Mensagem mensagem;
 
+    @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Turma> filtarPesquisa(List<Periodo> periodos, Integer ano, Pageable pageable) {
         return turmaRepository.findPeriodoAndAno(periodos, ano, pageable);
     }
 
+    @Override
     public TurmaDTO salvar(TurmaDTO turmaDTO) {
         turmaDTO.setNumeroTurma(gerarNumeroTurma(turmaDTO));
         if (turmaDTO.getCodigo() == null) {
@@ -44,6 +46,7 @@ public class TurmaServiceImpl implements TurmaService {
         return turmaMapper.toDTO(turmaRepository.save(turmaMapper.toEntity(turmaDTO)));
     }
 
+    @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public TurmaDTO buscarPorCodigo(Long codigo) {
         return turmaMapper.toDTO(turmaRepository.findOne(codigo));
@@ -58,6 +61,7 @@ public class TurmaServiceImpl implements TurmaService {
                 .toString();
     }
 
+    @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public TurmaDTO buscaTurmaPorNumero(String numTurma) {
         return turmaMapper.toDTO(turmaRepository.findByNumeroTurma(numTurma));
@@ -69,6 +73,7 @@ public class TurmaServiceImpl implements TurmaService {
         }
     }
 
+    @Override
     public Integer count() {
         return turmaRepository.quantidade(DataUtil.anoAtual());
     }

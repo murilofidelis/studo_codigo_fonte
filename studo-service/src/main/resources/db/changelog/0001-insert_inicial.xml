@@ -87,7 +87,7 @@
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,33);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(1,34);
 
-            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(6,30);
+            INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,6);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,17);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,18);
             INSERT INTO usuarios.tab_perfil_permissao (codigo_perfil, codigo_permissao) VALUES(2,19);

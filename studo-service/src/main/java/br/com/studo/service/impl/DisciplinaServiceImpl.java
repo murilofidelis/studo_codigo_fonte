@@ -28,11 +28,13 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     @Autowired
     private Mensagem mensagem;
 
+    @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Disciplina> filtraPesquisa(String descricao, Pageable pageable) {
         return disciplinaRepository.findByDescricaoContainingIgnoreCase(descricao, pageable);
     }
 
+    @Override
     public DisciplinaDTO salvar(DisciplinaDTO disciplinaDTO) {
         if (verificaDisciplinaExiste(disciplinaDTO.getDescricao())) {
             throw new StudoException(mensagem.get("MSG001"));
@@ -40,6 +42,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
         return disciplinaMapper.toDTO(disciplinaRepository.save(disciplinaMapper.toEntity(disciplinaDTO)));
     }
 
+    @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public DisciplinaDTO buscarPorCodigo(Long codigo) {
         return disciplinaMapper.toDTO(disciplinaRepository.findOne(codigo));
@@ -49,6 +52,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
         return disciplinaRepository.buscaDisciplinaPorNome(descricao);
     }
 
+    @Override
     public Integer count() {
         return disciplinaRepository.quantidade();
     }

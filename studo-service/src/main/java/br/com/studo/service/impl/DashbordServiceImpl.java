@@ -27,6 +27,7 @@ public class DashbordServiceImpl implements DashbordService {
     @Autowired
     private TurmaService turmaService;
 
+    @Override
     public DashbordDTO montarDashBord() {
         DashbordDTO dashbord = new DashbordDTO();
         dashbord.setNumAlunos(alunoService.count());

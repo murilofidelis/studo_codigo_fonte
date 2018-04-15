@@ -12,8 +12,7 @@ public interface ProfessorRepositoty extends CrudRepository<Professor, Long> {
 
     Page<Professor> findByNomeStartingWithIgnoreCase(String nome, Pageable pageable);
 
-    @Query("SELECT count(*) > 0 FROM Professor WHERE cpf = ?1")
-    Boolean findByCpfCadastrado(String cpf);
+    Professor findByCpf(String cpf);
 
     @Query("SELECT count(*) FROM Professor")
     Integer quantidade();

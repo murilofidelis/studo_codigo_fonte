@@ -4,6 +4,7 @@ import br.com.studo.domain.Professor;
 import br.com.studo.domain.dto.ProfessorDTO;
 import br.com.studo.domain.mapper.ProfessorMapper;
 import br.com.studo.repository.ProfessorRepositoty;
+import br.com.studo.security.SecurityUtil;
 import br.com.studo.service.ProfessorService;
 import br.com.studo.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,13 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Professor> filtarPesquisar(String nome, Pageable pageable) {
         return professorRepositoty.findByNomeStartingWithIgnoreCase(nome, pageable);
     }
 
+    @Override
     public ProfessorDTO salvar(ProfessorDTO professorDTO) {
         Professor professor = professorMapper.toEntity(professorDTO);
         if (professor.getCodigo() == null) {
@@ -41,18 +44,26 @@ public class ProfessorServiceImpl implements ProfessorService {
         return professorMapper.toDTO(professorRepositoty.save(professor));
     }
 
+    @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public boolean verificaCpfCadastrado(String cpf) {
-        return professorRepositoty.findByCpfCadastrado(cpf);
+        return usuarioService.cpfExiste(cpf);
     }
 
+    @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public ProfessorDTO buscaPorCodigo(Long codigo) {
         return professorMapper.toDTO(professorRepositoty.findOne(codigo));
     }
 
+    @Override
     public Integer count() {
         return professorRepositoty.quantidade();
+    }
+
+    @Override
+    public ProfessorDTO buscarProfessorLogado() {
+        return professorMapper.toDTO(professorRepositoty.findByCpf(SecurityUtil.getUsuarioLogado()));
     }
 
 }

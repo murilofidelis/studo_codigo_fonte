@@ -23,6 +23,7 @@ public class MatriculaServiceImpl implements MatriculaService {
     @Autowired
     private Mensagem mensagem;
 
+    @Override
     public Matricula salvaMatricula(Matricula matricula) {
         verificaMatricula(matricula);
         matricula.setDataMatricula(LocalDate.now());
@@ -40,6 +41,7 @@ public class MatriculaServiceImpl implements MatriculaService {
                 .toString();
     }
 
+    @Override
     public List<Matricula> buscaMatriculasPorAluno(Long codigo) {
         return matriculaRepository.findByAlunoCodigo(codigo);
     }
@@ -50,6 +52,7 @@ public class MatriculaServiceImpl implements MatriculaService {
         }
     }
 
+    @Override
     public void deletaMatriculaAluno(Long codMatricula) {
         matriculaRepository.delete(codMatricula);
     }

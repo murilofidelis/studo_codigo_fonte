@@ -14,6 +14,7 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Override
     public void enviaEmail(String destinatario, String assunto, String mensagem) {
 
         SimpleMailMessage mail = new SimpleMailMessage();

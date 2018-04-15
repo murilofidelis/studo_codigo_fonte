@@ -14,6 +14,7 @@ public class PerfilServiceImpl implements PerfilService {
     @Autowired
     private PerfilRepository perfilRepository;
 
+    @Override
     public Perfil getPerfil(Long codigo) {
         return perfilRepository.findOne(codigo);
     }
