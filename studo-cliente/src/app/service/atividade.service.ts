@@ -16,10 +16,17 @@ export class AtividadeService {
     private errorHandle: ErrorHandleService
   ) { }
 
+  buscaClassificacoes() {
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/listaClassificacao`)
+      .toPromise()
+      .then(res => res.json())
+      .catch(erro => this.errorHandle.handle(erro));
+  }
+
   salvar(atividade: Atividade) {
     return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(atividade))
       .toPromise()
-      .then(res => res.json())
+      .then(res => res)
       .catch(erro => this.errorHandle.handle(erro));
   }
 }

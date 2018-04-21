@@ -19,6 +19,7 @@ import { AtividadeService } from '../../../service/atividade.service';
 export class AtividadeCadastroComponent implements OnInit {
 
   disciplinas: SelectItem[];
+  classificacoes: SelectItem[];
   atividadeForm: FormGroup;
   atividade: Atividade;
 
@@ -42,6 +43,7 @@ export class AtividadeCadastroComponent implements OnInit {
       }),
     });
     this.carregarDiscicplinas();
+    this.carrgarClassificacoes();
   }
 
   carregarDiscicplinas() {
@@ -51,6 +53,17 @@ export class AtividadeCadastroComponent implements OnInit {
       disciplinas.forEach(disciplina => {
         this.disciplinas.push({ label: disciplina.descricao, value: disciplina.codigo });
       });
+    });
+  }
+
+  carrgarClassificacoes() {
+    this.classificacoes = [];
+    this.classificacoes.push({ label: 'Selecione...', value: null });
+    this.atividadeService.buscaClassificacoes().then(classificacoes => {
+      console.log(classificacoes);
+    /*  classificacoes.forEach(classificacao => {
+        this.classificacoes.push({ label: classificacao, value: classificacao });
+      });*/
     });
   }
 

@@ -6,17 +6,22 @@
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-fluid" formGroupName="disciplina">
-        <label>Disciplina</label>
+        <label>Disciplina*</label>
         <p-dropdown [options]="disciplinas" formControlName="codigo" [autoWidth]="false"></p-dropdown>
       </div>
 
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Classificação</label>
+        <p-dropdown [options]="classificacoes" formControlName="classificacao" [autoWidth]="false"></p-dropdown>
+      </div>
+
       <div class="ui-g-12 ui-fluid">
-        <label>Titulo</label>
+        <label>Titulo*</label>
         <input pInputText type="text" formControlName="titulo" maxlength="30">
       </div>
 
       <div class="ui-g-12 ui-fluid">
-        <label>Descrição</label>
+        <label>Descrição*</label>
         <textarea pInputTextarea formControlName="descricao" maxlength="1024" [rows]="10"></textarea>
       </div>
 

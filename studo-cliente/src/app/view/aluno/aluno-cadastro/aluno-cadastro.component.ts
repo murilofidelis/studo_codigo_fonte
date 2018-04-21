@@ -59,10 +59,7 @@ export class AlunoCadastroComponent implements OnInit {
     this.iniciaSexo();
     this.iniciaStatus();
     this.traduzirCalendar();
-
-    if (codigoAluno) {
-      this.carregaAluno(codigoAluno);
-    }
+    this.carregaAluno(codigoAluno);
   }
 
   iniciaSexo() {
@@ -91,11 +88,13 @@ export class AlunoCadastroComponent implements OnInit {
   }
 
   carregaAluno(codigo: number) {
-    this.alunoService.buscaPorCodigo(codigo)
-      .then(aluno => {
-        this.aluno = aluno;
-        this.alunoForm.setValue(this.aluno);
-      });
+    if (codigo) {
+      this.alunoService.buscaPorCodigo(codigo)
+        .then(aluno => {
+          this.aluno = aluno;
+          this.alunoForm.setValue(this.aluno);
+        });
+    }
   }
 
   traduzirCalendar() {

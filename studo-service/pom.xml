@@ -130,7 +130,6 @@
             <optional>true</optional>
         </dependency>
 
-
     </dependencies>
 
     <!-- mvn spring-boot:run -Drun.profiles=dev -->
@@ -166,6 +165,25 @@
                         <profile>dev</profile>
                         <profile>prod</profile>
                     </profiles>
+                </configuration>
+            </plugin>
+            <!-- mvn -DskipTests clean package docker:build -->
+            <!-- docker run -p 8080:8080 studo -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <imageName>studo</imageName>
+                    <baseImage>java</baseImage>
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
                 </configuration>
             </plugin>
         </plugins>

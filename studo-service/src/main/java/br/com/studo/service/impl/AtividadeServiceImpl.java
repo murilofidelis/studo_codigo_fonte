@@ -1,7 +1,9 @@
 package br.com.studo.service.impl;
 
 import br.com.studo.domain.dto.AtividadeDTO;
+import br.com.studo.domain.enums.ClassificacaoTurma;
 import br.com.studo.domain.mapper.AtividadeMapper;
+import br.com.studo.exception.StudoException;
 import br.com.studo.repository.AtividadeRepository;
 import br.com.studo.service.AtividadeService;
 import br.com.studo.service.ProfessorService;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @Transactional
@@ -29,5 +33,10 @@ public class AtividadeServiceImpl implements AtividadeService {
         atividadeDTO.setDataCadastro(LocalDateTime.now());
         atividadeDTO.setProfessor(professorService.buscarProfessorLogado());
         return atividadeMapper.toDTO(atividadeRepository.save(atividadeMapper.toEntity(atividadeDTO)));
+    }
+
+    @Override
+    public List<ClassificacaoTurma> listaClassificao() {
+        return Arrays.asList(ClassificacaoTurma.values());
     }
 }
