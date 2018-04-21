@@ -1,3 +1,4 @@
+import { ClassificacaoDisciplinaPipe } from './../../../util/pipes/classificacao-disciplina.pipe';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -39,7 +40,7 @@ export class AtividadeCadastroComponent implements OnInit {
       'descricao': [null, Validators.required],
       'classificacao': [null],
       'disciplina': this.formBuilder.group({
-        'codigo': [null]
+        'codigo': [null, Validators.required]
       }),
     });
     this.carregarDiscicplinas();
@@ -60,10 +61,10 @@ export class AtividadeCadastroComponent implements OnInit {
     this.classificacoes = [];
     this.classificacoes.push({ label: 'Selecione...', value: null });
     this.atividadeService.buscaClassificacoes().then(classificacoes => {
-      console.log(classificacoes);
-    /*  classificacoes.forEach(classificacao => {
-        this.classificacoes.push({ label: classificacao, value: classificacao });
-      });*/
+      classificacoes.forEach(classificacao => {
+        const c = new ClassificacaoDisciplinaPipe();
+        this.classificacoes.push({ label: c.transform(classificacao), value: classificacao });
+      });
     });
   }
 
@@ -78,5 +79,10 @@ export class AtividadeCadastroComponent implements OnInit {
         }, 1000);
       }
     });
+  }
+
+  verificaCampoContemErro(campo: string): boolean {
+    return (!this.atividadeForm.get(campo).value) &&
+      (this.atividadeForm.get(campo).touched || this.atividadeForm.get(campo).dirty);
   }
 }

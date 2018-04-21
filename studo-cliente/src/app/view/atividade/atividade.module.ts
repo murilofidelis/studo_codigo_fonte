@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { SharedModule } from './../../shared/shared.module';
+
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
@@ -34,6 +36,8 @@ import { AtividadeCadastroComponent } from './atividade-cadastro/atividade-cadas
     DropdownModule,
     SelectButtonModule,
     InputTextareaModule,
+
+    SharedModule
   ],
   declarations: [AtividadePesquisaComponent, AtividadeCadastroComponent]
 })
