@@ -18,4 +18,6 @@ public interface ProfessorService {
     Integer count();
 
    ProfessorDTO buscarProfessorLogado();
+
+   Long buscaCodProfessorProCPF(String cpf);
 }

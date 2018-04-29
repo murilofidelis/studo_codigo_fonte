@@ -37,7 +37,7 @@ public class AlunoResource {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_ALUNO')")
-    public ResponseEntity<Aluno> salvarAluno(@RequestBody AlunoDTO alunoDTO) {
+    public ResponseEntity<AlunoDTO> salvarAluno(@RequestBody AlunoDTO alunoDTO) {
         AlunoDTO alunoSalvo = alunoService.salvarAluno(alunoDTO);
         return alunoSalvo != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }

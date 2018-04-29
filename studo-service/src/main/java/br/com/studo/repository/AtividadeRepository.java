@@ -1,7 +1,10 @@
 package br.com.studo.repository;
 
 import br.com.studo.domain.Atividade;
+import br.com.studo.repository.custom.AtividadeRepositoryCustom;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AtividadeRepository extends CrudRepository<Atividade,Long> {
+@Repository
+public interface AtividadeRepository extends CrudRepository<Atividade, Long>, AtividadeRepositoryCustom {
 }

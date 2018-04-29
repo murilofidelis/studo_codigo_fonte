@@ -1,6 +1,7 @@
 package br.com.studo.exception;
 
 import br.com.studo.service.LogErroService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @ControllerAdvice
 public class ExceprionHandler extends ResponseEntityExceptionHandler {
 
@@ -32,6 +34,7 @@ public class ExceprionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({Exception.class})
     public void errorInterceptor(Exception exception) {
         logErroService.salvarLog(getStackTrace(exception));
+        log.error("ERRO: ", exception);
     }
 
     private String getStackTrace(Throwable throwable) {

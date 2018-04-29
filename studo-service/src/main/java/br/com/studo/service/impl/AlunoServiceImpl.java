@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class AlunoServiceImpl implements AlunoService{
+public class AlunoServiceImpl implements AlunoService {
 
     @Autowired
     private AlunoRepository alunoRepository;

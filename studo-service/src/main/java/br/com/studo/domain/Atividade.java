@@ -1,12 +1,13 @@
 package br.com.studo.domain;
 
-import br.com.studo.util.DateTimeConverter;
+import br.com.studo.util.DateConverter;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -32,8 +33,8 @@ public class Atividade implements Serializable {
 
     @NotNull
     @Column(name = "dte_cadastro")
-    @Convert(converter = DateTimeConverter.class)
-    private LocalDateTime dataCadastro;
+    @Convert(converter = DateConverter.class)
+    private LocalDate dataCadastro;
 
     @NotNull
     @Size(max = 250)
@@ -49,7 +50,7 @@ public class Atividade implements Serializable {
     @Size(max = 30)
     private String classificacao;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Professor professor;
 
     @OneToOne

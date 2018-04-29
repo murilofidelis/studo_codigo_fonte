@@ -29,4 +29,10 @@ export class AtividadeService {
       .then(res => res)
       .catch(erro => this.errorHandle.handle(erro));
   }
+
+  teste(){
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/teste`)
+    .toPromise()
+    .then(res => res.json());
+  }
 }

@@ -1,10 +1,9 @@
-package br.com.studo.test;
+package br.com.studo.test.service;
 
 import br.com.studo.domain.Disciplina;
 import br.com.studo.domain.mapper.DisciplinaMapper;
 import br.com.studo.repository.DisciplinaRepository;
 import br.com.studo.service.DisciplinaService;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +13,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import static org.junit.Assert.assertNotNull;
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DisciplinaTest {
+public class DisciplinaServiceTest {
 
     @Autowired
     DisciplinaService service;
@@ -39,8 +41,6 @@ public class DisciplinaTest {
     @Test
     public void buscar() {
         List<Disciplina> disciplinas = (List<Disciplina>) repository.findAll();
-        Assert.assertTrue(disciplinas.size() > 0);
-
+        assertNotNull(disciplinas);
     }
-
 }
