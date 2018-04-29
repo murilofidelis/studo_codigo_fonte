@@ -3,7 +3,9 @@ package br.com.studo.repository;
 import br.com.studo.domain.usuario.Usuario;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UsuarioRepositoty extends CrudRepository<Usuario, Long> {
 
     Usuario findByLoginAndStatus(String cpf, boolean status);

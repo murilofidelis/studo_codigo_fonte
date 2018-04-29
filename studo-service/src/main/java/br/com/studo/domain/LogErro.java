@@ -33,11 +33,11 @@ public class LogErro implements Serializable {
     private LocalDateTime data;
 
     @Column(name = "usuario_logado")
-    @Size(max = 11)
+    @Size(max = 30)
     private String usuarioLogado;
 
     @Column(name = "log_erro")
-    @Size(max = 20000)
+    @Size(max = 30000)
     private String stackTrace;
 
 }

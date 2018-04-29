@@ -66,4 +66,9 @@ public class ProfessorServiceImpl implements ProfessorService {
         return professorMapper.toDTO(professorRepositoty.findByCpf(SecurityUtil.getUsuarioLogado()));
     }
 
+    @Override
+    public Long buscaCodProfessorProCPF(String cpf) {
+        return professorRepositoty.buscaCodProfessorPorCPF(cpf);
+    }
+
 }

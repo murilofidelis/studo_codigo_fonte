@@ -3,7 +3,7 @@ package br.com.studo.domain.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -11,7 +11,7 @@ public class AtividadeDTO {
 
     private Long codigo;
 
-    private LocalDateTime dataCadastro;
+    private LocalDate dataCadastro;
 
     private String titulo;
 
