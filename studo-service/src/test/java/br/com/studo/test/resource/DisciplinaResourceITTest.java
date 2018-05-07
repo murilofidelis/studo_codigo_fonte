@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DisciplinaResourceTest {
+public class DisciplinaResourceITTest {
 
     @Autowired
     private WebApplicationContext context;
@@ -47,7 +47,7 @@ public class DisciplinaResourceTest {
         this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
 
         dto = new DisciplinaDTO();
-        dto.setDescricao("TWATW");
+        dto.setDescricao("teste 3dw42d");
         dto.setAtiva(true);
     }
 
@@ -58,10 +58,17 @@ public class DisciplinaResourceTest {
         this.mvc.perform(get(BASE_URL)).andExpect(status().isOk());
     }
 
+
     @Test
     public void salvar() throws Exception {
         this.mvc.perform(post(BASE_URL).contentType(MediaType.APPLICATION_JSON).content(TesteUtil.connverteEmJson(dto)))
                 .andExpect(status().isCreated());
+    }
+
+
+    @Test(expected = Exception.class)
+    public void salvarDuplicado() throws Exception {
+        this.mvc.perform(post(BASE_URL).contentType(MediaType.APPLICATION_JSON).content(TesteUtil.connverteEmJson(dto)));
     }
 
 

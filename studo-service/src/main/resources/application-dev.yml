@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: studo - dev
+  profiles:
+    active:
+      - dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_studo
+    username: postgres
+    password: 123456
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+    hibernate:
+      ddl-auto: none
+
+  mail:
+    host: smtp.gmail.com
+    username:
+    password:
+    port: 587
+    properties:
+      mail.smtp.starttls.enable: true
+
+  jackson:
+    date-format: yyyy-MM-dd
+
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+
+liquibase:
+  enabled: true
+  default-schema: studo
+  change-log: classpath:db/liquibase-changelog-master.xml
+
+server:
+  port: 8080
+
+studo:
+  enviar-email: false
+  seguranca:
+    origin-permitida: http://localhost:4200
+    studo-cliente: studo_cliente
+    secret: stud0_cli3nt3_s3cret
+    scopes:
+      - read
+      - write
+    authorized-grant-types:
+      - password
+      - refresh_token
+    access-token-validity-seconds: 600
+    refresh-token-validity-seconds: 86400
+
+
+
+

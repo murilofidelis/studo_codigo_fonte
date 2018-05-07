@@ -1,29 +1,22 @@
-server:
-  port: 8080
-
 spring:
   application:
-    name: studo
+    name: studo - prod
+  profiles:
+    active:
+      - prod
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/db_studo
+    url: jdbc:postgresql://localhost:5432/db_studo_prod
     username: postgres
     password: 123456
 
   jpa:
     database: POSTGRESQL
-    show-sql: true
+    show-sql: false
     properties:
-      hibernate.format_sql: true
+      hibernate.format_sql: false
     hibernate:
       ddl-auto: none
-
-  jackson:
-    date-format: yyyy-MM-dd
-
-  cache:
-    ehcache:
-      config: classpath:ehcache.xml
 
   mail:
     host: smtp.gmail.com
@@ -33,13 +26,23 @@ spring:
     properties:
       mail.smtp.starttls.enable: true
 
+  jackson:
+    date-format: yyyy-MM-dd
+
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+
 liquibase:
-  enabled: false
+  enabled: true
   default-schema: studo
   change-log: classpath:db/liquibase-changelog-master.xml
 
+server:
+  port: 8080
+
 studo:
-  enviar-email: false
+  enviar-email: true
   seguranca:
     origin-permitida: http://localhost:4200
     studo-cliente: studo_cliente
@@ -52,6 +55,7 @@ studo:
       - refresh_token
     access-token-validity-seconds: 600
     refresh-token-validity-seconds: 86400
+
 
 
 
