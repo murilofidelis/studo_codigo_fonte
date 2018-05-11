@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -7,7 +8,6 @@
     <artifactId>studo-service</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <name>studo-service</name>
     <description>Sistema de cadastro de atividades</description>
 
@@ -23,14 +23,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
-
         <maven-failsafe-plugin.argLine>-noverify -Xmx512m -XX:MaxMetaspaceSize=512m -XX:+UseParallelGC
         </maven-failsafe-plugin.argLine>
-        <!--    <maven-surefire-plugin.argLine>-noverify -Xmx512m -XX:MaxMetaspaceSize=512m -XX:+UseParallelGC</maven-surefire-plugin.argLine> -->
         <jacoco.version>0.8.1</jacoco.version>
         <jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</jacoco.itReportPath>
         <jacoco.utReportPath>${project.build.directory}/jacoco.exec</jacoco.utReportPath>
-
     </properties>
 
     <dependencies>
@@ -79,7 +76,7 @@
             <version>1.4.3.RELEASE</version>
         </dependency>
 
-        <!--Tets-->
+        <!--Test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -129,19 +126,13 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
 
+        <!-- Liquibase -->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
         </dependency>
 
-        <!-- Spring profile-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- use mapstruct-jdk8 for Java 8 or higher -->
+        <!-- Mapstruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-jdk8</artifactId>
@@ -156,6 +147,7 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Jacoco -->
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>org.jacoco.core</artifactId>
@@ -163,14 +155,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!--        <dependency>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>org.jacoco.core</artifactId>
-                    <version>0.8.1</version>
-                </dependency> -->
     </dependencies>
-
-    <!-- mvn spring-boot:run -Drun.profiles=dev -->
 
     <build>
         <plugins>
@@ -192,20 +177,8 @@
                             <destFile>${jacoco.utReportPath}</destFile>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>post-unit-test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <dataFile>${jacoco.utReportPath}</dataFile>
-                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
-
             <!-- Teste unitários -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -218,8 +191,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -241,7 +212,7 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-
+            <!-- mvn spring-boot:run -Drun.profiles=dev ou prod-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -273,5 +244,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
