@@ -28,6 +28,7 @@
         <jacoco.version>0.8.1</jacoco.version>
         <jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</jacoco.itReportPath>
         <jacoco.utReportPath>${project.build.directory}/jacoco.exec</jacoco.utReportPath>
+        <powermock.version>1.6.6</powermock.version>
     </properties>
 
     <dependencies>
@@ -152,6 +153,20 @@
             <groupId>org.jacoco</groupId>
             <artifactId>org.jacoco.core</artifactId>
             <version>${jacoco.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Powermock -->
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <version>${powermock.version}</version>
             <scope>test</scope>
         </dependency>
 

@@ -1,30 +1,69 @@
 package br.com.studo.test.service;
 
+import br.com.studo.domain.Disciplina;
 import br.com.studo.domain.dto.DisciplinaDTO;
-import br.com.studo.service.DisciplinaService;
+import br.com.studo.domain.mapper.DisciplinaMapper;
+import br.com.studo.exception.StudoException;
+import br.com.studo.repository.DisciplinaRepository;
 import br.com.studo.service.impl.DisciplinaServiceImpl;
+import br.com.studo.util.Mensagem;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.any;
+import static org.powermock.api.mockito.PowerMockito.when;
+import static org.powermock.api.support.membermodification.MemberMatcher.method;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(DisciplinaServiceImpl.class)
 public class DisciplinaServiceTest {
 
-    @Mock
+    @InjectMocks
     DisciplinaServiceImpl disciplinaService;
 
+    @Mock
+    DisciplinaDTO dto;
+
+    @Mock
+    DisciplinaRepository repository;
+
+    @Mock
+    DisciplinaMapper mapper;
+
+    @Mock
+    Disciplina disciplina;
+
+    @Mock
+    Pageable pageable;
+
+    @Mock
+    Mensagem mensagem;
+
+    @Before
+    public void setUp() {
+        when(mapper.toEntity(any(DisciplinaDTO.class))).thenReturn(disciplina);
+        when(mapper.toDTO(any(Disciplina.class))).thenReturn(dto);
+    }
+
     @Test
-    public void cout() {
-        when(disciplinaService.count()).thenReturn(3);
-        assertTrue(disciplinaService.count() == 3);
+    public void salva() {
+        dto = new DisciplinaDTO(1L, "ARTES", true);
+        DisciplinaDTO disciplinaDTO = disciplinaService.salvar(dto);
+        assertNotNull(disciplinaDTO);
     }
 
     @Test
@@ -41,22 +80,41 @@ public class DisciplinaServiceTest {
     }
 
     @Test
-    public void buscaPorId() {
-        DisciplinaDTO dto = new DisciplinaDTO(1L, "ARTES", false);
-        when(disciplinaService.buscarPorCodigo(1L)).thenReturn(dto);
-        DisciplinaDTO result = disciplinaService.buscarPorCodigo(1L);
-        assertEquals(dto.getCodigo(), result.getCodigo());
-        assertEquals("ARTES", result.getDescricao());
-        assertEquals(false, result.getAtiva());
+    public void ccount() {
+        when(repository.quantidade()).thenReturn(10);
+        Integer qtd = disciplinaService.count();
+        assertEquals(true, qtd == 10);
     }
 
     @Test
-    public void salvar() {
-        DisciplinaDTO dto = new DisciplinaDTO(1L, "ARTES", true);
-        when(disciplinaService.salvar(dto)).thenReturn(dto);
-        DisciplinaDTO result = disciplinaService.salvar(dto);
-        assertEquals(true, result.getAtiva());
-        assertEquals(true, result.getDescricao().equals("ARTES"));
+    public void filtarPesquisa() {
+        Disciplina disciplina = new Disciplina();
+        disciplina.setCodigo(1L);
+        disciplina.setDescricao("ARTES");
+        disciplina.setAtiva(true);
+        List<Disciplina> lista = Arrays.asList(disciplina);
+        Page<Disciplina> pageDisciplina = new PageImpl<>(lista);
+        when(disciplinaService.filtraPesquisa("TESTE", this.pageable)).thenReturn(pageDisciplina);
+        Page<Disciplina> page = disciplinaService.filtraPesquisa("TESTE", this.pageable);
+        assertNotNull(page);
     }
 
+    @Test
+    public void buscaPorCodigo() {
+        when(repository.findOne(1L)).thenReturn(disciplina);
+        DisciplinaDTO dto = disciplinaService.buscarPorCodigo(1L);
+        assertNotNull(dto);
+    }
+
+    @Test(expected = StudoException.class)
+    public void disciplinCadastrada() throws Exception {
+        when(repository.buscaDisciplinaPorNome(any(String.class))).thenReturn(true);
+        DisciplinaServiceImpl spy = PowerMockito.spy(new DisciplinaServiceImpl());
+        when(spy, method(DisciplinaServiceImpl.class, "verificaDisciplinaExiste", String.class))
+                .withArguments(any(String.class))
+                .thenReturn(true);
+        when(mensagem.get(any(String.class))).thenReturn("Já cadastrada");
+        dto = new DisciplinaDTO(1L, "ARTES", true);
+        disciplinaService.salvar(dto);
+    }
 }
