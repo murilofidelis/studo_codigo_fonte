@@ -53,8 +53,6 @@ public class DisciplinaServiceTest {
     @Mock
     Mensagem mensagem;
 
-    private DisciplinaServiceImpl service;
-
     @Before
     public void setUp() {
         when(mapper.toEntity(any(DisciplinaDTO.class))).thenReturn(disciplina);
@@ -82,7 +80,7 @@ public class DisciplinaServiceTest {
     }
 
     @Test
-    public void ccount() {
+    public void count() {
         when(repository.quantidade()).thenReturn(10);
         Integer qtd = disciplinaService.count();
         assertEquals(true, qtd == 10);
