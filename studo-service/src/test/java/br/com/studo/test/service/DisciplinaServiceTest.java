@@ -25,8 +25,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
+import static org.powermock.api.mockito.PowerMockito.doReturn;
 import static org.powermock.api.mockito.PowerMockito.when;
-import static org.powermock.api.support.membermodification.MemberMatcher.method;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DisciplinaServiceImpl.class)
@@ -52,6 +52,8 @@ public class DisciplinaServiceTest {
 
     @Mock
     Mensagem mensagem;
+
+    private DisciplinaServiceImpl service;
 
     @Before
     public void setUp() {
@@ -109,12 +111,9 @@ public class DisciplinaServiceTest {
     @Test(expected = StudoException.class)
     public void disciplinCadastrada() throws Exception {
         when(repository.buscaDisciplinaPorNome(any(String.class))).thenReturn(true);
-        DisciplinaServiceImpl spy = PowerMockito.spy(new DisciplinaServiceImpl());
-        when(spy, method(DisciplinaServiceImpl.class, "verificaDisciplinaExiste", String.class))
-                .withArguments(any(String.class))
-                .thenReturn(true);
+        DisciplinaServiceImpl disciplinaServiceSpy = PowerMockito.spy(new DisciplinaServiceImpl());
+        doReturn(true).when(disciplinaServiceSpy, "verificaDisciplinaExiste", any(String.class));
         when(mensagem.get(any(String.class))).thenReturn("Já cadastrada");
-        dto = new DisciplinaDTO(1L, "ARTES", true);
-        disciplinaService.salvar(dto);
+        disciplinaService.salvar(new DisciplinaDTO());
     }
 }
