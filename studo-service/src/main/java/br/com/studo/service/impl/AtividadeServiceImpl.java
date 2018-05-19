@@ -7,6 +7,8 @@ import br.com.studo.repository.AtividadeRepository;
 import br.com.studo.security.SecurityUtil;
 import br.com.studo.service.AtividadeService;
 import br.com.studo.service.ProfessorService;
+import br.com.studo.util.DataUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -15,10 +17,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 
+import java.sql.Date;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
+@Slf4j
 @Service
 @Transactional
 public class AtividadeServiceImpl implements AtividadeService {
@@ -34,15 +40,29 @@ public class AtividadeServiceImpl implements AtividadeService {
 
     @Override
     public Page<AtividadeDTO> buscaAtividades(MultiValueMap<String, String> parametros, Pageable pageable) {
+        Date dataInicio = null;
+        Date dataFim = null;
 
         Long cod = professorService.buscaCodProfessorProCPF(SecurityUtil.getUsuarioLogado());
 
-        List<AtividadeDTO> listaAtividades = atividadeRepository.buscaAtividades(null, null, cod, pageable);
+        if (Objects.nonNull(parametros.getFirst("dataInicio"))) {
+            dataInicio = formataDataInfomata(parametros.getFirst("dataInicio"));
+        }
+        if (Objects.nonNull(parametros.getFirst("dataFim"))) {
+            dataFim = formataDataInfomata(parametros.getFirst("dataFim"));
+        }
+        List<AtividadeDTO> listaAtividades = atividadeRepository.buscaAtividades(dataInicio, dataFim, cod, pageable);
+        Long quantidade = atividadeRepository.quantidade(dataInicio, dataFim, cod, pageable);
+        return new PageImpl<>(listaAtividades, pageable, quantidade);
+    }
 
-        //   Long qtd = atividadeRepository.quantidade(null, null, cod, pageable);
-
-        return new PageImpl<>(listaAtividades, pageable, listaAtividades.size());
-
+    private Date formataDataInfomata(String data) {
+        try {
+            return DataUtil.formatDate(data);
+        } catch (ParseException e) {
+            log.error("Erro ao converter data", e);
+            return null;
+        }
     }
 
     @Override

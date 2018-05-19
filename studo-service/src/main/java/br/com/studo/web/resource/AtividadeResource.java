@@ -7,6 +7,7 @@ import br.com.studo.service.AtividadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.MultiValueMap;
@@ -38,7 +39,7 @@ public class AtividadeResource {
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_ATIVIDADE')")
     public ResponseEntity salvar(@RequestBody AtividadeDTO atividadeDTO) {
         AtividadeDTO atividade = atividadeService.salvar(atividadeDTO);
-        return atividade != null ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+        return atividade != null ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/listaClassificacao")

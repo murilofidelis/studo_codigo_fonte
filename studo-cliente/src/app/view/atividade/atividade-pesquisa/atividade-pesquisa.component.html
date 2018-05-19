@@ -5,16 +5,18 @@
     </div>
 
     <p-fieldset legend="Pesquisa" class="ui-g-12">
-      <form autocomplete="off" #formulario="ngForm">
+      <form autocomplete="off" #formulario="ngForm" (ngSubmit)="pesquisar()">
 
         <div class="ui-g-3 ui-fluid">
           <label>De</label>
-          <p-calendar [locale]="pt" dateFormat="dd/mm/yy" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2030"></p-calendar>
+          <p-calendar [locale]="pt" dateFormat="dd/mm/yy" name="dataInicio" [(ngModel)]="filtro.dataInicio" [showIcon]="true" [monthNavigator]="true"
+            [yearNavigator]="true" yearRange="1900:2030"></p-calendar>
         </div>
 
         <div class="ui-g-3 ui-fluid">
           <label>Até</label>
-          <p-calendar [locale]="pt" dateFormat="dd/mm/yy" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2030"></p-calendar>
+          <p-calendar [locale]="pt" dateFormat="dd/mm/yy" name="dataFim" [(ngModel)]="filtro.dataFim" [showIcon]="true" [monthNavigator]="true"
+            [yearNavigator]="true" yearRange="1900:2030"></p-calendar>
         </div>
 
         <div class="ui-g-3 ui-fluid align-button">
@@ -22,7 +24,7 @@
         </div>
 
         <div class="ui-g-3 ui-fluid align-button">
-          <button pButton type="button" icon="fa-times" label="Limpar"></button>
+          <button pButton type="button" icon="fa-times" label="Limpar" (click)="limpa(formulario)"></button>
         </div>
 
       </form>
@@ -32,10 +34,11 @@
 
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-dataTable [responsive]="true" [paginator]="true" emptyMessage="Nenhum registro encontrado" #tabela>
+        <p-dataTable [value]="atividades" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" (onLazyLoad)="mudarPagina($event)"
+          [totalRecords]="totalRegistros" emptyMessage="Nenhum registro encontrado" #tabela>
 
-          <p-column field="" header="Título"></p-column>
-          <p-column field="descricao" header="Disciplina"></p-column>
+          <p-column field="titulo" header="Título"></p-column>
+          <p-column field="disciplina.descricao" header="Disciplina" styleClass="col-ativida-disciplina"></p-column>
 
           <p-column header="Ações" styleClass="col-acoes">
             <ng-template let-disciplina="rowData" pTemplate="body">

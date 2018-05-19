@@ -27,6 +27,11 @@ body{
     text-align: left;
   }
 
+  .col-ativida-disciplina{
+    width: 200px;
+    text-align: center;
+  }
+
 
   .btn-align {
     display: block;
@@ -43,7 +48,7 @@ body{
     bottom:0;
     width:98%;
   }
-  
+
 
 
 

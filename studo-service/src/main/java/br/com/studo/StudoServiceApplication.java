@@ -24,7 +24,7 @@ public class StudoServiceApplication {
         Environment env = app.run(args).getEnvironment();
 
         log.info("\n----------------------------------------------------------\n\t" +
-                        "Aplicação '{}' esta rodando! Acesso URLs:\n\t" +
+                        "Serviço: '{}' iniciado! Acesso URLs:\n\t" +
                         "Local: \t\thttp://localhost:{}\n\t" +
                         "Externo: \thttp://{}:{}\n----------------------------------------------------------",
                 env.getProperty("spring.application.name"),
