@@ -27,15 +27,12 @@ public class AtividadeRepositoryImpl implements AtividadeRepositoryCustom {
     @Override
     public List<AtividadeDTO> buscaAtividades(Date dataInicio, Date dataFim, Long codProfessor, Pageable pageable) {
         StringBuilder sql = new StringBuilder("SELECT a.codigo, a.dsc_classificacao, a.dte_cadastro, a.descricao, a.titulo, d.codigo as cod_disciplina, d.descricao as disciplina FROM studo.tab_atividade a ");
-        sql.append(getSql(dataInicio, dataFim));
+        sql.append(getSql(dataInicio, dataFim, true));
 
         Query query = manager.createNativeQuery(sql.toString());
         query.setFirstResult(pageable.getPageSize() * pageable.getPageNumber());
         query.setMaxResults(pageable.getPageSize());
-
-        for (Map.Entry<String, Object> entry : substituiParametros(dataInicio, dataFim, codProfessor).entrySet()) {
-            query.setParameter(entry.getKey(), entry.getValue());
-        }
+        setParamtros(dataInicio, dataFim, codProfessor, query);
         List<Object[]> atividades = query.getResultList();
         return montarResultado(atividades);
     }
@@ -43,13 +40,17 @@ public class AtividadeRepositoryImpl implements AtividadeRepositoryCustom {
     @Override
     public Long quantidade(Date dataInicio, Date dataFim, Long codProfessor, Pageable pageable) {
         StringBuilder sql = new StringBuilder("SELECT count(a)  FROM studo.tab_atividade a ");
-        sql.append(getSql(dataInicio, dataFim));
+        sql.append(getSql(dataInicio, dataFim, false));
         Query query = manager.createNativeQuery(sql.toString());
+        setParamtros(dataInicio, dataFim, codProfessor, query);
+        BigInteger qtd = (BigInteger) query.getSingleResult();
+        return qtd.longValue();
+    }
+
+    private void setParamtros(Date dataInicio, Date dataFim, Long codProfessor, Query query) {
         for (Map.Entry<String, Object> entry : substituiParametros(dataInicio, dataFim, codProfessor).entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }
-        BigInteger qtd = (BigInteger) query.getSingleResult();
-        return qtd.longValue();
     }
 
     private List<AtividadeDTO> montarResultado(List<Object[]> atividades) {
@@ -72,21 +73,24 @@ public class AtividadeRepositoryImpl implements AtividadeRepositoryCustom {
         return listaAtividades;
     }
 
-    private StringBuilder getSql(Date dataInicio, Date dataFim) {
+    private StringBuilder getSql(Date dataInicio, Date dataFim, boolean ordenar) {
         StringBuilder sql = new StringBuilder();
         sql.append(" INNER JOIN studo.tab_disciplina d on a.disciplina_codigo = d.codigo ");
         sql.append("WHERE 0 = 0 ");
-        addWhere(dataInicio, dataFim, sql);
+        addWhere(sql, dataInicio, dataFim, ordenar);
         return sql;
     }
 
-    private void addWhere(Date dataInicio, Date dataFim, StringBuilder sql) {
+    private void addWhere(StringBuilder sql, Date dataInicio, Date dataFim, boolean ordenar) {
         sql.append(" AND a.professor_codigo =  :codProfessor ");
         if (Objects.nonNull(dataInicio)) {
             sql.append(" AND a.dte_cadastro >= :dataIncio ");
         }
         if (Objects.nonNull(dataFim)) {
             sql.append(" AND a.dte_cadastro <= :dataFim ");
+        }
+        if (ordenar) {
+            sql.append(" ORDER BY a.dte_cadastro DESC ");
         }
     }
 
