@@ -90,7 +90,7 @@ public class AtividadeRepositoryImpl implements AtividadeRepositoryCustom {
             sql.append(" AND a.dte_cadastro <= :dataFim ");
         }
         if (ordenar) {
-            sql.append(" ORDER BY a.dte_cadastro DESC ");
+            sql.append(" ORDER BY a.codigo DESC ");
         }
     }
 

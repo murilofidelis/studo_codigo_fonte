@@ -14,5 +14,9 @@ public interface AtividadeService {
 
     AtividadeDTO salvar(AtividadeDTO atividadeDTO);
 
+    AtividadeDTO buscaPorCodigo(Long codigo);
+
     List<ClassificacaoTurma> listaClassificao();
+
+    void excluir(Long codigo);
 }

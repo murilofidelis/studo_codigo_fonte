@@ -67,4 +67,20 @@ export class AtividadeService {
       .then(res => res)
       .catch(erro => this.errorHandle.handle(erro));
   }
+
+  buscaPorCodigo(codigo: number) {
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/${codigo}`)
+      .toPromise()
+      .then(response => {
+        const atividade = response.json() as Atividade;
+        return atividade;
+      });
+  }
+
+  exluirAtividade(codigo: number) {
+    return this.http.delete(`${STUDO_API}/${this.END_POINT}/${codigo}`)
+      .toPromise()
+      .then(res => res)
+      .catch(erro => this.errorHandle.handle(erro));
+  }
 }

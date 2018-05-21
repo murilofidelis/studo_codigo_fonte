@@ -46,17 +46,17 @@ public class AtividadeServiceImpl implements AtividadeService {
         Long cod = professorService.buscaCodProfessorProCPF(SecurityUtil.getUsuarioLogado());
 
         if (Objects.nonNull(parametros.getFirst("dataInicio"))) {
-            dataInicio = formataDataInfomata(parametros.getFirst("dataInicio"));
+            dataInicio = formataDataInfomada(parametros.getFirst("dataInicio"));
         }
         if (Objects.nonNull(parametros.getFirst("dataFim"))) {
-            dataFim = formataDataInfomata(parametros.getFirst("dataFim"));
+            dataFim = formataDataInfomada(parametros.getFirst("dataFim"));
         }
         List<AtividadeDTO> listaAtividades = atividadeRepository.buscaAtividades(dataInicio, dataFim, cod, pageable);
         Long quantidade = atividadeRepository.quantidade(dataInicio, dataFim, cod, pageable);
         return new PageImpl<>(listaAtividades, pageable, quantidade);
     }
 
-    private Date formataDataInfomata(String data) {
+    private Date formataDataInfomada(String data) {
         try {
             return DataUtil.formatDate(data);
         } catch (ParseException e) {
@@ -73,7 +73,17 @@ public class AtividadeServiceImpl implements AtividadeService {
     }
 
     @Override
+    public AtividadeDTO buscaPorCodigo(Long codigo) {
+        return atividadeMapper.toDTO(atividadeRepository.findOne(codigo));
+    }
+
+    @Override
     public List<ClassificacaoTurma> listaClassificao() {
         return Arrays.asList(ClassificacaoTurma.values());
+    }
+
+    @Override
+    public void excluir(Long codigo) {
+        atividadeRepository.delete(codigo);
     }
 }

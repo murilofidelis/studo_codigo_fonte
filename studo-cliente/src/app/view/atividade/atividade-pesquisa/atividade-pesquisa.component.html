@@ -41,8 +41,9 @@
           <p-column field="disciplina.descricao" header="Disciplina" styleClass="col-ativida-disciplina"></p-column>
 
           <p-column header="Ações" styleClass="col-acoes">
-            <ng-template let-disciplina="rowData" pTemplate="body">
-              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+            <ng-template let-atividade="rowData" pTemplate="body">
+              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/atividade', atividade.codigo]"></a>
+              <a pButton icon="fa-times" pTooltip="Excluir Atividade" tooltipPosition="top" (click)="excluirAtividade(atividade)"></a>
             </ng-template>
           </p-column>
         </p-dataTable>
@@ -53,5 +54,11 @@
       <a pButton label="Nova" icon="fa-plus" routerLink="/atividade/nova"></a>
     </div>
 
+    <p-confirmDialog #confirmacao>
+      <p-footer>
+        <button type="button" pButton icon="fa-check" label="Sim" (click)="confirmacao.accept()"></button>
+        <button type="button" pButton icon="fa-times" label="Não" (click)="confirmacao.reject()"></button>
+      </p-footer>
+    </p-confirmDialog>
   </div>
 </div>

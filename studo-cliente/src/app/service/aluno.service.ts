@@ -64,14 +64,14 @@ export class AlunoService {
   salvar(aluno: Aluno) {
     return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(aluno))
       .toPromise()
-      .then(res => res.json())
+      .then(res => res)
       .catch(erro => this.erroHandle.handle(erro));
   }
 
   salvarMatricula(matricula: Matricula) {
     return this.http.post(`${STUDO_API}/${this.END_POINT}/matricula`, JSON.stringify(matricula))
       .toPromise()
-      .then(res => res.json())
+      .then(res => res)
       .catch(erro => this.erroHandle.handle(erro));
   }
 

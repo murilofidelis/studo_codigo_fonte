@@ -76,6 +76,12 @@ export const ROUTES: Routes = [
     path: 'atividade/nova', component: AtividadeCadastroComponent, canActivate: [AuthGuard],
     data: { roles: ['ROLE_CADASTRAR_ATIVIDADE'] }
   },
+  {
+    path: 'atividade/:codigo', component: AtividadeCadastroComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ALTERAR_ATIVIDADE'] }
+  },
+
+
 
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
   { path: 'acesso-negado', component: AcessoNegadoComponent },

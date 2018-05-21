@@ -1,4 +1,4 @@
-import { ClassificacaoDisciplinaPipe } from './../../../util/pipes/classificacao-disciplina.pipe';
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +11,8 @@ import { Mensagem } from '../../../util/mensagens.util';
 import { Atividade } from '../../../model/atividade.model';
 import { DisciplinaService } from '../../../service/disciplina.service';
 import { AtividadeService } from '../../../service/atividade.service';
+import { ErrorHandleService } from './../../../service/error-handle.service';
+import { ClassificacaoDisciplinaPipe } from './../../../util/pipes/classificacao-disciplina.pipe';
 
 @Component({
   selector: 'app-atividade-cadastro',
@@ -30,10 +32,12 @@ export class AtividadeCadastroComponent implements OnInit {
     private route: Router,
     private activatedRoute: ActivatedRoute,
     private atividadeService: AtividadeService,
-    private disciplinaService: DisciplinaService
+    private disciplinaService: DisciplinaService,
+    private errorHandle: ErrorHandleService
   ) { }
 
   ngOnInit() {
+    const codigoAtividade = this.activatedRoute.snapshot.params['codigo'];
     this.atividadeForm = this.formBuilder.group({
       'codigo': [null],
       'titulo': [null, Validators.required],
@@ -45,6 +49,7 @@ export class AtividadeCadastroComponent implements OnInit {
     });
     this.carregarDiscicplinas();
     this.carrgarClassificacoes();
+    this.carrgarAtividade(codigoAtividade);
   }
 
   carregarDiscicplinas() {
@@ -65,6 +70,28 @@ export class AtividadeCadastroComponent implements OnInit {
         const c = new ClassificacaoDisciplinaPipe();
         this.classificacoes.push({ label: c.transform(classificacao), value: classificacao });
       });
+    });
+  }
+
+  carrgarAtividade(codigo: number) {
+    if (codigo) {
+      this.atividadeService.buscaPorCodigo(codigo)
+        .then(atividade => {
+          this.atividade = atividade;
+          this.atribuirValores(this.atividade);
+        }).catch(erro => this.errorHandle.handle(erro));
+    }
+  }
+
+  atribuirValores(atividade: Atividade) {
+    this.atividadeForm.patchValue({
+      codigo: atividade.codigo,
+      titulo: atividade.titulo,
+      descricao: atividade.descricao,
+      classificacao: atividade.classificacao,
+      disciplina: {
+        codigo: atividade.disciplina.codigo
+      }
     });
   }
 

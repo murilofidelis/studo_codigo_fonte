@@ -101,7 +101,7 @@ export class AlunoCadastroComponent implements OnInit {
     this.pt = CalendarioUtil.pt;
   }
 
-  verificaCampoConteErro(campo: string): boolean {
+  verificaCampoContenErro(campo: string): boolean {
     return (!this.alunoForm.get(campo).value) &&
       (this.alunoForm.get(campo).touched || this.alunoForm.get(campo).dirty);
   }

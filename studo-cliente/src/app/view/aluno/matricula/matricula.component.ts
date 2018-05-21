@@ -64,10 +64,12 @@ export class MatriculaComponent implements OnInit {
     this.matricula.aluno = this.aluno;
     if (this.matricula.aluno.codigo && this.matricula.turma.codigo) {
       this.alunoService.salvarMatricula(this.matricula)
-        .then(() => {
-          this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
-          this.buscaMatriculasPorAluno(this.aluno.codigo);
-        }).catch(erro => this.errorHandle.handle(erro));
+        .then(response => {
+          if (response) {
+            this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);
+            this.buscaMatriculasPorAluno(this.aluno.codigo);
+          }
+        });
     }
   }
 

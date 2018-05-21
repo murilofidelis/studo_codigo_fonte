@@ -37,7 +37,7 @@ public class LogErro implements Serializable {
     private String usuarioLogado;
 
     @Column(name = "log_erro")
-    @Size(max = 30000)
+    @Size(max = 20000)
     private String stackTrace;
 
 }
