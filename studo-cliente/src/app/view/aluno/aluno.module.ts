@@ -14,6 +14,7 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { PanelModule } from 'primeng/components/panel/panel';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
+import { FileUploadModule } from 'primeng/components/fileupload/fileupload';
 
 import { AlunoCadastroComponent } from './aluno-cadastro/aluno-cadastro.component';
 
@@ -41,6 +42,7 @@ import { MatriculaComponent } from './matricula/matricula.component';
     InputMaskModule,
     PanelModule,
     ConfirmDialogModule,
+    FileUploadModule,
 
     SharedModule
   ],

@@ -27,6 +27,7 @@ export class AlunoCadastroComponent implements OnInit {
   alunoForm: FormGroup;
   aluno: Aluno = new Aluno();
   pt: any;
+  uploadedFiles: any[] = [];
 
   cpfCadastrado: boolean;
   disableCpf: boolean;
@@ -130,6 +131,13 @@ export class AlunoCadastroComponent implements OnInit {
   removeMascara(valor: string): string {
     const valorSemFormatacao = valor.replace(/[^a-zA-Z0-9]/g, '');
     return valorSemFormatacao;
+  }
+
+  onUpload(event) {
+    for (const file of event.files) {
+      this.uploadedFiles.push(file);
+      console.log(this.uploadedFiles);
+    }
   }
 
 }
