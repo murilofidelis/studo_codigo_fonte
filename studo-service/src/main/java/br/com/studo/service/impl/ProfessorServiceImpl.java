@@ -3,7 +3,7 @@ package br.com.studo.service.impl;
 import br.com.studo.domain.Professor;
 import br.com.studo.domain.dto.ProfessorDTO;
 import br.com.studo.domain.mapper.ProfessorMapper;
-import br.com.studo.repository.ProfessorRepositoty;
+import br.com.studo.repository.ProfessorRepository;
 import br.com.studo.security.SecurityUtil;
 import br.com.studo.service.ProfessorService;
 import br.com.studo.service.UsuarioService;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProfessorServiceImpl implements ProfessorService {
 
     @Autowired
-    private ProfessorRepositoty professorRepositoty;
+    private ProfessorRepository repository;
 
     @Autowired
     private ProfessorMapper professorMapper;
@@ -30,7 +30,7 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Professor> filtarPesquisar(String nome, Pageable pageable) {
-        return professorRepositoty.findByNomeStartingWithIgnoreCase(nome, pageable);
+        return repository.findByNomeStartingWithIgnoreCase(nome, pageable);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ProfessorServiceImpl implements ProfessorService {
         } else {
             usuarioService.atualizaUsuarioProfessor(professor);
         }
-        return professorMapper.toDTO(professorRepositoty.save(professor));
+        return professorMapper.toDTO(repository.save(professor));
     }
 
     @Override
@@ -53,22 +53,22 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public ProfessorDTO buscaPorCodigo(Long codigo) {
-        return professorMapper.toDTO(professorRepositoty.findOne(codigo));
+        return professorMapper.toDTO(repository.findOne(codigo));
     }
 
     @Override
     public Integer count() {
-        return professorRepositoty.quantidade();
+        return repository.quantidade();
     }
 
     @Override
     public ProfessorDTO buscarProfessorLogado() {
-        return professorMapper.toDTO(professorRepositoty.findByCpf(SecurityUtil.getUsuarioLogado()));
+        return professorMapper.toDTO(repository.findByCpf(SecurityUtil.getUsuarioLogado()));
     }
 
     @Override
     public Long buscaCodProfessorProCPF(String cpf) {
-        return professorRepositoty.buscaCodProfessorPorCPF(cpf);
+        return repository.buscaCodProfessorPorCPF(cpf);
     }
 
 }

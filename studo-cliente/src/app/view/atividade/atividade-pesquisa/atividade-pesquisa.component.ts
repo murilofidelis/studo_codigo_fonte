@@ -23,6 +23,8 @@ export class AtividadePesquisaComponent implements OnInit {
   totalRegistros = 0;
   filtro = new FiltroAtividade();
   atividades = [];
+  visualisarAtividade: boolean;
+  atividade: Atividade;
   @ViewChild('tabela') grid;
 
   constructor(
@@ -79,5 +81,10 @@ export class AtividadePesquisaComponent implements OnInit {
         this.pesquisar();
       }
     });
+  }
+
+  exibirAtividade(atividade: Atividade) {
+    this.visualisarAtividade = true;
+    this.atividade = atividade;
   }
 }

@@ -13,17 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
 public class TurmaServiceImpl implements TurmaService {
 
     @Autowired
-    private TurmaRepository turmaRepository;
+    private TurmaRepository repository;
 
     @Autowired
     private TurmaMapper turmaMapper;
@@ -32,24 +30,23 @@ public class TurmaServiceImpl implements TurmaService {
     private Mensagem mensagem;
 
     @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Turma> filtarPesquisa(List<Periodo> periodos, Integer ano, Pageable pageable) {
-        return turmaRepository.findPeriodoAndAno(periodos, ano, pageable);
+        return repository.findPeriodoAndAno(periodos, ano, pageable);
     }
 
     @Override
+    @Transactional
     public TurmaDTO salvar(TurmaDTO turmaDTO) {
         turmaDTO.setNumeroTurma(gerarNumeroTurma(turmaDTO));
         if (turmaDTO.getCodigo() == null) {
             verificaTurmaCadastrada(turmaDTO.getNumeroTurma());
         }
-        return turmaMapper.toDTO(turmaRepository.save(turmaMapper.toEntity(turmaDTO)));
+        return turmaMapper.toDTO(repository.save(turmaMapper.toEntity(turmaDTO)));
     }
 
     @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public TurmaDTO buscarPorCodigo(Long codigo) {
-        return turmaMapper.toDTO(turmaRepository.findOne(codigo));
+        return turmaMapper.toDTO(repository.findOne(codigo));
     }
 
     private String gerarNumeroTurma(TurmaDTO turmaDTO) {
@@ -62,19 +59,18 @@ public class TurmaServiceImpl implements TurmaService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public TurmaDTO buscaTurmaPorNumero(String numTurma) {
-        return turmaMapper.toDTO(turmaRepository.findByNumeroTurma(numTurma));
+        return turmaMapper.toDTO(repository.findByNumeroTurma(numTurma));
     }
 
     private void verificaTurmaCadastrada(String numTruma) {
-        if (turmaRepository.findTurmaCadastrada(numTruma)) {
+        if (repository.findTurmaCadastrada(numTruma)) {
             throw new StudoException(mensagem.get("MSG001"));
         }
     }
 
     @Override
     public Integer count() {
-        return turmaRepository.quantidade(DataUtil.anoAtual());
+        return repository.quantidade(DataUtil.anoAtual());
     }
 }

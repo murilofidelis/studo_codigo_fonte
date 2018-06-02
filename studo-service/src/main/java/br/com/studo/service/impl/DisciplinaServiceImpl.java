@@ -12,15 +12,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class DisciplinaServiceImpl implements DisciplinaService {
 
     @Autowired
-    private DisciplinaRepository disciplinaRepository;
+    private DisciplinaRepository repository;
 
     @Autowired
     private DisciplinaMapper disciplinaMapper;
@@ -29,37 +27,37 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     private Mensagem mensagem;
 
     @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+
     public Page<Disciplina> filtraPesquisa(String descricao, Pageable pageable) {
-        return disciplinaRepository.findByDescricaoContainingIgnoreCase(descricao, pageable);
+        return repository.findByDescricaoContainingIgnoreCase(descricao, pageable);
     }
 
     @Override
+    @Transactional
     public DisciplinaDTO salvar(DisciplinaDTO disciplinaDTO) {
         if (verificaDisciplinaExiste(disciplinaDTO.getDescricao())) {
             throw new StudoException(mensagem.get("MSG001"));
         }
-        return disciplinaMapper.toDTO(disciplinaRepository.save(disciplinaMapper.toEntity(disciplinaDTO)));
+        return disciplinaMapper.toDTO(repository.save(disciplinaMapper.toEntity(disciplinaDTO)));
     }
 
     @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public DisciplinaDTO buscarPorCodigo(Long codigo) {
-        return disciplinaMapper.toDTO(disciplinaRepository.findOne(codigo));
+        return disciplinaMapper.toDTO(repository.findOne(codigo));
     }
 
     private Boolean verificaDisciplinaExiste(String descricao) {
-        return disciplinaRepository.buscaDisciplinaPorNome(descricao);
+        return repository.buscaDisciplinaPorNome(descricao);
     }
 
     @Override
     public Integer count() {
-        return disciplinaRepository.quantidade();
+        return repository.quantidade();
     }
 
     @Override
     @Cacheable("disciplinas")
     public Iterable<DisciplinaDTO> listar() {
-        return disciplinaMapper.iterable(disciplinaRepository.findAll());
+        return disciplinaMapper.iterable(repository.findAll());
     }
 }

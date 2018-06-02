@@ -8,7 +8,7 @@ import { SharedModule } from './../../shared/shared.module';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
-import { DialogModule } from 'primeng/primeng';
+import { DialogModule } from 'primeng/components/dialog/dialog';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { FieldsetModule } from 'primeng/components/fieldset/fieldset';
 import { CalendarModule } from 'primeng/components/calendar/calendar';
@@ -19,6 +19,7 @@ import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdia
 
 import { AtividadePesquisaComponent } from './atividade-pesquisa/atividade-pesquisa.component';
 import { AtividadeCadastroComponent } from './atividade-cadastro/atividade-cadastro.component';
+import { ClassificacaoDisciplinaPipe } from '../../util/pipes/classificacao-disciplina.pipe';
 
 @NgModule({
   imports: [
@@ -38,9 +39,8 @@ import { AtividadeCadastroComponent } from './atividade-cadastro/atividade-cadas
     SelectButtonModule,
     InputTextareaModule,
     ConfirmDialogModule,
-
     SharedModule
   ],
-  declarations: [AtividadePesquisaComponent, AtividadeCadastroComponent]
+  declarations: [AtividadePesquisaComponent, AtividadeCadastroComponent, ClassificacaoDisciplinaPipe],
 })
 export class AtividadeModule { }

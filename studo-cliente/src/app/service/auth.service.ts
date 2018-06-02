@@ -82,11 +82,12 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
-  private carregarToken() {
+  carregarToken(): string {
     const token = localStorage.getItem('token');
     if (token) {
       this.armazenarToken(token);
     }
+    return token;
   }
 
 }

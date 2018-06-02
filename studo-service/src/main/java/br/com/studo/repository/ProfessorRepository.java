@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProfessorRepositoty extends CrudRepository<Professor, Long> {
+public interface ProfessorRepository extends CrudRepository<Professor, Long> {
 
     Page<Professor> findByNomeStartingWithIgnoreCase(String nome, Pageable pageable);
 

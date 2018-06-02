@@ -17,6 +17,7 @@ import { EnderecoService } from '../service/endereco.service';
 import { AlunoService } from '../service/aluno.service';
 import { DashbordService } from './../service/dashbord.service';
 import { AtividadeService } from '../service/atividade.service';
+import { DocumentosService } from './../service/documentos.service';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { AtividadeService } from '../service/atividade.service';
     EnderecoService,
     DashbordService,
     AtividadeService,
+    DocumentosService,
   ],
   declarations: [NavbarComponent, PaginaNaoEncontradaComponent, AcessoNegadoComponent]
 })

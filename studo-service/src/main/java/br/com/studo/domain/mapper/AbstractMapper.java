@@ -5,20 +5,20 @@ import org.mapstruct.IterableMapping;
 
 import java.util.List;
 
-public interface AbstractMapper<Entity, DTO> {
+public interface AbstractMapper<T, D> {
 
-    Entity toEntity(DTO dto);
+    T toEntity(D dto);
 
     @InheritInverseConfiguration
-    DTO toDTO(Entity entity);
+    D toDTO(T entity);
 
     @IterableMapping(qualifiedByName = "toDTO")
-    Iterable<DTO> iterable(Iterable<Entity> entities);
+    Iterable<D> iterable(Iterable<T> entities);
 
     @IterableMapping(qualifiedByName = "toDTO")
-    List<DTO> listDTO(List<Entity> entities);
+    List<D> listDTO(List<T> entities);
 
     @IterableMapping(qualifiedByName = "toEntity")
-    List<Entity> listEntitys(List<DTO> dtos);
+    List<T> listEntitys(List<D> dtos);
 
 }

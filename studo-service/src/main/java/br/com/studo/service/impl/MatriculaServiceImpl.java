@@ -13,23 +13,23 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
-@Transactional
 @Service
 public class MatriculaServiceImpl implements MatriculaService {
 
     @Autowired
-    private MatriculaRepository matriculaRepository;
+    private MatriculaRepository repository;
 
     @Autowired
     private Mensagem mensagem;
 
     @Override
+    @Transactional
     public Matricula salvaMatricula(Matricula matricula) {
         verificaMatricula(matricula);
         matricula.setDataMatricula(LocalDate.now());
         matricula.setTurmaAtual(true);
         matricula.setMatricula(geraMatricula(matricula));
-        return matriculaRepository.save(matricula);
+        return repository.save(matricula);
     }
 
     private String geraMatricula(Matricula matricula) {
@@ -43,17 +43,17 @@ public class MatriculaServiceImpl implements MatriculaService {
 
     @Override
     public List<Matricula> buscaMatriculasPorAluno(Long codigo) {
-        return matriculaRepository.findByAlunoCodigo(codigo);
+        return repository.findByAlunoCodigo(codigo);
     }
 
     private void verificaMatricula(Matricula matricula) {
-        if (matriculaRepository.findByAlunoMatriculado(matricula.getAluno().getCodigo(), matricula.getTurma().getCodigo())) {
+        if (repository.findByAlunoMatriculado(matricula.getAluno().getCodigo(), matricula.getTurma().getCodigo())) {
             throw new StudoException(mensagem.get("MSG002"));
         }
     }
 
     @Override
     public void deletaMatriculaAluno(Long codMatricula) {
-        matriculaRepository.delete(codMatricula);
+        repository.delete(codMatricula);
     }
 }

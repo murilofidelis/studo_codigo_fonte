@@ -26,11 +26,10 @@ import java.util.Objects;
 
 @Slf4j
 @Service
-@Transactional
 public class AtividadeServiceImpl implements AtividadeService {
 
     @Autowired
-    private AtividadeRepository atividadeRepository;
+    private AtividadeRepository repository;
 
     @Autowired
     private ProfessorService professorService;
@@ -51,8 +50,8 @@ public class AtividadeServiceImpl implements AtividadeService {
         if (Objects.nonNull(parametros.getFirst("dataFim"))) {
             dataFim = formataDataInfomada(parametros.getFirst("dataFim"));
         }
-        List<AtividadeDTO> listaAtividades = atividadeRepository.buscaAtividades(dataInicio, dataFim, cod, pageable);
-        Long quantidade = atividadeRepository.quantidade(dataInicio, dataFim, cod, pageable);
+        List<AtividadeDTO> listaAtividades = repository.buscaAtividades(dataInicio, dataFim, cod, pageable);
+        Long quantidade = repository.quantidade(dataInicio, dataFim, cod, pageable);
         return new PageImpl<>(listaAtividades, pageable, quantidade);
     }
 
@@ -66,15 +65,16 @@ public class AtividadeServiceImpl implements AtividadeService {
     }
 
     @Override
+    @Transactional
     public AtividadeDTO salvar(AtividadeDTO atividadeDTO) {
         atividadeDTO.setDataCadastro(LocalDate.now());
         atividadeDTO.setProfessor(professorService.buscarProfessorLogado());
-        return atividadeMapper.toDTO(atividadeRepository.save(atividadeMapper.toEntity(atividadeDTO)));
+        return atividadeMapper.toDTO(repository.save(atividadeMapper.toEntity(atividadeDTO)));
     }
 
     @Override
     public AtividadeDTO buscaPorCodigo(Long codigo) {
-        return atividadeMapper.toDTO(atividadeRepository.findOne(codigo));
+        return atividadeMapper.toDTO(repository.findOne(codigo));
     }
 
     @Override
@@ -83,7 +83,8 @@ public class AtividadeServiceImpl implements AtividadeService {
     }
 
     @Override
+    @Transactional
     public void excluir(Long codigo) {
-        atividadeRepository.delete(codigo);
+        repository.delete(codigo);
     }
 }

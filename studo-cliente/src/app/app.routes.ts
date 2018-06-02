@@ -1,3 +1,4 @@
+import { DocumentosComponent } from './view/aluno/documentos/documentos.component';
 
 import { Routes } from '@angular/router';
 
@@ -34,6 +35,10 @@ export const ROUTES: Routes = [
   },
   {
     path: 'aluno/:codigo', component: AlunoCadastroComponent, canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ALTERAR_ALUNO'] }
+  },
+  {
+    path: 'aluno/documentos/:codigo', component: DocumentosComponent, canActivate: [AuthGuard],
     data: { roles: ['ROLE_ALTERAR_ALUNO'] }
   },
   {

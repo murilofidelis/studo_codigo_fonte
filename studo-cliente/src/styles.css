@@ -27,6 +27,11 @@ body{
     text-align: left;
   }
 
+  .col-ativida-acoes{
+    width: 220px;
+    text-align: center;
+  }
+
   .col-ativida-disciplina{
     width: 200px;
     text-align: center;

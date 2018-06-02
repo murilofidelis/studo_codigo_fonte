@@ -45,6 +45,7 @@ server:
 studo:
   enviar-email: false
   seguranca:
+    enableHttps: false
     origin-permitida: http://localhost:4200
     studo-cliente: studo_cliente
     secret: stud0_cli3nt3_s3cret

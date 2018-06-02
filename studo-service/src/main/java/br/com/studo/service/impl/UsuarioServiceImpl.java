@@ -21,11 +21,10 @@ import java.util.Set;
 
 @Slf4j
 @Service
-@Transactional
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
-    private UsuarioRepositoty usuarioRepositoty;
+    private UsuarioRepositoty repositoty;
 
     @Autowired
     private PerfilService perfilService;
@@ -37,6 +36,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     private StudoProperty property;
 
     @Override
+    @Transactional
     public Usuario criaUsuarioProfessor(Professor professor) {
         Usuario usuario = new Usuario();
         usuario.setLogin(professor.getCpf());
@@ -58,6 +58,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    @Transactional
     public Usuario atualizaUsuarioProfessor(Professor professor) {
         Usuario usuario = buscaPorCpf(professor.getCpf());
         usuario.setNome(professor.getNome());
@@ -68,6 +69,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    @Transactional
     public Usuario criaUsuarioAluno(Aluno aluno) {
         Usuario usuario = new Usuario();
         usuario.setNome(aluno.getNome());
@@ -89,6 +91,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    @Transactional
     public Usuario atualizaUsuarioAluno(Aluno aluno) {
         Usuario usuario = buscaPorCpf(aluno.getCpf());
         usuario.setNome(aluno.getNome());
@@ -100,11 +103,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Boolean cpfExiste(String cpf) {
-        return usuarioRepositoty.veificaCpf(cpf);
+        return repositoty.veificaCpf(cpf);
     }
 
+    @Transactional
     private void salvaUsuario(Usuario usuario) {
-        usuarioRepositoty.save(usuario);
+        repositoty.save(usuario);
     }
 
     private Set<Perfil> addPerfil(TipoPerfil tipoPerfil) {
@@ -116,7 +120,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private Usuario buscaPorCpf(String cpf) {
         log.debug("BUSCANDO USUÁRIO CPF:  {}", cpf);
-        return usuarioRepositoty.findByLogin(cpf);
+        return repositoty.findByLogin(cpf);
     }
 
     private String criarMensagemEmail(String cpf, String nome, String senhaProvisoria) {

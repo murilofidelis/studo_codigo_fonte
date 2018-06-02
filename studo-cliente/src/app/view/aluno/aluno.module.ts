@@ -22,7 +22,7 @@ import { SharedModule } from './../../shared/shared.module';
 import { AlunoPesquisaComponent } from './aluno-pesquisa/aluno-pesquisa.component';
 import { TurmaInfoComponent } from './matricula/turma-info/turma-info.component';
 import { MatriculaComponent } from './matricula/matricula.component';
-
+import { DocumentosComponent } from './documentos/documentos.component';
 
 @NgModule({
   imports: [
@@ -46,6 +46,12 @@ import { MatriculaComponent } from './matricula/matricula.component';
 
     SharedModule
   ],
-  declarations: [AlunoCadastroComponent, AlunoPesquisaComponent, TurmaInfoComponent, MatriculaComponent]
+  declarations: [
+    AlunoCadastroComponent,
+    AlunoPesquisaComponent,
+    TurmaInfoComponent,
+    MatriculaComponent,
+    DocumentosComponent
+  ]
 })
 export class AlunoModule { }

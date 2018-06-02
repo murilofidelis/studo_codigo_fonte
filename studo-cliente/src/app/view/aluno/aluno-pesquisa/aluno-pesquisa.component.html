@@ -46,6 +46,7 @@
           <p-column header="Ações" styleClass="col-acoes">
             <ng-template let-aluno="rowData" pTemplate="body">
               <a pButton icon="fa-address-book" pTooltip="Matricula" tooltipPosition="top" [routerLink]="['/matricula', aluno.codigo]"></a>
+              <a pButton icon="fa-file" pTooltip="Documentos" tooltipPosition="top" [routerLink]="['/aluno/documentos/', aluno.codigo]"></a>
               <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/aluno', aluno.codigo]"></a>
             </ng-template>
           </p-column>

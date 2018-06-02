@@ -2,7 +2,6 @@ package br.com.studo.web.resource;
 
 import br.com.studo.domain.dto.AtividadeDTO;
 import br.com.studo.domain.enums.ClassificacaoTurma;
-import br.com.studo.repository.AtividadeRepository;
 import br.com.studo.service.AtividadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,9 +28,6 @@ public class AtividadeResource {
 
     @Autowired
     private AtividadeService atividadeService;
-
-    @Autowired
-    private AtividadeRepository repository;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_LISTAR_ATIVIDADE')")

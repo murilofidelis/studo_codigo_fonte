@@ -1,7 +1,7 @@
 package br.com.studo.domain;
 
-import br.com.studo.util.DateConverter;
 import br.com.studo.domain.enums.Sexo;
+import br.com.studo.util.DateConverter;
 import lombok.Getter;
 import lombok.Setter;
 

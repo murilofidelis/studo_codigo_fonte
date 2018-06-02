@@ -1,0 +1,49 @@
+<div class="container">
+
+  <form autocomplete="off">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Documentos</h1>
+      </div>
+
+      <div class="ui-g-12">
+        <p-fileUpload name="documentos[]" [url]="uploadURL" (onUpload)="onUpload($event)" (onBeforeSend)="onBeforeSend($event)" multiple="multiple"
+          maxFileSize="9000000" chooseLabel="Adicionar" uploadLabel="Enviar" cancelLabel="Cancelar">
+          <ng-template pTemplate="content">
+            <ul *ngIf="documentos.length">
+              <li *ngFor="let arquivo of documentos">{{arquivo.name}} - {{arquivo.size}} bytes</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+      </div>
+
+      <br>
+
+      <!-- TABELA -->
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <h3>Arquivos</h3>
+          <p-dataTable [value]="listaDocumentos" [paginator]="true" [responsive]="true" [rows]="10" emptyMessage="Nenhum registro encontrado"
+            #tabela>
+
+            <p-column field="nome" header="Arquivos"></p-column>
+            <p-column header="Ações" styleClass="col-acoes">
+              <ng-template let-documento="rowData" pTemplate="body">
+                <a pButton icon="fa-download" pTooltip="Download" tooltipPosition="top" (click)="download(documento)"></a>
+              </ng-template>
+            </p-column>
+
+          </p-dataTable>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+  <!-- OPÇÕES-->
+  <div class="ui-g-12 ui-md-4 ui-fluid btn-align">
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <button pButton type="submit" icon="fa-reply" label="Voltar" routerLink="/aluno"></button>
+    </div>
+  </div>
+</div>

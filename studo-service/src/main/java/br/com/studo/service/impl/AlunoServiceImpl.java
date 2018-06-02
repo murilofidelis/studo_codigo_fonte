@@ -9,21 +9,21 @@ import br.com.studo.repository.AlunoRepository;
 import br.com.studo.service.AlunoService;
 import br.com.studo.service.MatriculaService;
 import br.com.studo.service.UsuarioService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
-@Transactional
 public class AlunoServiceImpl implements AlunoService {
 
     @Autowired
-    private AlunoRepository alunoRepository;
+    private AlunoRepository repository;
 
     @Autowired
     private AlunoMapper alunoMapper;
@@ -32,16 +32,16 @@ public class AlunoServiceImpl implements AlunoService {
     private MatriculaMapper matriculaMapper;
 
     @Autowired
-    MatriculaService matriculaService;
+    private MatriculaService matriculaService;
 
     @Autowired
     private UsuarioService usuarioService;
 
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Aluno> filtarPesquisar(String nome, Pageable pageable) {
-        return alunoRepository.findByNomeStartingWithIgnoreCase(nome, pageable);
+        return repository.findByNomeStartingWithIgnoreCase(nome, pageable);
     }
 
+    @Transactional
     public AlunoDTO salvarAluno(AlunoDTO alunoDTO) {
         Aluno aluno = alunoMapper.toEntity(alunoDTO);
         if (aluno.getCodigo() == null) {
@@ -49,33 +49,33 @@ public class AlunoServiceImpl implements AlunoService {
         } else {
             usuarioService.atualizaUsuarioAluno(aluno);
         }
-        return alunoMapper.toDTO(alunoRepository.save(aluno));
+        return alunoMapper.toDTO(repository.save(aluno));
     }
 
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public AlunoDTO buscaPorCodigo(Long codigo) {
-        return alunoMapper.toDTO(alunoRepository.findOne(codigo));
+        return alunoMapper.toDTO(repository.findOne(codigo));
     }
 
+    @Transactional
     public MatriculaDTO salvaMatricula(MatriculaDTO matriculaDTO) {
         return matriculaMapper.toDTO(matriculaService.salvaMatricula(matriculaMapper.toEntity(matriculaDTO)));
     }
 
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<MatriculaDTO> buscaMatriculasPorAluno(Long codigo) {
         return matriculaMapper.listDTO(matriculaService.buscaMatriculasPorAluno(codigo));
     }
 
+    @Transactional
     public void deletaMatriculaAluno(Long codMatricula) {
         matriculaService.deletaMatriculaAluno(codMatricula);
     }
 
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public boolean verificaCpfCadastrado(String cpf) {
         return usuarioService.cpfExiste(cpf);
     }
 
     public Integer count() {
-        return alunoRepository.quantidade();
+        return repository.quantidade();
     }
+
 }

@@ -1,4 +1,3 @@
-import { CalendarioUtil } from './../../../util/calendario.util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,6 +11,7 @@ import { Turma } from './../../../model/turma.model';
 import { Matricula } from './../../../model/matricula.model';
 import { Aluno } from './../../../model/aluno.model';
 import { ValidadorCPF } from './../../../util/validator/cpf-validador';
+import { CalendarioUtil } from './../../../util/calendario.util';
 
 import { AlunoService } from '../../../service/aluno.service';
 
@@ -27,7 +27,6 @@ export class AlunoCadastroComponent implements OnInit {
   alunoForm: FormGroup;
   aluno: Aluno = new Aluno();
   pt: any;
-  uploadedFiles: any[] = [];
 
   cpfCadastrado: boolean;
   disableCpf: boolean;
@@ -132,12 +131,4 @@ export class AlunoCadastroComponent implements OnInit {
     const valorSemFormatacao = valor.replace(/[^a-zA-Z0-9]/g, '');
     return valorSemFormatacao;
   }
-
-  onUpload(event) {
-    for (const file of event.files) {
-      this.uploadedFiles.push(file);
-      console.log(this.uploadedFiles);
-    }
-  }
-
 }

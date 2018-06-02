@@ -40,9 +40,12 @@
           <p-column field="titulo" header="Título"></p-column>
           <p-column field="disciplina.descricao" header="Disciplina" styleClass="col-ativida-disciplina"></p-column>
 
-          <p-column header="Ações" styleClass="col-acoes">
+          <p-column header="Ações" styleClass="col-ativida-acoes">
             <ng-template let-atividade="rowData" pTemplate="body">
-              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/atividade', atividade.codigo]"></a>
+              <a pButton icon="fa-eye" pTooltip="Visualizar Atividade" tooltipPosition="top" (click)="exibirAtividade(atividade)"></a>
+              <a pButton icon="fa-share" pTooltip="Atribuir Atividade" tooltipPosition="top"></a>
+              <a pButton icon="fa-question-circle" pTooltip="Questões" tooltipPosition="top"></a>
+              <a pButton icon="fa-pencil" pTooltip="Editar Atividade" tooltipPosition="top" [routerLink]="['/atividade', atividade.codigo]"></a>
               <a pButton icon="fa-times" pTooltip="Excluir Atividade" tooltipPosition="top" (click)="excluirAtividade(atividade)"></a>
             </ng-template>
           </p-column>
@@ -60,5 +63,32 @@
         <button type="button" pButton icon="fa-times" label="Não" (click)="confirmacao.reject()"></button>
       </p-footer>
     </p-confirmDialog>
+
+
+    <p-dialog header="Visualizar" [(visible)]="visualisarAtividade" [width]="800">
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label>Disciplina: </label>
+          {{atividade?.disciplina.descricao}}
+        </div>
+        <div class="ui-g-4">
+          <label>Classificação: </label>
+          {{atividade?.classificacao | classificacaoDisciplina}}
+        </div>
+        <div class="ui-g-4">
+          <label>Data Criação: </label>
+          {{atividade?.dataCadastro}}
+        </div>
+        <div class="ui-g-12">
+          <label>Título: </label>
+          {{atividade?.titulo}}
+        </div>
+        <div class="ui-g-12">
+          <label>Descrição: </label>
+          {{atividade?.descricao}}
+        </div>
+      </div>
+    </p-dialog>
+
   </div>
 </div>
