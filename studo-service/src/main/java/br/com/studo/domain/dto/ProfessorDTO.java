@@ -1,13 +1,13 @@
 package br.com.studo.domain.dto;
 
-import br.com.studo.domain.Email;
-import br.com.studo.domain.Endereco;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class ProfessorDTO {
+public class ProfessorDTO implements Serializable {
 
     private Long codigo;
 

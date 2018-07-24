@@ -52,9 +52,7 @@ public class DisciplinaResourceITTest {
     }
 
     @Test
-    @Ignore
     public void lista() throws Exception {
-        //   System.out.println(this.mvc.perform(get(URL)).andDo(print()));
         this.mvc.perform(get(BASE_URL)).andExpect(status().isOk());
     }
 

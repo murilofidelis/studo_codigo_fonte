@@ -51,10 +51,10 @@ public class DocumentoServiceImpl implements DocumentoService {
     }
 
     private void createResponse(HttpServletResponse response, Documento documento) {
-        try (InputStream inputStream = new ByteArrayInputStream(documento.getDocumento())) {
+        try (InputStream inputStream = new ByteArrayInputStream(documento.getArquivo())) {
             response.setContentType("application/octet-stream");
             response.setHeader("Content-Disposition", "attachment; filename=" + documento.getNome());
-            response.setHeader("Content-Length", String.valueOf(documento.getDocumento().length));
+            response.setHeader("Content-Length", String.valueOf(documento.getArquivo().length));
             FileCopyUtils.copy(inputStream, response.getOutputStream());
         } catch (IOException e) {
             log.info("ERRO AO REALIZAR DOWNLOAD: ", e.getMessage(), e);
@@ -62,7 +62,6 @@ public class DocumentoServiceImpl implements DocumentoService {
         }
     }
 
-    @Transactional
     private void salvar(Documento documento) {
         repository.save(documento);
     }

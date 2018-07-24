@@ -106,7 +106,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         return repositoty.veificaCpf(cpf);
     }
 
-    @Transactional
     private void salvaUsuario(Usuario usuario) {
         repositoty.save(usuario);
     }

@@ -28,7 +28,7 @@ public class MatriculaServiceImpl implements MatriculaService {
         verificaMatricula(matricula);
         matricula.setDataMatricula(LocalDate.now());
         matricula.setTurmaAtual(true);
-        matricula.setMatricula(geraMatricula(matricula));
+        matricula.setNumMatricula(geraMatricula(matricula));
         return repository.save(matricula);
     }
 

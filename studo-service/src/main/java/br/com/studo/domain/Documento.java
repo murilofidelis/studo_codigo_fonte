@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -23,7 +24,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "tab_documentos", schema = "studo")
-public class Documento {
+public class Documento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +39,7 @@ public class Documento {
     private String nome;
 
     @Lob
-    @Column(name = "documento")
-    private byte[] documento;
+    @Column(name = "arquivo")
+    private byte[] arquivo;
 
 }

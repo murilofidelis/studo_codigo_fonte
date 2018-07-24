@@ -3,9 +3,11 @@ package br.com.studo.domain.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class DashbordDTO {
+public class DashbordDTO implements Serializable {
 
     private Integer numAlunos;
 

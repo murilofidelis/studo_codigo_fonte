@@ -1,0 +1,10 @@
+version: '1'
+services:
+
+  studo-bd:
+    container_name: studo-bd
+    build: .
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data

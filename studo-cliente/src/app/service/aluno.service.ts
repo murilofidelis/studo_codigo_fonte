@@ -62,17 +62,17 @@ export class AlunoService {
   }
 
   salvar(aluno: Aluno) {
-    return this.http.post(`${STUDO_API}/${this.END_POINT}`, JSON.stringify(aluno))
+    return this.http.post(`${STUDO_API}/${this.END_POINT}`, aluno)
       .toPromise()
       .then(res => res)
       .catch(erro => this.erroHandle.handle(erro));
   }
 
   salvarMatricula(matricula: Matricula) {
-    return this.http.post(`${STUDO_API}/${this.END_POINT}/matricula`, JSON.stringify(matricula))
+    return this.http.post(`${STUDO_API}/${this.END_POINT}/matricula`, matricula)
       .toPromise()
       .then(res => res)
-      .catch(erro => this.erroHandle.handle(erro));
+      .catch(error => this.erroHandle.handle(error));
   }
 
   private converteStringParaData(aluno: Aluno) {

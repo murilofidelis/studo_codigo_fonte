@@ -4,11 +4,12 @@ import br.com.studo.domain.enums.Sexo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
 @Setter
-public class AlunoDTO {
+public class AlunoDTO implements Serializable {
 
     private Long codigo;
 

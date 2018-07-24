@@ -34,7 +34,7 @@ public class Matricula implements Serializable {
 
     @NotNull
     @Column(name = "matricula", unique = true)
-    private String matricula;
+    private String numMatricula;
 
     @NotNull
     @ManyToOne
