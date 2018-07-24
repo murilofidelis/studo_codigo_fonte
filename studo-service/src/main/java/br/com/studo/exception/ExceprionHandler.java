@@ -24,7 +24,7 @@ public class ExceprionHandler extends ResponseEntityExceptionHandler {
     private LogErroService logErroService;
 
     @ExceptionHandler({StudoException.class})
-    public ResponseEntity<Object> exceprionHandler(StudoException exception, WebRequest request) {
+    public ResponseEntity<Object> exceptionHandler(StudoException exception, WebRequest request) {
         String mensagem = exception.getMessage();
         List<String> erros = Arrays.asList(mensagem);
         logErroService.salvarLog(getStackTrace(exception));
@@ -32,9 +32,10 @@ public class ExceprionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({Exception.class})
-    public void errorInterceptor(Exception exception) {
+    public ResponseEntity<Object> exceptionHandler(Exception exception, WebRequest request) {
         logErroService.salvarLog(getStackTrace(exception));
         log.error("ERRO: ", exception);
+        return handleExceptionInternal(exception, null, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     private String getStackTrace(Throwable throwable) {

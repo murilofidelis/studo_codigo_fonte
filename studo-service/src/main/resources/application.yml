@@ -55,7 +55,7 @@ studo:
     authorized-grant-types:
       - password
       - refresh_token
-    access-token-validity-seconds: 600
+    access-token-validity-seconds: 9000
     refresh-token-validity-seconds: 86400
 
 

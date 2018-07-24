@@ -30,7 +30,6 @@ public class DisciplinaServiceITTest {
     private DisciplinaRepository repository;
 
     @Test
-    @Ignore
     public void salvar() {
         Disciplina d = new Disciplina();
         d.setDescricao("TESTE 222");
