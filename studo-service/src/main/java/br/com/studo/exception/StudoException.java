@@ -12,5 +12,8 @@ public class StudoException extends RuntimeException {
 	public StudoException(String var) {
         super(var);
     }
+    public StudoException(String var, Throwable throwable) {
+        super(var);
+    }
 
 }

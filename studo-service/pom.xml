@@ -170,6 +170,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!--javers -  auditoria-->
+        <dependency>
+            <groupId>org.javers</groupId>
+            <artifactId>javers-spring-boot-starter-sql</artifactId>
+            <version>3.10.2</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

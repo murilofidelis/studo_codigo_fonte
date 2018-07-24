@@ -3,6 +3,7 @@ package br.com.studo.domain;
 import br.com.studo.util.DateConverter;
 import lombok.Getter;
 import lombok.Setter;
+import org.javers.core.metamodel.annotation.TypeName;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "tab_matricula",  schema = "studo")
+@TypeName("matricula")
 public class Matricula implements Serializable {
 
     private static final long serialVersionUID = -927136295454282048L;

@@ -1,6 +1,7 @@
 package br.com.studo.repository;
 
 import br.com.studo.domain.Matricula;
+import org.javers.spring.annotation.JaversSpringDataAuditable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+@JaversSpringDataAuditable
 public interface MatriculaRepository extends CrudRepository<Matricula, Long> {
 
     List<Matricula> findByAlunoCodigo(Long codigo);

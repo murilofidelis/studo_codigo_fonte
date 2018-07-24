@@ -5,7 +5,6 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './seguranca/auth.guard';
 
 import { DashbordComponent } from './view/dashbord/dashbord/dashbord.component';
-import { DisciplinaPesquisaComponent } from './view/disciplina/disciplinas/disciplina-pesquisa.component';
 import { TurmaPesquisaComponent } from './view/turma/turma-pesquisa/turma-pesquisa.component';
 import { TurmaCadastroComponent } from './view/turma/turma-cadastro/turma-cadastro.component';
 import { ProfessorPesquisaComponent } from './view/professor/professor-pesquisa/professor-pesquisa.component';

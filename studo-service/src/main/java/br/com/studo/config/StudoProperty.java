@@ -13,6 +13,8 @@ public class StudoProperty {
 
     private final Seguranca seguranca = new Seguranca();
 
+    private final Auditoria auditoria = new Auditoria();
+
     @Setter
     @Getter
     public static class Seguranca {
@@ -32,6 +34,24 @@ public class StudoProperty {
         private int refreshTokenValiditySeconds;
 
         private String[] authorizedGrantTypes;
+
+    }
+
+    @Setter
+    @Getter
+    public static class Auditoria{
+
+        private String user;
+
+        private  String pass;
+
+        private String userPostgres;
+
+        private String passPostgres;
+
+        private String urlDataBase;
+
+        private String schema;
 
     }
 }

@@ -2,6 +2,7 @@ package br.com.studo.repository;
 
 import br.com.studo.domain.Turma;
 import br.com.studo.domain.enums.Periodo;
+import org.javers.spring.annotation.JaversSpringDataAuditable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+@JaversSpringDataAuditable
 public interface TurmaRepository extends CrudRepository<Turma, Long> {
 
     @Query(value = "SELECT turma FROM Turma turma WHERE turma.periodo IN ?1 AND turma.ano = ?2 ")

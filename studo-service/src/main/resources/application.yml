@@ -34,7 +34,7 @@ spring:
       config: classpath:ehcache.xml
 
 liquibase:
-  enabled: false
+  enabled: true
   default-schema: studo
   change-log: classpath:db/liquibase-changelog-master.xml
 
@@ -55,8 +55,16 @@ studo:
     authorized-grant-types:
       - password
       - refresh_token
-    access-token-validity-seconds: 600
+    access-token-validity-seconds: 6000
     refresh-token-validity-seconds: 86400
+  auditoria:
+    user: user
+    pass: password
+    user-postgres: postgres
+    pass-postgres: 123456
+    url-data-base:  jdbc:postgresql:db_studo
+    schema: usuarios
+
 
 
 

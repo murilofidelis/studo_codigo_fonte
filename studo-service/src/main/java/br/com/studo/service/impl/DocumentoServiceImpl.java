@@ -58,7 +58,7 @@ public class DocumentoServiceImpl implements DocumentoService {
             FileCopyUtils.copy(inputStream, response.getOutputStream());
         } catch (IOException e) {
             log.info("ERRO AO REALIZAR DOWNLOAD: ", e.getMessage(), e);
-            throw new StudoException("Erro ao realizar download do arquivo: " + e.getMessage());
+            throw new StudoException("Erro ao realizar download do arquivo: ", e);
         }
     }
 
