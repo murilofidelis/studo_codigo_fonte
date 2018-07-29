@@ -111,8 +111,7 @@ public class AlunoServiceImpl implements AlunoService {
 
             JRDataSource dataSource = new JRBeanCollectionDataSource(alunos);
 
-            parametros.put("nome_sistema", "STUDO");
-
+            parametros.put("total_alunos", alunos.size());
             parametros.put("datasource", dataSource);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource);
