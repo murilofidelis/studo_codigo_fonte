@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -74,4 +76,11 @@ public class AlunoResource {
     public void deletaMatriculaAluno(@PathVariable Long codMatricula) {
         alunoService.deletaMatriculaAluno(codMatricula);
     }
+
+    @ResponseBody
+    @GetMapping("/geraRelatorioAlunos")
+    public void geraPDF(HttpServletResponse response) {
+        alunoService.geraRelatorioAluno(response);
+    }
+
 }

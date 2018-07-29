@@ -177,6 +177,12 @@
             <version>3.10.2</version>
         </dependency>
 
+        <!-- Jasper Reports -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.2.1</version>
+        </dependency>
 
     </dependencies>
 

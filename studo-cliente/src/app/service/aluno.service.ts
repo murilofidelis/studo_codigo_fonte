@@ -1,7 +1,7 @@
 import { ErrorHandleService } from './error-handle.service';
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
-import { URLSearchParams } from '@angular/http';
+import { URLSearchParams, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
@@ -96,6 +96,16 @@ export class AlunoService {
       .toPromise()
       .then(res => res.json())
       .catch(erro => this.erroHandle.handle(erro));
+  }
+
+  downloadRelatorio() {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    const opt = new RequestOptions({ headers: headers, responseType: ResponseContentType.Blob });
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/geraRelatorioAlunos`, opt)
+      .map(res => {
+        return new Blob([res.blob()], { type: 'application/x-www-form-urlencoded' });
+      }).catch((error: any) => Observable.throw(error.json() || 'Erro ao realizar download'));
   }
 
 }

@@ -6,6 +6,7 @@ import br.com.studo.domain.dto.MatriculaDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface AlunoService {
@@ -25,4 +26,6 @@ public interface AlunoService {
     boolean verificaCpfCadastrado(String cpf);
 
     Integer count();
+
+    void geraRelatorioAluno(HttpServletResponse response);
 }

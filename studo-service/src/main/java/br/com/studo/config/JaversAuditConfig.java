@@ -37,14 +37,14 @@ public class JaversAuditConfig {
             public Connection getConnection() throws SQLException {
                 try {
                     Class.forName("org.postgresql.Driver");
+                    Properties properties = new Properties();
+                    properties.setProperty(property.getAuditoria().getUser(), property.getAuditoria().getUserPostgres());
+                    properties.setProperty(property.getAuditoria().getPass(), property.getAuditoria().getPassPostgres());
+                    return DriverManager.getConnection(property.getAuditoria().getUrlDataBase(), properties);
                 } catch (ClassNotFoundException e) {
                     log.error("Erro de conexão: ", e);
                     return null;
                 }
-                Properties properties = new Properties();
-                properties.setProperty(property.getAuditoria().getUser(), property.getAuditoria().getUserPostgres());
-                properties.setProperty(property.getAuditoria().getPass(), property.getAuditoria().getPassPostgres());
-                return DriverManager.getConnection(property.getAuditoria().getUrlDataBase(), properties);
             }
         };
     }

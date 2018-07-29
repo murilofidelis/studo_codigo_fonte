@@ -45,5 +45,21 @@ export class AlunoPesquisaComponent {
     this.pesquisar();
   }
 
+  geraRelatorio() {
+    this.alunoService.downloadRelatorio().subscribe(blob => {
+      this.downloadArquivo(blob, 'relatorio.pdf');
+    });
+  }
+
+  private downloadArquivo(blob: any, nomeArquivo: string) {
+    const url = window.URL.createObjectURL(blob);
+    const element = window.document.createElement('a');
+    document.body.appendChild(element);
+
+    element.href = url;
+    element.download = nomeArquivo;
+    element.click();
+    document.body.removeChild(element);
+  }
 
 }
