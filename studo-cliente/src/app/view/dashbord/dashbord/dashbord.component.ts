@@ -31,4 +31,21 @@ export class DashbordComponent implements OnInit {
     });
   }
 
+  geraRelatorio() {
+    this.dashBordService.downloadRelatorio().subscribe(blob => {
+      this.downloadArquivo(blob, 'resumo.pdf');
+    });
+  }
+
+  private downloadArquivo(blob: any, nomeArquivo: string) {
+    const url = window.URL.createObjectURL(blob);
+    const element = window.document.createElement('a');
+    document.body.appendChild(element);
+
+    element.href = url;
+    element.download = nomeArquivo;
+    element.click();
+    document.body.removeChild(element);
+  }
+
 }

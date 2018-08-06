@@ -1,7 +1,7 @@
 package br.com.studo.repository.custom.impl;
 
-import br.com.studo.domain.dto.AtividadeDTO;
-import br.com.studo.domain.dto.DisciplinaDTO;
+import br.com.studo.annotation.CosultaNativaResultadoMapeamento;
+import br.com.studo.domain.dto.AtividadeConsultaDTO;
 import br.com.studo.repository.custom.AtividadeRepositoryCustom;
 import org.springframework.data.domain.Pageable;
 
@@ -10,8 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigInteger;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,23 +20,22 @@ public class AtividadeRepositoryImpl implements AtividadeRepositoryCustom {
     @PersistenceContext
     private EntityManager manager;
 
-    private static final String VAZIO = "";
-
     @Override
-    public List<AtividadeDTO> buscaAtividades(Date dataInicio, Date dataFim, Long codProfessor, Pageable pageable) {
-        StringBuilder sql = new StringBuilder("SELECT a.codigo, a.dsc_classificacao, a.dte_cadastro, a.descricao, a.titulo, d.codigo as cod_disciplina, d.descricao as disciplina FROM studo.tab_atividade a ");
+    public List<AtividadeConsultaDTO> buscaAtividades(Date dataInicio, Date dataFim, Long codProfessor, Pageable pageable) {
+        StringBuilder sql = new StringBuilder("SELECT a.codigo, a.dsc_classificacao, a.dte_cadastro, a.descricao, a.titulo, d.descricao as disciplina FROM studo.tab_atividade a ");
         sql.append(getSql(dataInicio, dataFim, true));
 
         Query query = manager.createNativeQuery(sql.toString());
         query.setFirstResult(pageable.getPageSize() * pageable.getPageNumber());
         query.setMaxResults(pageable.getPageSize());
+
         setParamtros(dataInicio, dataFim, codProfessor, query);
-        List<Object[]> atividades = query.getResultList();
-        return montarResultado(atividades);
+
+        return CosultaNativaResultadoMapeamento.mapear(query.getResultList(), AtividadeConsultaDTO.class);
     }
 
     @Override
-    public Long quantidade(Date dataInicio, Date dataFim, Long codProfessor, Pageable pageable) {
+    public Long quantidade(Date dataInicio, Date dataFim, Long codProfessor) {
         StringBuilder sql = new StringBuilder("SELECT count(a)  FROM studo.tab_atividade a ");
         sql.append(getSql(dataInicio, dataFim, false));
         Query query = manager.createNativeQuery(sql.toString());
@@ -51,26 +48,6 @@ public class AtividadeRepositoryImpl implements AtividadeRepositoryCustom {
         for (Map.Entry<String, Object> entry : substituiParametros(dataInicio, dataFim, codProfessor).entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }
-    }
-
-    private List<AtividadeDTO> montarResultado(List<Object[]> atividades) {
-        List<AtividadeDTO> listaAtividades = new ArrayList<>();
-        if (!atividades.isEmpty()) {
-            atividades.forEach(atividade -> {
-                AtividadeDTO dto = new AtividadeDTO();
-                dto.setCodigo(Long.parseLong(atividade[0].toString()));
-                dto.setClassificacao(atividade[1] != null ? atividade[1].toString() : VAZIO);
-                dto.setDataCadastro(LocalDate.parse(atividade[2].toString()));
-                dto.setDescricao(atividade[3].toString());
-                dto.setTitulo(atividade[4].toString());
-                DisciplinaDTO disciplinaDTO = new DisciplinaDTO();
-                disciplinaDTO.setCodigo(Long.parseLong(atividade[5].toString()));
-                disciplinaDTO.setDescricao(atividade[6].toString());
-                dto.setDisciplina(disciplinaDTO);
-                listaAtividades.add(dto);
-            });
-        }
-        return listaAtividades;
     }
 
     private StringBuilder getSql(Date dataInicio, Date dataFim, boolean ordenar) {

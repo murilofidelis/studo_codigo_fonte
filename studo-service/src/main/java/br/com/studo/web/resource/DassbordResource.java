@@ -7,10 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
-@RequestMapping("dashbord")
+@RequestMapping("/dashbord")
 public class DassbordResource {
 
     @Autowired
@@ -20,5 +23,11 @@ public class DassbordResource {
     public ResponseEntity<DashbordDTO> dashbord() {
         DashbordDTO dashbord = dashbordService.montarDashBord();
         return dashbord != null ? ResponseEntity.status(HttpStatus.OK).body(dashbord) : ResponseEntity.status(HttpStatus.OK).body(new DashbordDTO());
+    }
+
+    @ResponseBody
+    @GetMapping("/geraRelatorio")
+    public void geraPDF(HttpServletResponse response) {
+        dashbordService.gerarRelatotio(response);
     }
 }

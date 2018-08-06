@@ -5,11 +5,15 @@ import { AuthHttp } from 'angular2-jwt';
 
 import { STUDO_API } from '../app.api';
 
+import * as moment from 'moment';
+
 import { ErrorHandleService } from './error-handle.service';
 
 export class FiltroAtividade {
   dataInicio: Date;
   dataFim: Date;
+  titulo: string;
+  codDisciplina: number;
   pagina = 0;
   itensPorPagina = 10;
 }
@@ -24,21 +28,28 @@ export class AtividadeService {
     private errorHandle: ErrorHandleService
   ) { }
 
-  pesquisar(filtro: FiltroAtividade) {
+  filtrar(filtro: FiltroAtividade) {
+
     const params = new URLSearchParams();
 
     if (filtro.dataInicio) {
-      params.set('dataInicio', this.formataDataParaPesquisa(filtro.dataInicio).toString());
+      params.set('dataInicio', moment(filtro.dataInicio).format('YYYY-MM-DD'));
     }
     if (filtro.dataFim) {
-      params.set('dataFim', this.formataDataParaPesquisa(filtro.dataFim).toString());
+      params.set('dataFim', moment(filtro.dataFim).format('YYYY-MM-DD'));
     }
+    if (filtro.codDisciplina) {
+      params.set('codigoDisciplina', filtro.codDisciplina.toString());
+    }
+    if (filtro.titulo) {
+      params.set('titulo', filtro.titulo.toString());
+    }
+
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
 
     return this.http.get(`${STUDO_API}/${this.END_POINT}`, { search: params })
-      .toPromise()
-      .then(response => {
+      .map(response => {
         const responseJson = response.json();
         const atividades = responseJson.content;
 
@@ -49,6 +60,41 @@ export class AtividadeService {
         return resultado;
       });
   }
+
+  /**Pesquisa antiga usando query nativa */
+  pesquisar(filtro: FiltroAtividade) {
+
+    const params = new URLSearchParams();
+
+    if (filtro.dataInicio) {
+      params.set('dataInicio', this.formataDataParaPesquisa(filtro.dataInicio).toString());
+    }
+    if (filtro.dataFim) {
+      params.set('dataFim', this.formataDataParaPesquisa(filtro.dataInicio).toString());
+    }
+    if (filtro.codDisciplina) {
+      params.set('codigoDisciplina', filtro.codDisciplina.toString());
+    }
+    if (filtro.titulo) {
+      params.set('titulo', filtro.titulo.toString());
+    }
+
+    params.set('page', filtro.pagina.toString());
+    params.set('size', filtro.itensPorPagina.toString());
+
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/pesquisa`, { search: params })
+      .map(response => {
+        const responseJson = response.json();
+        const atividades = responseJson.content;
+
+        const resultado = {
+          atividades,
+          total: responseJson.totalElements
+        };
+        return resultado;
+      });
+  }
+
 
   formataDataParaPesquisa(data: Date): String {
     return `${data.getFullYear()}/${data.getMonth() + 1}/${data.getDate()}`;

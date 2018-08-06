@@ -1,8 +1,10 @@
 package br.com.studo.web.resource;
 
+import br.com.studo.domain.dto.AtividadeConsultaDTO;
 import br.com.studo.domain.dto.AtividadeDTO;
 import br.com.studo.domain.enums.ClassificacaoTurma;
 import br.com.studo.service.AtividadeService;
+import br.com.studo.service.filter.AtividadeFiltro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +33,13 @@ public class AtividadeResource {
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_LISTAR_ATIVIDADE')")
-    public Page<AtividadeDTO> buscaAtividades(@RequestParam MultiValueMap<String, String> parametros, Pageable pageable) {
+    public Page<AtividadeDTO> filtrar(AtividadeFiltro filtro, Pageable pageable) {
+        return atividadeService.filtraPesquisa(filtro, pageable);
+    }
+
+    @GetMapping("/pesquisa")
+    @PreAuthorize("hasAuthority('ROLE_LISTAR_ATIVIDADE')")
+    public Page<AtividadeConsultaDTO> pesquisar(@RequestParam MultiValueMap<String, String> parametros, Pageable pageable) {
         return atividadeService.buscaAtividades(parametros, pageable);
     }
 

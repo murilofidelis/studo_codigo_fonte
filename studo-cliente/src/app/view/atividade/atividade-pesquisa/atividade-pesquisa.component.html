@@ -7,24 +7,34 @@
     <p-fieldset legend="Pesquisa" class="ui-g-12">
       <form autocomplete="off" #formulario="ngForm" (ngSubmit)="pesquisar()">
 
-        <div class="ui-g-3 ui-fluid">
+        <div class="ui-g-2 ui-fluid">
           <label>De</label>
           <p-calendar [locale]="pt" dateFormat="dd/mm/yy" name="dataInicio" [(ngModel)]="filtro.dataInicio" [showIcon]="true" [monthNavigator]="true"
             [yearNavigator]="true" yearRange="1900:2030"></p-calendar>
         </div>
 
-        <div class="ui-g-3 ui-fluid">
+        <div class="ui-g-2 ui-fluid">
           <label>Até</label>
           <p-calendar [locale]="pt" dateFormat="dd/mm/yy" name="dataFim" [(ngModel)]="filtro.dataFim" [showIcon]="true" [monthNavigator]="true"
             [yearNavigator]="true" yearRange="1900:2030"></p-calendar>
         </div>
 
-        <div class="ui-g-3 ui-fluid align-button">
-          <button pButton type="submit" icon="fa-search" label="Pesquisar"></button>
+        <div class="ui-g-5 ui-fluid">
+          <label>Título</label>
+          <input pInputText name="titulo" [(ngModel)]="filtro.titulo" type="text" maxlength="50">
         </div>
 
-        <div class="ui-g-3 ui-fluid align-button">
+        <div class="ui-g-3 ui-fluid">
+          <label>Disciplina</label>
+          <p-dropdown name="discplina" [(ngModel)]="filtro.codDisciplina" [options]="disciplinas" [autoWidth]="false"></p-dropdown>
+        </div>
+
+        <div class="ui-g-3 ui-fluid align-button" style="float: right;">
           <button pButton type="button" icon="fa-times" label="Limpar" (click)="limpa(formulario)"></button>
+        </div>
+
+        <div class="ui-g-3 ui-fluid align-button" style="float: right;">
+          <button pButton type="submit" icon="fa-search" label="Pesquisar"></button>
         </div>
 
       </form>

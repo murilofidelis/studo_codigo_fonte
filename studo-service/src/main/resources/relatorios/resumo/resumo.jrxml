@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="alunos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="4ab572f3-b39f-441c-824f-6f97c67c457c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="TOTAL_ALUNOS" class="java.lang.Integer"/>
+	<parameter name="TOTAL_PROFESSORES" class="java.lang.Integer"/>
+	<parameter name="TOTAL_DICIPLINAS" class="java.lang.Integer"/>
+	<parameter name="TOTAL_TURMAS" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="88" splitType="Stretch">
+			<rectangle radius="12">
+				<reportElement x="0" y="-5" width="556" height="83" forecolor="#0D0202" uuid="a6a6e75f-779e-4048-9a4e-ee8569c98568"/>
+				<graphicElement>
+					<pen lineColor="#A8A8A8"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="150" y="30" width="270" height="40" forecolor="#13CBD1" uuid="7729198b-bded-44a9-92be-9b2bbe883f1e"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="SansSerif" size="26" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Resumo]]></text>
+			</staticText>
+			<textField pattern="MMMM d, yyyy">
+				<reportElement x="468" y="0" width="88" height="30" uuid="13f331e5-2bca-4876-9c23-dbc3e1003143"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Icon">
+				<reportElement x="0" y="0" width="60" height="45" uuid="23f6f4f7-330e-4955-a263-57eee30409a1"/>
+				<imageExpression><![CDATA["relatorios/alunos/logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="60" y="11" width="78" height="34" forecolor="#13CBD1" uuid="58a82ce4-00c0-4371-aecb-8eb1cd14d913"/>
+				<box>
+					<topPen lineColor="#13CBD1"/>
+					<leftPen lineColor="#13CBD1"/>
+					<bottomPen lineColor="#13CBD1"/>
+					<rightPen lineColor="#13CBD1"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Studo ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="471">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<rectangle radius="12">
+				<reportElement x="0" y="0" width="556" height="239" forecolor="#D4C7C7" uuid="aafe6635-0739-42dd-ab77-9395f4046712"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#A8A8A8"/>
+				</graphicElement>
+			</rectangle>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="290" y="26" width="264" height="200" uuid="46374738-0642-4dfa-acd8-ac54240d3017"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<pieSeries>
+						<keyExpression><![CDATA["Alunos"]]></keyExpression>
+						<valueExpression><![CDATA[$P{TOTAL_ALUNOS}]]></valueExpression>
+						<labelExpression><![CDATA[$P{TOTAL_ALUNOS}.toString()]]></labelExpression>
+					</pieSeries>
+					<pieSeries>
+						<keyExpression><![CDATA["Turmas"]]></keyExpression>
+						<valueExpression><![CDATA[$P{TOTAL_TURMAS}]]></valueExpression>
+						<labelExpression><![CDATA[$P{TOTAL_TURMAS}.toString()]]></labelExpression>
+					</pieSeries>
+					<pieSeries>
+						<keyExpression><![CDATA["Professores"]]></keyExpression>
+						<valueExpression><![CDATA[$P{TOTAL_PROFESSORES}]]></valueExpression>
+						<labelExpression><![CDATA[$P{TOTAL_PROFESSORES}.toString()]]></labelExpression>
+					</pieSeries>
+					<pieSeries>
+						<keyExpression><![CDATA["Disciplinas"]]></keyExpression>
+						<valueExpression><![CDATA[$P{TOTAL_DICIPLINAS}]]></valueExpression>
+						<labelExpression><![CDATA[$P{TOTAL_DICIPLINAS}.toString()]]></labelExpression>
+					</pieSeries>
+				</pieDataset>
+				<piePlot isCircular="true">
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="290" y="8" width="263" height="18" uuid="d3ac18f1-8c7d-426c-b285-e40090411217"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumo Geral]]></text>
+			</staticText>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="28" width="270" height="196" uuid="80c2ad15-edc2-4259-8477-512f54b599f4"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Alunos"]]></seriesExpression>
+						<categoryExpression><![CDATA[0]]></categoryExpression>
+						<valueExpression><![CDATA[$P{TOTAL_ALUNOS}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Professores"]]></seriesExpression>
+						<categoryExpression><![CDATA[0]]></categoryExpression>
+						<valueExpression><![CDATA[$P{TOTAL_PROFESSORES}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Turmas"]]></seriesExpression>
+						<categoryExpression><![CDATA[0]]></categoryExpression>
+						<valueExpression><![CDATA[$P{TOTAL_TURMAS}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Disciplinas"]]></seriesExpression>
+						<categoryExpression><![CDATA[0]]></categoryExpression>
+						<valueExpression><![CDATA[$P{TOTAL_DICIPLINAS}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot foregroundAlpha="0.96" labelRotation="0.0"/>
+					<itemLabel/>
+					<categoryAxisFormat labelRotation="0.0">
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" verticalTickLabels="true" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="0" y="10" width="270" height="18" uuid="c7856c6e-09d8-4016-a8b5-3647a758ab3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumo Geral]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="470" y="24" width="50" height="30" uuid="592f9594-d86c-4504-adb4-2dba8010e7ad"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["páginas " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="24" width="34" height="30" uuid="119316ee-f4cd-4257-aa23-8d373056bcc5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="34" width="170" height="20" uuid="7d92d694-fe70-4b8e-9650-e784d2d2e452"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Studo - Sistema de Atividades]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

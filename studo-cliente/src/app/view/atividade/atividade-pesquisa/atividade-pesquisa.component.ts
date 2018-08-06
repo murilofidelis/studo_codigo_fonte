@@ -8,6 +8,7 @@ import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { ConfirmationService } from 'primeng/components/common/api';
 
 import { ErrorHandleService } from './../../../service/error-handle.service';
+import { DisciplinaService } from '../../../service/disciplina.service';
 import { AtividadeService, FiltroAtividade } from './../../../service/atividade.service';
 import { Atividade } from './../../../model/atividade.model';
 
@@ -23,12 +24,14 @@ export class AtividadePesquisaComponent implements OnInit {
   totalRegistros = 0;
   filtro = new FiltroAtividade();
   atividades = [];
+  disciplinas = [];
   visualisarAtividade: boolean;
   atividade: Atividade;
   @ViewChild('tabela') grid;
 
   constructor(
     private atividadeService: AtividadeService,
+    private disciplinaService: DisciplinaService,
     private errorHandle: ErrorHandleService,
     private confirmartion: ConfirmationService,
     private toasty: ToastyService
@@ -36,19 +39,30 @@ export class AtividadePesquisaComponent implements OnInit {
 
   ngOnInit() {
     this.traduzirCalendar();
+    this.carregarDiscicplinas();
   }
 
   traduzirCalendar() {
     this.pt = CalendarioUtil.pt;
   }
 
+  carregarDiscicplinas() {
+    this.disciplinas = [];
+    this.disciplinas.push({ label: 'Selecione...', value: null });
+    this.disciplinaService.buscaTodas().then(disciplinas => {
+      disciplinas.forEach(disciplina => {
+        this.disciplinas.push({ label: disciplina.descricao, value: disciplina.codigo });
+      });
+    });
+  }
+
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
-    this.atividadeService.pesquisar(this.filtro)
-      .then(resultado => {
-        this.totalRegistros = resultado.total;
-        this.atividades = resultado.atividades;
-      }).catch(erro => this.errorHandle.handle(erro));
+    this.atividadeService.filtrar(this.filtro).subscribe(resultado => {
+      console.log('RESULTADO, ', resultado);
+      this.totalRegistros = resultado.total;
+      this.atividades = resultado.atividades;
+    });
   }
 
   mudarPagina(event: LazyLoadEvent) {

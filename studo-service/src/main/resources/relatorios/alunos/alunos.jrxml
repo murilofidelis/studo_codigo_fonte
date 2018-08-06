@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2018-07-29T13:05:50 -->
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="alunos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="4ab572f3-b39f-441c-824f-6f97c67c457c">
 	<parameter name="total_alunos" class="java.lang.Integer"/>
 	<queryString>
@@ -19,7 +18,7 @@
 	<pageHeader>
 		<band height="83" splitType="Stretch">
 			<staticText>
-				<reportElement stretchType="RelativeToTallestObject" x="148" y="50" width="270" height="30" forecolor="#13CBD1" uuid="7729198b-bded-44a9-92be-9b2bbe883f1e"/>
+				<reportElement stretchType="RelativeToTallestObject" x="148" y="40" width="270" height="40" forecolor="#13CBD1" uuid="7729198b-bded-44a9-92be-9b2bbe883f1e"/>
 				<textElement textAlignment="Center" markup="styled">
 					<font fontName="SansSerif" size="24" isBold="true" isItalic="false"/>
 				</textElement>

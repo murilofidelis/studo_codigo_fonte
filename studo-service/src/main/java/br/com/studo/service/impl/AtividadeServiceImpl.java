@@ -1,5 +1,7 @@
 package br.com.studo.service.impl;
 
+import br.com.studo.domain.Atividade;
+import br.com.studo.domain.dto.AtividadeConsultaDTO;
 import br.com.studo.domain.dto.AtividadeDTO;
 import br.com.studo.domain.enums.ClassificacaoTurma;
 import br.com.studo.domain.mapper.AtividadeMapper;
@@ -7,6 +9,7 @@ import br.com.studo.repository.AtividadeRepository;
 import br.com.studo.security.SecurityUtil;
 import br.com.studo.service.AtividadeService;
 import br.com.studo.service.ProfessorService;
+import br.com.studo.service.filter.AtividadeFiltro;
 import br.com.studo.util.DataUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +41,16 @@ public class AtividadeServiceImpl implements AtividadeService {
     private AtividadeMapper atividadeMapper;
 
     @Override
-    public Page<AtividadeDTO> buscaAtividades(MultiValueMap<String, String> parametros, Pageable pageable) {
+    public Page<AtividadeDTO> filtraPesquisa(AtividadeFiltro filtro, Pageable pageable) {
+        Long codigoProfessor = professorService.buscaCodProfessorProCPF(SecurityUtil.getUsuarioLogado());
+        filtro.setCodigoProfessor(codigoProfessor);
+        Page<Atividade> page = repository.findAll(filtro.filtro(), pageable);
+        return page.map(atividadeMapper::toDTO);
+    }
+
+    @Override
+    @Deprecated
+    public Page<AtividadeConsultaDTO> buscaAtividades(MultiValueMap<String, String> parametros, Pageable pageable) {
         Date dataInicio = null;
         Date dataFim = null;
 
@@ -50,8 +62,10 @@ public class AtividadeServiceImpl implements AtividadeService {
         if (Objects.nonNull(parametros.getFirst("dataFim"))) {
             dataFim = formataDataInfomada(parametros.getFirst("dataFim"));
         }
-        List<AtividadeDTO> listaAtividades = repository.buscaAtividades(dataInicio, dataFim, cod, pageable);
-        Long quantidade = repository.quantidade(dataInicio, dataFim, cod, pageable);
+        List<AtividadeConsultaDTO> listaAtividades = repository.buscaAtividades(dataInicio, dataFim, cod, pageable);
+
+        Long quantidade = repository.quantidade(dataInicio, dataFim, cod);
+
         return new PageImpl<>(listaAtividades, pageable, quantidade);
     }
 
