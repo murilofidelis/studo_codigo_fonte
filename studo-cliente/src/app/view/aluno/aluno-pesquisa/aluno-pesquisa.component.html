@@ -9,17 +9,36 @@
       <form autocomplete="off" #formulario="ngForm" (ngSubmit)="pesquisar()">
         <div class="ui-g">
 
-          <div class="ui-g-6 ui-fluid">
-            <label>Nome</label>
-            <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+          <div class="ui-g-12">
+            <div class="ui-g-6 ui-fluid">
+              <label>Nome</label>
+              <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+            </div>
+
+            <div class="ui-g-2 ui-fluid">
+              <label>CPF</label>
+              <p-inputMask mask="999.999.999-99" unmask="true" name="CPF" [(ngModel)]="filtro.cpf"></p-inputMask>
+            </div>
+
+            <div class="ui-g-2 ui-fluid">
+              <label>SEXO</label>
+              <p-dropdown [options]="sexo" [autoWidth]="false" name="sexo" [(ngModel)]="filtro.sexo"></p-dropdown>
+            </div>
+
+            <div class="ui-g-2 ui-fluid">
+              <label>CPF</label>
+              <p-selectButton [options]="status" name="status" [(ngModel)]="filtro.status"></p-selectButton>
+            </div>
+
           </div>
 
-          <div class="ui-g-3 ui-fluid margin-button">
-            <button pButton type="submit" icon="fa-search" label="Pesquisar"></button>
-          </div>
-
-          <div class="ui-g-3 ui-fluid margin-button">
-            <button pButton type="button" icon="fa-times" label="Limpar" (click)="limpa(formulario)"></button>
+          <div class="ui-g-12">
+            <div class="ui-g-3 ui-fluid" style="float: right;">
+              <button pButton type="button" icon="fa-times" label="Limpar" (click)="limpa(formulario)"></button>
+            </div>
+            <div class="ui-g-3 ui-fluid" style="float: right;">
+              <button pButton type="submit" icon="fa-search" label="Pesquisar"></button>
+            </div>
           </div>
 
         </div>

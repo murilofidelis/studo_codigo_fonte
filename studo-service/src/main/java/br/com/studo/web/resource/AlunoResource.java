@@ -4,9 +4,11 @@ import br.com.studo.domain.Aluno;
 import br.com.studo.domain.dto.AlunoDTO;
 import br.com.studo.domain.dto.MatriculaDTO;
 import br.com.studo.service.AlunoService;
+import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +32,12 @@ public class AlunoResource {
 
     @Autowired
     private AlunoService alunoService;
+
+    @GetMapping("/filtrar")
+    @PreAuthorize("hasAuthority('ROLE_LISTAR_ALUNO')")
+    public Page<Aluno> filtar(@QuerydslPredicate(root = Aluno.class) Predicate predicate, Pageable pageable) {
+        return alunoService.filtrar(predicate, pageable);
+    }
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_LISTAR_ALUNO')")

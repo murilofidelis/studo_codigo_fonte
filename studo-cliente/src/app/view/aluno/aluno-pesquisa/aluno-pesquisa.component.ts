@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { ToastyService } from 'ng2-toasty';
@@ -12,11 +12,13 @@ import { AlunoService, AlunoFiltro } from './../../../service/aluno.service';
   templateUrl: './aluno-pesquisa.component.html',
   styleUrls: ['./aluno-pesquisa.component.css']
 })
-export class AlunoPesquisaComponent {
+export class AlunoPesquisaComponent implements OnInit {
 
   totalRegistros = 0;
   filtro = new AlunoFiltro();
   alunos = [];
+  sexo = [];
+  status = [];
   @ViewChild('tabela') grid;
 
   constructor(
@@ -25,9 +27,26 @@ export class AlunoPesquisaComponent {
     private toasty: ToastyService,
   ) { }
 
+  ngOnInit() {
+    this.iniciaSexo();
+    this.iniciaStatus();
+  }
+
+  iniciaSexo() {
+    this.sexo = [];
+    this.sexo.push({ label: 'Selecione...', value: null });
+    this.sexo.push({ label: 'Masculino', value: 'MASCULINO' });
+    this.sexo.push({ label: 'Feminino', value: 'FEMININO' });
+  }
+
+  iniciaStatus() {
+    this.status.push({ label: 'Ativo', value: true });
+    this.status.push({ label: 'Inativo', value: false });
+  }
+
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
-    this.alunoService.pesquisar(this.filtro)
+    this.alunoService.filtar(this.filtro)
       .then(resultado => {
         this.totalRegistros = resultado.total;
         this.alunos = resultado.alunos;

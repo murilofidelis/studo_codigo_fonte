@@ -13,6 +13,9 @@ import { Aluno } from './../model/aluno.model';
 
 export class AlunoFiltro {
   nome: string;
+  cpf: string;
+  sexo: string;
+  status: boolean;
   pagina = 0;
   itensPorPagina = 10;
 }
@@ -27,17 +30,27 @@ export class AlunoService {
     private erroHandle: ErrorHandleService
   ) { }
 
-  pesquisar(filtro: AlunoFiltro) {
+  /** FILTRO USANDO DSL QUERY */
+  filtar(filtro: AlunoFiltro) {
 
     const params = new URLSearchParams();
 
     if (filtro.nome) {
       params.set('nome', filtro.nome);
     }
+    if (filtro.cpf) {
+      params.set('cpf', filtro.cpf);
+    }
+    if (filtro.sexo) {
+      params.set('sexo', filtro.sexo);
+    }
+    if (filtro.status != null) {
+      params.set('status', filtro.status.toString());
+    }
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
 
-    return this.http.get(`${STUDO_API}/${this.END_POINT}`, { search: params })
+    return this.http.get(`${STUDO_API}/${this.END_POINT}/filtrar`, { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();

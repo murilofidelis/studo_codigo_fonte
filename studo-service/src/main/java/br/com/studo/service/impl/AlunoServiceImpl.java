@@ -10,6 +10,7 @@ import br.com.studo.repository.AlunoRepository;
 import br.com.studo.service.AlunoService;
 import br.com.studo.service.MatriculaService;
 import br.com.studo.service.UsuarioService;
+import com.querydsl.core.types.Predicate;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -58,6 +59,11 @@ public class AlunoServiceImpl implements AlunoService {
 
     public Page<Aluno> filtarPesquisar(String nome, Pageable pageable) {
         return repository.findByNomeStartingWithIgnoreCase(nome, pageable);
+    }
+
+    @Override
+    public Page<Aluno> filtrar(Predicate predicate, Pageable pageable) {
+        return repository.findAll(predicate, pageable);
     }
 
     @Transactional
