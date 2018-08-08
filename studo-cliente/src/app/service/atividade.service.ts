@@ -8,14 +8,13 @@ import { STUDO_API } from '../app.api';
 import * as moment from 'moment';
 
 import { ErrorHandleService } from './error-handle.service';
+import { Pageable } from '../util/pageable';
 
 export class FiltroAtividade {
   dataInicio: Date;
   dataFim: Date;
   titulo: string;
   codDisciplina: number;
-  pagina = 0;
-  itensPorPagina = 10;
 }
 
 @Injectable()
@@ -28,7 +27,7 @@ export class AtividadeService {
     private errorHandle: ErrorHandleService
   ) { }
 
-  filtrar(filtro: FiltroAtividade) {
+  filtrar(filtro: FiltroAtividade, pageable: Pageable) {
 
     const params = new URLSearchParams();
 
@@ -45,8 +44,10 @@ export class AtividadeService {
       params.set('titulo', filtro.titulo.toString());
     }
 
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    params.set('page', pageable.page.toString());
+    params.set('size', pageable.size.toString());
+    params.set('sortField', pageable.sortField.toString());
+    params.set('sortOrder', pageable.sortOrder.toString());
 
     return this.http.get(`${STUDO_API}/${this.END_POINT}`, { search: params })
       .map(response => {
@@ -62,7 +63,7 @@ export class AtividadeService {
   }
 
   /**Pesquisa antiga usando query nativa */
-  pesquisar(filtro: FiltroAtividade) {
+  pesquisar(filtro: FiltroAtividade, pageable: Pageable) {
 
     const params = new URLSearchParams();
 
@@ -79,8 +80,8 @@ export class AtividadeService {
       params.set('titulo', filtro.titulo.toString());
     }
 
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    params.set('page', pageable.page.toString());
+    params.set('size', pageable.size.toString());
 
     return this.http.get(`${STUDO_API}/${this.END_POINT}/pesquisa`, { search: params })
       .map(response => {

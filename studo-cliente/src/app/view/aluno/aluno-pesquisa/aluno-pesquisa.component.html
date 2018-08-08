@@ -26,7 +26,7 @@
             </div>
 
             <div class="ui-g-2 ui-fluid">
-              <label>CPF</label>
+              <label>Situação</label>
               <p-selectButton [options]="status" name="status" [(ngModel)]="filtro.status"></p-selectButton>
             </div>
 
@@ -49,12 +49,12 @@
     <!-- TABELA -->
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-dataTable [value]="alunos" [paginator]="true" [responsive]="true" [rows]="filtro.itensPorPagina" [lazy]="true" (onLazyLoad)="mudarPagina($event)"
+        <p-dataTable [value]="alunos" [paginator]="true" [responsive]="true" [rows]="filtro.itensPorPagina" [lazy]="true" (onLazyLoad)="pesquisar($event)"
           [totalRecords]="totalRegistros" emptyMessage="Nenhum registro encontrado" #tabela>
 
-          <p-column field="nome" header="Nome"></p-column>
-          <p-column field="email.dscEmail" header="E-mail"></p-column>
-          <p-column header="Situação">
+          <p-column field="nome" header="Nome" [sortable]="true"></p-column>
+          <p-column field="email.dscEmail" header="E-mail" [sortable]="true"></p-column>
+          <p-column field="status" header="Situação" [sortable]="true">
             <ng-template let-aluno="rowData" pTemplate="body">
               <a href="javascript:;" [pTooltip]="aluno.status ? 'Desativar' : 'Ativar'" tooltipPosition="top">
                 {{ aluno.status ? 'Ativo' : 'Inativo' }}

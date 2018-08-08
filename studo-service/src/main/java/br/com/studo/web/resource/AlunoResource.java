@@ -7,7 +7,9 @@ import br.com.studo.service.AlunoService;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +37,12 @@ public class AlunoResource {
 
     @GetMapping("/filtrar")
     @PreAuthorize("hasAuthority('ROLE_LISTAR_ALUNO')")
-    public Page<Aluno> filtar(@QuerydslPredicate(root = Aluno.class) Predicate predicate, Pageable pageable) {
-        return alunoService.filtrar(predicate, pageable);
+    public Page<Aluno> filtar(@QuerydslPredicate(root = Aluno.class) Predicate predicate,
+                                      @RequestParam("page") int page,
+                                      @RequestParam("size") int size,
+                                      @RequestParam("sortField") String sortField,
+                                      @RequestParam("sortOrder") String sortOrder) {
+        return alunoService.filtrar(predicate, new PageRequest(page, size, new Sort(new Sort.Order(Sort.Direction.fromString(sortOrder), sortField))));
     }
 
     @GetMapping

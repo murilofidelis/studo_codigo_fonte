@@ -7,10 +7,10 @@ import { CalendarioUtil } from './../../../util/calendario.util';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { ConfirmationService } from 'primeng/components/common/api';
 
-import { ErrorHandleService } from './../../../service/error-handle.service';
 import { DisciplinaService } from '../../../service/disciplina.service';
 import { AtividadeService, FiltroAtividade } from './../../../service/atividade.service';
 import { Atividade } from './../../../model/atividade.model';
+import { Pageable } from '../../../util/pageable';
 
 @Component({
   selector: 'app-atividade-pesquisa',
@@ -32,7 +32,6 @@ export class AtividadePesquisaComponent implements OnInit {
   constructor(
     private atividadeService: AtividadeService,
     private disciplinaService: DisciplinaService,
-    private errorHandle: ErrorHandleService,
     private confirmartion: ConfirmationService,
     private toasty: ToastyService
   ) { }
@@ -56,24 +55,27 @@ export class AtividadePesquisaComponent implements OnInit {
     });
   }
 
-  pesquisar(pagina = 0) {
-    this.filtro.pagina = pagina;
-    this.atividadeService.filtrar(this.filtro).subscribe(resultado => {
-      console.log('RESULTADO, ', resultado);
+  pesquisar(event: LazyLoadEvent) {
+
+    const pageable = new Pageable(0, 10, 'codigo', 'ASC');
+
+    if (event) {
+      pageable.size = event.rows || 10;
+      pageable.page = event.first / event.rows || 0;
+      pageable.sortField = event.sortField ? event.sortField : 'codigo';
+      pageable.sortOrder = event.sortOrder === 1 ? 'DESC' : 'ASC';
+    }
+
+    this.atividadeService.filtrar(this.filtro, pageable).subscribe(resultado => {
       this.totalRegistros = resultado.total;
       this.atividades = resultado.atividades;
     });
   }
 
-  mudarPagina(event: LazyLoadEvent) {
-    const pagina = event.first / event.rows;
-    this.pesquisar(pagina);
-  }
-
   limpa(form: FormControl) {
     form.reset();
     this.grid.reset();
-    this.pesquisar();
+    this.pesquisar(null);
   }
 
   excluirAtividade(atividade: any) {
@@ -92,7 +94,7 @@ export class AtividadePesquisaComponent implements OnInit {
     this.atividadeService.exluirAtividade(atividade.codigo).then(res => {
       if (res) {
         this.toasty.info(Mensagem.MENSAGEM_EXCLUIDO_SUCESSO);
-        this.pesquisar();
+        this.pesquisar(null);
       }
     });
   }

@@ -6,6 +6,7 @@ import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 
 import { ErrorHandleService } from './../../../service/error-handle.service';
 import { AlunoService, AlunoFiltro } from './../../../service/aluno.service';
+import { Pageable } from '../../../util/pageable';
 
 @Component({
   selector: 'app-aluno-pesquisa',
@@ -44,24 +45,28 @@ export class AlunoPesquisaComponent implements OnInit {
     this.status.push({ label: 'Inativo', value: false });
   }
 
-  pesquisar(pagina = 0) {
-    this.filtro.pagina = pagina;
-    this.alunoService.filtar(this.filtro)
+  pesquisar(event: LazyLoadEvent) {
+
+    const pageable = new Pageable(0, 10, 'codigo', 'ASC');
+
+    if (event) {
+      pageable.size = event.rows || 10;
+      pageable.page = event.first / event.rows || 0;
+      pageable.sortField = event.sortField ? event.sortField : 'codigo';
+      pageable.sortOrder = event.sortOrder === 1 ? 'DESC' : 'ASC';
+    }
+
+    this.alunoService.filtar(this.filtro, pageable)
       .then(resultado => {
         this.totalRegistros = resultado.total;
         this.alunos = resultado.alunos;
       }).catch(erro => this.errorHandle.handle(erro));
   }
 
-  mudarPagina(event: LazyLoadEvent) {
-    const pagina = event.first / event.rows;
-    this.pesquisar(pagina);
-  }
-
   limpa(form: FormControl) {
     form.reset();
     this.grid.reset();
-    this.pesquisar();
+    this.pesquisar(null);
   }
 
   geraRelatorio() {

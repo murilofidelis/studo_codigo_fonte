@@ -1,3 +1,4 @@
+import { Pageable } from './../util/pageable';
 import { ErrorHandleService } from './error-handle.service';
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
@@ -31,7 +32,7 @@ export class AlunoService {
   ) { }
 
   /** FILTRO USANDO DSL QUERY */
-  filtar(filtro: AlunoFiltro) {
+  filtar(filtro: AlunoFiltro, pageable: Pageable) {
 
     const params = new URLSearchParams();
 
@@ -47,8 +48,10 @@ export class AlunoService {
     if (filtro.status != null) {
       params.set('status', filtro.status.toString());
     }
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    params.set('page', pageable.page.toString());
+    params.set('size', pageable.size.toString());
+    params.set('sortField', pageable.sortField.toString());
+    params.set('sortOrder', pageable.sortOrder.toString());
 
     return this.http.get(`${STUDO_API}/${this.END_POINT}/filtrar`, { search: params })
       .toPromise()

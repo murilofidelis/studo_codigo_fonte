@@ -44,11 +44,11 @@
 
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-dataTable [value]="atividades" [responsive]="true" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" (onLazyLoad)="mudarPagina($event)"
+        <p-dataTable [value]="atividades" [responsive]="true" [paginator]="true" [rows]="10" [lazy]="true" (onLazyLoad)="pesquisar($event)"
           [totalRecords]="totalRegistros" emptyMessage="Nenhum registro encontrado" #tabela>
 
-          <p-column field="titulo" header="Título"></p-column>
-          <p-column field="disciplina.descricao" header="Disciplina" styleClass="col-ativida-disciplina"></p-column>
+          <p-column field="titulo" header="Título" [sortable]="true"></p-column>
+          <p-column field="disciplina.descricao" header="Disciplina" [sortable]="true" styleClass="col-ativida-disciplina"></p-column>
 
           <p-column header="Ações" styleClass="col-ativida-acoes">
             <ng-template let-atividade="rowData" pTemplate="body">
