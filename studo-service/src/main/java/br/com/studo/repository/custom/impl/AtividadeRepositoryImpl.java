@@ -1,6 +1,6 @@
 package br.com.studo.repository.custom.impl;
 
-import br.com.studo.annotation.CosultaNativaResultadoMapeamento;
+import br.com.studo.annotation.ConsultaNativaResultadoMapeamento;
 import br.com.studo.domain.dto.AtividadeConsultaDTO;
 import br.com.studo.repository.custom.AtividadeRepositoryCustom;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +31,7 @@ public class AtividadeRepositoryImpl implements AtividadeRepositoryCustom {
 
         setParamtros(dataInicio, dataFim, codProfessor, query);
 
-        return CosultaNativaResultadoMapeamento.mapear(query.getResultList(), AtividadeConsultaDTO.class);
+        return ConsultaNativaResultadoMapeamento.mapear(query.getResultList(), AtividadeConsultaDTO.class);
     }
 
     @Override

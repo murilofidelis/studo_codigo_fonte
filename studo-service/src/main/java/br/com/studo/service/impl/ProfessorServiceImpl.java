@@ -67,7 +67,7 @@ public class ProfessorServiceImpl implements ProfessorService {
     }
 
     @Override
-    public Long buscaCodProfessorProCPF(String cpf) {
+    public Long buscaCodProfessorPorCPF(String cpf) {
         return repository.buscaCodProfessorPorCPF(cpf);
     }
 

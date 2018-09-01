@@ -19,5 +19,5 @@ public interface ProfessorService {
 
    ProfessorDTO buscarProfessorLogado();
 
-   Long buscaCodProfessorProCPF(String cpf);
+   Long buscaCodProfessorPorCPF(String cpf);
 }

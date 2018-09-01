@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Slf4j
-public class CosultaNativaResultadoMapeamento {
+public class ConsultaNativaResultadoMapeamento {
 
-    private CosultaNativaResultadoMapeamento() {
+    private ConsultaNativaResultadoMapeamento() {
     }
 
     public static <T> List<T> mapear(List<Object[]> listaObjetos, Class<T> tipoGenerico) {

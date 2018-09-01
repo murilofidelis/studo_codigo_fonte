@@ -42,7 +42,7 @@ public class AtividadeServiceImpl implements AtividadeService {
 
     @Override
     public Page<AtividadeDTO> filtraPesquisa(AtividadeFiltro filtro, Pageable pageable) {
-        Long codigoProfessor = professorService.buscaCodProfessorProCPF(SecurityUtil.getUsuarioLogado());
+        Long codigoProfessor = professorService.buscaCodProfessorPorCPF(SecurityUtil.getUsuarioLogado());
         filtro.setCodigoProfessor(codigoProfessor);
         Page<Atividade> page = repository.findAll(filtro.filtro(), pageable);
         return page.map(atividadeMapper::toDTO);
@@ -54,7 +54,7 @@ public class AtividadeServiceImpl implements AtividadeService {
         Date dataInicio = null;
         Date dataFim = null;
 
-        Long cod = professorService.buscaCodProfessorProCPF(SecurityUtil.getUsuarioLogado());
+        Long cod = professorService.buscaCodProfessorPorCPF(SecurityUtil.getUsuarioLogado());
 
         if (Objects.nonNull(parametros.getFirst("dataInicio"))) {
             dataInicio = formataDataInfomada(parametros.getFirst("dataInicio"));
