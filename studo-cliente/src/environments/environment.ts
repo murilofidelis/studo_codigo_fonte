@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8080',
+  baseUrl: 'https://localhost:8443',
   env: 'dev'
 };
