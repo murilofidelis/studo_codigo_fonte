@@ -2,8 +2,7 @@ spring:
   application:
     name: studo - prod
   profiles:
-    active:
-      - prod
+    active: prod
 
   datasource:
     url: jdbc:postgresql://localhost:5432/db_studo_prod

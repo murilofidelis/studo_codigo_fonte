@@ -1,0 +1,9 @@
+version: '3.1'
+
+services:
+    app:
+        container_name: 'studo-client'
+        image: 'studo-client'
+        build: '.'
+        ports:
+            - 4200:80

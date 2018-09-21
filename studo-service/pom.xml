@@ -24,12 +24,14 @@
         <java.version>1.8</java.version>
         <org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
         <hibernate.version>5.2.12.Final</hibernate.version>
-        <maven-failsafe-plugin.argLine>-noverify -Xmx512m -XX:MaxMetaspaceSize=512m -XX:+UseParallelGC
-        </maven-failsafe-plugin.argLine>
-        <jacoco.version>0.8.1</jacoco.version>
-        <jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</jacoco.itReportPath>
-        <jacoco.utReportPath>${project.build.directory}/jacoco.exec</jacoco.utReportPath>
         <powermock.version>1.6.6</powermock.version>
+        <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
+
+        <sonar.tests>${project.basedir}/src/test/</sonar.tests>
+        <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
+        <sonar.jacoco.reportPath>${project.testresult.directory}/coverage/jacoco/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.surefire.reportsPath>${project.testresult.directory}/surefire-reports</sonar.surefire.reportsPath>
+        <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
     </properties>
 
     <dependencies>
@@ -149,14 +151,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Jacoco -->
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.core</artifactId>
-            <version>${jacoco.version}</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Powermock -->
         <dependency>
             <groupId>org.powermock</groupId>
@@ -207,7 +201,13 @@
     </dependencies>
 
     <build>
+        <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
             <!-- Plugin para gerar as classes Q -->
             <plugin>
                 <groupId>com.mysema.maven</groupId>
@@ -225,37 +225,34 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Jacoco -->
+
+            <!-- Jacoco Teste -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.1</version>
+                <version>${jacoco-maven-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>prepare-ut-agent</id>
-                        <phase>process-test-classes</phase>
+                        <id>pre-unit-tests</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                         <configuration>
-                            <propertyName>jacoco.agent.ut.arg</propertyName>
-                            <append>true</append>
-                            <destFile>${jacoco.utReportPath}</destFile>
+                            <destFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</destFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</dataFile>
+                            <outputDirectory>${project.testresult.directory}/coverage/jacoco</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <!-- Teste unitários -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <trimStackTrace>false</trimStackTrace>
-                    <argLine>${maven-failsafe-plugin.argLine} ${jacoco.agent.ut.arg}</argLine>
-                    <excludes>
-                        <exclude>**/*IT.java</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
 
             <plugin>
@@ -286,18 +283,6 @@
                 </configuration>
             </plugin>
 
-            <!-- mvn spring-boot:run -Drun.profiles=dev ou prod-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <profiles>
-                        <profile>dev</profile>
-                        <profile>prod</profile>
-                    </profiles>
-                </configuration>
-            </plugin>
-
             <!-- mvn -DskipTests clean package docker:build -->
             <!-- docker run -p 8080:8080 studo -->
             <plugin>
@@ -319,4 +304,50 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <profiles>
+                                <profile>dev</profile>
+                            </profiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <profiles>
+                                <profile>prod</profile>
+                            </profiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
