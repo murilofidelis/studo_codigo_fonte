@@ -284,13 +284,13 @@
             </plugin>
 
             <!-- mvn -DskipTests clean package docker:build -->
-            <!-- docker run -p 8080:8080 studo -->
+            <!-- docker run -p 8443:8443 studo-service -->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.0.0</version>
                 <configuration>
-                    <imageName>studo</imageName>
+                    <imageName>studo-service</imageName>
                     <baseImage>java</baseImage>
                     <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
                     <resources>
