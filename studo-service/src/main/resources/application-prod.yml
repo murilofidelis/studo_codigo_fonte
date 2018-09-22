@@ -5,7 +5,7 @@ spring:
     active: prod
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/db_studo_prod
+    url: jdbc:postgresql://172.10.0.2:5432/db_studo
     username: postgres
     password: 123456
 
@@ -41,7 +41,7 @@ server:
   port: 8443
   context-path: /studo/api
   ssl:
-    key-store: studoKeystore.p12
+    key-store: classpath:studoKeystore.p12
     key-store-password: 123456
     key-store-type: PKCS12
     key-alias: tomcat
@@ -49,8 +49,8 @@ server:
 studo:
   enviar-email: true
   seguranca:
-    enableHttps: true
-    origin-permitida: http://localhost:4200
+    enableHttps: false
+    origin-permitida: http://localhost
     studo-cliente: studo_cliente
     secret: stud0_cli3nt3_s3cret
     scopes:
@@ -66,7 +66,7 @@ studo:
     pass: password
     user-postgres: postgres
     pass-postgres: 123456
-    url-data-base:  jdbc:postgresql:db_studo
+    url-data-base: jdbc:postgresql://172.10.0.2:5432/db_studo
     schema: usuarios
 
 

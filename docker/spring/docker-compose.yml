@@ -1,0 +1,9 @@
+version: '2'
+services:
+    studo-service:
+        container_name: 'studo-service'
+        image: 'studo-service'
+        build: '.'
+        ports:
+            - 8443:8443
+        network_mode: "studo-network"

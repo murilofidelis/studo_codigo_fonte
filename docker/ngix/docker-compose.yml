@@ -1,9 +1,9 @@
-version: '3.1'
-
+version: '2'
 services:
-    app:
+    studo-client:
         container_name: 'studo-client'
         image: 'studo-client'
         build: '.'
         ports:
-            - 4200:80
+            - 80:80
+        network_mode: "studo-network"
