@@ -1,6 +1,5 @@
-version: '1'
+version: '2'
 services:
-
   studo-bd:
     container_name: studo-bd
     build: .
@@ -8,3 +7,5 @@ services:
       - "5432:5432"
     volumes:
       - ./data:/var/lib/postgresql/data
+    network_mode: "studo-network"
+

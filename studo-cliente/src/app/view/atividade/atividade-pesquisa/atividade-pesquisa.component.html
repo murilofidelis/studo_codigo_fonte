@@ -5,7 +5,7 @@
     </div>
 
     <p-fieldset legend="Pesquisa" class="ui-g-12">
-      <form autocomplete="off" #formulario="ngForm" (ngSubmit)="pesquisar()">
+      <form autocomplete="off" #formulario="ngForm" (ngSubmit)="pesquisar($event)">
 
         <div class="ui-g-2 ui-fluid">
           <label>De</label>
