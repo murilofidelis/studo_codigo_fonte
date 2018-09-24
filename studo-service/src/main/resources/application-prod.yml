@@ -49,7 +49,7 @@ server:
 studo:
   enviar-email: true
   seguranca:
-    enableHttps: false
+    enableHttps: true
     origin-permitida: http://localhost
     studo-cliente: studo_cliente
     secret: stud0_cli3nt3_s3cret
