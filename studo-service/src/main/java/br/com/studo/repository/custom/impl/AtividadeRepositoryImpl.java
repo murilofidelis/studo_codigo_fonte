@@ -1,6 +1,6 @@
 package br.com.studo.repository.custom.impl;
 
-import br.com.studo.annotation.ConsultaNativaResultadoMapeamento;
+import br.com.studo.annotation.consultanativa.ConsultaNativaResultadoMapeamento;
 import br.com.studo.domain.dto.AtividadeConsultaDTO;
 import br.com.studo.repository.custom.AtividadeRepositoryCustom;
 import org.springframework.data.domain.Pageable;

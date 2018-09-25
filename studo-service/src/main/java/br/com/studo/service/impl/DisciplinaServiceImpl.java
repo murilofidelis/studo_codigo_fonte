@@ -1,5 +1,6 @@
 package br.com.studo.service.impl;
 
+import br.com.studo.annotation.debug.Debug;
 import br.com.studo.domain.Disciplina;
 import br.com.studo.domain.dto.DisciplinaDTO;
 import br.com.studo.domain.mapper.DisciplinaMapper;
@@ -34,6 +35,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
 
     @Override
     @Transactional
+    @Debug
     public DisciplinaDTO salvar(DisciplinaDTO disciplinaDTO) {
         if (verificaDisciplinaExiste(disciplinaDTO.getDescricao())) {
             throw new StudoException(mensagem.get("MSG001"));

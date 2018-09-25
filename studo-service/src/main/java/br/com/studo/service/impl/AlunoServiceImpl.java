@@ -1,5 +1,6 @@
 package br.com.studo.service.impl;
 
+import br.com.studo.annotation.debug.Debug;
 import br.com.studo.domain.Aluno;
 import br.com.studo.domain.dto.AlunoDTO;
 import br.com.studo.domain.dto.AlunoRelatorioDTO;
@@ -66,6 +67,7 @@ public class AlunoServiceImpl implements AlunoService {
         return repository.findAll(predicate, pageable);
     }
 
+    @Debug
     @Transactional
     public AlunoDTO salvarAluno(AlunoDTO alunoDTO) {
         Aluno aluno = alunoMapper.toEntity(alunoDTO);

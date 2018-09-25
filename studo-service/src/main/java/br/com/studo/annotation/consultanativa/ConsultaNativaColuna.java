@@ -1,4 +1,4 @@
-package br.com.studo.annotation;
+package br.com.studo.annotation.consultanativa;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

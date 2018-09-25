@@ -5,4 +5,4 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # cat Dockerfile
 # sudo docker build -t studo-client .
-# sudo docker run -d --name studo-clinet-container -p 4200:80 studo-client
+# sudo docker run -d --name studo-clinet-container -p 80:80 studo-client

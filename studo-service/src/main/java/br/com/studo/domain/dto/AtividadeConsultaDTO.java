@@ -1,7 +1,7 @@
 package br.com.studo.domain.dto;
 
-import br.com.studo.annotation.ConsultaNativaColuna;
-import br.com.studo.annotation.ConsultaNativaResultado;
+import br.com.studo.annotation.consultanativa.ConsultaNativaColuna;
+import br.com.studo.annotation.consultanativa.ConsultaNativaResultado;
 import lombok.Getter;
 import lombok.Setter;
 
