@@ -2,6 +2,7 @@ package br.com.studo.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.javers.core.metamodel.annotation.TypeName;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
+@TypeName("tab_disciplina")
 @Table(name = "tab_disciplina",  schema = "studo")
 public class Disciplina implements Serializable {
 

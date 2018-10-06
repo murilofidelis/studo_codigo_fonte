@@ -11,11 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class ProfessorServiceImpl implements ProfessorService {
 
     @Autowired
@@ -28,12 +26,12 @@ public class ProfessorServiceImpl implements ProfessorService {
     private UsuarioService usuarioService;
 
     @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Page<Professor> filtarPesquisar(String nome, Pageable pageable) {
         return repository.findByNomeStartingWithIgnoreCase(nome, pageable);
     }
 
     @Override
+    @Transactional
     public ProfessorDTO salvar(ProfessorDTO professorDTO) {
         Professor professor = professorMapper.toEntity(professorDTO);
         if (professor.getCodigo() == null) {
@@ -45,13 +43,11 @@ public class ProfessorServiceImpl implements ProfessorService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public boolean verificaCpfCadastrado(String cpf) {
         return usuarioService.cpfExiste(cpf);
     }
 
     @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public ProfessorDTO buscaPorCodigo(Long codigo) {
         return professorMapper.toDTO(repository.findOne(codigo));
     }

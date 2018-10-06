@@ -4,6 +4,7 @@ import br.com.studo.domain.enums.Sexo;
 import br.com.studo.util.DateConverter;
 import lombok.Getter;
 import lombok.Setter;
+import org.javers.core.metamodel.annotation.TypeName;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,6 +26,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@TypeName("tab_aluno")
 @Table(name = "tab_aluno", schema = "studo")
 public class Aluno implements Serializable {
 

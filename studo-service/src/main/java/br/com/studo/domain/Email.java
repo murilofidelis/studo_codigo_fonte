@@ -10,12 +10,14 @@ import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.javers.core.metamodel.annotation.TypeName;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
 @Entity
+@TypeName("tab_email")
 @Table(name = "tab_email",  schema = "studo")
 public class Email implements Serializable {
 

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
-
 @Slf4j
 @Aspect
 @Component
@@ -33,7 +32,7 @@ public class DebugAspect {
         log.info("Método: {}", method.getName());
         log.info("Retono: {}", method.getReturnType().getName());
         log.info("Paramêtro: {}", method.getParameterTypes()[0].getName());
-        log.info("______________________________________________________________________________________________________");
+        log.info("_________________________________________________________________________________________________________________");
 
         Object[] args = getArgs(joinPoint);
         ObjectMapper mapper = new ObjectMapper();

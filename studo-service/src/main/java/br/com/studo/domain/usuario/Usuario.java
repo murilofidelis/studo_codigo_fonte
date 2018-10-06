@@ -1,6 +1,5 @@
 package br.com.studo.domain.usuario;
 
-import br.com.studo.domain.usuario.Perfil;
 import lombok.Getter;
 import lombok.Setter;
 

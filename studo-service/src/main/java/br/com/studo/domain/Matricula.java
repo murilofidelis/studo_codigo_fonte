@@ -21,8 +21,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@TypeName("tab_matricula")
 @Table(name = "tab_matricula",  schema = "studo")
-@TypeName("matricula")
 public class Matricula implements Serializable {
 
     private static final long serialVersionUID = -927136295454282048L;

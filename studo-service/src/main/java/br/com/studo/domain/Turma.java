@@ -3,6 +3,7 @@ package br.com.studo.domain;
 import br.com.studo.domain.enums.Periodo;
 import lombok.Getter;
 import lombok.Setter;
+import org.javers.core.metamodel.annotation.TypeName;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
+@TypeName("tab_turma")
 @Table(name = "tab_turma",  schema = "studo")
 public class Turma implements Serializable {
 
