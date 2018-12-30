@@ -1,9 +1,0 @@
-version: '2'
-services:
-    studo-client:
-        container_name: 'studo-client'
-        image: 'studo-client'
-        build: '.'
-        ports:
-            - 80:80
-        network_mode: "studo-network"

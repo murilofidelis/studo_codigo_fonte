@@ -5,7 +5,7 @@ spring:
     active: prod
 
   datasource:
-    url: jdbc:postgresql://172.10.0.2:5432/db_studo
+    url: jdbc:postgresql://studo-bd:5432/db_studo
     username: postgres
     password: 123456
 
@@ -66,7 +66,7 @@ studo:
     pass: password
     user-postgres: postgres
     pass-postgres: 123456
-    url-data-base: jdbc:postgresql://172.10.0.2:5432/db_studo
+    url-data-base: jdbc:postgresql://studo-bd:5432/db_studo
     schema: usuarios
 
 

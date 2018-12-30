@@ -1,0 +1,30 @@
+version: '2'
+services:
+    studo-bd:
+        container_name: 'studo-bd'
+        build: '.'
+        ports:
+            - 5432:5432
+        volumes:
+            - ./data:/var/lib/postgresql/data
+        network_mode: "studo-network"
+
+    studo-service:
+        container_name: 'studo-service'
+        image: 'studo-service'
+        build: '.'
+        ports:
+            - 8443:8443
+        network_mode: "studo-network"
+        depends_on:
+            - studo-bd
+
+    studo-client:
+        container_name: 'studo-client'
+        image: 'studo-client'
+        build: '.'
+        ports:
+            - 80:80
+        network_mode: "studo-network"
+        depends_on:
+            - studo-service
