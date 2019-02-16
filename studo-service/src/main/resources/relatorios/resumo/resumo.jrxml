@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="alunos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="4ab572f3-b39f-441c-824f-6f97c67c457c">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="alunos" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="4ab572f3-b39f-441c-824f-6f97c67c457c">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="TOTAL_ALUNOS" class="java.lang.Integer"/>
 	<parameter name="TOTAL_PROFESSORES" class="java.lang.Integer"/>
 	<parameter name="TOTAL_DICIPLINAS" class="java.lang.Integer"/>
 	<parameter name="TOTAL_TURMAS" class="java.lang.Integer"/>
+	<parameter name="SUB_REPORT_PATH" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_REPORT_DATA" class="java.lang.Object"/>
+	<parameter name="SUB_REPORT_DISCIPLINA_PATH" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_REPORT_DISCIPLINA_DATA" class="java.lang.Object"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -51,7 +55,7 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="471">
+		<band height="627">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<rectangle radius="12">
 				<reportElement x="0" y="0" width="556" height="239" forecolor="#D4C7C7" uuid="aafe6635-0739-42dd-ab77-9395f4046712"/>
@@ -146,6 +150,30 @@
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Resumo Geral]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="1" y="280" width="553" height="100" uuid="efcf1b43-3696-4873-9e15-0ea0a925861c"/>
+				<dataSourceExpression><![CDATA[$P{SUB_REPORT_DATA}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUB_REPORT_PATH}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="1" y="250" width="555" height="30" uuid="efa17227-814e-4b63-be6a-b1bfeca8b406"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Professsores]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="1" y="427" width="552" height="103" uuid="519194d9-964b-47dc-9780-914f43cf9a22"/>
+				<dataSourceExpression><![CDATA[$P{SUB_REPORT_DISCIPLINA_DATA}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUB_REPORT_DISCIPLINA_PATH}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="390" width="552" height="30" uuid="2acdcdec-0293-4f7b-bf30-c721f27caf5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Disciplinas]]></text>
 			</staticText>
 		</band>
 	</detail>

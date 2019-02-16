@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" isIgnorePagination="true" uuid="4ded6034-52f5-4357-a4e1-14ae153dabf0">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.Long"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="endereco.bairro" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="status" class="java.lang.Boolean"/>
+	<field name="email.dscEmail" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="524d8626-4cea-4556-ba7b-936ac3e61d44"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Professor:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="80" y="0" width="470" height="20" uuid="84024a39-6f6d-444d-8f72-65cdc465e8c8"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="21" width="60" height="20" uuid="123d5c04-695e-4c03-bb87-1a8916fb48ac"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="21" width="130" height="20" uuid="a3a2cdb6-82ef-4ccd-b262-334909a2bfc9"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="21" width="110" height="20" uuid="8b6886f8-eca1-4a6a-912f-444438e3b466"/>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="21" width="150" height="20" uuid="c2fa3dd5-ad60-4534-8311-dd030e768c0c"/>
+				<textFieldExpression><![CDATA[$F{email.dscEmail}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="21" width="100" height="20" uuid="85c35215-d096-43ba-9c31-a74c05bf1f84"/>
+				<textFieldExpression><![CDATA[$F{endereco.bairro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

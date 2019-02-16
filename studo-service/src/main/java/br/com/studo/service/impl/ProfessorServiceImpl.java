@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
 
@@ -65,6 +67,11 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public Long buscaCodProfessorPorCPF(String cpf) {
         return repository.buscaCodProfessorPorCPF(cpf);
+    }
+
+    @Override
+    public List<ProfessorDTO> listaTodos() {
+        return professorMapper.listDTO((List<Professor>) repository.findAll());
     }
 
 }
