@@ -6,9 +6,8 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 
 CMD java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar app.jar
 
-RUN apk update && \
-    apk add --no-cache ttf-dejavu font-adobe-100dpi
+RUN apk --update add fontconfig ttf-dejavu
 
-EXPOSE 8443
+EXPOSE 8081
 
-COPY target/app.jar /app.jar
+COPY app.jar /app.jar
