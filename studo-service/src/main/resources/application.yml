@@ -38,7 +38,7 @@ liquibase:
   change-log: classpath:db/liquibase-changelog-master.xml
 
 server:
-  port: 8080
+  port: 8081
   context-path: /studo/api
 
 studo:

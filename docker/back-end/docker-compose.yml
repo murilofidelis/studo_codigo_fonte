@@ -1,0 +1,11 @@
+version: '2'
+services:
+    studo-service:
+        container_name: 'studo-service'
+        image: 'studo-service'
+        build: '.'
+        ports:
+            - 8081:8081
+        network_mode: "studo-network"
+        depends_on:
+            - studo-bd
