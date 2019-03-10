@@ -30,7 +30,7 @@ import java.util.Map;
 
 @Slf4j
 @Service
-public class DashbordServiceImpl implements DashbordService {
+public class    DashbordServiceImpl implements DashbordService {
 
     @Autowired
     private AlunoService alunoService;
@@ -74,11 +74,15 @@ public class DashbordServiceImpl implements DashbordService {
 
             Map<String, Object> parametros = new HashMap<>();
 
-            parametros.put("SUB_REPORT_PATH", jasperSubReport);
-            parametros.put("SUB_REPORT_DATA", subReportProfessor);
+            if(!professores.isEmpty()){
+                parametros.put("SUB_REPORT_PATH", jasperSubReport);
+                parametros.put("SUB_REPORT_DATA", subReportProfessor);
+            }
 
-            parametros.put("SUB_REPORT_DISCIPLINA_PATH", jasperSubReportDisciplinas);
-            parametros.put("SUB_REPORT_DISCIPLINA_DATA", subReportDisciplina);
+            if(!disciplinas.isEmpty()){
+                parametros.put("SUB_REPORT_DISCIPLINA_PATH", jasperSubReportDisciplinas);
+                parametros.put("SUB_REPORT_DISCIPLINA_DATA", subReportDisciplina);
+            }
 
             setParametros(parametros);
 
