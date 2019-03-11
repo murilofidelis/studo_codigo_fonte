@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -35,11 +36,23 @@ public class Documento implements Serializable {
     @JoinColumn(name = "codigo_aluno", foreignKey = @ForeignKey(name = "fk_aluno_documento"))
     private Aluno aluno;
 
+    @NotNull
     @Column(name = "nome_documento")
     private String nome;
 
-    @Lob
-    @Column(name = "arquivo")
-    private byte[] arquivo;
+    @NotNull
+    @Column(name = "extensao")
+    private String extensao;
 
+    @NotNull
+    @Column(name = "descricao")
+    private String descricao;
+
+    @NotNull
+    @Column(name = "tipo")
+    private String tipo;
+
+    @NotNull
+    @Column(name = "caminho")
+    private String caminho;
 }

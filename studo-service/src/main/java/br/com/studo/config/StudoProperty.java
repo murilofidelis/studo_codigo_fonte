@@ -15,6 +15,8 @@ public class StudoProperty {
 
     private final Auditoria auditoria = new Auditoria();
 
+    private final Armazenamento armazenamento = new Armazenamento();
+
     @Setter
     @Getter
     public static class Seguranca {
@@ -39,11 +41,11 @@ public class StudoProperty {
 
     @Setter
     @Getter
-    public static class Auditoria{
+    public static class Auditoria {
 
         private String user;
 
-        private  String pass;
+        private String pass;
 
         private String userPostgres;
 
@@ -53,5 +55,14 @@ public class StudoProperty {
 
         private String schema;
 
+    }
+
+    @Getter
+    @Setter
+    public static class Armazenamento {
+
+        private String root = "media";
+
+        private String anexos = "anexos";
     }
 }

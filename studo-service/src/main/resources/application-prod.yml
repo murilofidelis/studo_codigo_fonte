@@ -47,6 +47,9 @@ server:
     #key-alias: tomcat
 
 studo:
+  armazenamento:
+    root: media
+    anexos: ${studo.armazenamento.root}/anexos
   enviar-email: true
   seguranca:
     enableHttps: true

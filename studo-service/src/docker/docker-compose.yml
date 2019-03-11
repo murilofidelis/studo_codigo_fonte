@@ -7,3 +7,5 @@ services:
         ports:
             - 8081:8081
         network_mode: "studo-network"
+        volumes:
+          - /media/anexos:/media/anexos

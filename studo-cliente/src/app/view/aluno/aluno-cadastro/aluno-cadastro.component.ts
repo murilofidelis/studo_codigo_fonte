@@ -7,8 +7,6 @@ import { ToastyService } from 'ng2-toasty';
 
 import { Mensagem } from '../../../util/mensagens.util';
 
-import { Turma } from './../../../model/turma.model';
-import { Matricula } from './../../../model/matricula.model';
 import { Aluno } from './../../../model/aluno.model';
 import { ValidadorCPF } from './../../../util/validator/cpf-validador';
 import { CalendarioUtil } from './../../../util/calendario.util';

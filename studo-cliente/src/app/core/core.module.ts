@@ -18,6 +18,7 @@ import { AlunoService } from '../service/aluno.service';
 import { DashbordService } from './../service/dashbord.service';
 import { AtividadeService } from '../service/atividade.service';
 import { DocumentosService } from './../service/documentos.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { DocumentosService } from './../service/documentos.service';
     DashbordService,
     AtividadeService,
     DocumentosService,
+    ConfirmationService
   ],
   declarations: [NavbarComponent, PaginaNaoEncontradaComponent, AcessoNegadoComponent]
 })

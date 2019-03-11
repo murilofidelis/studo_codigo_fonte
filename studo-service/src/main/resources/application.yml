@@ -42,6 +42,9 @@ server:
   context-path: /studo/api
 
 studo:
+  armazenamento:
+    root: media
+    anexos: ${studo.armazenamento.root}/anexos
   enviar-email: false
   seguranca:
     enableHttps: false

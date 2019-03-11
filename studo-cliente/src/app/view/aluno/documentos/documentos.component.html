@@ -1,49 +1,88 @@
 <div class="container">
 
-  <form autocomplete="off">
+  <form autocomplete="off" [formGroup]="formDocumento">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Documentos</h1>
       </div>
 
+      <!--Upload-->
       <div class="ui-g-12">
-        <p-fileUpload name="documentos[]" [url]="uploadURL" (onUpload)="onUpload($event)" (onBeforeSend)="onBeforeSend($event)" multiple="multiple"
-          maxFileSize="9000000" chooseLabel="Adicionar" uploadLabel="Enviar" cancelLabel="Cancelar">
-          <ng-template pTemplate="content">
-            <ul *ngIf="documentos.length">
-              <li *ngFor="let arquivo of documentos">{{arquivo.name}} - {{arquivo.size}} bytes</li>
-            </ul>
-          </ng-template>
-        </p-fileUpload>
-      </div>
 
-      <br>
-
-      <!-- TABELA -->
-      <div class="ui-g">
-        <div class="ui-g-12">
-          <h3>Arquivos</h3>
-          <p-dataTable [value]="listaDocumentos" [paginator]="true" [responsive]="true" [rows]="10" emptyMessage="Nenhum registro encontrado"
-            #tabela>
-
-            <p-column field="nome" header="Arquivos"></p-column>
-            <p-column header="Ações" styleClass="col-acoes">
-              <ng-template let-documento="rowData" pTemplate="body">
-                <a pButton icon="fa-download" pTooltip="Download" tooltipPosition="top" (click)="download(documento)"></a>
-              </ng-template>
-            </p-column>
-
-          </p-dataTable>
+        <div class="ui-g-12 ui-md-6 ui-fluid">
+          <label>Tipo*</label>
+          <p-dropdown [options]="tipos" [autoWidth]="false" formControlName="tipo"></p-dropdown>
         </div>
-      </div>
 
+        <div class="ui-g-12 ui-md-6 ui-fluid">
+          <label>Arquivo*</label>
+          <input #arquivo type="file" name="anexoBase64" accept=".pdf,.odt,.xlx,.xlsx,.txt,.zip,.doc,.docx,.jpeg,.png,.jpg" (change)="selecionaAnexo()"
+            class="ui-button">
+        </div>
+
+        <div class="ui-g-12 ui-md-10 ui-fluid">
+          <label>Descrição*</label>
+          <input pInputText type="text" formControlName="descricao" maxlength="30">
+        </div>
+
+        <div class="ui-g-12 ui-md-2" style="margin-top: 15px;">
+          <button pButton type="buttom" icon="fa-plus" label="Adicionar Anexo" (click)="adicinarAnexo()"></button>
+        </div>
+
+      </div>
     </div>
   </form>
 
-  <!-- OPÇÕES-->
-  <div class="ui-g-12 ui-md-4 ui-fluid btn-align">
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <button pButton type="submit" icon="fa-reply" label="Voltar" routerLink="/aluno"></button>
+  <!-- TABELA -->
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h3>Arquivos</h3>
+      <p-dataTable #tableAnexo [value]="documentos" [paginator]="true" [responsive]="true" [rows]="10" emptyMessage="Nenhum registro encontrado">
+
+        <p-column field="nome" header="Nome"></p-column>
+
+        <p-column field="extensao" header="Extensão"></p-column>
+
+        <p-column field="descricao" header="Descrição"></p-column>
+
+        <p-column field="tipo" header="Tipo">
+          <ng-template let-item="rowData" pTemplate="type">
+            {{ item.tipo | tipoDocumento }}
+          </ng-template>
+        </p-column>
+
+        <p-column header="Ações" styleClass="col-acoes">
+          <ng-template let-documento="rowData" pTemplate="body">
+            <a pButton icon="fa-download" *ngIf="documento.codigo" pTooltip="Download" tooltipPosition="top" (click)="download(documento)"></a>
+            <a pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(documento)"></a>
+          </ng-template>
+        </p-column>
+
+      </p-dataTable>
     </div>
   </div>
+
+  <!-- OPÇÕES-->
+  <div class="ui-g-12 ui-md-12 ui-fluid btn-align">
+
+    <div class="ui-g-12 ui-md-3 ui-fluid">
+      <button pButton type="submit" icon="fa-reply" label="Voltar" routerLink="/aluno"></button>
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+    </div>
+
+    <div class="ui-g-12 ui-md-3 ui-fluid">
+      <button pButton type="buttom" icon="fa-save" label="Salva Documentos" (click)="salvaAnexos()"></button>
+    </div>
+
+  </div>
+
+  <p-confirmDialog #confirmacao>
+    <p-footer>
+      <button type="button" pButton icon="fa-check" label="Sim" (click)="confirmacao.accept()"></button>
+      <button type="button" pButton icon="fa-times" label="Não" (click)="confirmacao.reject()"></button>
+    </p-footer>
+  </p-confirmDialog>
+
 </div>

@@ -1,10 +1,12 @@
-import { OnInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { OnInit, Component, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { STUDO_API } from '../../../app.api';
+import { ToastyService } from 'ng2-toasty';
 
-import { AuthService } from '../../../service/auth.service';
+import { Documento } from '../../../model/documento.model';
 import { DocumentosService } from '../../../service/documentos.service';
+import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 
 @Component({
   selector: 'app-documentos',
@@ -13,54 +15,156 @@ import { DocumentosService } from '../../../service/documentos.service';
 })
 export class DocumentosComponent implements OnInit {
 
-  listaDocumentos: any[] = [];
-  documentos: any[] = [];
-  uploadURL: string;
+  @ViewChild('arquivo') arquivo;
+
+  @ViewChild('tableAnexo') tableAnexo;
+
+  documento: Documento = new Documento();
+
+  formDocumento: FormGroup;
+
+  documentos: Documento[] = [];
+
+  tipos: any[];
+
   codigoAluno: number;
 
   constructor(
-    private auth: AuthService,
+    private toasty: ToastyService,
+    private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private documentosService: DocumentosService
+    private confirmartion: ConfirmationService,
+    private documentosService: DocumentosService,
   ) { }
 
   ngOnInit() {
     this.codigoAluno = this.activatedRoute.snapshot.params['codigo'];
-    this.uploadURL = `${STUDO_API}/documentos/upload/${this.codigoAluno}`;
-    this.buscaDocumentos(this.codigoAluno);
-  }
 
-  buscaDocumentos(codigo: number) {
-    this.documentosService.listar(codigo).then(documentos => {
-      this.listaDocumentos = documentos;
+    this.formDocumento = this.formBuilder.group({
+      'descricao': [null, Validators.required],
+      'tipo': [null, Validators.required],
     });
+    this.carregaTipoRquivo();
+    this.listarAnexos();
   }
 
-  onBeforeSend(event) {
-    event.xhr.setRequestHeader('Authorization', `Bearer ${this.auth.carregarToken()}`);
+  private carregaTipoRquivo() {
+    this.tipos = [{ valeu: null, label: 'Selecione..' }, { value: 'TIPO_A', label: 'Tipo A' }, { value: 'TIPO_B', label: 'Tipo B' }];
   }
 
-  onUpload(event) {
-    for (const arquivo of event.files) {
-      this.documentos.push(arquivo);
+  listarAnexos() {
+    this.documentosService.listar(this.codigoAluno)
+      .subscribe(lista => {
+        this.documentos = lista;
+      });
+  }
+
+  selecionaAnexo() {
+
+    const file: File = this.arquivo.nativeElement.files[0];
+
+    if ((file.size / 1024 / 1024) > 25) {
+      this.toasty.warning('O arquivo fornecido deve possui o tamanho máximo de 25MB');
+    } else {
+
+      const fileReader: FileReader = new FileReader();
+
+      fileReader.onloadend = () => {
+        const nomeCompleto = this.arquivo.nativeElement.files[0].name;
+        this.documento.nome = nomeCompleto.substr(0, nomeCompleto.lastIndexOf('.'));
+        this.documento.extensao = nomeCompleto.substr(nomeCompleto.lastIndexOf('.'));
+        const base64: string = fileReader.result;
+        const base64Data: string[] = base64.split('base64,');
+        this.documento.anexoBase64 = base64Data[1];
+      };
+
+      fileReader.readAsDataURL(file);
     }
-    this.buscaDocumentos(this.codigoAluno);
   }
 
-  download(documento: any) {
-    this.documentosService.download(documento.codigo).subscribe(blob => {
-      this.downloadArquivo(blob, documento.nome);
-    });
+  adicinarAnexo() {
+    if (this.formDocumento.valid && this.arquivo.nativeElement.files[0]) {
+      if (!this.validaExtensoes(this.documento)) {
+        this.toasty.warning('Extesão de arquivo não permitida');
+        return;
+      }
+      this.documento.codigo = null;
+      this.documento.codigoAluno = this.codigoAluno;
+      this.documento.descricao = this.formDocumento.get('descricao').value;
+      this.documento.tipo = this.formDocumento.get('tipo').value;
+      this.documentos.push(this.documento);
+      this.tableAnexo.value = this.documentos;
+      this.limpaCampos();
+    } else {
+      this.toasty.warning('Há campos obrigatórios não preenchidos!');
+    }
   }
 
-  downloadArquivo(blob: any, nomeArquivo: string) {
+  private validaExtensoes(documento: Documento): boolean {
+    return ['.pdf', '.odt', '.xlx', '.xlsx', '.txt', '.zip', '.doc', '.docx', '.png', '.jpeg', '.png', '.jpg']
+      .includes(documento.extensao);
+  }
+
+  private limpaCampos() {
+    this.documento = new Documento();
+    this.formDocumento.reset();
+    this.arquivo.nativeElement.value = null;
+  }
+
+  salvaAnexos() {
+    if (this.documentos.length > 0 && this.verificaSeHaDadosSalvar()) {
+      this.documentosService.upload(this.documentos)
+        .subscribe(() => this.listarAnexos());
+    }
+  }
+
+  download(documento: Documento) {
+    this.documentosService.download(documento.caminho)
+      .subscribe(blob => this.downloadArquivo(blob, documento));
+  }
+
+  downloadArquivo(blob: any, documento: Documento) {
     const url = window.URL.createObjectURL(blob);
     const element = window.document.createElement('a');
     document.body.appendChild(element);
-
     element.href = url;
-    element.download = nomeArquivo;
+    element.download = `${documento.nome}${documento.extensao}`;
     element.click();
     document.body.removeChild(element);
   }
+
+  confirmarExclusao(documento: Documento) {
+    this.confirmartion.confirm({
+      message: `Deseja excluir o documento: ${documento.nome}${documento.extensao} ?`,
+      header: 'Excluir documento',
+      icon: 'fa fa-question-circle',
+      accept: () => this.exclui(documento),
+      reject: () => { }
+    });
+  }
+
+  private exclui(documento: Documento) {
+    const indice = this.documentos.indexOf(documento);
+    if (documento.codigo) {
+      this.documentosService.delete(documento.codigo)
+        .subscribe(() => this.removeRegistroLista(indice));
+    } else {
+      this.removeRegistroLista(indice);
+    }
+  }
+
+  private removeRegistroLista(indice: number) {
+    this.documentos.splice(indice, 1);
+    this.tableAnexo.value = this.documentos;
+    this.toasty.success('Excluido com sucesso!');
+  }
+
+  private verificaSeHaDadosSalvar(): boolean {
+    const result = this.documentos
+      .find(doc => {
+        return doc.codigo === null;
+      });
+    return result !== undefined;
+  }
+
 }

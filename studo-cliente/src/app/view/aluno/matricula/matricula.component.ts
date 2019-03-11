@@ -16,7 +16,6 @@ import { Matricula } from '../../../model/matricula.model';
   selector: 'app-matricula',
   templateUrl: './matricula.component.html',
   styleUrls: ['./matricula.component.css'],
-  providers: [ConfirmationService]
 })
 export class MatriculaComponent implements OnInit {
 
