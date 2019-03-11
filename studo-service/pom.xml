@@ -26,6 +26,7 @@
         <hibernate.version>5.2.12.Final</hibernate.version>
         <powermock.version>1.6.6</powermock.version>
         <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
+        <spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
 
         <sonar.tests>${project.basedir}/src/test/</sonar.tests>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
@@ -34,7 +35,26 @@
         <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
+
+        <!-- Sprin Cloud-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
         <!-- Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -284,7 +304,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Copiar .JAR para pasta de Deploy -->
+            <!-- Copiar .jar para pasta de Deploy -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
