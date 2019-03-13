@@ -1,6 +1,10 @@
 FROM nginx:1.11-alpine
 
-COPY /dist /usr/share/nginx/html/
+COPY default.conf /etc/nginx/conf.d/
+
+COPY proxy.conf /etc/nginx/
+
+ADD dist.tar.gz /usr/share/nginx/html
 
 EXPOSE 80
 
