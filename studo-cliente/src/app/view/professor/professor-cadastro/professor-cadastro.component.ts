@@ -13,6 +13,7 @@ import { Professor } from './../../../model/professor.model';
 import { EnderecoService } from '../../../service/endereco.service';
 import { ProfessorService } from './../../../service/professor.service';
 import { ErrorHandleService } from '../../../service/error-handle.service';
+import { Endereco } from '../../../model/endereco.model';
 
 @Component({
   selector: 'app-professor-cadastro',
@@ -22,12 +23,14 @@ import { ErrorHandleService } from '../../../service/error-handle.service';
 export class ProfessorCadastroComponent implements OnInit {
 
   sexo: SelectItem[];
+
   status = [];
+
   professorForm: FormGroup;
+
   professor = new Professor();
 
   cpfCadastrado: boolean;
-  disableCpf: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,14 +38,12 @@ export class ProfessorCadastroComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private route: Router,
     private professorService: ProfessorService,
-    private enderecoService: EnderecoService,
     private errorHandle: ErrorHandleService) { }
 
   ngOnInit() {
     const codigoProfessor = this.activatedRoute.snapshot.params['codigo'];
 
     this.professorForm = this.formBuilder.group({
-      'codigo': [null],
       'nome': [null, Validators.required],
       'cpf': [null, [Validators.required, Validators.minLength(11), ValidadorCPF.validate]],
       'sexo': [null, Validators.required],
@@ -52,25 +53,11 @@ export class ProfessorCadastroComponent implements OnInit {
         'codigo': [null],
         'dscEmail': [null, [Validators.required, Validators.email]],
       }),
-
-      endereco: this.formBuilder.group({
-        'codigo': [null],
-        'cep': [null, Validators.required],
-        'uf': [null, Validators.required],
-        'localidade': [null, Validators.required],
-        'logradouro': [null, Validators.required],
-        'bairro': [null, Validators.required],
-        'numero': [null, Validators.required],
-        'complemento': [null],
-      }),
-
+      endereco: [null, [Validators.required]]
     });
     this.iniciaSexo();
     this.iniciaStatus();
-
-    if (codigoProfessor) {
-      this.carregaProfessor(codigoProfessor);
-    }
+    this.carregaProfessor(codigoProfessor);
   }
 
   iniciaSexo() {
@@ -83,28 +70,6 @@ export class ProfessorCadastroComponent implements OnInit {
   iniciaStatus() {
     this.status.push({ label: 'Ativo', value: true });
     this.status.push({ label: 'Inativo', value: false });
-  }
-
-  buscaCep(event) {
-    const cep = this.removeMascara(event.target.value);
-    this.enderecoService.buscarCep(cep).then(resulatdo => {
-      this.preencheEndereco(resulatdo);
-    });
-  }
-
-  preencheEndereco(endereco: any) {
-    if (endereco.erro === true) {
-      this.toasty.info(Mensagem.CEP_NAO_ENCONTRADO);
-    }
-    this.professorForm.patchValue({
-      endereco: {
-        uf: endereco.uf,
-        localidade: endereco.localidade,
-        logradouro: endereco.logradouro,
-        bairro: endereco.bairro,
-        complemento: endereco.complemento,
-      }
-    });
   }
 
   verificaCampoContenErro(campo: string): boolean {
@@ -127,19 +92,26 @@ export class ProfessorCadastroComponent implements OnInit {
   verificaCpfCadastrado(event) {
     const cpf = this.removeMascara(event.target.value);
     if (cpf) {
-      this.professorService.verificaCpfCadastrado(cpf).subscribe(result => {
-        this.cpfCadastrado = result;
-      });
+      this.professorService.verificaCpfCadastrado(cpf)
+        .subscribe(result => {
+          this.cpfCadastrado = result;
+        });
     }
   }
 
   carregaProfessor(codigo: number) {
-    this.professorService.buscaPorCodigo(codigo)
-      .then(professor => {
-        this.professor = professor;
-        this.professorForm.setValue(this.professor);
-        this.disableCpf = true;
-      }).catch(erro => this.errorHandle.handle(erro));
+    if (codigo) {
+      this.professorService.buscaPorCodigo(codigo)
+        .then(professor => {
+          this.professor = professor;
+          this.professorForm.patchValue(this.professor);
+          this.professorForm.get('cpf').disable();
+        }).catch(erro => this.errorHandle.handle(erro));
+    }
+  }
+
+  atualizaEndereco(event: Endereco) {
+    this.professorForm.get('endereco').setValue(event);
   }
 
   bloquearCadastro(): boolean {
@@ -147,7 +119,12 @@ export class ProfessorCadastroComponent implements OnInit {
   }
 
   salvar() {
-    this.professorService.salvar(this.professorForm.value)
+
+    const professor = Object.assign(this.professor, this.professorForm.value);
+
+    console.log('SALVANDO ...', professor);
+
+    this.professorService.salvar(professor)
       .then(() => {
         this.professor = new Professor();
         this.toasty.success(Mensagem.MENSAGEM_SALVO_SUCESSO);

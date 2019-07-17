@@ -7,6 +7,8 @@
       <!-- DADOS PESSOAIS-->
       <div class="ui-g-12">
         <h1>Cadastro de Professor</h1>
+        <!-- {{ professorForm.valid | json }} -->
+
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
@@ -17,7 +19,7 @@
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>CPF*</label>
-        <p-inputMask mask="999.999.999-99" unmask="true" formControlName="cpf" (change)="verificaCpfCadastrado($event)" [disabled]="disableCpf"></p-inputMask>
+        <p-inputMask mask="999.999.999-99" unmask="true" formControlName="cpf" (change)="verificaCpfCadastrado($event)"></p-inputMask>
         <app-control-erro [exibiErro]="verificaCampoContenErro('cpf')" mensagemErro="CPF é obrigatório."></app-control-erro>
         <app-control-erro [exibiErro]="verificaCpfValido()" mensagemErro="CPF inválido."></app-control-erro>
         <app-control-erro [exibiErro]="cpfCadastrado" mensagemErro="CPF já cadastrado."></app-control-erro>
@@ -46,51 +48,10 @@
       </div>
 
       <!-- ENDEREÇO-->
-      <div formGroupName="endereco">
-        <div class="ui-g">
-          <div class="ui-g-12 ui-md-2 ui-fluid">
-            <label>CEP*</label>
-            <p-inputMask mask="99999-999" unmask="true" formControlName="cep" (change)="buscaCep($event)"></p-inputMask>
-            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.cep')" mensagemErro="CEP é obrigatório."></app-control-erro>
-          </div>
-
-          <div class="ui-g-12 ui-md-2 ui-fluid">
-            <label>Estado*</label>
-            <input pInputText type="text" formControlName="uf">
-            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.uf')" mensagemErro="UF é obrigatório."></app-control-erro>
-          </div>
-
-          <div class="ui-g-12 ui-md-4 ui-fluid">
-            <label>Cidade*</label>
-            <input pInputText type="text" formControlName="localidade">
-            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.localidade')" mensagemErro="UF é obrigatório."></app-control-erro>
-          </div>
-
-          <div class="ui-g-12 ui-md-4 ui-fluid">
-            <label>Logradouro*</label>
-            <input pInputText type="text" formControlName="logradouro">
-            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.logradouro')" mensagemErro="Logradouro é obrigatório."></app-control-erro>
-          </div>
-
-          <div class="ui-g-12 ui-md-4 ui-fluid">
-            <label>Bairro*</label>
-            <input pInputText type="text" formControlName="bairro">
-            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.bairro')" mensagemErro="Bairro é obrigatório."></app-control-erro>
-          </div>
-
-          <div class="ui-g-12 ui-md-4 ui-fluid">
-            <label>Numero*</label>
-            <input pInputText type="text" formControlName="numero">
-            <app-control-erro [exibiErro]="verificaCampoContenErro('endereco.numero')" mensagemErro="Número é obrigatório."></app-control-erro>
-          </div>
-
-          <div class="ui-g-12 ui-md-4 ui-fluid">
-            <label>Complemento</label>
-            <input pInputText type="text" formControlName="complemento">
-          </div>
-
-        </div>
+      <div class="ui-g-12">
+        <app-endereco [professor]="professor" (enderecoEmit)="atualizaEndereco($event)"></app-endereco>
       </div>
+      
 
       <!-- OPÇÕES-->
       <div class="ui-g-12 ui-md-4 ui-fluid btn-align">

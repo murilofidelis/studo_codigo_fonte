@@ -73,7 +73,7 @@ export class DocumentosComponent implements OnInit {
         const nomeCompleto = this.arquivo.nativeElement.files[0].name;
         this.documento.nome = nomeCompleto.substr(0, nomeCompleto.lastIndexOf('.'));
         this.documento.extensao = nomeCompleto.substr(nomeCompleto.lastIndexOf('.'));
-        const base64: string = fileReader.result;
+        const base64: string = fileReader.result.toString();
         const base64Data: string[] = base64.split('base64,');
         this.documento.anexoBase64 = base64Data[1];
       };
@@ -85,7 +85,7 @@ export class DocumentosComponent implements OnInit {
   adicinarAnexo() {
     if (this.formDocumento.valid && this.arquivo.nativeElement.files[0]) {
       if (!this.validaExtensoes(this.documento)) {
-        this.toasty.warning('Extesão de arquivo não permitida');
+        this.toasty.warning('Extensão de arquivo não permitida');
         return;
       }
       this.documento.codigo = null;
